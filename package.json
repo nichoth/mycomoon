@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p public && npm run copy",
+    "build": "mkdir -p public && npm run copy && npm run build-sass",
     "copy": "cp src/index.html public",
+    "build-sass": "sass src/style/main.scss public/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/nichoth/mycomoon/issues"
   },
-  "homepage": "https://github.com/nichoth/mycomoon#readme"
+  "homepage": "https://github.com/nichoth/mycomoon#readme",
+  "devDependencies": {
+    "sass": "^1.32.8"
+  }
 }
