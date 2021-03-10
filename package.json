@@ -1,0 +1,21 @@
+{
+  "name": "mycomoon",
+  "description": "A website",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run copy",
+    "copy": "cp src/index.html public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/mycomoon.git"
+  },
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/mycomoon/issues"
+  },
+  "homepage": "https://github.com/nichoth/mycomoon#readme"
+}
