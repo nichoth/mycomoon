@@ -1,10 +1,17 @@
+@font-face {
+    font-family: Casta;
+    src: url("/Casta-Regular.otf") format("opentype");
+}
+
 body {
     // background-image: url("/myco.png");
-    color: #cbc3a7;;
+    color: #bab39a;
+    // color: #cbc3a7;;
     background-color: black;
     // background-size: cover;
     padding-top: 23vh;
     height: 100vh;
+    font-family: Casta;
 
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
@@ -20,6 +27,6 @@ body {
 
     p {
         font-size: 1rem;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
 }
