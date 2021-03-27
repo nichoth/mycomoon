@@ -7,7 +7,15 @@ body {
     height: 100vh;
 
     p, h1 {
-        margin: 0 10vw;
+        margin: 0 auto;
         margin-right: 0;
+        text-align: center;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    p {
+        font-size: 1rem;
+        margin-top: 1rem;
     }
 }
