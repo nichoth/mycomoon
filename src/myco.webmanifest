@@ -1,0 +1,17 @@
+{
+  "name": "myco moon",
+  "short_name": "myco",
+  "description": "Mushrooms",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "theme_color": "#B12A34",
+  "background_color": "#B12A34"
+}
+
