@@ -4,14 +4,11 @@
 }
 
 body {
-    // background-image: url("/myco.png");
-    // color: #bab39a;
     color: #f0dca9;
-    // color: #cbc3a7;;
+    font-variant-ligatures: common-ligatures;
     background-color: black;
-    // background-size: cover;
     padding-top: 23vh;
-    height: 100vh;
+    // height: 100vh;
     font-family: Casta;
 
     background: url(/myco.png) no-repeat center center fixed; 
@@ -23,11 +20,11 @@ body {
         text-align: center;
     }
     h1 {
-        font-size: 3rem;
+        font-size: 5rem;
     }
 
     p {
-        font-size: 1rem;
+        font-size: 2rem;
         margin-top: 0.5rem;
     }
 }
