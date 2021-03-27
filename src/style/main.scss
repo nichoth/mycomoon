@@ -7,12 +7,15 @@ body {
     color: #f0dca9;
     font-variant-ligatures: common-ligatures;
     background-color: black;
-    padding-top: 23vh;
-    // height: 100vh;
+    padding-top: 16vh;
     font-family: Casta;
 
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
+
+    #content {
+        margin-left: 14vw;
+    }
 
     p, h1 {
         margin: 0 auto;
