@@ -3,6 +3,14 @@
     src: url("/Casta-Regular.otf") format("opentype");
 }
 
+@media screen and (max-width: 1025px) {
+    body {
+        #content {
+            margin-left: 0!important;
+        }
+    }
+}
+
 body {
     color: #f0dca9;
     font-variant-ligatures: common-ligatures;
