@@ -10,11 +10,15 @@
 let CACHE_NAME = 'my-cache'
 let urlsToCache = [
     '/index.html',
+    'http://localhost:8000/',
+    '/Casta-Regular.otf',
+    'myco.webmanifest',
 
     '/style.css',
     '/style.css.map',
     '/bundle.js',
 
+    'favicon.ico',
     '/android-chrome-192x192.png',
     '/android-chrome-512x512.png',
     '/apple-touch-icon.png',
@@ -42,6 +46,7 @@ self.addEventListener('fetch', function (ev) {
     ev.respondWith(caches.match(ev.request)
             .then(function (response) {
                 console.log('**cache hit', response)
+                console.log('**ev.requst**', ev.request)
                 // Cache hit - return response
                 if (response) return response
                 return fetch(ev.request)
