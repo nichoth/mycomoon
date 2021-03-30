@@ -46,9 +46,9 @@ self.addEventListener('fetch', function (ev) {
     ev.respondWith(caches.match(ev.request)
             .then(function (response) {
                 console.log('cache hit', response)
-                console.log('ev.requst', ev.request)
                 // Cache hit - return response
                 if (response) return response
+                console.log('ev.requst', ev.request)
                 return fetch(ev.request)
             })
             .catch(err => console.log('!!!!err!! here', err))
@@ -58,7 +58,7 @@ self.addEventListener('fetch', function (ev) {
 // the browser will check if these resources are in the previous cache
 // list. if they don’t exist anymore it will remove them.
 self.addEventListener('activate', function (ev) {
-    console.log('activate', ev)
+    console.log('**activate', ev)
     var cacheWhitelist = ['my-cache']
 
     ev.waitUntil(
