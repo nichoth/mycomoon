@@ -10,7 +10,7 @@
 let CACHE_NAME = 'my-cache'
 let urlsToCache = [
     '/index.html',
-    'http://localhost:8000/',
+    // 'http://localhost:8000/',
     '/Casta-Regular.otf',
     'myco.webmanifest',
 
