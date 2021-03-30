@@ -45,8 +45,8 @@ self.addEventListener('install', function (ev) {
 self.addEventListener('fetch', function (ev) {
     ev.respondWith(caches.match(ev.request)
             .then(function (response) {
-                console.log('**cache hit', response)
-                console.log('**ev.requst**', ev.request)
+                console.log('cache hit', response)
+                console.log('ev.requst', ev.request)
                 // Cache hit - return response
                 if (response) return response
                 return fetch(ev.request)
