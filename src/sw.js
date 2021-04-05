@@ -56,9 +56,11 @@ self.addEventListener('fetch', function (ev) {
     var resourceType = 'static'
     var cacheKey
 
-    if ((acceptHeader || []).indexOf('text/html') !== -1) {
+    if ((acceptHeader || '').indexOf('text/html') !== -1) {
+        console.log('**content**')
         resourceType = 'content';
-    } else if ((acceptHeader || []).indexOf('image') !== -1) {
+    } else if ((acceptHeader || '').indexOf('image') !== -1) {
+        console.log('**image**')
         resourceType = 'image';
     }
 
@@ -83,32 +85,6 @@ self.addEventListener('fetch', function (ev) {
         )
     }
 
-
-
-
-
-
-
-    // ev.respondWith(caches.match(ev.request)
-    //     .then(function (response) {
-    //         // using a cache-first strategy
-    //         console.log('cache hit', response)
-    //         // Cache hit -- return response
-    //         if (response) return response
-
-    //         // cache miss -- request it
-    //         console.log('ev.requst', request)
-    //         return fetch(request)
-
-
-
-
-
-
-
-    //     })
-    //     .catch(err => console.log('!!!!err!! here', err))
-    // )
 })
 
 
@@ -137,29 +113,13 @@ function fetchFromCache (ev) {
 
 
 
-
-// function shouldHandleFetch (ev, opts) {
-//     // Should we handle this fetch?
-//     var request = ev.request
-//     var url = new URL(request.url)
-//     console.log('path', url.pathname)
-
-//     return ev.respondWith(caches.match(ev.request))
-// }
-
-// function onFetch (ev, opts) {
-//     // … TBD: Respond to the fetch
-// }
-
-
-
-
 // the browser will check if these resources are in the previous cache
 // list. if they don’t exist anymore it will remove them.
 self.addEventListener('activate', function (ev) {
     console.log('**activate', ev)
     var cacheWhitelist = ['my-cache', 'static']
 
+    // rm caches not in 'whitelist'
     ev.waitUntil(
         caches.keys().then(function (cacheNames) {
             return Promise.all(
