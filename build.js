@@ -11,8 +11,6 @@ fs.readdir(__dirname + '/src/_pages', (err, files) => {
         var name = path.basename(fileName, '.md')
         var dirPath = path.join(__dirname + '/public', name)
 
-
-
         mkdirp(dirPath).then(() => {
             console.log('made dir', dirPath)
             // then write the index file
