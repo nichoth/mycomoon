@@ -11,7 +11,6 @@
 let CACHE_NAME = 'my-cache'
 let urlsToCache = [
     '/index.html',
-    // 'http://localhost:8000/',
     '/Casta-Regular.otf',
     'myco.webmanifest',
 
@@ -35,7 +34,7 @@ self.addEventListener('install', function (ev) {
 
     ev.waitUntil(caches.open(CACHE_NAME)
         .then(function (cache) {
-            console.log('**Opened cache**', cache)
+            console.log('**Opened cache**', cache, CACHE_NAME)
             return cache.addAll(urlsToCache)
         })
     )
@@ -44,27 +43,23 @@ self.addEventListener('install', function (ev) {
 // This works great for static content but if we have dynamic content,
 // it will never be updated.
 self.addEventListener('fetch', function (ev) {
-
-    // -------------------------------------------------------------
-
     // below is based on the content type --
     // using fetch-first for content, cache for static
+
+    console.log('fetch ev', ev)
 
     var { request } = ev
     var acceptHeader = request.headers.get('Accept')
     console.log('acceptHeader', acceptHeader)
-    var resourceType = 'static'
-    var cacheKey
+    var cacheKey = 'static'
 
     if ((acceptHeader || '').indexOf('text/html') !== -1) {
         console.log('**content**')
-        resourceType = 'content';
+        cacheKey = 'content';
     } else if ((acceptHeader || '').indexOf('image') !== -1) {
-        console.log('**image**')
-        resourceType = 'image';
+        console.log('image')
+        cacheKey = 'image';
     }
-
-    cacheKey = resourceType
 
     // 1. Determine what kind of asset this is… (above).
     if (resourceType === 'content') {
@@ -100,7 +95,6 @@ function addToCache (cacheKey, request, response) {
     }
 }
 
-
 function fetchFromCache (ev) {
     return caches.match(ev.request).then(response => {
         if (!response) {
@@ -117,7 +111,7 @@ function fetchFromCache (ev) {
 // list. if they don’t exist anymore it will remove them.
 self.addEventListener('activate', function (ev) {
     console.log('**activate', ev)
-    var cacheWhitelist = ['my-cache', 'static']
+    var cacheWhitelist = ['my-cache', 'static', 'content', 'image']
 
     // rm caches not in 'whitelist'
     ev.waitUntil(

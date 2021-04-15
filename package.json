@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others \"ecstatic public\" \"npm run watch-sass\"",
-    "build": "mkdir -p public && npm run copy && npm run build-js && npm run build-sass",
-    "build-js": "browserify --debug src/index.js > public/bundle.js",
-    "copy": "cp src/sw.js public && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
+    "build": "mkdir -p public && npm run copy && npm run build-sw && npm run build-js && npm run build-sass",
+    "build-js": "browserify -t uglifyify --debug src/index.js > public/bundle.js",
+    "build-sw": "browserify -t uglifyify --debug src/sw.js > public/sw.js",
+    "copy": "mkdir -p public/admin && cp src/admin/* publuc/admin && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
     "build-sass": "sass src/style/main.scss public/style.css",
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +27,7 @@
     "browserify": "^17.0.0",
     "concurrently": "^6.0.0",
     "ecstatic": "^4.1.4",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "uglifyify": "^5.0.2"
   }
 }

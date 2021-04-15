@@ -6,12 +6,27 @@
     <title>Myco Moon</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="manifest" href="myco.webmanifest">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <div id="content">
         <h1>Myco Moon</h1>
         <p>coming soon&#8230;</p>
     </div>
+
     <script src="/bundle.js"></script>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>
+
