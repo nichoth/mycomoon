@@ -20,7 +20,8 @@ fs.readdir(__dirname + '/src/_pages', (err, files) => {
 
                 var hs = hyperstream({
                     '#content': {
-                        _appendHtml: matter(content).content
+                        _appendHtml: matter(content).content,
+                        class: { append: 'page-about' }
                     }
                 })
 
