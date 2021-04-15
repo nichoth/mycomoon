@@ -54,7 +54,6 @@ self.addEventListener('fetch', function (ev) {
     var cacheKey = 'static'
 
     if ((acceptHeader || '').indexOf('text/html') !== -1) {
-        console.log('**content**')
         cacheKey = 'content';
     } else if ((acceptHeader || '').indexOf('image') !== -1) {
         console.log('image')
@@ -65,12 +64,19 @@ self.addEventListener('fetch', function (ev) {
 
     // 1. Determine what kind of asset this is… (above).
     if (resourceType === 'content') {
+        console.log('**content**')
         // Use a network-first strategy.
         ev.respondWith(
             fetch(request)
-            .then(response => addToCache(cacheKey, request, response))
-            .catch(() => fetchFromCache(ev))
-            // .catch(() => offlineResponse(opts))
+                .then(response => {
+                    console.log('fetching', response)
+                    addToCache(cacheKey, request, response)
+                })
+                .catch((err) => {
+                    console.log('errrrr', err)
+                    return fetchFromCache(ev)
+                })
+                // .catch(() => offlineResponse(opts))
         );
     } else {
         // Use a cache-first strategy.
@@ -87,6 +93,7 @@ self.addEventListener('fetch', function (ev) {
 
 
 function addToCache (cacheKey, request, response) {
+    console.log('adding', cacheKey, response)
     if (response.ok) {
         var copy = response.clone()
         caches.open(cacheKey).then(cache => {
