@@ -18,8 +18,10 @@
 //     }
 //  }
 
+$main-color: #f0dca9;
+
 body {
-    color: #f0dca9;
+    color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
     padding-top: 16vh;
@@ -27,8 +29,28 @@ body {
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
 
+    a {
+        color: $main-color;
+    }
+
     #content {
         margin-left: 30vw;
+
+        .main-nav {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+
+            a {
+                text-decoration: none;
+                font-family: sans-serif;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
     p, h1 {
