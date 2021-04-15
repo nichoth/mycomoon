@@ -8,7 +8,7 @@
     "build": "mkdir -p public && npm run copy && npm run build-sw && npm run build-js && npm run build-sass",
     "build-js": "browserify -t uglifyify --debug src/index.js > public/bundle.js",
     "build-sw": "browserify -t uglifyify --debug src/sw.js > public/sw.js",
-    "copy": "mkdir -p public/admin && cp src/admin/* publuc/admin && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
+    "copy": "mkdir -p public/admin && cp src/admin/* public/admin && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
     "build-sass": "sass src/style/main.scss public/style.css",
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
