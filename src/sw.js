@@ -61,6 +61,8 @@ self.addEventListener('fetch', function (ev) {
         cacheKey = 'image';
     }
 
+    var resourceType = cacheKey;
+
     // 1. Determine what kind of asset this is… (above).
     if (resourceType === 'content') {
         // Use a network-first strategy.
