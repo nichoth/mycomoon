@@ -98,8 +98,6 @@ function addToCache (cacheKey, request, response) {
         caches.open(cacheKey).then(cache => {
             cache.put(request, copy)
         })
-
-        return response
     }
     return response
 }
