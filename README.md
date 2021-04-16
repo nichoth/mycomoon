@@ -31,5 +31,9 @@ version number from package.json.
 
 [branch deploys](https://docs.netlify.com/site-deploys/overview/#branch-deploy-controls)
 
+----------------------------------------
 
+* https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/
 
+-----^-------
+* uses a network-first strategy

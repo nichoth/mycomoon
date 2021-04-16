@@ -10,7 +10,7 @@
 // Perform install steps
 let CACHE_NAME = 'my-cache'
 let urlsToCache = [
-    '/index.html',
+    // '/index.html',
     '/Casta-Regular.otf',
     'myco.webmanifest',
 
@@ -64,13 +64,14 @@ self.addEventListener('fetch', function (ev) {
 
     // 1. Determine what kind of asset this is… (above).
     if (resourceType === 'content') {
-        console.log('**content**')
+        console.log('**content**', request)
         // Use a network-first strategy.
         ev.respondWith(
             fetch(request)
                 .then(response => {
                     console.log('fetching', response)
-                    addToCache(cacheKey, request, response)
+                    return addToCache(cacheKey, request, response)
+                        // .catch(err => console.log('errrrr in here', err))
                 })
                 .catch((err) => {
                     console.log('errrrr', err)
@@ -102,6 +103,7 @@ function addToCache (cacheKey, request, response) {
 
         return response
     }
+    return response
 }
 
 function fetchFromCache (ev) {
