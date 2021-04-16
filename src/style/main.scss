@@ -29,6 +29,51 @@ body {
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
 
+
+
+
+
+    #test-content {
+        display: grid;
+        grid-template-columns: 20px 1fr 20px;
+    }
+
+    #test-content > * {
+        grid-column: 2 / -2;
+    }
+
+    #test-content > .full {
+        grid-column: 1 / -1;
+    }
+
+    .hs {
+        padding: 0;
+        
+        overflow-x: scroll;
+        scroll-snap-type: x proximity;
+        padding-bottom: calc(.75 * var(--gutter));
+        margin-bottom: calc(-.25 * var(--gutter));
+        
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(6, calc(50% - 40px));
+        grid-template-rows: minmax(150px, 1fr);
+        list-style: none;
+
+        color: black;
+
+        li {
+            background-color: pink;
+            border: 1px solid black;
+        }
+    }
+
+
+
+    
+
+
+
     a {
         color: $main-color;
     }
