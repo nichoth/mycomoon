@@ -32,6 +32,10 @@ body {
 
 
 
+
+
+
+
     // -------------------------------------------------------
 
     #test-content {
@@ -82,7 +86,10 @@ body {
         overflow-y: hidden;
         scroll-snap-coordinate: 0 0;
         scroll-snap-points-x: repeat(100%);
+
         scroll-snap-type: x mandatory;
+        // scroll-padding: 50%;
+
         flex: 1;
         display:flex;
         -webkit-overflow-scrolling: touch;
@@ -102,15 +109,16 @@ body {
     .green {
         background: #ABE66F;
     }
-      
     .purple {
         background: #4E4E94;
     }
-      
     .orange {
         background: #FD8F58;
     }
     // -----------------------------------------------
+
+
+
 
 
 
