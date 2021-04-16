@@ -1,7 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
 
-console.log('wooooo')
-
 if ('serviceWorker' in navigator) {
     console.log('we are in')
     navigator.serviceWorker.register('/sw.js')
