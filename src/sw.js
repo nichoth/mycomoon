@@ -56,7 +56,6 @@ self.addEventListener('fetch', function (ev) {
     if ((acceptHeader || '').indexOf('text/html') !== -1) {
         cacheKey = 'content';
     } else if ((acceptHeader || '').indexOf('image') !== -1) {
-        console.log('image')
         cacheKey = 'image';
     }
 
@@ -70,8 +69,7 @@ self.addEventListener('fetch', function (ev) {
             fetch(request)
                 .then(response => {
                     console.log('fetching', response)
-                    return addToCache(cacheKey, request, response)
-                        // .catch(err => console.log('errrrr in here', err))
+                    return addToCache(CACHE_NAME, request, response)
                 })
                 .catch((err) => {
                     console.log('errrrr', err)
@@ -84,7 +82,7 @@ self.addEventListener('fetch', function (ev) {
         ev.respondWith(
             fetchFromCache(ev)
             .catch(() => fetch(request))
-            .then(response => addToCache(cacheKey, request, response))
+            .then(response => addToCache(CACHE_NAME, request, response))
             // .catch(() => offlineResponse(resourceType, opts))
         )
     }
@@ -112,17 +110,18 @@ function fetchFromCache (ev) {
             // A synchronous error that will kick off the catch handler
             throw Error(`${ev.request.url} not found in cache`)
         }
+        console.log('got from cache', ev.request, response)
         return response
     })
 }
-
 
 
 // the browser will check if these resources are in the previous cache
 // list. if they don’t exist anymore it will remove them.
 self.addEventListener('activate', function (ev) {
     console.log('**activate', ev)
-    var cacheWhitelist = ['my-cache', 'static', 'content', 'image']
+    // var cacheWhitelist = ['my-cache', 'static', 'content', 'image']
+    var cacheWhitelist = [CACHE_NAME]
 
     // rm caches not in 'whitelist'
     ev.waitUntil(

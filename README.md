@@ -37,3 +37,17 @@ version number from package.json.
 
 -----^-------
 * uses a network-first strategy
+
+----------------------------------------------
+
+[caches.match](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/match)
+
+> Note: caches.match() is a convenience method. Equivalent functionality is to call cache.match() on each cache (in the order returned by caches.keys()) until a Response is returned.
+
+## todo
+
+* fix the cache system in service worker. 
+
+
+
+
