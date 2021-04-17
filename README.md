@@ -52,11 +52,19 @@ version number from package.json.
 
 ## 4-16-2020
 
-[Swipe Views with CSS Snap Points](https://medium.com/@_zouhir/swipe-views-with-css-snap-points-building-a-more-efficient-mobile-web-navigation-f9ac8c53dbc0)
+This is the colorful horizontally snapping one:
 
 > here’s a pen where I made a fully responsive Swipe Views (Carousel) with CSS Grid and Snap Points where neither JavaScript nor CSS media queries are required to achieve the responsiveness.
 
+[Swipe Views with CSS Snap Points](https://medium.com/@_zouhir/swipe-views-with-css-snap-points-building-a-more-efficient-mobile-web-navigation-f9ac8c53dbc0)
+
+-----------------------------------------
+
+This is the demo with the pink smooth scrolling boxes:
+
 [Creating horizontal scrolling containers the right way [CSS Grid]](https://uxdesign.cc/creating-horizontal-scrolling-containers-the-right-way-css-grid-c256f64fc585)
+
+----------------------------------------
 
 [Example 5: 2D image grid](https://css-tricks.com/practical-css-scroll-snapping/#example-5-2d-image-grid) -- could be cool
 
