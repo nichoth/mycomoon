@@ -81,6 +81,18 @@ This is the demo with the pink smooth scrolling boxes:
 
 You can start a local dev server with `netlify dev`
 
+```
+my_functions/hello.js
+my_functions/hello/hello.js
+my_functions/hello/index.js
+```
+
+> Any of the above formats would deploy a synchronous serverless function that can be called on the following endpoint, relative to the base URL of your site: `/.netlify/functions/hello`
+
+```
+https://dev--mycomoon.netlify.app/.netlify/functions/hello-world
+```
+
 
 
 
