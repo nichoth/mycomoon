@@ -69,4 +69,16 @@ This is the demo with the pink smooth scrolling boxes:
 [Example 5: 2D image grid](https://css-tricks.com/practical-css-scroll-snapping/#example-5-2d-image-grid) -- could be cool
 
 
+----------------------------------------------
+
+## square
+
+1. copy the app id and secret to `.env.example`
+2. install `square` via npm
+
+
+
+
+
+
 

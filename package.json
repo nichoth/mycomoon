@@ -32,5 +32,8 @@
     "mkdirp": "^1.0.4",
     "sass": "^1.32.8",
     "uglifyify": "^5.0.2"
+  },
+  "dependencies": {
+    "square": "^10.0.0"
   }
 }
