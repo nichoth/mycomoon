@@ -77,6 +77,9 @@ This is the demo with the pink smooth scrolling boxes:
 2. install `square` via npm
 3. set up netlify functions. see [build your first function](https://app.netlify.com/sites/mycomoon/functions)
 
+--------------------------------
+
+You can start a local dev server with `netlify dev`
 
 
 
