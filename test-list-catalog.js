@@ -59,7 +59,7 @@ const inv = async () => {
         const { result, ...httpResponse } =
             await inventoryApi.batchRetrieveInventoryCounts(body);
         console.log('inventory', result)
-        console.log('inv state code', httpResponse.statusCode)
+        console.log('inv stat code', httpResponse.statusCode)
     } catch(error) {
         console.log('err in inv', error)
     }
