@@ -4,14 +4,16 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && concurrently --kill-others \"npx ecstatic public\" \"npm run watch-sass\"",
+    "start": "netlify dev",
+    "//start": "npm run build && concurrently --kill-others \"npx ecstatic public\" \"npm run watch-sass\"",
     "build": "mkdir -p public && npm run copy && node build.js && npm run build-sw && npm run build-js && npm run build-sass",
     "build-js": "browserify -t uglifyify --debug src/index.js > public/bundle.js",
     "build-sw": "browserify -t uglifyify --debug src/sw.js > public/sw.js",
     "copy": "mkdir -p public/admin && cp src/admin/* public/admin && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
     "build-sass": "sass src/style/main.scss public/style.css",
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ok": ""
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "square": "^10.0.0"
   }
 }

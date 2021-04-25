@@ -94,7 +94,50 @@ https://dev--mycomoon.netlify.app/.netlify/functions/hello-world
 ```
 
 
+https://docs.netlify.com/functions/build-with-javascript/
+
+-----------------------------------
+
+* [create order request](https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md)
+
+----------------------------------------------
+
+[test values](https://developer.squareup.com/docs/testing/test-values)
+
+Payments.CreatePayment (card)
+nonce --
+```
+cnon:card-nonce-ok
+```
+
+-----------------------------------------
+
+What am I doing?
+
+Need to create an order on square 
+from the myco website
 
 
+Get the catalog_object_id for your line item 
+
+## test file
+
+I found the access token here:
+https://developer.squareup.com/apps
+**In the 'account details' part** when you click on `myco-test`
+
+This is different than after you click 'open' on the 'myco moon' website, or
+when you click 'open' on the sandbox `myco-test`.
+https://developer.squareup.com/apps/sq0idp-tQkeBZJNjlKlfjdxvaBxFg/settings
+
+--------------------------------
+
+## [how to find a location id?](https://www.sellercommunity.com/t5/Point-of-Sale-API/Square-s-API-How-do-I-find-my-Application-ID-Location-ID-amp/td-p/142543)
+
+* Go to https://developer.squareup.com
+* The Location ID(s) for your Square account can be found in the Locations tab of your Developer Dashboard.
 
 
+'default test' location in the 'real' site
+
+LTTBZ5XKA3MGS
