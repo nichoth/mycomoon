@@ -141,3 +141,12 @@ https://developer.squareup.com/apps/sq0idp-tQkeBZJNjlKlfjdxvaBxFg/settings
 'default test' location in the 'real' site
 
 LTTBZ5XKA3MGS
+
+----------------------------------------
+
+
+[Batch Retrieve Inventory Counts](https://github.com/square/square-nodejs-sdk/blob/master/doc/api/inventory.md#batch-retrieve-inventory-counts)
+
+
+
+

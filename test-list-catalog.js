@@ -42,3 +42,32 @@ try {
     console.log('**errrrrrrrrrrrrrr**')
     console.log(err)
 }
+
+
+
+
+// now the inventory
+var body = {
+    catalogObjectIds: ['Q4UZQOY3XDUCVREVFXJAHQIU', 'XADSDDW5UKJLRYINTYCUSE4V']
+    // locationIds: ['LTTBZ5XKA3MGS']
+}
+
+const inv = async () => {
+    const inventoryApi = client.inventoryApi;
+
+    try {
+        const { result, ...httpResponse } =
+            await inventoryApi.batchRetrieveInventoryCounts(body);
+        console.log('inventory', result)
+        console.log('inv state code', httpResponse.statusCode)
+    } catch(error) {
+        console.log('err in inv', error)
+    }
+}
+
+try {
+    inv()
+} catch (err) {
+    console.log('inv **errrrrrrrrrrrrrr**')
+    console.log(err)
+}
