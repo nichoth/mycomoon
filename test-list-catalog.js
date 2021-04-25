@@ -14,13 +14,18 @@ const client = new Client({
 const handler = async (event) => {
     const catalogApi = client.catalogApi;
     const cursor = ''
-    const types = "ITEM,CATEGORY,IMAGE"
-    const catalogVersion = 126;
+    const types = "ITEM,ITEM_VARIATION,CATEGORY,IMAGE"
+    // const catalogVersion = 126;
 
     try {
         const { result, ...httpResponse } = await catalogApi.listCatalog(
-            cursor, types, catalogVersion);
+            cursor, types);
+        // const { result, ...httpResponse } = await catalogApi.listCatalog(
+        //     cursor, types/*, catalogVersion*/);
         console.log('result', result)
+        // console.log('objects', result.objects)
+        // console.log('response', httpResponse)
+        console.log('stat code', httpResponse.statusCode)
         // Get more response info...
         // const { statusCode, headers } = httpResponse;
     } catch (error) {
