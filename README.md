@@ -148,5 +148,37 @@ LTTBZ5XKA3MGS
 [Batch Retrieve Inventory Counts](https://github.com/square/square-nodejs-sdk/blob/master/doc/api/inventory.md#batch-retrieve-inventory-counts)
 
 
+------------------------------------------------
+
+1. make a store type thing on square -- https://developer.squareup.com/apps,
+and make some products with pictures. This is done in the 'sandbox account' --
+https://squareupsandbox.com/dashboard/
+
+
+Have an index page that shows one item per item
+
+Then on the item page, you have the ability to select a variation for that item
+
+-----------------------------------------------
+
+in the catalog response, low inventory alerts are in `locationOverrides`:
+
+```js
+{
+    "locationId": "LAZSTD2P84MEA",
+    "trackInventory": true,
+    "inventoryAlertType": "LOW_QUANTITY",
+    "inventoryAlertThreshold": "3n"
+}
+```
+
+vs this one with no alert:
+```js
+{
+    "locationId": "LAZSTD2P84MEA",
+    "trackInventory": true
+}
+```
+
 
 
