@@ -2,6 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var mkdirp = require('mkdirp')
 const matter = require('gray-matter')
+const marked = require('marked')
 var hyperstream = require('hyperstream')
 
 fs.readdir(__dirname + '/src/_pages', (err, files) => {
@@ -20,10 +21,10 @@ fs.readdir(__dirname + '/src/_pages', (err, files) => {
 
                 var hs = hyperstream({
                     'body': {
-                        class: { append: 'page-about' }
+                        class: { append: 'page-' + name }
                     },
                     '#content': {
-                        _appendHtml: matter(content).content
+                        _appendHtml: marked( matter(content).content )
                     }
                 })
 

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "netlify dev",
+    "start": "npm run build && netlify dev",
     "//start": "npm run build && concurrently --kill-others \"npx ecstatic public\" \"npm run watch-sass\"",
     "build": "mkdir -p public && npm run copy && node build.js && npm run build-sw && npm run build-js && npm run build-sass",
     "build-js": "browserify -t uglifyify --debug src/index.js > public/bundle.js",
@@ -12,8 +12,7 @@
     "copy": "mkdir -p public/admin && cp src/admin/* public/admin && cp src/myco.webmanifest src/index.html src/icon.png src/*.otf src/*.png public && cp src/icons/* public",
     "build-sass": "sass src/style/main.scss public/style.css",
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "ok": ""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -32,11 +31,13 @@
     "gray-matter": "^4.0.2",
     "hyperstream": "^1.2.2",
     "mkdirp": "^1.0.4",
+    "netlify": "^6.1.20",
     "sass": "^1.32.8",
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "marked": "^2.0.3",
     "square": "^10.0.0"
   }
 }

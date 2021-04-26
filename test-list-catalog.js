@@ -19,7 +19,8 @@ var inv;
 const handler = async (event) => {
     const catalogApi = client.catalogApi;
     const cursor = ''
-    const types = "ITEM,ITEM_VARIATION,CATEGORY,IMAGE"
+    // const types = "ITEM,ITEM_VARIATION,CATEGORY,IMAGE"
+    const types = "ITEM,CATEGORY,IMAGE"
     // const catalogVersion = 126;
 
     try {
@@ -78,6 +79,7 @@ function gotThem (catalog, inventory) {
         return typeof value === "bigint" ? value.toString() + "n" : value
     }
 
+    // a map of all product variations, indexed by variationId
     var variations = catalog.reduce((acc, catItem) => {
         if (catItem.type !== 'ITEM') return acc
         var variants = catItem.itemData.variations
@@ -85,6 +87,7 @@ function gotThem (catalog, inventory) {
         return acc
     }, {})
 
+    // this is a list of `variations` b/c thats what the inventory is of
     var withStock = inventory.counts.map(({ catalogObjectId, quantity }) => {
         variations[catalogObjectId].quantity = quantity
         return variations[catalogObjectId]
@@ -92,7 +95,7 @@ function gotThem (catalog, inventory) {
 
     console.log('got them catalog', JSON.stringify(catalog, stringer, 2))
     console.log('got them with stock', withStock)
-    console.log('got them variations', JSON.stringify(variations, stringer, 2))
+    // console.log('got them variations', JSON.stringify(variations, stringer, 2))
     console.log('got them images', images)
     console.log('got them inventory', inventory)
 }
