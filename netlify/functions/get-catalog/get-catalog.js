@@ -63,6 +63,21 @@ const handler = async (/* event */) => {
         })
     })
 
+    // images by imageId
+    var images = cats
+        .reduce((acc, item) => {
+            if (item.type !== 'IMAGE') return acc
+            acc[item.id] = item
+            return acc
+        }, {})
+
+    // mutate each catalog item by adding the image data
+    cats.forEach(cat => {
+        if (cat.type !== 'ITEM') return
+        cat.imageData = images[cat.imageId].imageData
+    })
+
+
     // -----------------------------------------
 
     var stringer = (key, value) => {
