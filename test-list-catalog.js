@@ -67,6 +67,22 @@ res.then(_res => {
 function gotThem (catalog, inventory) {
     console.log('got them')
 
+    // inventory by catalog item ID
+    var _inv = inventory.counts.reduce((acc, invItem) => {
+        acc[invItem.catalogObjectId] = invItem
+        return acc
+    }, {})
+
+
+    catalog.forEach(cat => {
+        if (cat.type !== 'ITEM') return
+        cat.itemData.variations.forEach(variation => {
+            var id = variation.id
+            variation.quantityAvailable = _inv[id].quantity
+        })
+    })
+
+
     var images = catalog.reduce((acc, obj) => {
         // this maps the catalog item id to an image
         if (obj.type === 'IMAGE') {
@@ -79,25 +95,30 @@ function gotThem (catalog, inventory) {
         return typeof value === "bigint" ? value.toString() + "n" : value
     }
 
+    console.log('****cat', JSON.stringify(catalog, stringer, 2))
+
     // a map of all product variations, indexed by variationId
-    var variations = catalog.reduce((acc, catItem) => {
-        if (catItem.type !== 'ITEM') return acc
-        var variants = catItem.itemData.variations
-        variants.forEach(v => (acc[v.id] = v))
-        return acc
-    }, {})
+    // var variations = catalog.reduce((acc, catItem) => {
+    //     if (catItem.type !== 'ITEM') return acc
+    //     var variants = catItem.itemData.variations
+    //     variants.forEach(v => (acc[v.id] = v))
+    //     return acc
+    // }, {})
 
     // this is a list of `variations` b/c thats what the inventory is of
-    var withStock = inventory.counts.map(({ catalogObjectId, quantity }) => {
-        variations[catalogObjectId].quantity = quantity
-        return variations[catalogObjectId]
-    })
+    // var withStock = inventory.counts.map(({ catalogObjectId, quantity }) => {
+    //     variations[catalogObjectId].quantity = quantity
+    //     return variations[catalogObjectId]
+    // })
 
-    console.log('got them catalog', JSON.stringify(catalog, stringer, 2))
-    console.log('got them with stock', withStock)
+    // console.log('got them catalog', JSON.stringify(catalog, stringer, 2))
+    // console.log('got them with stock', withStock)
     // console.log('got them variations', JSON.stringify(variations, stringer, 2))
     console.log('got them images', images)
     console.log('got them inventory', inventory)
+
+
+    // we want a list of products with nested variation & quanitity
 }
 
 
@@ -227,6 +248,7 @@ function gotThem (catalog, inventory) {
 
 
 // now the inventory
+// these are variation ids
 var invBody = {
     catalogObjectIds: ['Q4UZQOY3XDUCVREVFXJAHQIU', 'XADSDDW5UKJLRYINTYCUSE4V',
         'BHRROLX5PDHPOLXANSIK4SWB']
@@ -254,3 +276,7 @@ _inv()
     .catch(err => {
         console.log('inv errrr', err)
     })
+
+
+
+// go through the catalog response, and map the item_variations to quntity

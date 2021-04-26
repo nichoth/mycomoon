@@ -161,7 +161,7 @@ Then on the item page, you have the ability to select a variation for that item
 
 -----------------------------------------------
 
-in the catalog response, low inventory alerts are in `locationOverrides`:
+in the catalog response, *rlow inventory alerts** are in `locationOverrides`:
 
 ```js
 {
@@ -181,4 +181,16 @@ vs this one with no alert:
 ```
 
 
+------------------------------------------------
+
+go through the catalog response, and map the item_variations to quntity
+
+```js
+item.itemData.variations[0].id === inventory.counts[0].catalogObjectId
+```
+
+the url for functions
+```
+/.netlify/functions/hello-world
+```
 
