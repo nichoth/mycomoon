@@ -24,6 +24,8 @@
 $main-color: #f0dca9;
 
 body {
+
+    padding: 0!important;
     
     &.page-products {
         margin: 0;
@@ -45,11 +47,16 @@ body {
         padding: 0;
         list-style: none;
         align-items: stretch;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%, 399px), 1fr));
-        grid-template-rows: repeat(auto-fill, 60vmin);
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+        // grid-template-columns: repeat(auto-fill, minmax(min(100%, 399px), 1fr));
+        grid-template-rows: repeat(auto-fill, 50vmin);
         gap: 2rem;
         grid-row-gap: 5rem;
         padding-bottom: 6rem;
+
+        p {
+            font-family: 'Work Sans', sans-serif;
+        }
 
         img {
             width: 100%;
@@ -181,6 +188,7 @@ body {
             &.products {
                 margin-left: 0;
                 padding-bottom: 10rem;
+                padding-top: 4rem;
                 background-color: #0000007a;
             }
         }

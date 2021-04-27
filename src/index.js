@@ -1,5 +1,4 @@
 var route = require('route-event')()
-// var router = require('ruta3')()
 var router = require('./router')
 import { html } from 'htm/preact'
 import { render/*, hydrate*/ } from 'preact'

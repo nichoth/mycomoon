@@ -49,7 +49,7 @@ router.addRoute('/products', () => {
             console.log('products content', content)
 
             return html`<div>
-                <p>products page</p>
+                <h1>products page</h1>
 
                 ${content ?
                     html`<ul class="products-list">
