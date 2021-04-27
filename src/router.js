@@ -62,11 +62,15 @@ router.addRoute('/products', () => {
                 <p>products page</p>
 
                 ${content ?
-                    html`<ul>
+                    html`<ul class="products-list">
                         ${content
                             .filter(item => item.type === 'ITEM')
                             .map(item => {
-                                return html`<li>aaaaa</li>`
+                                return html`<li>
+                                    <img src=${item.imageData.url}
+                                        alt="mushroom" />
+                                    <p>${item.itemData.name}</p>
+                                </li>`
                             })
                         }
                     </ul>` :

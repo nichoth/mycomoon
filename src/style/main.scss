@@ -31,7 +31,22 @@ body {
 
 
 
+    .products-list {
+        display: grid;
+        padding: 0;
+        list-style: none;
+        align-items: stretch;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 399px), 1fr));
+        grid-template-rows: repeat(auto-fill, 60vmin);
+        gap: 2rem;
 
+        img {
+            width: 100%;
+            // height: auto;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    }
 
 
 
@@ -77,6 +92,8 @@ body {
     }
 
     // ----------------------------------------------------
+
+
 
 
 
@@ -132,7 +149,6 @@ body {
     }
 
     #content {
-        margin-left: 30vw;
 
         .main-nav {
             padding: 0;
@@ -147,6 +163,13 @@ body {
                 &:hover {
                     text-decoration: underline;
                 }
+            }
+        }
+
+        .shell-placeholder {
+            margin-left: 30vw;
+            &.products {
+                margin-left: 0;
             }
         }
     }

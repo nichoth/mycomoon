@@ -4,6 +4,7 @@ var router = require('./router')
 import { html } from 'htm/preact'
 import { render/*, hydrate*/ } from 'preact'
 // import shell from './view/shell';
+var _path = require('path')
 
 
 console.log('wooooooo')
@@ -41,7 +42,11 @@ route(function onRoute (path) {
 
     var { view, getContent } = m.action(m)
 
-    var el = html`<div class="shell-placeholder">
+    var contentClass = path === '/' ?
+        'index' :
+        _path.basename(path)
+
+    var el = html`<div class="shell-placeholder ${contentClass}">
         <${view} getContent=${getContent} />
     </div>`
 
