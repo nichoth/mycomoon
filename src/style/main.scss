@@ -185,6 +185,10 @@ body {
 
         .shell-placeholder {
             margin-left: 30vw;
+            &.index {
+                margin-top: 2rem;
+            }
+
             &.products {
                 margin-left: 0;
                 padding-bottom: 10rem;
