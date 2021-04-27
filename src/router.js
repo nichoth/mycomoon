@@ -27,22 +27,12 @@ router.addRoute('/products', () => {
     console.log('**products route**')
 
     return {
-
         getContent: function () {
             return fetch('/.netlify/functions/get-catalog')
                 .then(response => response.json())
         },
 
-        // getContent: function () {
-        //     return new Promise((resolve, _reject) => {
-        //         setTimeout(() => {
-        //             resolve('products content')
-        //         }, 1000)
-        //     })
-        // },
-
         view: function (props) {
-            // in here, could do `useEffect` to fetch the content
             console.log('in view', props)
             var { getContent } = props
 
