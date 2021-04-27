@@ -27,13 +27,20 @@ router.addRoute('/products', () => {
     console.log('**products route**')
 
     return {
+
         getContent: function () {
-            return new Promise((resolve, _reject) => {
-                setTimeout(() => {
-                    resolve('products content')
-                }, 1000)
-            })
+            return fetch('/.netlify/functions/get-catalog')
+                .then(response => response.json())
         },
+
+        // getContent: function () {
+        //     return new Promise((resolve, _reject) => {
+        //         setTimeout(() => {
+        //             resolve('products content')
+        //         }, 1000)
+        //     })
+        // },
+
         view: function (props) {
             // in here, could do `useEffect` to fetch the content
             console.log('in view', props)
@@ -49,9 +56,23 @@ router.addRoute('/products', () => {
                     .catch(err => console.log('errrr', err))
             }, []);
 
+            console.log('products content', content)
+
             return html`<div>
                 <p>products page</p>
-                ${content ? html`<p>${content}</p>` : null}
+
+                ${content ?
+                    html`<ul>
+                        ${content
+                            .filter(item => item.type === 'ITEM')
+                            .map(item => {
+                                return html`<li>aaaaa</li>`
+                            })
+                        }
+                    </ul>` :
+                    null
+                }
+
             </div>`
         }
     }
