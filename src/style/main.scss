@@ -9,6 +9,9 @@
         #content {
             margin-left: 0!important;
         }
+        .shell-placeholder {
+            margin-left: 0!important;
+        }
     }
 }
 
@@ -21,6 +24,11 @@
 $main-color: #f0dca9;
 
 body {
+    
+    &.page-products {
+        margin: 0;
+    }
+
     color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
@@ -32,6 +40,7 @@ body {
 
 
     .products-list {
+        margin: 2rem 2rem;
         display: grid;
         padding: 0;
         list-style: none;
@@ -39,11 +48,13 @@ body {
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 399px), 1fr));
         grid-template-rows: repeat(auto-fill, 60vmin);
         gap: 2rem;
+        grid-row-gap: 5rem;
+        padding-bottom: 6rem;
 
         img {
             width: 100%;
-            // height: auto;
-            max-height: 100%;
+            height: 100%;
+            // max-height: 100%;
             object-fit: cover;
         }
     }
@@ -171,6 +182,8 @@ body {
             margin-left: 30vw;
             &.products {
                 margin-left: 0;
+                padding-bottom: 10rem;
+                background-color: #0000007a;
             }
         }
     }
@@ -188,7 +201,7 @@ body {
     }
 
     p {
-        font-size: 2rem;
+        font-size: 1.4rem;
         margin-top: 0;
     }
 }
