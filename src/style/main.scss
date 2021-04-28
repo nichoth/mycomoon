@@ -25,21 +25,22 @@ $main-color: #f0dca9;
 
 body {
 
+    margin: 0;
+
     padding: 0!important;
     
-    &.page-products {
-        margin: 0;
-    }
-
     color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
     padding-top: 16vh;
-    font-family: Casta;
+    // font-family: Casta;
+    font-family: 'Work Sans', sans-serif;
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
 
-
+    h1 {
+        font-family: Casta;
+    }
 
     .products-list {
         margin: 2rem 2rem;
@@ -53,10 +54,6 @@ body {
         gap: 2rem;
         grid-row-gap: 5rem;
         padding-bottom: 6rem;
-
-        p {
-            font-family: 'Work Sans', sans-serif;
-        }
 
         img {
             width: 100%;
@@ -175,7 +172,6 @@ body {
 
             a {
                 text-decoration: none;
-                font-family: sans-serif;
 
                 &:hover {
                     text-decoration: underline;
