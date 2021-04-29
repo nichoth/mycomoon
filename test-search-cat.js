@@ -15,29 +15,38 @@ var body = {
     // textFilter: 'name',
     // custom_attribute_filter: {
     //     "custom_attribute_definition_id": "slug",
-    //     'custom_attribute_definition_token': 'slug',
+    //     'custom_attribute_definition_token': 'test-slug',
     //     "string_filter": "test-slug"
     // },
-    
+
+//     customAttributeFilters: {
+//         "custom_attribute_definition_id": "slug",
+//         "string_filter": "test-slug"
+//     },
+
+    limit: 100,
+
+    customAttributeFilter: {
+        "customAttributeDefinitionToken": 'slug',
+    },
+
     customAttributeFilters: [
+        // {
+        //     "customAttributeDefinitionId": "slug",
+        //     "stringFilter": "test-slug"
+        // },
+        // {
+        //     "customAttributeDefinitionToken": 'slug'
+        // },
         {
-            "custom_attribute_definition_token": 'slug',
-            "string_filter": "test-slug"
+            // "customAttributeDefinitionToken": 'slug',
+            // key: 'slug',
+            "stringFilter": "test-slug",
+            // 'slug': 'test-slug',
+            // "customAttributeDefinitionId": "slug",
+            "customAttributeDefinitionToken": 'slug',
         },
-        {
-            "custom_attribute_definition_id": "slug",
-            "string_filter": "test-slug"
-        },
-        {
-            "custom_attribute_definition_id": "VARIETAL_DEFINITION_ID",
-            "selection_ids_filter": "MERLOT_SELECTION_ID"
-        }
-    //     // {
-    //     //     "custom_attribute_definition_id": "BRAND_DEFINITION_ID",
-    //     //     "string_filter": "Dark Horse"
-    //     // },
     ]
-    // stockLevels: []
 }
 
 async function search () {
@@ -46,14 +55,16 @@ async function search () {
     return result;
 }
 
-// var stringer = (key, value) => {
-//     return typeof value === "bigint" ? value.toString() + "n" : value
-// }
+var stringer = (key, value) => {
+    return typeof value === "bigint" ? value.toString() + "n" : value
+}
 
 search()
     .then(res => {
         // console.log('search', JSON.stringify(res.objects, stringer, 2))
-        console.log('search', res)
+        console.log('search', JSON.stringify(res, stringer, 2))
+        console.log(res)
+        // console.log('search', res)
     })
     .catch(err => console.log('oh no', err))
 
@@ -71,6 +82,7 @@ search()
 //     .then(res => res.json())
 //     .then(res => {
 //         console.log('old style api call', JSON.stringify(res.items, stringer, 2))
+//         console.log('**request**', body)
 //     })
 
 
