@@ -181,6 +181,8 @@ body {
 
         .shell-placeholder {
             margin-left: 30vw;
+            min-height: 100vh;
+
             &.index {
                 margin-top: 2rem;
             }
