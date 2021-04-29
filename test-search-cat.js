@@ -12,46 +12,18 @@ const client = new Client({
 const catalogApi = client.catalogApi;
 
 var body = {
-    // textFilter: 'name',
-    // custom_attribute_filter: {
-    //     "custom_attribute_definition_id": "slug",
-    //     'custom_attribute_definition_token': 'test-slug',
-    //     "string_filter": "test-slug"
-    // },
-
-//     customAttributeFilters: {
-//         "custom_attribute_definition_id": "slug",
-//         "string_filter": "test-slug"
-//     },
-
     limit: 100,
 
-    customAttributeFilter: {
-        "customAttributeDefinitionToken": 'slug',
-    },
-
     customAttributeFilters: [
-        // {
-        //     "customAttributeDefinitionId": "slug",
-        //     "stringFilter": "test-slug"
-        // },
-        // {
-        //     "customAttributeDefinitionToken": 'slug'
-        // },
         {
-            // "customAttributeDefinitionToken": 'slug',
-            // key: 'slug',
             "stringFilter": "test-slug",
-            // 'slug': 'test-slug',
-            // "customAttributeDefinitionId": "slug",
-            "customAttributeDefinitionToken": 'slug',
-        },
+            "customAttributeDefinitionId": "7KFDYZ54EAWBQ64SGDFIASRK",
+        }
     ]
 }
 
 async function search () {
     const { result } = await catalogApi.searchCatalogItems(body)
-
     return result;
 }
 
@@ -62,8 +34,9 @@ var stringer = (key, value) => {
 search()
     .then(res => {
         // console.log('search', JSON.stringify(res.objects, stringer, 2))
-        console.log('search', JSON.stringify(res, stringer, 2))
-        console.log(res)
+        // console.log('**search**', JSON.stringify(res, stringer, 2))
+        console.log('**res**', JSON.stringify(res.items, stringer, 2))
+        console.log('length', res.items.length)
         // console.log('search', res)
     })
     .catch(err => console.log('oh no', err))
