@@ -195,3 +195,21 @@ the url for functions
 ```
 
 `vmin` unit -- the lesser of `vw` and `vh`
+
+
+--------------------------------------------
+
+
+```js
+"custom_attribute_values": {
+    "Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec": {
+    "name": "slug",
+    "string_value": "test-slug",
+    "custom_attribute_definition_id": "7KFDYZ54EAWBQ64SGDFIASRK",
+    "type": "STRING",
+    "key": "Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec"
+    }
+},
+```
+
+
