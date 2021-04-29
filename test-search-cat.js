@@ -17,6 +17,9 @@ var body = {
     customAttributeFilters: [
         {
             "stringFilter": "test-slug",
+            // i got this id value from the `test-list-catalog` response
+            // not sure if it is visible in the square UI
+            // this id maps to `slug`
             "customAttributeDefinitionId": "7KFDYZ54EAWBQ64SGDFIASRK",
         }
     ]
@@ -33,32 +36,12 @@ var stringer = (key, value) => {
 
 search()
     .then(res => {
-        // console.log('search', JSON.stringify(res.objects, stringer, 2))
         // console.log('**search**', JSON.stringify(res, stringer, 2))
         console.log('**res**', JSON.stringify(res.items, stringer, 2))
         console.log('length', res.items.length)
         // console.log('search', res)
     })
     .catch(err => console.log('oh no', err))
-
-
-
-
-// fetch('https://connect.squareupsandbox.com/v2/catalog/search-catalog-items', {
-//     method: 'POST',
-//     body: JSON.stringify(body),
-//     headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: 'Bearer ' + accessToken
-//     },
-// })
-//     .then(res => res.json())
-//     .then(res => {
-//         console.log('old style api call', JSON.stringify(res.items, stringer, 2))
-//         console.log('**request**', body)
-//     })
-
-
 
 
 // module.exports = { handler }

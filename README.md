@@ -212,4 +212,58 @@ the url for functions
 },
 ```
 
+In the catalog list response:
+
+```
+{
+    "type": "ITEM",
+    "id": "YEUQ7F6NHHZTFO666FQ5CUVI",
+    "updatedAt": "2021-04-29T14:39:41.468Z",
+    "version": "1619707181468n",
+    "isDeleted": false,
+    "customAttributeValues": {
+      "Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec": {
+        "name": "slug",
+        "stringValue": "test-slug",
+        "customAttributeDefinitionId": "7KFDYZ54EAWBQ64SGDFIASRK",
+        "type": "STRING",
+        "key": "Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec"
+      }
+    },
+```
+
+This shows the `customAttributeDefinitionId`
+
+-----------------------------------------------
+
+## slugs
+
+You can use the same `customAttributeDefinitionId` string, and just replace
+the value in the request. This example uses the same ID with different
+search values. In the square UI, I just created a custom attribute on each
+item with an attribute name of `slug`, and a different attribute value for each.
+It re-used the same attribute id.
+
+```js
+    customAttributeFilters: [
+        {
+            "stringFilter": "test-slug",
+            // i got this id value from the `test-list-catalog` response
+            // not sure if it is visible in the square UI
+            "customAttributeDefinitionId": "7KFDYZ54EAWBQ64SGDFIASRK",
+        }
+    ]
+```
+
+vs
+
+```js
+customAttributeFilters: [
+    {
+        "stringFilter": "oos-slug",
+        "customAttributeDefinitionId": "7KFDYZ54EAWBQ64SGDFIASRK",
+    }
+]
+```
+
 
