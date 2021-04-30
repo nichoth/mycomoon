@@ -1,12 +1,12 @@
 const { Client, Environment } = require('square')
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 var accessToken = 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
 
 const client = new Client({
     environment: Environment.Sandbox,
     // this is from the 'sandbox test account'
     // this one works
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+    accessToken: accessToken
 })
 
 const catalogApi = client.catalogApi;
@@ -16,6 +16,7 @@ var body = {
 
     customAttributeFilters: [
         {
+            // `stringFilter` would come from the request body or query string
             "stringFilter": "test-slug",
             // i got this id value from the `test-list-catalog` response
             // not sure if it is visible in the square UI

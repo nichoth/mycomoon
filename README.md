@@ -238,9 +238,9 @@ This shows the `customAttributeDefinitionId`
 
 ## slugs
 
-You can use the same `customAttributeDefinitionId` string, and just replace
-the value in the request. This example uses the same ID with different
-search values. In the square UI, I just created a custom attribute on each
+You can use the same `customAttributeDefinitionId` string, and replace
+the value `stringFilter` in the request. This example uses the same ID with different
+search values. In the square UI, I created a custom attribute on each
 item with an attribute name of `slug`, and a different attribute value for each.
 It re-used the same attribute id.
 
@@ -265,5 +265,23 @@ customAttributeFilters: [
     }
 ]
 ```
+
+------------------------------------------
+https://github.com/square/square-nodejs-sdk/issues/30#issuecomment-829522492
+
+> you could just use `stringFilter` in the `SearchCatalogItems` instead of `customAttributeDefinitionId` to search by a specific string, I believe, instead of needing to know the actual definition id.
+
+see `textFilter` here: https://github.com/square/square-nodejs-sdk/blob/master/doc/models/search-catalog-items-request.md#fields
+
+
+
+
+
+
+
+
+
+
+
 
 
