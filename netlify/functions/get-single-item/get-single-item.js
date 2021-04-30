@@ -26,9 +26,20 @@ const handler = async (event) => {
         ]
     }
 
+
+    // need to get the image also
+
+    catalogApi.searchCatalogItems({
+        textFilter: slug,
+        productTypes: ['IMAGE']
+    })
+
+
+
+
     var res
     try {
-        const { result } = await catalogApi.searchCatalogObjects(body);
+        const { result } = await catalogApi.searchCatalogItems(body);
         res = result
     } catch (err) {
         console.log('err in here', err)

@@ -34,6 +34,26 @@ async function search () {
     return result;
 }
 
+
+
+
+// need to get the image also
+
+// catalogApi.searchCatalogItems({
+//     textFilter: 'test',
+//     productTypes: ['REGULAR']
+// })
+//     .then(res => {
+//         // console.log('***res in here***', res)
+//         console.log('*** res in here***', JSON.parse(res.body).items)
+//     })
+//     .catch(err => {
+//         console.log('***err in here', err)
+//     })
+
+
+
+
 var stringer = (key, value) => {
     return typeof value === "bigint" ? value.toString() + "n" : value
 }

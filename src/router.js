@@ -88,6 +88,19 @@ router.addRoute('/:slug', ({ params }) => {
         },
 
         view: function SingleProductView (props) {
+            var { getContent } = props
+            const [item, setItem] = useState(null)
+
+            useEffect(() => {
+                getContent()
+                    .then(res => {
+                        setItem(res)
+                    })
+                    .catch(err => console.log('errrr', err))
+            }, []);
+
+            return html`<div class="single-product">
+            </div>`
 
         }
     }
