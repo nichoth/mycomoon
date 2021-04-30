@@ -11,6 +11,9 @@ const client = new Client({
 
 const catalogApi = client.catalogApi;
 
+
+// event.queryStringParameters
+
 var body = {
     limit: 100,
 

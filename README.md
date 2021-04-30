@@ -267,6 +267,7 @@ customAttributeFilters: [
 ```
 
 ------------------------------------------
+
 https://github.com/square/square-nodejs-sdk/issues/30#issuecomment-829522492
 
 > you could just use `stringFilter` in the `SearchCatalogItems` instead of `customAttributeDefinitionId` to search by a specific string, I believe, instead of needing to know the actual definition id.
