@@ -72,4 +72,25 @@ router.addRoute('/products', () => {
     }
 })
 
+router.addRoute('/:slug', ({ params }) => {
+    return {
+        getContent: function () {
+            var { slug } = params
+            var url = new URL('/.netlify/functions/get-single-item')
+            url.searchParams.append('slug', slug)
+            return fetch(url)
+                .then(res => {
+                    return res.json()
+                })
+                .catch(err => {
+                    console.log('oh no', err)
+                })
+        },
+
+        view: function SingleProductView (props) {
+
+        }
+    }
+})
+
 module.exports = router
