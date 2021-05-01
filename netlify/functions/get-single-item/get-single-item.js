@@ -1,4 +1,5 @@
 const { Client, Environment } = require('square')
+var util = require('../util')
 
 const client = new Client({
     environment: Environment.Sandbox,
