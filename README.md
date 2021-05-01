@@ -280,8 +280,21 @@ see `textFilter` here: https://github.com/square/square-nodejs-sdk/blob/master/d
 
 
 
+`ITEM.customAttributeValues` --
 
-
+```js
+customAttributeValues: {
+    Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec: {
+        customAttributeDefinitionId: "7KFDYZ54EAWBQ64SGDFIASRK"
+        key: "Square:9b562b5e-b18e-4a91-8877-5b0ea3d433ec"
+        name: "slug"
+        stringValue: "test-slug"
+        type: "STRING"
+        __proto__: Object
+        __proto__: Object
+    }
+}
+```
 
 
 

@@ -56,10 +56,17 @@ router.addRoute('/products', () => {
                         ${content
                             .filter(item => item.type === 'ITEM')
                             .map(item => {
+                                if (item.customAttributeValues) {
+                                    var key = Object.keys(item.customAttributeValues)[0]
+                                    var slug = item.customAttributeValues[key].stringValue
+                                }
+
                                 return html`<li>
-                                    <img src=${item.imageData.url}
-                                        alt="mushroom" />
-                                    <p>${item.itemData.name}</p>
+                                    <a href="/${slug}">
+                                        <img src=${item.imageData.url}
+                                            alt="mushroom" />
+                                        <p>${item.itemData.name}</p>
+                                    </a>
                                 </li>`
                             })
                         }
@@ -76,7 +83,7 @@ router.addRoute('/:slug', ({ params }) => {
     return {
         getContent: function () {
             var { slug } = params
-            var url = new URL('/.netlify/functions/get-single-item')
+            var url = new URL('/.netlify/functions/get-single-item', location)
             url.searchParams.append('slug', slug)
             return fetch(url)
                 .then(res => {
@@ -99,9 +106,13 @@ router.addRoute('/:slug', ({ params }) => {
                     .catch(err => console.log('errrr', err))
             }, []);
 
-            return html`<div class="single-product">
-            </div>`
+            if (!item) return null
 
+            return html`<div class="single-product">
+                <img src="${item.imageData.url}" alt="mushroom" />
+                <h1>${item.itemData.name}</h1>
+                <p>${item.itemData.description}</p>
+            </div>`
         }
     }
 })
