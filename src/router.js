@@ -106,10 +106,20 @@ router.addRoute('/:slug', ({ params }) => {
 
             if (!item) return null
 
+            function addToCart (ev) {
+                console.log('add to cart', ev)
+            }
+
             return html`<div class="single-product">
                 <h1>${item.itemData.name}</h1>
-                <img src="${item.imageData.url}" alt="mushroom" />
-                <p>${item.itemData.description}</p>
+                <div class="single-product-content">
+                    <img src="${item.imageData.url}" alt="mushroom" />
+                    <p>${item.itemData.description}</p>
+
+                    <div class="item-controls">
+                        <button onclick=${addToCart}>add to cart</button>
+                    </div>
+                </div>
             </div>`
         }
     }
