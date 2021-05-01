@@ -109,8 +109,8 @@ router.addRoute('/:slug', ({ params }) => {
             if (!item) return null
 
             return html`<div class="single-product">
-                <img src="${item.imageData.url}" alt="mushroom" />
                 <h1>${item.itemData.name}</h1>
+                <img src="${item.imageData.url}" alt="mushroom" />
                 <p>${item.itemData.description}</p>
             </div>`
         }

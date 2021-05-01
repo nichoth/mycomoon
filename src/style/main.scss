@@ -183,6 +183,14 @@ body {
             margin-left: 30vw;
             min-height: 100vh;
 
+            &.product-page {
+                margin-left: 0;
+
+                p {
+                    text-align: left;
+                }
+            }
+
             &.index {
                 margin-top: 2rem;
             }

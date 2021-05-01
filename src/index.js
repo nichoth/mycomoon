@@ -41,9 +41,14 @@ route(function onRoute (path) {
 
     var { view, getContent } = m.action(m)
 
+    var dirs = path.split('/').filter(Boolean)
+
     var contentClass = path === '/' ?
         'index' :
         _path.basename(path)
+
+    if (dirs.length === 1) contentClass += ' product-page'
+    
 
     var el = html`<div class="shell-placeholder ${contentClass}">
         <${view} getContent=${getContent} />
