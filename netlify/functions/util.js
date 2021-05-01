@@ -14,11 +14,9 @@ async function getImages () {
     const types = "IMAGE"
     var cursor = ''
     const catalogApi = client.catalogApi;
-    // const catalogVersion = 126;
-
-    // return catalogApi.listCatalog(cursor, types)
 
     var res
+
     try {
         const {
             result,

@@ -27,28 +27,27 @@ const handler = async (event) => {
         ]
     }
 
+    async function getItem () {
+        var res
 
-    // need to get the image also
-
-    catalogApi.searchCatalogItems({
-        textFilter: slug,
-        productTypes: ['IMAGE']
-    })
-
-
-
-
-    var res
-    try {
-        const { result } = await catalogApi.searchCatalogItems(body);
-        res = result
-    } catch (err) {
-        console.log('err in here', err)
-        return {
-            statusCode: 500,
-            body: err
+        try {
+            const { result } = await catalogApi.searchCatalogItems(body);
+            res = result
+        } catch (err) {
+            console.log('err in here', err)
+            return {
+                statusCode: 500,
+                body: err
+            }
         }
+
+        return res.items[0]
     }
+
+    var item = await getItem()
+    var images = await util.getImages()
+    var img = images.find(_img => _img.id === item.imageId)
+    item.imageData = img.imageData
 
     var stringer = (key, value) => {
         return typeof value === "bigint" ? value.toString() + "n" : value
@@ -56,7 +55,7 @@ const handler = async (event) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(res.items[0], stringer, 2)
+        body: JSON.stringify(item, stringer, 2)
         // // more keys you can return:
         // headers: { "headerName": "headerValue", ... },
         // isBase64Encoded: true,
