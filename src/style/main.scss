@@ -1,3 +1,5 @@
+@use '../../node_modules/@nichoth/shopping-cart/src/style/main.scss';
+
 @font-face {
     font-family: Casta;
     src: url("/Casta-Regular.otf") format("opentype");
@@ -37,6 +39,20 @@ body {
     font-family: 'Work Sans', sans-serif;
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
+
+    .nav-part {
+        margin-top: 1rem;
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        #cart-icon {
+            svg {
+                fill: #f0dca9;
+            }
+        }
+    }
 
     h1 {
         font-family: Casta;

@@ -1,9 +1,12 @@
 var route = require('route-event')()
 var router = require('./router')
-import { html } from 'htm/preact'
-import { render/*, hydrate*/ } from 'preact'
+import { html, Component } from 'htm/preact'
+// import { render/*, hydrate*/ } from 'preact'
+import { createRef, /*hydrate,*/ render } from 'preact';
+import { useState, useLayoutEffect } from 'preact/hooks';
 // import shell from './view/shell';
 var _path = require('path')
+import Cart from '@nichoth/shopping-cart'
 
 
 console.log('wooooooo')
@@ -47,17 +50,59 @@ route(function onRoute (path) {
         'index' :
         _path.basename(path)
 
-    var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' && dirs[0]
-        !== 'about')
+    var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
+        dirs[0] !== 'about')
     if (isProdPage) contentClass += ' product-page'
 
-    var el = html`<div class="shell-placeholder ${contentClass}">
-        <${view} getContent=${getContent} />
-    </div>`
+    // var el = html`<div class="shell-placeholder ${contentClass}">
+    //     <${view} getContent=${getContent} />
+    // </div>`
 
-    // var el = html`<${shell} active=${_path} links=${links}>
-    //     <${view} />
-    // <//>`
+    var el = html`<${Shell} contentClass=${contentClass}>
+        <${view} getContent=${getContent} />
+    <//>`
 
     render(el, document.getElementById('content'))
 })
+
+
+
+class Shell extends Component {
+    constructor (props) {
+        super(props)
+        this.ref = createRef();
+    }
+
+    componentDidMount() {
+        console.log(this.ref.current);
+        // Logs: [HTMLDivElement]
+
+        var cart = new Cart({
+            storage: true, // store the state in localStorage?
+            key: 'myco-cart'  // default is 'cart'
+        })
+        cart.createIcon(this.ref.current)
+    }
+
+    render (props) {
+        return html`<div class="shell-paceholder" ${props.contentClass}>
+            <div class="nav-part" ref=${this.ref}>
+                <!-- <div ref=${this.ref} id="shopping-cart-icon"></div> -->
+            </div>
+            ${props.children}
+        </div>`
+    }
+}
+
+
+// function shell (props) {
+//     useLayoutEffect(() => {
+//         // cart in here
+//     }, [])
+
+//     return html`<div class="shell-paceholder" ${props.contentClass}>
+//         <div class="nav-part">
+//         </div>
+//         ${props.children}
+//     </div>`
+// }
