@@ -185,10 +185,16 @@ body {
 
             &.product-page {
                 margin-left: 0;
+                background-color: #0404047d;
+                padding: 2rem;
 
-                p {
-                    text-align: left;
+                .single-product {
+                    p {
+                        padding: 2rem;
+                        text-align: left;
+                    }
                 }
+
             }
 
             &.index {
