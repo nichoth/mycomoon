@@ -46,7 +46,7 @@ route(function onRoute (path) {
 
     var dirs = path.split('/').filter(Boolean)
 
-    var contentClass = path === '/' ?
+    var contentClass = (path === '/' || path === '') ?
         'index' :
         _path.basename(path)
 
@@ -85,7 +85,7 @@ class Shell extends Component {
     }
 
     render (props) {
-        return html`<div class="shell-paceholder" ${props.contentClass}>
+        return html`<div class="shell-placeholder ${props.contentClass}">
             <div class="nav-part" ref=${this.ref}>
                 <!-- <div ref=${this.ref} id="shopping-cart-icon"></div> -->
             </div>
