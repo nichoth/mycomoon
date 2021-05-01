@@ -100,9 +100,7 @@ router.addRoute('/:slug', ({ params }) => {
 
             useEffect(() => {
                 getContent()
-                    .then(res => {
-                        setItem(res)
-                    })
+                    .then(res => setItem(res))
                     .catch(err => console.log('errrr', err))
             }, []);
 
