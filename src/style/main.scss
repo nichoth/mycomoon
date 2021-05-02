@@ -85,12 +85,37 @@ body {
             border-bottom: 1px solid;
             display: flex;
             justify-content: space-between;
-        }
 
-        button {
-            border: none;
-            background-color: transparent;
-            fill: $main-color;
+            button {
+                border: none;
+                background-color: transparent;
+                fill: $main-color;
+
+                &:hover {
+                    fill: white;
+                    filter: drop-shadow(2px 4px 6px white);
+                }
+            }
+        }
+    }
+
+    .cart-controls {
+        margin-left: 4rem;
+        max-width: 40rem;
+        text-align: right;
+
+        a {
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 0.5rem;
+            background-color: $main-color;
+            color: black;
+            transition: border-color 0.4s;
+            &:hover {
+                // text-decoration: underline;
+                border-color: tomato;
+                // border-color: black;
+            }
         }
     }
     // ---------------- /cart page -----------------

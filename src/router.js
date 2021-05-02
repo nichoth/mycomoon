@@ -45,16 +45,33 @@ router.addRoute('/cart', () => {
         }
 
         render (props) {
-            console.log('render cart', props.cart)
             return html`
                 <h1>the shopping cart</h1>
                 <div class="cart-content" ref=${this.ref}></div>
+                <div class="cart-controls">
+                    <a class="pay" href="/cart/checkout">pay for them</a>
+                </div>
             `
         }
     }
 
     return {
         view: CartPage
+    }
+})
+
+router.addRoute('/cart/checkout', () => {
+    console.log('**checkout**')
+
+    function Checkout (props) {
+        console.log('checkout', props)
+        return html`<div>
+            checkout
+        </div>`
+    }
+
+    return {
+        view: Checkout
     }
 })
 
