@@ -55,6 +55,7 @@ body {
         border-bottom: 1px solid;
         padding: 0.5rem;
         padding-right: 1rem;
+        padding-top: 1rem;
 
         #cart-icon {
             svg {
@@ -191,6 +192,12 @@ body {
     }
 
     #content {
+        background-color: #0000007a;
+
+        &.index {
+            background-color: transparent;
+        }
+
         .main-nav {
             padding: 0;
             list-style: none;
@@ -213,7 +220,7 @@ body {
 
         &.product-page {
             margin-left: 0;
-            background-color: #0404047d;
+            // background-color: #0404047d;
             // padding: 0 2rem;
 
             .single-product {
@@ -270,7 +277,7 @@ body {
         &.products {
             margin-left: 0;
             padding-bottom: 10rem;
-            background-color: #0000007a;
+            // background-color: #0000007a;
         }
     }
 

@@ -73,9 +73,23 @@ class Shell extends Component {
         this.ref = createRef();
     }
 
+    componentDidUpdate () {
+        var el = document.getElementById('content')
+        if (this.props.contentClass === 'index') {
+            el.className += " " + 'index'
+        } else {
+            el.className = ''
+        }
+    }
+
     componentDidMount() {
         console.log(this.ref.current);
         // Logs: [HTMLDivElement]
+
+        if (this.props.contentClass === 'index') {
+            var el = document.getElementById('content')
+            el.className += " " + 'index'
+        }
 
         var cart = this.props.cart
         cart.createIcon(this.ref.current)
