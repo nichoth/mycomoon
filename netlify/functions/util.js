@@ -30,6 +30,20 @@ async function getImages () {
     return res
 }
 
+async function getInventory (itemId) {
+    const inventoryApi = client.inventoryApi;
+    var res
+    try {
+        const { result } = await inventoryApi.retrieveInventoryCount(itemId);
+        res = result.counts
+    } catch (err) {
+        throw err
+    }
+
+    return res
+}
+
 module.exports = {
-    getImages
+    getImages,
+    getInventory
 }

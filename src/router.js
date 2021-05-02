@@ -142,7 +142,12 @@ router.addRoute('/:slug', ({ params }) => {
             if (!item) return null
 
             function addToCart (ev) {
-                console.log('add to cart', item)
+                ev.preventDefault()
+                console.log('the cart', props.cart)
+                var _item = {
+                    name: item.itemData.name
+                }
+                console.log('added to cart', item, _item)
             }
 
             return html`<div class="single-product">
@@ -151,9 +156,9 @@ router.addRoute('/:slug', ({ params }) => {
                     <img src="${item.imageData.url}" alt="mushroom" />
                     <p>${item.itemData.description}</p>
 
-                    <div class="item-controls">
-                        <button onclick=${addToCart}>add to cart</button>
-                    </div>
+                    <form onSubmit=${addToCart} class="item-controls">
+                        <button type="submit">add to cart</button>
+                    </form>
                 </div>
             </div>`
         }

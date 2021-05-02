@@ -10,6 +10,7 @@ const client = new Client({
 
 const handler = async (event) => {
     const catalogApi = client.catalogApi;
+    const inventoryApi = client.inventoryApi;
     var { slug } = event.queryStringParameters
 
     var body = {
@@ -48,6 +49,15 @@ const handler = async (event) => {
     var images = await util.getImages()
     var img = images.find(_img => _img.id === item.imageId)
     item.imageData = img.imageData
+
+
+    item.itemData.variations = await Promise.all(
+        item.itemData.variations.map(async v => {
+            v.inventory = await util.getInventory(v.id)
+            return v
+        })
+    )
+
 
     var stringer = (key, value) => {
         return typeof value === "bigint" ? value.toString() + "n" : value
