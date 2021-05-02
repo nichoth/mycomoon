@@ -82,9 +82,10 @@ class Shell extends Component {
     }
 
     render (props) {
-        return html`<div class="shell ${props.contentClass}">
-            <div class="nav-part" ref=${this.ref}>
-            </div>
+        return html`<div class="nav-part">
+            <span class="cart-container" ref=${this.ref}></span>
+        </div>
+        <div class="shell ${props.contentClass}">
             ${props.children}
         </div>`
     }
