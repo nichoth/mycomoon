@@ -83,7 +83,7 @@ class Shell extends Component {
     }
 
     componentDidMount() {
-        console.log(this.ref.current);
+        // console.log(this.ref.current);
         // Logs: [HTMLDivElement]
 
         if (this.props.contentClass === 'index') {

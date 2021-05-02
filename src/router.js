@@ -1,6 +1,7 @@
 var router = require('ruta3')()
 import { useState, useEffect } from 'preact/hooks';
-import { html } from 'htm/preact'
+import { html, Component } from 'htm/preact'
+import { createRef } from 'preact';
 
 router.addRoute('/', () => {
     return {
@@ -23,6 +24,40 @@ router.addRoute('/', () => {
     }
 })
 
+router.addRoute('/cart', () => {
+    class CartPage extends Component {
+        constructor (props) {
+            super(props)
+            this.ref = createRef();
+        }
+
+        componentDidMount ()  {
+            var { cart } = this.props
+            cart.createPage(this.ref.current, mapper)
+
+            function mapper (html, product) {
+                console.log('in map', product)
+                return html`
+                    <span>name: ${product.name || 'none'}, </span>
+                    <span>price: ${product.price || 'none'}<//>
+                `
+            }
+        }
+
+        render (props) {
+            console.log('render cart', props.cart)
+            return html`
+                <h1>the shopping cart</h1>
+                <div class="cart-content" ref=${this.ref}></div>
+            `
+        }
+    }
+
+    return {
+        view: CartPage
+    }
+})
+
 router.addRoute('/products', () => {
     console.log('**products route**')
 
@@ -33,7 +68,7 @@ router.addRoute('/products', () => {
         },
 
         view: function (props) {
-            console.log('in view', props)
+            console.log('in products view', props)
             var { getContent } = props
 
             const [content, setContent] = useState(null)
