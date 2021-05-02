@@ -1,5 +1,12 @@
 @use '../../node_modules/@nichoth/shopping-cart/src/style/main.scss';
 
+// --------------- fix that icon --------------------
+#cart-quantity {
+    bottom: 23px;
+}
+// --------------- /fix that icon --------------------
+
+
 @font-face {
     font-family: Casta;
     src: url("/Casta-Regular.otf") format("opentype");
@@ -11,7 +18,7 @@
         #content {
             margin-left: 0!important;
         }
-        .shell-placeholder {
+        .shell {
             margin-left: 0!important;
         }
     }
@@ -42,10 +49,11 @@ body {
     .nav-part {
         margin-top: 1rem;
         margin-bottom: 1rem;
-        margin-right: 1rem;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        border-bottom: 1px solid;
+        padding-right: 1rem;
 
         #cart-icon {
             svg {
@@ -198,19 +206,22 @@ body {
         }
     }
 
-    .shell-placeholder {
+    .shell {
         margin-left: 30vw;
         min-height: 100vh;
 
         &.product-page {
             margin-left: 0;
             background-color: #0404047d;
-            padding: 2rem;
+            // padding: 0 2rem;
 
             .single-product {
+                margin: 0 2rem;
+
                 h1 {
                     font-size: 4rem;
                     margin-bottom: 2rem;
+                    margin-top: 0;
                 }
 
                 p {
@@ -224,6 +235,7 @@ body {
 
                 .single-product-content {
                     max-width: 30rem;
+                    padding-bottom: 6rem;
 
                     img {
                         width: 100%;
