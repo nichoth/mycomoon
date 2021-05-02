@@ -38,8 +38,8 @@ router.addRoute('/cart', () => {
             function mapper (html, product) {
                 console.log('in map', product)
                 return html`
-                    <span>name: ${product.name || 'none'}, </span>
-                    <span>price: ${product.price || 'none'}<//>
+                    <span>${product.name + ' '}</span>
+                    <span>${toMoneyFormat(product.price)}<//>
                 `
             }
         }
@@ -130,7 +130,7 @@ router.addRoute('/:slug', ({ params }) => {
         },
 
         view: function SingleProductView (props) {
-            var { getContent } = props
+            var { getContent, cart } = props
             const [item, setItem] = useState(null)
 
             useEffect(() => {
@@ -144,6 +144,7 @@ router.addRoute('/:slug', ({ params }) => {
             function addToCart (variation, ev) {
                 ev.preventDefault()
                 console.log('the cart', props.cart)
+
                 var _item = {
                     itemId: item.id,
                     variationId: variation.id,
@@ -152,6 +153,9 @@ router.addRoute('/:slug', ({ params }) => {
                     price: parseInt(variation.itemVariationData.priceMoney
                         .amount)
                 }
+
+                cart.add(_item)
+                console.log('cart state', cart.state())
 
                 console.log('added to cart', item, _item)
             }
@@ -187,14 +191,18 @@ router.addRoute('/:slug', ({ params }) => {
     }
 })
 
-function getReadableMoney (variation) {
-    var price = variation.itemVariationData.priceMoney.amount
-    var format = (parseInt(price) / 100).toLocaleString("en-US", {
+function toMoneyFormat (num) {
+    var format = (parseInt(num) / 100).toLocaleString("en-US", {
         style: "currency",
         currency: "USD"
     })
     console.log('formatted money', format)
     return format
+}
+
+function getReadableMoney (variation) {
+    var price = variation.itemVariationData.priceMoney.amount
+    return toMoneyFormat(price)
 }
 
 module.exports = router

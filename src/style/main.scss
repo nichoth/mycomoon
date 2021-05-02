@@ -68,6 +68,35 @@ body {
         }
     }
 
+
+
+    // ---------------- cart page -----------------
+    .cart-content {
+        padding: 0 4rem;
+    }
+
+    #cart-page {
+        list-style: none;
+        padding-left: 0;
+        max-width: 40rem;
+
+        li {
+            display: flex;
+            border-bottom: 1px solid;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            fill: $main-color;
+        }
+    }
+    // ---------------- /cart page -----------------
+
+
+
     .products-list {
         margin: 2rem 2rem;
         display: grid;
@@ -261,7 +290,6 @@ body {
                         &:hover {
                             filter: drop-shadow(2px 4px 6px black);
                             background-color: #70dbff;
-                            // border: 3px solid;
                         }
                     }
 
