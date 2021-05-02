@@ -141,14 +141,23 @@ router.addRoute('/:slug', ({ params }) => {
 
             if (!item) return null
 
-            function addToCart (ev) {
+            function addToCart (variation, ev) {
                 ev.preventDefault()
                 console.log('the cart', props.cart)
                 var _item = {
-                    name: item.itemData.name
+                    itemId: item.id,
+                    variationId: variation.id,
+                    name: item.itemData.name,
+                    variationName: variation.itemVariationData.name,
+                    price: parseInt(variation.itemVariationData.priceMoney
+                        .amount)
                 }
+
                 console.log('added to cart', item, _item)
             }
+
+            // in here, show a list of variations with an 'add' button 
+            // for each
 
             return html`<div class="single-product">
                 <h1>${item.itemData.name}</h1>
@@ -156,13 +165,36 @@ router.addRoute('/:slug', ({ params }) => {
                     <img src="${item.imageData.url}" alt="mushroom" />
                     <p>${item.itemData.description}</p>
 
-                    <form onSubmit=${addToCart} class="item-controls">
-                        <button type="submit">add to cart</button>
-                    </form>
+                    <ul class="item-variations">
+                        ${item.itemData.variations.map(function (v) {
+                            return html`<li>
+                                <span class="variation-name">
+                                    ${v.itemVariationData.name + ' '}
+                                </span>
+                                <span class="price-money">
+                                    ${getReadableMoney(v)}
+                                </span>
+                                <button onClick=${addToCart.bind(null, v)}>
+                                    add to cart
+                                </button>
+                            </li>`
+                        })}
+                    </ul>
+
                 </div>
             </div>`
         }
     }
 })
+
+function getReadableMoney (variation) {
+    var price = variation.itemVariationData.priceMoney.amount
+    var format = (parseInt(price) / 100).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD"
+    })
+    console.log('formatted money', format)
+    return format
+}
 
 module.exports = router
