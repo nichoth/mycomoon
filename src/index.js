@@ -76,7 +76,7 @@ class Shell extends Component {
     componentDidUpdate () {
         var el = document.getElementById('content')
         if (this.props.contentClass === 'index') {
-            el.className += " " + 'index'
+            el.className += ' index'
         } else {
             el.className = ''
         }
@@ -97,7 +97,7 @@ class Shell extends Component {
 
     render (props) {
         return html`<div class="nav-part">
-            <span class="cart-container" ref=${this.ref}></span>
+            <a href="/cart" class="cart-container" ref=${this.ref}></a>
         </div>
         <div class="shell ${props.contentClass}">
             ${props.children}

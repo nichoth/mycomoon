@@ -107,7 +107,7 @@ router.addRoute('/:slug', ({ params }) => {
             if (!item) return null
 
             function addToCart (ev) {
-                console.log('add to cart', ev)
+                console.log('add to cart', item)
             }
 
             return html`<div class="single-product">
