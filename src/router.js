@@ -175,12 +175,20 @@ router.addRoute('/:slug', ({ params }) => {
         view: function SingleProductView (props) {
             var { getContent, cart } = props
             const [item, setItem] = useState(null)
+            var [cartState, setCartState] = useState(null)
 
             useEffect(() => {
                 getContent()
                     .then(res => setItem(res))
                     .catch(err => console.log('errrr', err))
             }, []);
+
+            useEffect(() => {
+                setCartState(cart.state())
+                return cart.state(function onChange (newCartState) {
+                    setCartState(newCartState)
+                })
+            }, [])
 
             if (!item) return null
 
@@ -203,8 +211,11 @@ router.addRoute('/:slug', ({ params }) => {
                 console.log('added to cart', item, _item)
             }
 
-            // in here, show a list of variations with an 'add' button 
-            // for each
+            // get the number of variations that are in the cart
+            var prodsInCart = cart.state().products.reduce((acc, variant) => {
+                acc[variant.variationId] = (acc[variant.variationId] || 0) + 1
+                return acc
+            }, {})
 
             return html`<div class="single-product">
                 <h1>${item.itemData.name}</h1>
@@ -221,9 +232,17 @@ router.addRoute('/:slug', ({ params }) => {
                                 <span class="price-money">
                                     ${getReadableMoney(v)}
                                 </span>
-                                <button onClick=${addToCart.bind(null, v)}>
-                                    add to cart
-                                </button>
+                                <span class="variation-controls">
+                                    ${prodsInCart[v.id] ?
+                                        html`<span class="prod-count">
+                                            ${prodsInCart[v.id]}
+                                        </span>` :
+                                        null
+                                    }
+                                    <button onClick=${addToCart.bind(null, v)}>
+                                        add to cart
+                                    </button>
+                                </span>
                             </li>`
                         })}
                     </ul>

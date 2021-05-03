@@ -348,12 +348,25 @@ body {
                         padding-left: 0;
                         list-style: none;
 
+                        .variation-controls {
+                            .prod-count {
+                                background-color: #04020245;
+                                border: 2px solid;
+                                border-radius: 10px;
+                                padding: 0.3rem;
+                            }
+                            button {
+                                margin-left: 1rem;
+                            }
+                        }
+
                         li {
                             display: flex;
                             align-items: baseline;
                             justify-content: space-between;
                             border-bottom: 1px solid;
                             margin-bottom: 1rem;
+                            padding-bottom: 0.5rem;
                         }
                     }
                 }
