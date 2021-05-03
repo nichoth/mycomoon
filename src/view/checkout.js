@@ -13,8 +13,6 @@ function Checkout (props) {
 
     return html`<div class="checkout-page">
         <form onSubmit=${submit}>
-            <label for="name">name</label>
-            <input type="text" name="name" id="name" />
 
 
 
