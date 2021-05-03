@@ -47,7 +47,9 @@ router.addRoute('/cart', () => {
             function mapper (html, prod) {
                 return html`
                     <span>${prod.name + ' -- ' + prod.variationName}</span>
-                    <span>${toMoneyFormat(prod.price)}<//>
+                    <span>×${prod.quantity}</span>
+                    <span>${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+                    <//>
                 `
             }
         }
@@ -56,7 +58,7 @@ router.addRoute('/cart', () => {
             var { products } = props.cart.state()
 
             var total = products.reduce(function (total, prod) {
-                return total + prod.price
+                return total + (prod.price * prod.quantity)
             }, 0)
 
             return html`
