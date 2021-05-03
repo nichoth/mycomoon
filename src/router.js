@@ -37,10 +37,6 @@ router.addRoute('/cart', () => {
         componentDidMount ()  {
             var { cart } = this.props
 
-            cart.on(EVENTS.cart.remove, index => {
-                console.log('index of the removed item', index)
-            })
-
             var self = this
             cart.state(function onChange (newState) {
                 self.setState(newState)
@@ -49,7 +45,6 @@ router.addRoute('/cart', () => {
             cart.createPage(this.ref.current, mapper)
 
             function mapper (html, product) {
-                console.log('in map', product)
                 return html`
                     <span>${product.name + ' '}</span>
                     <span>${toMoneyFormat(product.price)}<//>
