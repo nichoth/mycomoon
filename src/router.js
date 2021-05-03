@@ -44,8 +44,6 @@ router.addRoute('/cart', () => {
 
             function changeQuantity (i, ev) {
                 var n = parseInt(ev.target.value)
-                console.log('n', n)
-                console.log('state', cart.state())
                 cart.changeQuantity(i, n)
             }
 
