@@ -45,12 +45,14 @@ router.addRoute('/cart', () => {
             cart.createPage(this.ref.current, mapper)
 
             function mapper (html, prod) {
-                return html`
+                return html`<form>
                     <span>${prod.name + ' -- ' + prod.variationName}</span>
-                    <span>×${prod.quantity}</span>
+                    <!-- <span>×${prod.quantity}</span> -->
+                    <input type="number" min="0" max="${prod.quantityAvailable}"
+                        value=${prod.quantity} />
                     <span>${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                     <//>
-                `
+                </form>`
             }
         }
 
@@ -200,6 +202,8 @@ router.addRoute('/:slug', ({ params }) => {
                 ev.preventDefault()
                 console.log('the cart', props.cart)
 
+                console.log('variation', variation)
+
                 var _item = {
                     itemId: item.id,
                     variationId: variation.id,
@@ -207,7 +211,8 @@ router.addRoute('/:slug', ({ params }) => {
                     variationName: variation.itemVariationData.name,
                     price: parseInt(variation.itemVariationData.priceMoney
                         .amount),
-                    quantity: 1
+                    quantity: 1,
+                    quantityAvailable: parseInt(variation.inventory[0].quantity)
                 }
 
                 // here, check & adjust the quantity if necessary

@@ -73,6 +73,11 @@ body {
     // ---------------- cart page -----------------
     .cart-content {
         padding: 0 4rem;
+
+        input {
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
     }
 
     #cart-page {
@@ -85,6 +90,7 @@ body {
             border-bottom: 1px solid;
             justify-content: space-between;
             margin-bottom: 0.5rem;
+            padding: 0.5rem 0rem;
 
             button {
                 border: none;
