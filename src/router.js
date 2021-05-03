@@ -2,6 +2,7 @@ var router = require('ruta3')()
 import { useState, useEffect } from 'preact/hooks';
 import { html, Component } from 'htm/preact'
 import { createRef } from 'preact';
+import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 
 router.addRoute('/', () => {
     return {
@@ -24,15 +25,27 @@ router.addRoute('/', () => {
     }
 })
 
+
 router.addRoute('/cart', () => {
     class CartPage extends Component {
         constructor (props) {
             super(props)
             this.ref = createRef();
+            this.state = props.cart.state()
         }
 
         componentDidMount ()  {
             var { cart } = this.props
+
+            cart.on(EVENTS.cart.remove, index => {
+                console.log('index of the removed item', index)
+            })
+
+            var self = this
+            cart.state(function onChange (newState) {
+                self.setState(newState)
+            })
+
             cart.createPage(this.ref.current, mapper)
 
             function mapper (html, product) {
@@ -45,11 +58,20 @@ router.addRoute('/cart', () => {
         }
 
         render (props) {
+            var { products } = props.cart.state()
+
             return html`
                 <h1>the shopping cart</h1>
                 <div class="cart-content" ref=${this.ref}></div>
                 <div class="cart-controls">
-                    <a class="pay" href="/cart/checkout">pay for them</a>
+                    ${products.length ?
+                        (html`<a class="pay" href="/cart/checkout">
+                            pay for them
+                        </a>`) :
+                        (html`<span class="pay">
+                            pay for them
+                        </span>`)
+                    }
                 </div>
             `
         }
@@ -213,7 +235,6 @@ function toMoneyFormat (num) {
         style: "currency",
         currency: "USD"
     })
-    console.log('formatted money', format)
     return format
 }
 
