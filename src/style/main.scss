@@ -301,10 +301,76 @@ body {
         margin-left: 30vw;
         min-height: 100vh;
 
+        &.checkout {
+            margin: 2rem;
+        }
+
+        .checkout-page {
+            max-width: 30rem;
+
+            form {
+                padding: 1rem;
+                background-color: #ffffff5c;
+
+
+
+
+                // floating label -----------------------------
+
+                .input-group {
+                    position: relative;
+                    margin: 40px 0 20px;
+                    width: 100%;
+
+                    input {
+                        font-size: 1.2rem;
+                        padding: 10px 10px 10px 5px;
+                        display: block;
+                        width: 90%;
+                        border: none;
+                        border-bottom: 1px solid #757575;
+
+                        &:focus {
+                            outline: none;
+                            border-bottom: 5px solid green;
+                        }
+                    }
+
+                    label {
+                        color: #999;
+                        font-size: 18px;
+                        font-weight: normal;
+                        position: absolute;
+                        pointer-events: none;
+                        left: 5px;
+                        top: 10px;
+                        transition: 0.2s ease all;
+                    }
+                    
+                    input:focus ~ label,
+                    input:valid ~ label {
+                        top: -20px;
+                        font-size: 14px;
+                        // color: black;
+                        color: #4285f4;
+                    }
+                }
+            }
+
+            // /floating label -----------------------------
+
+
+
+
+
+            .form-controls {
+                margin-top: 2rem;
+                text-align: right;
+            }
+        }
+
         &.product-page {
             margin-left: 0;
-            // background-color: #0404047d;
-            // padding: 0 2rem;
 
             .single-product {
                 margin: 0 2rem;

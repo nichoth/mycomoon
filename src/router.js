@@ -2,7 +2,7 @@ var router = require('ruta3')()
 import { useState, useEffect } from 'preact/hooks';
 import { html, Component } from 'htm/preact'
 import { createRef } from 'preact';
-// import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
+var Checkout = require('./view/checkout')
 
 router.addRoute('/', () => {
     return {
@@ -99,12 +99,6 @@ router.addRoute('/cart', () => {
 router.addRoute('/cart/checkout', () => {
     console.log('**checkout**')
 
-    function Checkout (props) {
-        console.log('checkout', props)
-        return html`<div>
-            checkout
-        </div>`
-    }
 
     return {
         view: Checkout
