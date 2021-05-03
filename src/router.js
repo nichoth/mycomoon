@@ -44,10 +44,10 @@ router.addRoute('/cart', () => {
 
             cart.createPage(this.ref.current, mapper)
 
-            function mapper (html, product) {
+            function mapper (html, prod) {
                 return html`
-                    <span>${product.name + ' '}</span>
-                    <span>${toMoneyFormat(product.price)}<//>
+                    <span>${prod.name + ' -- ' + prod.variationName}</span>
+                    <span>${toMoneyFormat(prod.price)}<//>
                 `
             }
         }
@@ -212,7 +212,7 @@ router.addRoute('/:slug', ({ params }) => {
             }
 
             // get the number of variations that are in the cart
-            var prodsInCart = cart.state().products.reduce((acc, variant) => {
+            var prodsInCart = cartState.products.reduce((acc, variant) => {
                 acc[variant.variationId] = (acc[variant.variationId] || 0) + 1
                 return acc
             }, {})
