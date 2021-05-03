@@ -42,14 +42,22 @@ router.addRoute('/cart', () => {
                 self.setState(newState)
             })
 
+            function changeQuantity (i, ev) {
+                var n = parseInt(ev.target.value)
+                console.log('n', n)
+                console.log('state', cart.state())
+                cart.changeQuantity(i, n)
+            }
+
             cart.createPage(this.ref.current, mapper)
 
-            function mapper (html, prod) {
+            function mapper (html, prod, i) {
                 return html`<form>
                     <span>${prod.name + ' -- ' + prod.variationName}</span>
-                    <!-- <span>×${prod.quantity}</span> -->
                     <input type="number" min="0" max="${prod.quantityAvailable}"
-                        value=${prod.quantity} />
+                        value=${prod.quantity}
+                        onChange=${changeQuantity.bind(null, i)}
+                    />
                     <span>${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                     <//>
                 </form>`
