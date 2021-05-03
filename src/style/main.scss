@@ -103,6 +103,7 @@ body {
         margin-left: 4rem;
         max-width: 40rem;
         text-align: right;
+        margin-top: 4rem;
 
         .pay {
             text-decoration: none;
@@ -125,6 +126,16 @@ body {
                 border-color: white;
             }
         }
+    }
+
+    .cart-totals {
+        max-width: 40rem;
+        text-align: right;
+        margin-left: 4rem;
+    }
+
+    .total-money {
+        text-align: right;
     }
     // ---------------- /cart page -----------------
 

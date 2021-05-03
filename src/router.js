@@ -55,9 +55,18 @@ router.addRoute('/cart', () => {
         render (props) {
             var { products } = props.cart.state()
 
+            var total = products.reduce(function (total, prod) {
+                return total + prod.price
+            }, 0)
+
             return html`
                 <h1>the shopping cart</h1>
                 <div class="cart-content" ref=${this.ref}></div>
+                <div class="cart-totals">
+                    <span class="total-money">
+                        total ${toMoneyFormat(total)}
+                    </span>
+                </div>
                 <div class="cart-controls">
                     ${products.length ?
                         (html`<a class="pay" href="/cart/checkout">
