@@ -2,7 +2,7 @@ var router = require('ruta3')()
 import { useState, useEffect } from 'preact/hooks';
 import { html, Component } from 'htm/preact'
 import { createRef } from 'preact';
-import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
+// import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 
 router.addRoute('/', () => {
     return {
@@ -177,6 +177,8 @@ router.addRoute('/:slug', ({ params }) => {
             const [item, setItem] = useState(null)
             var [cartState, setCartState] = useState(null)
 
+            console.log('state', cart.state())
+
             useEffect(() => {
                 getContent()
                     .then(res => setItem(res))
@@ -202,7 +204,20 @@ router.addRoute('/:slug', ({ params }) => {
                     name: item.itemData.name,
                     variationName: variation.itemVariationData.name,
                     price: parseInt(variation.itemVariationData.priceMoney
-                        .amount)
+                        .amount),
+                    quantity: 1
+                }
+
+                // here, check & adjust the quantity if necessary
+                var i = cart.state().products.findIndex(prod => {
+                    return prod.variationId === variation.id
+                })
+
+                if (i > -1) {
+                    var product = cart.state().products[i]
+                    cart.changeQuantity(i, product.quantity + 1)
+                    console.log('i > -1', cart.state())
+                    return
                 }
 
                 cart.add(_item)
@@ -213,7 +228,7 @@ router.addRoute('/:slug', ({ params }) => {
 
             // get the number of variations that are in the cart
             var prodsInCart = cartState.products.reduce((acc, variant) => {
-                acc[variant.variationId] = (acc[variant.variationId] || 0) + 1
+                acc[variant.variationId] = variant.quantity
                 return acc
             }, {})
 
