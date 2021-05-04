@@ -298,4 +298,11 @@ customAttributeValues: {
 
 
 
+-------------------------------
+
+## form validation
+
+https://css-tricks.com/form-validation-ux-html-css/#you-can-create-robust-validations
+
+
 
