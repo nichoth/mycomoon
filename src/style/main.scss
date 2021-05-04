@@ -315,7 +315,7 @@ body {
 
 
 
-                // floating label -----------------------------
+                // ------- floating label -----------------------------
 
                 .input-group {
                     position: relative;
@@ -332,7 +332,15 @@ body {
 
                         &:focus {
                             outline: none;
-                            border-bottom: 5px solid green;
+                            border-bottom: 4px solid #4285f4;
+                        }
+
+                        // When input is...
+                        //   1. NOT empty
+                        //   2. NOT in focus
+                        //   3. NOT valid
+                        &:invalid:not(:focus):not(:placeholder-shown) {
+                            border-bottom: 4px solid red;
                         }
                     }
 
@@ -348,7 +356,8 @@ body {
                     }
                     
                     input:focus ~ label,
-                    input:valid ~ label {
+                    input:valid ~ label,
+                    input:not(:placeholder-shown) ~ label {
                         top: -20px;
                         font-size: 14px;
                         // color: black;
@@ -357,7 +366,7 @@ body {
                 }
             }
 
-            // /floating label -----------------------------
+            // ------ /floating label -----------------------------
 
 
 

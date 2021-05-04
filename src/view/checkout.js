@@ -14,19 +14,16 @@ function Checkout (props) {
     return html`<div class="checkout-page">
         <form onSubmit=${submit}>
 
-
-
             <div class="input-group">
-                <input type="text" required />
-                <label>Username</label>
+                <input name="name" type="text" placeholder=" " required
+                    minlength="3" />
+                <label>Name</label>
             </div>
-
-
-
 
             <div class="form-controls">
                 <button type="submit">submit</button>
             </div>
+
         </form>
     </div>`
 }
