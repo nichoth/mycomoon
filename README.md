@@ -305,4 +305,51 @@ customAttributeValues: {
 https://css-tricks.com/form-validation-ux-html-css/#you-can-create-robust-validations
 
 
+## buying things
 
+1. create an order in square
+2. call `CreatePayment`
+
+------------------------------------
+
+see [take payments](https://developer.squareup.com/docs/payments-api/take-payments)
+
+see [take card payments](https://developer.squareup.com/docs/payments-api/take-payments/card-payments)
+
+> When Square receives a CreatePayment request, it charges the specified card and deposits the funds in the Square Balance of the account.
+
+see [Square payments in your own website](https://developer.squareup.com/docs/online-payment-options#square-payments-in-your-own-website)
+
+> Using the Square-provided client-side JavaScript library (`SqPaymentForm`)
+
+> Using the SqPaymentForm library, you develop a payment form in your web page. 
+
+----------------------
+
+`SqPaymentForm`
+
+from whammy -- https://github.com/nichoth/whammy/blob/square/src/buy-things/index.html
+
+```html
+<script src="https://js.squareupsandbox.com/v2/paymentform"></script>
+```
+
+https://github.com/nichoth/whammy/blob/b84a422cb4def79d86e1263b08599bdee6c21e17/src/js/pay.js
+
+```js
+function createPaymentForm (orderId, cart) {
+    return new SqPaymentForm({
+```
+
+---------------------------------------------------
+
+
+
+see [Walkthrough: Integrate Square Payments in a Website](https://developer.squareup.com/docs/payment-form/payment-form-walkthrough)
+
+> build a basic form that only takes a credit card on a web page
+
+-----------------------------------------
+
+card number -- 	4111 1111 1111 1111
+cvv -- 111

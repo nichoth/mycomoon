@@ -1,31 +1,129 @@
 import { html } from 'htm/preact'
+import { useState, useEffect } from 'preact/hooks';
 
 function Checkout (props) {
     console.log('checkout props', props)
     var { cart } = props
     console.log('**the cart**', cart)
 
-    function submit (ev) {
+
+
+    // function submit (ev) {
+    //     ev.preventDefault()
+    //     var els = ev.target.elements
+    //     console.log('name', els.name.value)
+    // }
+
+
+
+    // Create and initialize a payment form object
+    var paymentForm = new window.SqPaymentForm({
+        // Initialize the payment form elements
+        
+        //TODO: Replace with your sandbox application ID
+        // applicationId: "REPLACE_WITH_APPLICATION_ID",
+        applicationId: 'sandbox-sq0idb-ACaOfM9YIuvb6PvOIKRhJw',
+        inputClass: 'sq-input',
+        autoBuild: false,
+        // Customize the CSS for SqPaymentForm iframe elements
+        inputStyles: [{
+            fontSize: '16px',
+            lineHeight: '24px',
+            padding: '16px',
+            placeholderColor: '#a0a0a0',
+            backgroundColor: 'transparent'
+        }],
+        // Initialize the credit card placeholders
+        cardNumber: {
+            elementId: 'sq-card-number',
+            placeholder: 'Card Number'
+        },
+        cvv: {
+            elementId: 'sq-cvv',
+            placeholder: 'CVV'
+        },
+        expirationDate: {
+            elementId: 'sq-expiration-date',
+            placeholder: 'MM/YY'
+        },
+        postalCode: {
+            elementId: 'sq-postal-code',
+            placeholder: 'Postal'
+        },
+        // SqPaymentForm callback functions
+        callbacks: {
+            /*
+            * callback function: cardNonceResponseReceived
+            * Triggered when: SqPaymentForm completes a card nonce request
+            */
+            cardNonceResponseReceived: function (errors, nonce, cardData) {
+                if (errors) {
+                    // Log errors from nonce generation to the browser
+                    // developer console.
+                    console.error('Encountered errors:');
+                    errors.forEach(function (error) {
+                        console.error('  ' + error.message);
+                    });
+                    alert('Encountered errors, check browser console for more');
+                    return;
+                }
+
+                //TODO: Replace alert with code in step 2.1
+                console.log('got nonce', nonce)
+                console.log('card data', cardData)
+                alert(`The generated nonce is:\n${nonce}`);
+            }
+        }
+    });
+
+
+    useEffect(() => {
+        // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
+        paymentForm.build();
+    }, [])
+
+
+    function onGetCardNonce (ev) {
         ev.preventDefault()
-        var els = ev.target.elements
-        console.log('name', els.name.value)
+        console.log('get card nonce', ev)
+        paymentForm.requestCardNonce();
     }
 
+
     return html`<div class="checkout-page">
-        <form onSubmit=${submit}>
 
-            <div class="input-group">
-                <input name="name" type="text" placeholder=" " required
-                    minlength="3" />
-                <label>Name</label>
-            </div>
 
-            <div class="form-controls">
-                <button type="submit">submit</button>
-            </div>
+        <div id="form-container">
+            <div id="sq-card-number"></div>
+            <div class="third" id="sq-expiration-date"></div>
+            <div class="third" id="sq-cvv"></div>
+            <div class="third" id="sq-postal-code"></div>
+            <button id="sq-creditcard" class="button-credit-card"
+                onClick="${onGetCardNonce}"
+            >
+                Pay $1.00
+            </button>
+        </div> 
 
-        </form>
+
+
     </div>`
+
+
+
+        // <form onSubmit=${submit}>
+
+        //     <div class="input-group">
+        //         <input name="name" type="text" placeholder=" " required
+        //             minlength="3" />
+        //         <label>Name</label>
+        //     </div>
+
+        //     <div class="form-controls">
+        //         <button type="submit">submit</button>
+        //     </div>
+
+        // </form>
 }
 
 module.exports = Checkout
