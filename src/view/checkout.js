@@ -1,5 +1,6 @@
 import { html } from 'htm/preact'
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
+var timestamp = require('monotonic-timestamp')
 
 function Checkout (props) {
     console.log('checkout props', props)
@@ -14,6 +15,10 @@ function Checkout (props) {
     //     console.log('name', els.name.value)
     // }
 
+
+    //TODO: paste code from step 2.1.1
+    // is supposed to be a string
+    const idempotency_key = '' + timestamp()
 
 
     // Create and initialize a payment form object
@@ -68,10 +73,53 @@ function Checkout (props) {
                     return;
                 }
 
+
+
+
+
                 //TODO: Replace alert with code in step 2.1
+                fetch('/.netlify/functions/process-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nonce: nonce,
+                        idempotency_key: idempotency_key,
+                        location_id: "LAZSTD2P84MEA"
+                    })   
+                })
+                .catch(err => {
+                    alert('Network error: ' + err);
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(errorInfo => {
+                            Promise.reject(errorInfo)
+                        });
+                    }
+                    return response.json()
+                })
+                .then(res => {
+                    console.log('process payment success', res.result);
+                    alert('Payment complete successfully!\nCheck browser developer console for more details');
+                })
+                .catch(err => {
+                    console.log('err', err)
+                    console.error('error process payment', err);
+                    alert('Payment failed to complete!\nCheck browser developer console for more details');
+                });
+                  
+
+
+
+
+
+
                 console.log('got nonce', nonce)
                 console.log('card data', cardData)
-                alert(`The generated nonce is:\n${nonce}`);
+                // alert(`The generated nonce is:\n${nonce}`);
             }
         }
     });
@@ -80,6 +128,9 @@ function Checkout (props) {
     useEffect(() => {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
         paymentForm.build();
+
+        //TODO: paste code from step 2.1.2
+
     }, [])
 
 

@@ -305,12 +305,33 @@ customAttributeValues: {
 https://css-tricks.com/form-validation-ux-html-css/#you-can-create-robust-validations
 
 
+
+
+
 ## buying things
+-------------------------------------------------
 
 1. create an order in square
 2. call `CreatePayment`
 
+[payment walkthrough](https://developer.squareup.com/docs/payment-form/payment-form-walkthrough)
+
+
+* paste the square css for the square payment form -- see `mysqpaymentform.css`
+* get the square payment form JS -- has to be hosted by square --
+```js
+<script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
+```
+This adds a global -- `window.SqPaymentForm`
+* create a function in netlify -- `process-payment.js`
+This function takes a nonce, idempotency key, and location ID. You want this to be server-side because it calls an api `paymentsApi.createPayment` (you need the app token)
+
+see [Order-Ahead Sample Application](https://developer.squareup.com/docs/orders-api/quick-start/start)
+
 ------------------------------------
+
+
+
 
 see [take payments](https://developer.squareup.com/docs/payments-api/take-payments)
 
