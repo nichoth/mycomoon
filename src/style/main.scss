@@ -3,6 +3,7 @@
 // --------------- fix that icon --------------------
 #cart-quantity {
     bottom: 23px;
+    left: 16px;
 }
 // --------------- /fix that icon --------------------
 
@@ -310,6 +311,11 @@ body {
         .checkout-page {
             max-width: 30rem;
 
+            h2 {
+                border-bottom: 1px solid gray;
+                color: #8a6704;
+            }
+
 
 
 
@@ -434,14 +440,19 @@ body {
 
                 .input-group {
                     position: relative;
-                    margin: 40px 0 20px;
+                    // margin: 40px 0 20px;
                     width: 100%;
+                    margin: 1rem 0;
 
                     input {
                         font-size: 1.2rem;
                         padding: 10px 10px 10px 5px;
                         display: block;
-                        width: 90%;
+
+                        // this is a hack to fix the input width
+                        // don't know why we need this
+                        width: calc(100% - 1rem);
+
                         border: none;
                         border-bottom: 1px solid #757575;
 
@@ -592,6 +603,11 @@ body {
         font-feature-settings: "ss01";
         margin-top: 3rem;
         font-family: Casta;
+    }
+
+    h2 {
+        font-family: Casta;
+        font-feature-settings: "ss01";
     }
 
     p {

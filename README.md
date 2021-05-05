@@ -311,8 +311,7 @@ https://css-tricks.com/form-validation-ux-html-css/#you-can-create-robust-valida
 ## buying things
 -------------------------------------------------
 
-1. create an order in square
-2. call `CreatePayment`
+First you create an order, then you pay for it
 
 [payment walkthrough](https://developer.squareup.com/docs/payment-form/payment-form-walkthrough)
 
@@ -328,8 +327,26 @@ This function takes a nonce, idempotency key, and location ID. You want this to 
 
 see [Order-Ahead Sample Application](https://developer.squareup.com/docs/orders-api/quick-start/start)
 
+--------------------------------------
+
+see [basic order ahead flow](https://github.com/square/connect-api-examples/tree/master/connect-examples/v2/node_orders-payments#basic-order-ahead-flow)
+
+* call `create order` -- https://github.com/square/connect-api-examples/blob/master/connect-examples/v2/node_orders-payments/routes/index.js#L80
+* pay for the order -- https://github.com/square/connect-api-examples/blob/master/connect-examples/v2/node_orders-payments/routes/checkout.js#L420
+
 ------------------------------------
 
+
+
+* Calls createOrder (Orders API) to create an order 
+* delivery info is added as `fulfillments` information in the order
+
+see [fulfillment](https://github.com/square/square-nodejs-sdk/blob/master/doc/models/order-fulfillment.md)
+
+
+
+
+--------------------------------------------
 
 
 

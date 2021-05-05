@@ -1,20 +1,44 @@
 const { Client, Environment } = require('square')
+const createOrder = require('./create-order')
 
 const client = new Client({
     environment: Environment.Sandbox,
-
-    // this is from the 'sandbox test account'
-    // this one works
     accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
 })
 
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+
+
+// (linItems)
+// "line_items": [
+//     {
+//         "base_price_money": {
+//             "amount": 1599,
+//             "currency": "USD"
+//         },
+//         "name": "New York Strip Steak",
+//         "quantity": "1"
+//     }
+// ],
+var order = await createOrder([
+    {
+        "base_price_money": {
+            "amount": 1599,
+            "currency": "USD"
+        },
+        "name": "New York Strip Steak",
+        "quantity": "1"
+    }
+])
+
+
+
+
+// const ordersApi = client.ordersApi;
+
+// Docs on event and context
+// https://www.netlify.com/docs/functions/#the-handler-method
 const handler = async (event) => {
 
-    // console.log('envvvv', process.env.SQ_SANDBOX_APP_ID)
-    // console.log('client', client)
-
-    const ordersApi = client.ordersApi;
     // body: CreateOrderRequest
     // https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md
     // var body = {

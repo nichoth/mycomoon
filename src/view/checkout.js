@@ -74,7 +74,7 @@ function Checkout (props) {
                 }
 
 
-
+                // in here, first create an order, then pay for it
 
 
                 //TODO: Replace alert with code in step 2.1
@@ -112,11 +112,6 @@ function Checkout (props) {
                 });
                   
 
-
-
-
-
-
                 console.log('got nonce', nonce)
                 console.log('card data', cardData)
                 // alert(`The generated nonce is:\n${nonce}`);
@@ -129,31 +124,41 @@ function Checkout (props) {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
         paymentForm.build();
 
-        //TODO: paste code from step 2.1.2
-
     }, [])
 
 
-    function onGetCardNonce (ev) {
+    function getCardNonce (ev) {
         ev.preventDefault()
-        console.log('get card nonce', ev)
+        console.log('get card nonce', ev.target.elements)
+        console.log('**els**', ev.target.elements.name.value)
         paymentForm.requestCardNonce();
     }
 
 
     return html`<div class="checkout-page">
 
-
         <div id="form-container">
-            <div id="sq-card-number"></div>
-            <div class="third" id="sq-expiration-date"></div>
-            <div class="third" id="sq-cvv"></div>
-            <div class="third" id="sq-postal-code"></div>
-            <button id="sq-creditcard" class="button-credit-card"
-                onClick="${onGetCardNonce}"
-            >
-                Pay $1.00
-            </button>
+            <form onsubmit="${getCardNonce}">
+
+                <h2>shipping</h2>
+
+                <div class="input-group">
+                    <input name="name" type="text" placeholder=" " required
+                        minlength="3" />
+                    <label>Name</label>
+                </div>
+
+                <h2>payment</h2>
+
+                <div id="sq-card-number"></div>
+                <div class="third" id="sq-expiration-date"></div>
+                <div class="third" id="sq-cvv"></div>
+                <div class="third" id="sq-postal-code"></div>
+                <button id="sq-creditcard" class="button-credit-card"
+                    type="submit">
+                    Pay $1.00
+                </button>
+            </form>
         </div> 
 
 
@@ -164,11 +169,11 @@ function Checkout (props) {
 
         // <form onSubmit=${submit}>
 
-        //     <div class="input-group">
-        //         <input name="name" type="text" placeholder=" " required
-        //             minlength="3" />
-        //         <label>Name</label>
-        //     </div>
+            // <div class="input-group">
+            //     <input name="name" type="text" placeholder=" " required
+            //         minlength="3" />
+            //     <label>Name</label>
+            // </div>
 
         //     <div class="form-controls">
         //         <button type="submit">submit</button>
