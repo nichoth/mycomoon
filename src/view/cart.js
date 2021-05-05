@@ -24,6 +24,7 @@ class CartPage extends Component {
         cart.createPage(this.ref.current, mapper)
 
         function mapper (html, prod, i) {
+            console.log('mapper', prod)
             return html`<div>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
                 <input type="number" min="0" max="${prod.quantityAvailable}"
