@@ -50,7 +50,7 @@ router.addRoute('/cart', () => {
             cart.createPage(this.ref.current, mapper)
 
             function mapper (html, prod, i) {
-                return html`<form>
+                return html`<div>
                     <span>${prod.name + ' -- ' + prod.variationName}</span>
                     <input type="number" min="0" max="${prod.quantityAvailable}"
                         value=${prod.quantity}
@@ -58,7 +58,7 @@ router.addRoute('/cart', () => {
                     />
                     <span>${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                     <//>
-                </form>`
+                </div>`
             }
         }
 

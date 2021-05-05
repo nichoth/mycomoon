@@ -83,6 +83,7 @@ body {
     #cart-page {
         list-style: none;
         padding-left: 0;
+        margin: 1rem auto;
         max-width: 40rem;
 
         li {
@@ -106,7 +107,7 @@ body {
     }
 
     .cart-controls {
-        margin-left: 4rem;
+        margin: 0 auto;
         max-width: 40rem;
         text-align: right;
         margin-top: 4rem;
@@ -137,7 +138,7 @@ body {
     .cart-totals {
         max-width: 40rem;
         text-align: right;
-        margin-left: 4rem;
+        margin: 0 auto;
     }
 
     .total-money {
