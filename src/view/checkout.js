@@ -149,6 +149,8 @@ function Checkout (props) {
 
     return html`<div class="checkout-page">
 
+        <h1>Checkout</h1>
+
         <div id="form-container">
             <form onsubmit="${getCardNonce}">
 
