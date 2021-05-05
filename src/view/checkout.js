@@ -152,48 +152,52 @@ function Checkout (props) {
         <div id="form-container">
             <form onsubmit="${getCardNonce}">
 
-                <h2>shipping</h2>
+                <div class="form-section">
+                    <h2>shipping</h2>
 
-                <div class="input-group">
-                    <input name="name" type="text" placeholder=" " required
-                        minlength="3" />
-                    <label>Name</label>
+                    <div class="input-group">
+                        <input name="name" type="text" placeholder=" " required
+                            minlength="3" />
+                        <label>Name</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input name="address" type="text" placeholder=" " required
+                            minlength="3" />
+                        <label>address</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input name="city" type="text" placeholder=" " required
+                            minlength="3" />
+                        <label>City</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input name="state" type="text" placeholder=" " required
+                            minlength="3" />
+                        <label>State</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input name="zip-code" type="text" placeholder=" " required
+                            minlength="5" max-length="5" />
+                        <label>Zip Code</label>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <input name="address" type="text" placeholder=" " required
-                        minlength="3" />
-                    <label>address</label>
+                <div class="form-section">
+                    <h2>payment</h2>
+
+                    <div id="sq-card-number"></div>
+                    <div class="third" id="sq-expiration-date"></div>
+                    <div class="third" id="sq-cvv"></div>
+                    <div class="third" id="sq-postal-code"></div>
+                    <button id="sq-creditcard" class="button-credit-card"
+                        type="submit">
+                        Pay $1.00
+                    </button>
                 </div>
-
-                <div class="input-group">
-                    <input name="city" type="text" placeholder=" " required
-                        minlength="3" />
-                    <label>City</label>
-                </div>
-
-                <div class="input-group">
-                    <input name="state" type="text" placeholder=" " required
-                        minlength="3" />
-                    <label>State</label>
-                </div>
-
-                <div class="input-group">
-                    <input name="zip-code" type="text" placeholder=" " required
-                        minlength="5" max-length="5" />
-                    <label>Zip Code</label>
-                </div>
-
-                <h2>payment</h2>
-
-                <div id="sq-card-number"></div>
-                <div class="third" id="sq-expiration-date"></div>
-                <div class="third" id="sq-cvv"></div>
-                <div class="third" id="sq-postal-code"></div>
-                <button id="sq-creditcard" class="button-credit-card"
-                    type="submit">
-                    Pay $1.00
-                </button>
             </form>
         </div> 
 
