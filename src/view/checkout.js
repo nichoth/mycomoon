@@ -112,6 +112,8 @@ function Checkout (props) {
                 });
                   
 
+
+
                 console.log('got nonce', nonce)
                 console.log('card data', cardData)
                 // alert(`The generated nonce is:\n${nonce}`);
@@ -130,7 +132,17 @@ function Checkout (props) {
     function getCardNonce (ev) {
         ev.preventDefault()
         console.log('get card nonce', ev.target.elements)
-        console.log('**els**', ev.target.elements.name.value)
+        console.log('**name el**', ev.target.elements.name.value)
+        console.log('**address el**', ev.target.elements.address.value)
+
+        var shipping = ['name', 'address', 'city', 'state',
+            'zip-code'].reduce((acc, v) => {
+                acc[v] = ev.target.elements[v].value
+                return acc
+            }, {})
+
+        console.log('shipping', shipping)
+
         paymentForm.requestCardNonce();
     }
 
@@ -146,6 +158,30 @@ function Checkout (props) {
                     <input name="name" type="text" placeholder=" " required
                         minlength="3" />
                     <label>Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input name="address" type="text" placeholder=" " required
+                        minlength="3" />
+                    <label>address</label>
+                </div>
+
+                <div class="input-group">
+                    <input name="city" type="text" placeholder=" " required
+                        minlength="3" />
+                    <label>City</label>
+                </div>
+
+                <div class="input-group">
+                    <input name="state" type="text" placeholder=" " required
+                        minlength="3" />
+                    <label>State</label>
+                </div>
+
+                <div class="input-group">
+                    <input name="zip-code" type="text" placeholder=" " required
+                        minlength="5" max-length="5" />
+                    <label>Zip Code</label>
                 </div>
 
                 <h2>payment</h2>
