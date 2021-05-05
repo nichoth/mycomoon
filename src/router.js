@@ -3,7 +3,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
-var SingleProductView = require('./view/single-product')
+var createSingleProductView = require('./view/single-product')
 
 router.addRoute('/', () => {
     return {
@@ -96,11 +96,13 @@ router.addRoute('/products', () => {
 })
 
 router.addRoute('/:slug', ({ params }) => {
+    var { slug } = params
+
     return {
         getContent: function () {
-            var { slug } = params
             var url = new URL('/.netlify/functions/get-single-item', location)
             url.searchParams.append('slug', slug)
+
             return fetch(url)
                 .then(res => {
                     return res.json()
@@ -110,7 +112,7 @@ router.addRoute('/:slug', ({ params }) => {
                 })
         },
 
-        view: SingleProductView
+        view: createSingleProductView({ slug })
     }
 })
 

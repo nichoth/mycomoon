@@ -25,10 +25,12 @@ class CartPage extends Component {
 
         function mapper (html, prod, i) {
             console.log('mapper', prod)
+            var { slug } = prod
+
             return html`<div>
-                <span class="cart-image">
+                <a href="${slug}" class="cart-image">
                     <img src=${prod.imageData.url} />
-                </span>
+                </a>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
                 <input type="number" min="0" max="${prod.quantityAvailable}"
                     value=${prod.quantity}
