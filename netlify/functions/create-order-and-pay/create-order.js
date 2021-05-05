@@ -7,7 +7,7 @@ const client = new Client({
 
 const ordersApi = client.ordersApi;
 
-var createOrder = async function (lineItems, idempKey) {
+var createOrder = async function ({ lineItems, fullfilments }, idempKey) {
     // https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md
     var body = {
         "idempotency_key": idempKey,

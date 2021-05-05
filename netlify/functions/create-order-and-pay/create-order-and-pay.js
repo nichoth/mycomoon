@@ -8,7 +8,7 @@ const client = new Client({
 
 
 
-// (linItems)
+// (lineItems)
 // "line_items": [
 //     {
 //         "base_price_money": {
@@ -19,16 +19,20 @@ const client = new Client({
 //         "quantity": "1"
 //     }
 // ],
-var order = await createOrder([
-    {
-        "base_price_money": {
-            "amount": 1599,
-            "currency": "USD"
-        },
-        "name": "New York Strip Steak",
-        "quantity": "1"
-    }
-])
+var order = await createOrder({
+    lineItems: [
+        {
+            "base_price_money": {
+                "amount": 1599,
+                "currency": "USD"
+            },
+            "name": "New York Strip Steak",
+            "quantity": "1"
+        }
+    ],
+
+    fullfilments: []
+})
 
 
 

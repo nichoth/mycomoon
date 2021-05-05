@@ -8,18 +8,9 @@ function Checkout (props) {
     console.log('**the cart**', cart)
 
 
-
-    // function submit (ev) {
-    //     ev.preventDefault()
-    //     var els = ev.target.elements
-    //     console.log('name', els.name.value)
-    // }
-
-
     //TODO: paste code from step 2.1.1
     // is supposed to be a string
     const idempotency_key = '' + timestamp()
-
 
     // Create and initialize a payment form object
     var paymentForm = new window.SqPaymentForm({
@@ -63,18 +54,28 @@ function Checkout (props) {
             */
             cardNonceResponseReceived: function (errors, nonce, cardData) {
                 if (errors) {
-                    // Log errors from nonce generation to the browser
-                    // developer console.
+                    // Log errors from nonce generation
                     console.error('Encountered errors:');
                     errors.forEach(function (error) {
                         console.error('  ' + error.message);
                     });
-                    alert('Encountered errors, check browser console for more');
+                    var msg = errors[0].message
+                    alert('Error -- ' + msg)
                     return;
                 }
 
+                console.log('got nonce', nonce)
+                console.log('card data', cardData)
+                // alert(`The generated nonce is:\n${nonce}`);
+
+
+
 
                 // in here, first create an order, then pay for it
+                // @TODO -- need to get the address info & call our endpoint
+                // fetch('/.netlify/functions/create-order-and-pay')
+
+
 
 
                 //TODO: Replace alert with code in step 2.1
@@ -111,12 +112,6 @@ function Checkout (props) {
                     alert('Payment failed to complete!\nCheck browser developer console for more details');
                 });
                   
-
-
-
-                console.log('got nonce', nonce)
-                console.log('card data', cardData)
-                // alert(`The generated nonce is:\n${nonce}`);
             }
         }
     });
@@ -141,7 +136,10 @@ function Checkout (props) {
                 return acc
             }, {})
 
-        console.log('shipping', shipping)
+        var email = ev.target.elements.email
+
+        console.log('**shipping**', shipping)
+        console.log('**email**', email)
 
         paymentForm.requestCardNonce();
     }
@@ -190,6 +188,12 @@ function Checkout (props) {
 
                 <div class="form-section">
                     <h2>payment</h2>
+
+                    <div class="input-group">
+                        <input name="email" type="email" placeholder=" " required
+                            minlength="5" max-length="5" />
+                        <label>email</label>
+                    </div>
 
                     <div id="sq-card-number"></div>
                     <div class="third" id="sq-expiration-date"></div>
