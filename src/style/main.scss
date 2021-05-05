@@ -93,6 +93,19 @@ body {
             margin-bottom: 0.5rem;
             padding: 0.5rem 0rem;
 
+            span.cart-image {
+                width: 2rem;
+                height: 2rem;
+                margin-right: 1rem;
+                display: inline-block;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
             button {
                 border: none;
                 background-color: transparent;
