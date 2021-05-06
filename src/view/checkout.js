@@ -73,13 +73,7 @@ function Checkout (props) {
 
                 // in here, first create an order, then pay for it
                 // @TODO -- need to get the address info & call our endpoint
-                // fetch('/.netlify/functions/create-order-and-pay')
-
-
-
-
-                //TODO: Replace alert with code in step 2.1
-                fetch('/.netlify/functions/process-payment', {
+                fetch('/.netlify/functions/create-order-and-pay', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -91,26 +85,65 @@ function Checkout (props) {
                         location_id: "LAZSTD2P84MEA"
                     })   
                 })
-                .catch(err => {
-                    alert('Network error: ' + err);
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(errorInfo => {
-                            Promise.reject(errorInfo)
-                        });
-                    }
-                    return response.json()
-                })
-                .then(res => {
-                    console.log('process payment success', res.result);
-                    alert('Payment complete successfully!\nCheck browser developer console for more details');
-                })
-                .catch(err => {
-                    console.log('err', err)
-                    console.error('error process payment', err);
-                    alert('Payment failed to complete!\nCheck browser developer console for more details');
-                });
+                    .catch(err => {
+                        alert('Network error: ' + err);
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorInfo => {
+                                Promise.reject(errorInfo)
+                            });
+                        }
+                        return response.json()
+                    })
+                    .then(res => {
+                        console.log('process payment success', res.result);
+                        alert('Payment complete successfully!\nCheck browser developer console for more details');
+                    })
+                    .catch(err => {
+                        console.log('err', err)
+                        console.error('error process payment', err);
+                        alert('Payment failed to complete!\nCheck browser developer console for more details');
+                    });
+
+
+
+
+                //TODO: Replace alert with code in step 2.1
+            //     fetch('/.netlify/functions/process-payment', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify({
+            //             nonce: nonce,
+            //             idempotency_key: idempotency_key,
+            //             location_id: "LAZSTD2P84MEA"
+            //         })   
+            //     })
+            //     .catch(err => {
+            //         alert('Network error: ' + err);
+            //     })
+            //     .then(response => {
+            //         if (!response.ok) {
+            //             return response.json().then(errorInfo => {
+            //                 Promise.reject(errorInfo)
+            //             });
+            //         }
+            //         return response.json()
+            //     })
+            //     .then(res => {
+            //         console.log('process payment success', res.result);
+            //         alert('Payment complete successfully!\nCheck browser developer console for more details');
+            //     })
+            //     .catch(err => {
+            //         console.log('err', err)
+            //         console.error('error process payment', err);
+            //         alert('Payment failed to complete!\nCheck browser developer console for more details');
+            //     });
+            
+
                   
             }
         }
@@ -211,21 +244,6 @@ function Checkout (props) {
 
     </div>`
 
-
-
-        // <form onSubmit=${submit}>
-
-            // <div class="input-group">
-            //     <input name="name" type="text" placeholder=" " required
-            //         minlength="3" />
-            //     <label>Name</label>
-            // </div>
-
-        //     <div class="form-controls">
-        //         <button type="submit">submit</button>
-        //     </div>
-
-        // </form>
 }
 
 module.exports = Checkout
