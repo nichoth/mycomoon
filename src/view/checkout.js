@@ -8,6 +8,14 @@ function Checkout (props) {
     console.log('**the cart**', cart)
 
 
+
+    // this get set by the `submit` handler for the form -- `getCardNonce`
+    // then it's read in the cb we pass to the payment form --
+    // `cardNonceResponseReceived`
+    var shipping
+
+
+
     //TODO: paste code from step 2.1.1
     // is supposed to be a string
     const idempotency_key = '' + timestamp()
@@ -66,6 +74,7 @@ function Checkout (props) {
 
                 console.log('got nonce', nonce)
                 console.log('card data', cardData)
+                console.log('in nonce received cb', shipping)
                 // alert(`The generated nonce is:\n${nonce}`);
 
 
@@ -82,7 +91,8 @@ function Checkout (props) {
                     body: JSON.stringify({
                         nonce: nonce,
                         idempotency_key: idempotency_key,
-                        location_id: "LAZSTD2P84MEA"
+                        location_id: "LAZSTD2P84MEA",
+                        shipping: shipping
                     })   
                 })
                     .catch(err => {
@@ -107,44 +117,6 @@ function Checkout (props) {
                     });
 
 
-
-
-                //TODO: Replace alert with code in step 2.1
-            //     fetch('/.netlify/functions/process-payment', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Accept': 'application/json',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({
-            //             nonce: nonce,
-            //             idempotency_key: idempotency_key,
-            //             location_id: "LAZSTD2P84MEA"
-            //         })   
-            //     })
-            //     .catch(err => {
-            //         alert('Network error: ' + err);
-            //     })
-            //     .then(response => {
-            //         if (!response.ok) {
-            //             return response.json().then(errorInfo => {
-            //                 Promise.reject(errorInfo)
-            //             });
-            //         }
-            //         return response.json()
-            //     })
-            //     .then(res => {
-            //         console.log('process payment success', res.result);
-            //         alert('Payment complete successfully!\nCheck browser developer console for more details');
-            //     })
-            //     .catch(err => {
-            //         console.log('err', err)
-            //         console.error('error process payment', err);
-            //         alert('Payment failed to complete!\nCheck browser developer console for more details');
-            //     });
-            
-
-                  
             }
         }
     });
@@ -153,7 +125,6 @@ function Checkout (props) {
     useEffect(() => {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
         paymentForm.build();
-
     }, [])
 
 
@@ -163,7 +134,7 @@ function Checkout (props) {
         console.log('**name el**', ev.target.elements.name.value)
         console.log('**address el**', ev.target.elements.address.value)
 
-        var shipping = ['name', 'address', 'city', 'state',
+        shipping = ['name', 'address', 'city', 'state',
             'zip-code'].reduce((acc, v) => {
                 acc[v] = ev.target.elements[v].value
                 return acc
