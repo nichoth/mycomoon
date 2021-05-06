@@ -12,38 +12,16 @@ var createOrder = async function ({ lineItems, shipping, email }, idempKey) {
     var body = {
         idempotencyKey: idempKey,
         order: {
-            lineIems: lineItems,
+            // lineIems: lineItems,
 
-            idempotencyKey: idempKey,
-
-            // this is a real loc id
-            locationId: "LAZSTD2P84MEA",
-
-            fulfillments: [
-                {
-                    shipmentDetails: {
-                        recipient: {
-                            emailAddress: email,
-                            phoneNumber: '',
-                            address: {
-                                addressLine1: shipping.address,
-                                addressLine2: '',
-                                addressLine3: '',
-                                locality: shipping.city, // the city
-                                // the state
-                                administrativeDistrictLevel1: shipping.state,  
-                                postalCode: shipping.postalCode,
-                                country: 'USA',
-                                firstName: shipping.name,
-                                lastName: shipping.lastName
-                            }
-                        },
-                        trackingNumber: '',
-                        trackingUrl: '',
-                    }
+            lineItems: lineItems.map(function (item) {
+                return {
+                    catalogObjectId: item.variationId,
+                    quantity: '' + item.quantity,
+                    metadata: { slug: item.slug }
                 }
-            ],
-            
+            }),
+
             // lineItems: [
             //     {
             //       quantity: '1',
@@ -57,6 +35,39 @@ var createOrder = async function ({ lineItems, shipping, email }, idempKey) {
             //   ]
             // },
 
+
+            idempotencyKey: idempKey,
+
+            // this is a real loc id
+            locationId: "LAZSTD2P84MEA",
+
+            fulfillments: [
+                {
+                    type: 'SHIPMENT',
+                    shipmentDetails: {
+                        recipient: {
+                            displayName: shipping['first-name'],
+                            emailAddress: email,
+                            // phoneNumber: '',
+                            address: {
+                                addressLine1: shipping.address,
+                                // addressLine2: '',
+                                // addressLine3: '',
+                                locality: shipping.city, // the city
+                                // the state
+                                administrativeDistrictLevel1: shipping.state,  
+                                postalCode: shipping['zip-code'],
+                                country: 'US',
+                                firstName: shipping['first-name'],
+                                lastName: shipping['last-name']
+                            }
+                        },
+                        // trackingNumber: '',
+                        // trackingUrl: '',
+                    }
+                }
+            ],
+            
             taxes: [
                 {
                     "name": "State Sales Tax",
@@ -73,9 +84,10 @@ var createOrder = async function ({ lineItems, shipping, email }, idempKey) {
     } catch (err) {
         console.log('***err')
         console.log(err)
+        throw err
     }
 
-    return res
+    return res.result
 }
 
 module.exports = createOrder

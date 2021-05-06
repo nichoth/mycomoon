@@ -8,6 +8,14 @@ const client = new Client({
 const paymentsApi = client.paymentsApi;
 
 const pay = async ({ order, nonce, idempotency_key }) => {
+
+    // const orderRes = await ordersApi.retrieveOrder(orderId);
+    // const orderRes = await ordersApi.retrieveOrder(order.id);
+
+
+    var totalMoney = order.totalMoney
+
+
     const requestBody = {
         sourceId: nonce,
 
@@ -15,10 +23,12 @@ const pay = async ({ order, nonce, idempotency_key }) => {
         orderId: order.id,
 
         // TODO -- need to get the amount from the backend
-        amountMoney: {
-            amount: 100, // $1.00 charge
-            currency: 'USD'
-        },
+        amountMoney: totalMoney,
+
+        // amountMoney: {
+        //     amount: 100, // $1.00 charge
+        //     currency: 'USD'
+        // },
 
         locationId: "LAZSTD2P84MEA",
         idempotencyKey: idempotency_key
@@ -27,7 +37,7 @@ const pay = async ({ order, nonce, idempotency_key }) => {
     try {
         var response = await paymentsApi.createPayment(requestBody);
         return response.result
-    } catch(error) {
+    } catch (error) {
         // let errorResult = null;
 
         // if (error instanceof ApiError) {
@@ -38,10 +48,6 @@ const pay = async ({ order, nonce, idempotency_key }) => {
 
         throw error
 
-        // res.status(500).json({
-        //     'title': 'Payment Failure',
-        //     'result': errorResult
-        // });
     }
 
 }

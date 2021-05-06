@@ -6,7 +6,7 @@ function Checkout (props) {
     console.log('checkout props', props)
     var { cart } = props
     console.log('**the cart**', cart)
-
+    console.log('**products', cart.products())
 
 
     // this get set by the `submit` handler for the form -- `getCardNonce`
@@ -80,6 +80,12 @@ function Checkout (props) {
 
 
 
+
+                var products = cart.products()
+
+
+
+
                 // in here, first create an order, then pay for it
                 // @TODO -- need to get the address info & call our endpoint
                 fetch('/.netlify/functions/create-order-and-pay', {
@@ -92,7 +98,8 @@ function Checkout (props) {
                         nonce: nonce,
                         idempotency_key: idempotency_key,
                         location_id: "LAZSTD2P84MEA",
-                        shipping: shipping
+                        shipping: shipping,
+                        lineItems: products
                     })   
                 })
                     .catch(err => {
@@ -107,7 +114,7 @@ function Checkout (props) {
                         return response.json()
                     })
                     .then(res => {
-                        console.log('process payment success', res.result);
+                        console.log('process payment success', res);
                         alert('Payment complete successfully!\nCheck browser developer console for more details');
                     })
                     .catch(err => {
@@ -131,10 +138,10 @@ function Checkout (props) {
     function getCardNonce (ev) {
         ev.preventDefault()
         console.log('get card nonce', ev.target.elements)
-        console.log('**name el**', ev.target.elements.name.value)
+        console.log('**name el**', ev.target.elements['first-name'].value)
         console.log('**address el**', ev.target.elements.address.value)
 
-        shipping = ['name', 'address', 'city', 'state',
+        shipping = ['first-name', 'last-name', 'address', 'city', 'state',
             'zip-code'].reduce((acc, v) => {
                 acc[v] = ev.target.elements[v].value
                 return acc
@@ -160,33 +167,40 @@ function Checkout (props) {
                     <h2>shipping</h2>
 
                     <div class="input-group">
-                        <input name="name" type="text" placeholder=" " required
-                            minlength="3" />
-                        <label>Name</label>
+                        <input name="first-name" type="text" placeholder=" "
+                            required minlength="3" id="first-name" />
+                        <label for="first-name">First Name</label>
                     </div>
 
                     <div class="input-group">
-                        <input name="address" type="text" placeholder=" " required
-                            minlength="3" />
-                        <label>address</label>
+                        <input id="last-name" name="last-name" type="text"
+                            placeholder=" " required minlength="3" />
+                        <label for="last-name">Last Name</label>
                     </div>
 
                     <div class="input-group">
-                        <input name="city" type="text" placeholder=" " required
-                            minlength="3" />
-                        <label>City</label>
+                        <input name="address" id="address" type="text"
+                            placeholder=" " required minlength="3" />
+                        <label for="address">address</label>
                     </div>
 
                     <div class="input-group">
-                        <input name="state" type="text" placeholder=" " required
-                            minlength="3" />
-                        <label>State</label>
+                        <input name="city" id="city" type="text"
+                            placeholder=" " required minlength="3" />
+                        <label for="city">City</label>
                     </div>
 
                     <div class="input-group">
-                        <input name="zip-code" type="text" placeholder=" " required
-                            minlength="5" max-length="5" />
-                        <label>Zip Code</label>
+                        <input name="state" id="state" type="text"
+                            placeholder=" " required minlength="3" />
+                        <label for="state">State</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input name="zip-code" id="zip-code" type="text"
+                            placeholder=" " required minlength="5"
+                            max-length="5" />
+                        <label for="zip-code">Zip Code</label>
                     </div>
                 </div>
 
