@@ -1,11 +1,11 @@
-const { Client, Environment } = require('square')
+// const { Client, Environment } = require('square')
 const createOrder = require('./create-order')
 var pay = require('./pay')
 
-const client = new Client({
-    environment: Environment.Sandbox,
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
-})
+// const client = new Client({
+//     environment: Environment.Sandbox,
+//     accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+// })
 
 // Docs on event and context
 // https://www.netlify.com/docs/functions/#the-handler-method

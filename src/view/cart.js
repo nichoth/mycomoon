@@ -1,5 +1,6 @@
 import { html, Component } from 'htm/preact'
 import { createRef } from 'preact';
+var { toMoneyFormat, getTax, withTax } = require('../util')
 
 class CartPage extends Component {
     constructor (props) {
@@ -55,9 +56,11 @@ class CartPage extends Component {
             <div class="cart-content" ref=${this.ref}></div>
 
             <div class="cart-totals">
-                <span class="total-money">
-                    total ${toMoneyFormat(total)}
-                </span>
+                <div class="subtotal-money">
+                    subtotal ${toMoneyFormat(total)}
+                </div>
+                <div class="tax">tax ${toMoneyFormat(getTax(products))}</div>
+                <div>total ${toMoneyFormat(withTax(products))}</div>
             </div>
 
             <div class="cart-controls">
@@ -72,14 +75,6 @@ class CartPage extends Component {
             </div>
         `
     }
-}
-
-function toMoneyFormat (num) {
-    var format = (parseInt(num) / 100).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD"
-    })
-    return format
 }
 
 module.exports = CartPage

@@ -9,20 +9,13 @@ const paymentsApi = client.paymentsApi;
 
 const pay = async ({ order, nonce, idempotency_key }) => {
 
-    // const orderRes = await ordersApi.retrieveOrder(orderId);
-    // const orderRes = await ordersApi.retrieveOrder(order.id);
 
-
-    var totalMoney = order.totalMoney
+    var { totalMoney } = order
 
 
     const requestBody = {
         sourceId: nonce,
-
-        // TODO -- get the order and see if it has the total price
         orderId: order.id,
-
-        // TODO -- need to get the amount from the backend
         amountMoney: totalMoney,
 
         // amountMoney: {

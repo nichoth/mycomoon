@@ -1,6 +1,7 @@
 import { html } from 'htm/preact'
 import { useEffect } from 'preact/hooks';
 var timestamp = require('monotonic-timestamp')
+var { toMoneyFormat, withTax } = require('../util')
 
 function Checkout (props) {
     console.log('checkout props', props)
@@ -155,9 +156,7 @@ function Checkout (props) {
         paymentForm.requestCardNonce();
     }
 
-
     return html`<div class="checkout-page">
-
         <h1>Checkout</h1>
 
         <div id="form-container">
@@ -219,12 +218,11 @@ function Checkout (props) {
                     <div class="third" id="sq-postal-code"></div>
                     <button id="sq-creditcard" class="button-credit-card"
                         type="submit">
-                        Pay $1.00
+                        Pay ${toMoneyFormat(withTax(cart.products()))}
                     </button>
                 </div>
             </form>
         </div> 
-
 
 
     </div>`

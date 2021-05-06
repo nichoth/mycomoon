@@ -71,7 +71,7 @@ var createOrder = async function ({ lineItems, shipping, email }, idempKey) {
             taxes: [
                 {
                     "name": "State Sales Tax",
-                    "percentage": "9",
+                    "percentage": "6.5",
                     "scope": "ORDER",
                     "uid": "state-sales-tax"
                 }

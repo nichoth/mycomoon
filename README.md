@@ -391,3 +391,15 @@ see [Walkthrough: Integrate Square Payments in a Website](https://developer.squa
 
 card number -- 	4111 1111 1111 1111
 cvv -- 111
+
+
+-------------------------------------------------
+
+
+Can make an order first with shipping addr only, then get a response from that
+and use the total in the next screen, where you pay.
+
+or
+
+Show the total & shipping on one screen because the total is calculated 
+client-side
