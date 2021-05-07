@@ -184,8 +184,9 @@ function Checkout (props) {
 
     if (state.order) {
         console.log('**order**', state.order)
-        return html`<div>
+        return html`<div class="success">
             <p>success</p>
+            <pre>${JSON.stringify(state.order, null, 2)}</pre>
         </div>`
     }
 

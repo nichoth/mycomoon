@@ -328,6 +328,12 @@ body {
             padding: 0 2rem;
             margin-left: 0;
             padding-bottom: 10rem;
+
+            & .success {
+                p {
+                    text-align: left;
+                }
+            }
         }
 
         .checkout-page {
