@@ -58,7 +58,6 @@ route(function onRoute (path) {
         'index' :
         _path.basename(path)
 
-
     var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
         dirs[0] !== 'about')
     if (isProdPage) contentClass += ' product-page'
