@@ -1,16 +1,13 @@
 import { html } from 'htm/preact'
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 var timestamp = require('monotonic-timestamp')
 var { toMoneyFormat, withTax } = require('../util')
 
 function Checkout (props) {
-    console.log('checkout props', props)
-    var { cart } = props
-    console.log('**the cart**', cart)
-    console.log('**products', cart.products())
+    var { cart, setOrder } = props
 
 
-    // this get set by the `submit` handler for the form -- `getCardNonce`
+    // this gets set by the `submit` handler for the form -- `getCardNonce`
     // then it's read in the cb we pass to the payment form --
     // `cardNonceResponseReceived`
     var shipping
@@ -20,6 +17,8 @@ function Checkout (props) {
     //TODO: paste code from step 2.1.1
     // is supposed to be a string
     const idempotency_key = '' + timestamp()
+
+    var [state, setState] = useState({ isResolving: false })
 
     // Create and initialize a payment form object
     var paymentForm = new window.SqPaymentForm({
@@ -105,6 +104,7 @@ function Checkout (props) {
                 })
                     .catch(err => {
                         alert('Network error: ' + err);
+                        setState({ isResolving: false })
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -116,19 +116,21 @@ function Checkout (props) {
                     })
                     .then(res => {
                         console.log('process payment success', res);
+                        setOrder(res)
                         alert('Payment complete successfully!\nCheck browser developer console for more details');
+                        setState({ isResolving: false })
                     })
                     .catch(err => {
                         console.log('err', err)
                         console.error('error process payment', err);
                         alert('Payment failed to complete!\nCheck browser developer console for more details');
+                        setState({ isResolving: false })
                     });
 
 
             }
         }
     });
-
 
     useEffect(() => {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
@@ -152,6 +154,8 @@ function Checkout (props) {
 
         console.log('**shipping**', shipping)
         console.log('**email**', email)
+
+        setState({ isResolving: true })
 
         paymentForm.requestCardNonce();
     }
@@ -216,10 +220,16 @@ function Checkout (props) {
                     <div class="third" id="sq-expiration-date"></div>
                     <div class="third" id="sq-cvv"></div>
                     <div class="third" id="sq-postal-code"></div>
-                    <button id="sq-creditcard" class="button-credit-card"
-                        type="submit">
-                        Pay ${toMoneyFormat(withTax(cart.products()))}
-                    </button>
+                    ${state.isResolving ?
+                        html`<button id="sq-creditcard"
+                            class="button-credit-card spinning" type="submit"
+                            disabled=${true}
+                        >
+                        </button>` :
+                        html`<button id="sq-creditcard" class="button-credit-card">
+                            Pay ${toMoneyFormat(withTax(cart.products()))}
+                        </button>`
+                    }
                 </div>
             </form>
         </div> 

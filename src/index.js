@@ -1,12 +1,13 @@
 var route = require('route-event')()
-var router = require('./router')
+var Router = require('./router')
 import { html, Component } from 'htm/preact'
 // import { render/*, hydrate*/ } from 'preact'
 import { createRef, /*hydrate,*/ render } from 'preact';
-import { useState, useLayoutEffect } from 'preact/hooks';
+// import { useState, useLayoutEffect } from 'preact/hooks';
 // import shell from './view/shell';
 var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
+var observ = require('observ')
 
 
 console.log('wooooooo')
@@ -36,6 +37,12 @@ var cart = new Cart({
     key: 'myco-cart'  // default is 'cart'
 })
 
+
+// kind of a hack
+var order = observ(null)
+var router = Router()
+
+
 route(function onRoute (path) {
     console.log('route event', path)
 
@@ -54,12 +61,14 @@ route(function onRoute (path) {
         'index' :
         _path.basename(path)
 
+
     var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
         dirs[0] !== 'about')
     if (isProdPage) contentClass += ' product-page'
 
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}>
-        <${view} cart=${cart} getContent=${getContent} />
+        <${view} cart=${cart} getContent=${getContent} order=${order}
+            setOrder=${order.set.bind(order)} />
     <//>`
 
     render(el, document.getElementById('content'))
