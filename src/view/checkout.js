@@ -127,7 +127,8 @@ function Checkout (props) {
 
                         // TODO -- keep the route the same, and just set
                         // some state for the success response
-                        alert('Payment complete successfully!\nCheck browser developer console for more details');
+                        // alert('Payment complete successfully!\nCheck browser developer console for more details');
+
                         setState({
                             isResolving: false,
                             order: res,
@@ -182,12 +183,14 @@ function Checkout (props) {
     }
 
     if (state.order) {
+        console.log('**order**', state.order)
         return html`<div>
             <p>success</p>
         </div>`
     }
 
     if (state.error) {
+        console.log('**error**')
         return html`<div>
             <p>error</p>
         </div>`
