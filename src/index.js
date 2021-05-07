@@ -38,8 +38,6 @@ var cart = new Cart({
 })
 
 
-// kind of a hack
-var order = observ(null)
 var router = Router()
 
 route(function onRoute (path) {
@@ -66,8 +64,7 @@ route(function onRoute (path) {
     if (isProdPage) contentClass += ' product-page'
 
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}>
-        <${view} cart=${cart} getContent=${getContent} order=${order}
-            setOrder=${order.set.bind(order)} />
+        <${view} cart=${cart} getContent=${getContent} />
     <//>`
 
     render(el, document.getElementById('content'))
