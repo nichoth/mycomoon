@@ -75,25 +75,32 @@ function Router (/*order*/) {
         }
     })
 
+
+
+
+    // we're going to just set some state in the `checkout` route instead
+
     // need to put the order object into the app state
-    router.addRoute('/success', (/*{ params }*/) => {
-        // var { orderId } = params
+    // router.addRoute('/success', (/*{ params }*/) => {
+    //     // var { orderId } = params
 
-        return {
-            getContent: function noop () {},
-            view: function (props) {
-                var { order } = props
-                console.log('in the success view', props)
-                console.log('the order', props.order)
-                return html`<div class="success">
-                    <p>good job</p>
-                    <pre>${orderId + JSON.stringify(order(), null, 2)}</pre>
-                </div>`
-            }
-        }
-            
+    //     return {
+    //         getContent: function noop () {},
+    //         view: function (props) {
+    //             var { order } = props
+    //             console.log('in the success view', props)
+    //             console.log('the order', props.order)
+    //             return html`<div class="success">
+    //                 <p>good job</p>
+    //                 <pre>${orderId + JSON.stringify(order(), null, 2)}</pre>
+    //             </div>`
+    //         }
+    //     }
+    // })
 
-    })
+
+
+
 
     return router
 }

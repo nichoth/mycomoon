@@ -4,7 +4,7 @@ var timestamp = require('monotonic-timestamp')
 var { toMoneyFormat, withTax } = require('../util')
 
 function Checkout (props) {
-    var { cart, setOrder } = props
+    var { cart } = props
 
 
     // this gets set by the `submit` handler for the form -- `getCardNonce`
@@ -18,7 +18,11 @@ function Checkout (props) {
     // is supposed to be a string
     const idempotency_key = '' + timestamp()
 
-    var [state, setState] = useState({ isResolving: false })
+    var [state, setState] = useState({
+        isResolving: false,
+        order: null,
+        error: null
+    })
 
     // Create and initialize a payment form object
     var paymentForm = new window.SqPaymentForm({
@@ -104,7 +108,11 @@ function Checkout (props) {
                 })
                     .catch(err => {
                         alert('Network error: ' + err);
-                        setState({ isResolving: false })
+                        setState({
+                            isResolving: false,
+                            order: null,
+                            error: err
+                        })
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -116,15 +124,28 @@ function Checkout (props) {
                     })
                     .then(res => {
                         console.log('process payment success', res);
-                        setOrder(res)
+
+                        // TODO -- keep the route the same, and just set
+                        // some state for the success response
                         alert('Payment complete successfully!\nCheck browser developer console for more details');
-                        setState({ isResolving: false })
+                        setState({
+                            isResolving: false,
+                            order: res,
+                            error: null
+                        })
                     })
                     .catch(err => {
                         console.log('err', err)
                         console.error('error process payment', err);
-                        alert('Payment failed to complete!\nCheck browser developer console for more details');
-                        setState({ isResolving: false })
+                        // alert('Payment failed to complete!\nCheck browser developer console for more details');
+
+                        // TODO -- should show an error message
+
+                        setState({
+                            isResolving: false,
+                            order: null,
+                            error: err
+                        })
                     });
 
 
@@ -158,6 +179,18 @@ function Checkout (props) {
         setState({ isResolving: true })
 
         paymentForm.requestCardNonce();
+    }
+
+    if (state.order) {
+        return html`<div>
+            <p>success</p>
+        </div>`
+    }
+
+    if (state.error) {
+        return html`<div>
+            <p>error</p>
+        </div>`
     }
 
     return html`<div class="checkout-page">

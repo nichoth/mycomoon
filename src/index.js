@@ -42,7 +42,6 @@ var cart = new Cart({
 var order = observ(null)
 var router = Router()
 
-
 route(function onRoute (path) {
     console.log('route event', path)
 
