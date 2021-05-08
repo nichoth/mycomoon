@@ -403,3 +403,17 @@ or
 
 Show the total & shipping on one screen because the total is calculated 
 client-side
+
+
+-------------------------------------------------
+
+## email receipts
+
+> The `receipt_url` associated with a Sandbox payment is not valid and does not link to an actual Sandbox payment receipt.
+
+https://www.jennapederson.com/blog/2019/11/4/sending-email-with-netlify-functions/
+
+Trying to send an email
+
+
+

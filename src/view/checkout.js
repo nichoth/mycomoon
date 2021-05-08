@@ -131,7 +131,7 @@ function Checkout (props) {
 
                         setState({
                             isResolving: false,
-                            order: res,
+                            order: res.order,
                             error: null
                         })
                     })
@@ -156,7 +156,9 @@ function Checkout (props) {
 
     useEffect(() => {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
-        paymentForm.build();
+        if (!state.order && !state.error) {
+            paymentForm.build();
+        }
     }, [])
 
 
@@ -185,8 +187,13 @@ function Checkout (props) {
     if (state.order) {
         console.log('**order**', state.order)
         return html`<div class="success">
-            <p>success</p>
-            <pre>${JSON.stringify(state.order, null, 2)}</pre>
+            <h1>success</h1>
+
+            <p>Thanks for buying some things</p>
+            <p>We will send you an email with a receipt</p>
+
+            <${OrderSummary} order=${state.order}
+                lineItems=${state.order.lineItems} />
         </div>`
     }
 
@@ -271,9 +278,24 @@ function Checkout (props) {
             </form>
         </div> 
 
-
     </div>`
-
 }
+
+function OrderSummary ({ lineItems, order }) {
+    return html`<div class="order-summary">
+        ${lineItems.map(item => {
+            return html`<ul>
+                <li>
+                    <span>${item.name} -- ${item.variationName}</span>
+                    <span>${item.quantity}</span>
+                    <span>${toMoneyFormat(item.totalMoney.amount)}</span>
+                </li>
+
+                <li>total -- ${toMoneyFormat(order.totalMoney.amount)}</li>
+            </ul>`
+        })}
+    </div>`
+}
+
 
 module.exports = Checkout

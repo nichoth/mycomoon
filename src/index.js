@@ -7,7 +7,6 @@ import { createRef, /*hydrate,*/ render } from 'preact';
 // import shell from './view/shell';
 var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
-var observ = require('observ')
 
 
 console.log('wooooooo')

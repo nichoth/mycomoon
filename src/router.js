@@ -4,6 +4,7 @@ var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var createSingleProductView = require('./view/single-product')
 var Products = require('./view/products')
+var AboutPage = require('./view/about')
 
 function Router (/*order*/) {
 
@@ -25,6 +26,12 @@ function Router (/*order*/) {
                     </ul>
                 `
             }
+        }
+    })
+
+    router.addRoute('/about', () => {
+        return {
+            view: AboutPage
         }
     })
 
