@@ -99,12 +99,12 @@ class Shell extends Component {
         }
 
         var cart = this.props.cart
-        cart.createIcon(this.ref.current)
+        cart.createIcon(this.ref.current, { link: '/cart' })
     }
 
     render (props) {
         return html`<div class="nav-part">
-            <a href="/cart" class="cart-container" ref=${this.ref}></a>
+            <span class="cart-container" ref=${this.ref}></span>
         </div>
         <div class="shell ${props.contentClass}">
             ${props.children}
