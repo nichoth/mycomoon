@@ -42,7 +42,11 @@ var router = Router()
 route(function onRoute (path) {
     console.log('route event', path)
 
-    var m = router.match(path)
+    try {
+        var m = router.match(path)
+    } catch (err) {
+        console.log('caught', err)
+    }
 
     if (!m) {
         console.log('not m', path)
