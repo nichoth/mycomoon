@@ -173,9 +173,6 @@ function Checkout (props) {
 
     function getCardNonce (ev) {
         ev.preventDefault()
-        console.log('get card nonce', ev.target.elements)
-        console.log('**name el**', ev.target.elements['first-name'].value)
-        console.log('**address el**', ev.target.elements.address.value)
 
         shipping = ['first-name', 'last-name', 'address', 'city', 'state',
             'zip-code'].reduce((acc, v) => {

@@ -3,7 +3,7 @@ const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-function sendEmail ({ toEmail, fromEmail, subject, payment, order }) {
+function sendEmail ({ toEmail, fromEmail, payment, order }) {
 
     return Promise.all([toEmail, fromEmail].map(addr => {
         const msg = {
@@ -11,7 +11,12 @@ function sendEmail ({ toEmail, fromEmail, subject, payment, order }) {
             from: fromEmail,
             subject: 'Thanks for buying mushrooms',
             text: 'yes thanks',
-            html: `<pre>
+            html: `<p>
+                    <a href=${payment.receiptUrl}>
+                        receipt URL
+                    </a>
+                </p>
+                <pre>
                     ${JSON.stringify(payment, stringer, 2)}
                 </pre>
                 <pre>
