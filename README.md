@@ -161,7 +161,7 @@ Then on the item page, you have the ability to select a variation for that item
 
 -----------------------------------------------
 
-in the catalog response, *rlow inventory alerts** are in `locationOverrides`:
+in the catalog response, **low inventory alerts** are in `locationOverrides`:
 
 ```js
 {
