@@ -1,6 +1,7 @@
 // const { Client, Environment } = require('square')
 const createOrder = require('./create-order')
 var pay = require('./pay')
+var sendEmail = require('./send-email')
 
 // const client = new Client({
 //     environment: Environment.Sandbox,
@@ -19,17 +20,25 @@ const handler = async (event) => {
     var { nonce, idempotency_key, lineItems, shipping, email } = body
     console.log('body', body)
 
-    var orderRes = await createOrder({
-        lineItems: lineItems,
-        shipping: shipping,
-        email: email
-    }, idempotency_key)
+    try {
+        var orderRes = await createOrder({
+            lineItems: lineItems,
+            shipping: shipping,
+            email: email
+        }, idempotency_key)
+    } catch (err) {
+        return { statusCode: 500, body: err.toString() }
+    }
 
-    // console.log('order', order)
+    // console.log('**order**', orderRes)
 
-    var paymentRes = await pay({ nonce, idempotency_key, ...orderRes })
+    try {
+        var paymentRes = await pay({ nonce, idempotency_key, ...orderRes })
+    } catch (err) {
+        return { statusCode: 500, body: err.toString() }
+    }
 
-    // console.log('payment', payment)
+    // console.log('**payment**', paymentRes)
 
 
     // https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md

@@ -10,14 +10,13 @@ const handler = (event, ctx, cb) => {
 
         const msg = {
             to: 'nichoth@gmail.com', // Change to your recipient
-            from: 'getmycomoon@mycomoon.com', // Change to your verified sender
+            from: 'getmycomoon@mycomoon.com',
             subject: 'Sending with SendGrid is Fun',
             text: subject + ' -- and easy to do anywhere, even with Node.js',
             html: '<strong>' + subject + ' -- and easy to do anywhere, even with Node.js</strong>',
         }
 
-        sgMail
-            .send(msg)
+        sgMail.send(msg)
             .then(() => {
                 console.log('Email sent')
                 cb(null, {
