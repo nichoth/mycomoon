@@ -1,5 +1,3 @@
-var key = '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'
-
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const handler = (event, ctx, cb) => {
     try {
