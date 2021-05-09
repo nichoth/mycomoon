@@ -9,9 +9,7 @@ const paymentsApi = client.paymentsApi;
 
 const pay = async ({ order, nonce, idempotency_key }) => {
 
-
     var { totalMoney } = order
-
 
     const requestBody = {
         sourceId: nonce,
@@ -40,7 +38,6 @@ const pay = async ({ order, nonce, idempotency_key }) => {
         // }
 
         throw error
-
     }
 
 }
