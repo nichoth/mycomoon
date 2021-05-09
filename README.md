@@ -441,5 +441,7 @@ We've set it up to use `getmycomoon@gmail.com`, which will resolve to a name
 ### transaction emails
 Need to use a service like `send grid` to send the emails via API.
 
+Run `netlify dev`, then open a browser to `http://localhost:8888/.netlify/functions/send-contact-email?name="fooooo"`
+
 
 
