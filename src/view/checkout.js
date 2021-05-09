@@ -168,9 +168,8 @@ function Checkout (props) {
         // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
         if (!state.order && !state.error) {
             paymentForm.build();
-        }
+        } 
     }, [])
-
 
     function getCardNonce (ev) {
         ev.preventDefault()
