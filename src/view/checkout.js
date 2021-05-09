@@ -192,6 +192,11 @@ function Checkout (props) {
 
     if (state.order) {
         console.log('**order**', state.order)
+
+        useEffect(() => {
+            window.scrollTo(0, 0); 
+        }, [])
+
         return html`<div class="success">
             <h1>success</h1>
 

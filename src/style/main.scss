@@ -332,6 +332,10 @@ body {
             .success {
                 p {
                     text-align: left;
+
+                    h1 {
+                        margin-bottom: 2rem;
+                    }
                 }
 
                 .order-summary {
