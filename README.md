@@ -413,7 +413,33 @@ client-side
 
 https://www.jennapederson.com/blog/2019/11/4/sending-email-with-netlify-functions/
 
-Trying to send an email
+### Trying to send an email
+
+[the netlify q&a thing](https://answers.netlify.com/t/support-guide-how-can-i-receive-emails-on-my-domain/178)
+
+
+[the google instructions](https://support.google.com/a/answer/174125?hl=en)
+
+> Once the MX records are configured correctly, we recommend changing the TTL value from 3600 to 86400,
+
+We've set it up to use `getmycomoon@gmail.com`, which will resolve to a name
+`@mycomoon.com`.
+
+
+------------------------------------
+
+
+* Use https://app.improvmx.com/ to forward `*@mycomoon.com` to
+`getmycomoon@gmail.com`.
+* Add the improvmx text records to netlify DNS settings
+
+
+----------------------------------------------------
+
+## 5-9-2021
+
+### transaction emails
+Need to use a service like `send grid` to send the emails via API.
 
 
 

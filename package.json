@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@nichoth/shopping-cart": "^0.0.25",
+    "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.2.0",
     "htm": "^3.0.4",
     "marked": "^2.0.3",
