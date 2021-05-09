@@ -6,13 +6,11 @@ var { toMoneyFormat, withTax } = require('../util')
 function Checkout (props) {
     var { cart } = props
 
-
     // this gets set by the `submit` handler for the form -- `getCardNonce`
     // then it's read in the cb we pass to the payment form --
     // `cardNonceResponseReceived`
     var shipping
-
-
+    var email
 
     //TODO: paste code from step 2.1.1
     // is supposed to be a string
@@ -76,18 +74,13 @@ function Checkout (props) {
                     return;
                 }
 
-                console.log('got nonce', nonce)
-                console.log('card data', cardData)
-                console.log('in nonce received cb', shipping)
+                // console.log('got nonce', nonce)
+                // console.log('card data', cardData)
+                // console.log('in nonce received cb', shipping, email)
                 // alert(`The generated nonce is:\n${nonce}`);
 
 
-
-
-
                 var products = cart.products()
-
-
 
 
                 // in here, first create an order, then pay for it
@@ -103,7 +96,8 @@ function Checkout (props) {
                         idempotency_key: idempotency_key,
                         location_id: "LAZSTD2P84MEA",
                         shipping: shipping,
-                        lineItems: products
+                        lineItems: products,
+                        email: email
                     })   
                 })
                     .catch(err => {
@@ -116,11 +110,28 @@ function Checkout (props) {
                     })
                     .then(response => {
                         if (!response.ok) {
-                            return response.json().then(errorInfo => {
-                                Promise.reject(errorInfo)
-                            });
+                            console.log('not ok', response)
+                            return response.text().then(errInfo => {
+                                return Promise.reject(errInfo)
+                            })
+                            // return response.json().then(errorInfo => {
+                            //     Promise.reject(errorInfo)
+                            // });
                         }
                         return response.json()
+                    })
+                    .catch(err => {
+                        // console.log('**err**', err)
+                        console.error('errr in hrr', err);
+                        // alert('Payment failed to complete!\nCheck browser developer console for more details');
+
+                        // TODO -- should show an error message
+
+                        setState({
+                            isResolving: false,
+                            order: null,
+                            error: err
+                        })
                     })
                     .then(res => {
                         console.log('process payment success', res);
@@ -136,8 +147,8 @@ function Checkout (props) {
                         })
                     })
                     .catch(err => {
-                        console.log('err', err)
-                        console.error('error process payment', err);
+                        // console.log('**err**', err)
+                        console.error('error -- process payment', err);
                         // alert('Payment failed to complete!\nCheck browser developer console for more details');
 
                         // TODO -- should show an error message
@@ -148,7 +159,6 @@ function Checkout (props) {
                             error: err
                         })
                     });
-
 
             }
         }
@@ -174,10 +184,7 @@ function Checkout (props) {
                 return acc
             }, {})
 
-        var email = ev.target.elements.email
-
-        console.log('**shipping**', shipping)
-        console.log('**email**', email)
+        email = ev.target.elements.email.value
 
         setState({ isResolving: true })
 
@@ -201,6 +208,7 @@ function Checkout (props) {
         console.log('**error**')
         return html`<div>
             <p>error</p>
+            <p class="error">${state.error}</p>
         </div>`
     }
 
@@ -291,7 +299,7 @@ function OrderSummary ({ lineItems, order }) {
                     <span>${toMoneyFormat(item.totalMoney.amount)}</span>
                 </li>
 
-                <li>total -- ${toMoneyFormat(order.totalMoney.amount)}</li>
+                <li>total ${toMoneyFormat(order.totalMoney.amount)}</li>
             </ul>`
         })}
     </div>`

@@ -10,9 +10,8 @@ function sendEmail ({ toEmail, fromEmail, subject, payment, order }) {
             to: addr, // Change to your recipient
             from: fromEmail,
             subject: 'Thanks for buying mushrooms',
-            text: '',
-            html: `<strong>${subject}</strong>
-                <pre>
+            text: 'yes thanks',
+            html: `<pre>
                     ${JSON.stringify(payment, stringer, 2)}
                 </pre>
                 <pre>
@@ -21,6 +20,13 @@ function sendEmail ({ toEmail, fromEmail, subject, payment, order }) {
         }
 
         return sgMail.send(msg)
+            .then(res => {
+                // console.log('**res**', res)
+                return res
+            })
+            .catch(err => {
+                console.log('errrrrrr', err)
+            })
     }))
 
 

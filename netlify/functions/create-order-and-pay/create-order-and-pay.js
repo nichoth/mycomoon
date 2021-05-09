@@ -18,7 +18,7 @@ const handler = async (event, ctx, cb) => {
 
     var body = JSON.parse(event.body)
     var { nonce, idempotency_key, lineItems, shipping, email } = body
-    console.log('body', body)
+    console.log('**body**', body)
 
     try {
         var orderRes = await createOrder({
@@ -27,6 +27,7 @@ const handler = async (event, ctx, cb) => {
             email: email
         }, idempotency_key)
     } catch (err) {
+        console.log('errrrrrr', err)
         return { statusCode: 500, body: err.toString() }
     }
 
@@ -43,41 +44,61 @@ const handler = async (event, ctx, cb) => {
     // https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md
 
 
-    Promise.all([
-        email,
-        'getmycomoon@gmail.com'
-    ].map(addr => {
-        return sendEmail({
-            subject: 'wooo',
-            toEmail: addr,
-            fromEmail: 'getmycomoon@mycomoon.com',
-            ...paymentRes,
-            ...orderRes
+    return sendEmail({
+        ...paymentRes,
+        ...orderRes,
+        fromEmail: 'getmycomoon@mycomoon.com',
+        toEmail: email
+    })
+        .then(() => {
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    ...paymentRes,
+                    ...orderRes,
+                    status: 'email sent',
+                    message: `woooo`,
+                }, stringer, 2)
+            }
         })
-            .then(() => {
-                console.log('Email sent')
+        .catch(err => console.log('errrrr againnn', err))
 
-                cb(null, {
-                    statusCode: 200,
-                    body: JSON.stringify({
-                        ...paymentRes,
-                        ...orderRes,
-                        status: 'email sent',
-                        message: `Hello ${subject}`
-                    }, stringer, 2)
-                })
-            })
-            .catch((error) => {
-                console.error('**oh no**', error)
-                cb(null, {
-                    statusCode: 500,
-                    body: JSON.stringify({
-                        status: 'error with email',
-                        message: error.toString()
-                    })
-                })
-            })
-    }))
+
+    // Promise.all([
+    //     email,
+    //     'getmycomoon@gmail.com'
+    // ].map(addr => {
+    //     return sendEmail({
+    //         subject: 'wooo',
+    //         toEmail: addr,
+    //         fromEmail: 'getmycomoon@mycomoon.com',
+    //         ...paymentRes,
+    //         ...orderRes
+    //     })
+    //         .then(() => {
+    //             console.log('Email sent')
+
+    //             cb(null, {
+    //                 statusCode: 200,
+    //                 body: JSON.stringify({
+    //                     ...paymentRes,
+    //                     ...orderRes,
+    //                     status: 'email sent',
+    //                     message: `Hello ${subject}`
+    //                 }, stringer, 2)
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             console.error('**oh no**', error)
+    //             cb(null, {
+    //                 statusCode: 500,
+    //                 body: JSON.stringify({
+    //                     status: 'error with email',
+    //                     message: error.toString()
+    //                 })
+    //             })
+    //         })
+    // }))
 
 
 
