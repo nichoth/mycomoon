@@ -13,7 +13,7 @@ const handler = (event, ctx, cb) => {
             from: 'getmycomoon@mycomoon.com', // Change to your verified sender
             subject: 'Sending with SendGrid is Fun',
             text: subject + ' -- and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            html: '<strong>' + subject + ' -- and easy to do anywhere, even with Node.js</strong>',
         }
 
         sgMail
