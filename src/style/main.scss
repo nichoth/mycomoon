@@ -308,16 +308,43 @@ body {
             padding: 0;
             list-style: none;
             display: flex;
-            justify-content: space-evenly;
+            // justify-content: space-evenly;
+            justify-content: flex-end;
 
-            a {
-                text-decoration: none;
 
-                &:hover {
-                    text-decoration: underline;
+
+            // -------------- new stuff ---------
+
+            margin-top: 0rem;
+            padding-top: 3.3rem;
+
+            li {
+                height: 100vh;
+                border-left: 1px solid white;
+                div {
+                    padding-top: 0;
+                    padding-right: 1rem;
+
+                    a {
+                        padding-top: 2rem;
+                        position: relative;
+                        right: 1rem;
+                        text-decoration: none;
+
+                        div {
+                            transform: rotate(-90deg);
+                        }
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
+
         }
+
+            // -------------- /new stuff ---------
     }
 
     .shell {
