@@ -1,12 +1,6 @@
-// const { Client, Environment } = require('square')
 const createOrder = require('./create-order')
 var pay = require('./pay')
 var sendEmail = require('./send-email')
-
-// const client = new Client({
-//     environment: Environment.Sandbox,
-//     accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
-// })
 
 // Docs on event and context
 // https://www.netlify.com/docs/functions/#the-handler-method
@@ -63,58 +57,6 @@ const handler = async (event, ctx, cb) => {
         })
         .catch(err => console.log('errrrr againnn', err))
 
-
-    // Promise.all([
-    //     email,
-    //     'getmycomoon@gmail.com'
-    // ].map(addr => {
-    //     return sendEmail({
-    //         subject: 'wooo',
-    //         toEmail: addr,
-    //         fromEmail: 'getmycomoon@mycomoon.com',
-    //         ...paymentRes,
-    //         ...orderRes
-    //     })
-    //         .then(() => {
-    //             console.log('Email sent')
-
-    //             cb(null, {
-    //                 statusCode: 200,
-    //                 body: JSON.stringify({
-    //                     ...paymentRes,
-    //                     ...orderRes,
-    //                     status: 'email sent',
-    //                     message: `Hello ${subject}`
-    //                 }, stringer, 2)
-    //             })
-    //         })
-    //         .catch((error) => {
-    //             console.error('**oh no**', error)
-    //             cb(null, {
-    //                 statusCode: 500,
-    //                 body: JSON.stringify({
-    //                     status: 'error with email',
-    //                     message: error.toString()
-    //                 })
-    //             })
-    //         })
-    // }))
-
-
-
-
-    // try {
-    //     return {
-    //         statusCode: 200,
-    //         body: JSON.stringify({ ...paymentRes, ...orderRes }, stringer, 2),
-    //         // // more keys you can return:
-    //         // headers: { "headerName": "headerValue", ... },
-    //         // isBase64Encoded: true,
-    //     }
-    // } catch (error) {
-    //     console.log('oh no', error)
-    //     return { statusCode: 500, body: error.toString() }
-    // }
 }
 
 function stringer (key, value) {

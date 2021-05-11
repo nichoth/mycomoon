@@ -165,7 +165,6 @@ function Checkout (props) {
     });
 
     useEffect(() => {
-        // 1.1.5: ADD JAVASCRIPT TO BUILD THE FORM
         if (!state.order && !state.error) {
             paymentForm.build();
         } 

@@ -1,10 +1,10 @@
 var router = require('ruta3')()
-import { html } from 'htm/preact'
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var createSingleProductView = require('./view/single-product')
 var Products = require('./view/products')
 var AboutPage = require('./view/about')
+var IndexView = require('./view/index')
 
 function Router (/*order*/) {
 
@@ -18,14 +18,7 @@ function Router (/*order*/) {
                 })
             },
 
-            view: function () {
-                return html`<h1>Myco Moon</h1>
-                    <ul class="main-nav">
-                        <li><a href="/about">about</a></li>
-                        <li><a href="/products">products</a></li>
-                    </ul>
-                `
-            }
+            view: IndexView
         }
     })
 
