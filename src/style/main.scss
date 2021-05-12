@@ -321,6 +321,10 @@ body {
                 height: 100%;
                 border-left: 1px solid white;
 
+                &.tab {
+                    transition: 2s all;
+                }
+
                 &.tab.active {
                     flex-grow: 1;
                 }

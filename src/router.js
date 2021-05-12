@@ -4,7 +4,8 @@ var CartPage = require('./view/cart')
 var createSingleProductView = require('./view/single-product')
 var Products = require('./view/products')
 var AboutPage = require('./view/about')
-var createIndexView = require('./view/index')
+// var createIndexView = require('./view/index')
+var IndexView = require('./view/index')
 
 function Router (/*order*/) {
 
@@ -18,13 +19,13 @@ function Router (/*order*/) {
                 })
             },
 
-            view: createIndexView('')
+            view: IndexView
         }
     })
 
     router.addRoute('/about', () => {
         return {
-            view: createIndexView('about')
+            view: IndexView
         }
     })
 
@@ -50,7 +51,8 @@ function Router (/*order*/) {
                     .then(response => response.json())
             },
 
-            view: createIndexView('products')
+            // view: createIndexView('products')
+            view: IndexView
         }
     })
 
