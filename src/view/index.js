@@ -5,8 +5,6 @@ function IndexView (props) {
     // we're doing it this weird way because it doesn't work if you use a HOC
     var { path } = this.props
 
-    var about = path.includes('about')
-    
     return html`
         <ul class="main-nav">
             <li class="tab${path.includes('about') ? ' active' : ''}">

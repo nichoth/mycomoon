@@ -332,21 +332,24 @@ body {
 
                 &.tab.active {
                     flex-grow: 1;
+
                     .page-content {
                         display: block;
-                        padding: 0 1rem;
+                        padding: 2rem;
                     }
 
                     a {
                         padding-top: 0;
                         height: initial;
                         & > h2 {
-                            // transition: all 1s ease;
                             transition: font-size 1s ease;
-                            transform: rotate(0deg);
                             font-size: 2rem;
                             padding: 0 2rem;
-                            // display: inline;
+
+                            top: 1rem;
+                            display: inline-block;
+                            position: relative;
+                            left: -2rem;
                         }
                     }
                 }
@@ -375,6 +378,9 @@ body {
 
             // -------------- /new stuff ---------
     }
+
+
+
 
     .shell {
         margin-left: 30vw;
