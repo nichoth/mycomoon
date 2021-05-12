@@ -1,12 +1,13 @@
 var route = require('route-event')()
 var Router = require('./router')
-import { html, Component } from 'htm/preact'
-// import { render/*, hydrate*/ } from 'preact'
-import { createRef, /*hydrate,*/ render } from 'preact';
+import { html } from 'htm/preact'
+// import { /*createRef, hydrate,*/ render } from 'preact';
+import { render } from 'preact';
 // import { useState, useLayoutEffect } from 'preact/hooks';
 // import shell from './view/shell';
 var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
+var Shell = require('./view/shell')
 
 
 console.log('wooooooo')
@@ -30,6 +31,7 @@ console.log('wooooooo')
 // }
 
 // --------------------------------------------------
+
 
 var cart = new Cart({
     storage: true, // store the state in localStorage?
@@ -71,43 +73,3 @@ route(function onRoute (path) {
 
     render(el, document.getElementById('content'))
 })
-
-
-
-class Shell extends Component {
-    constructor (props) {
-        super(props)
-        this.ref = createRef();
-    }
-
-    componentDidUpdate () {
-        var el = document.getElementById('content')
-        if (this.props.contentClass === 'index') {
-            el.className += ' index'
-        } else {
-            el.className = ''
-        }
-    }
-
-    componentDidMount() {
-        // console.log(this.ref.current);
-        // Logs: [HTMLDivElement]
-
-        if (this.props.contentClass === 'index') {
-            var el = document.getElementById('content')
-            el.className += " " + 'index'
-        }
-
-        var cart = this.props.cart
-        cart.createIcon(this.ref.current, { link: '/cart' })
-    }
-
-    render (props) {
-        return html`<div class="nav-part">
-            <span class="cart-container" ref=${this.ref}></span>
-        </div>
-        <div class="shell ${props.contentClass}">
-            ${props.children}
-        </div>`
-    }
-}
