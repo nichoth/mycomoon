@@ -29,12 +29,6 @@
     }
 }
 
-// @media screen and (orientation:landscape) {
-//     body {
-//         color: pink!important;
-//     }
-//  }
-
 $main-color: #f0dca9;
 
 body {
@@ -308,28 +302,24 @@ body {
             padding: 0;
             list-style: none;
             display: flex;
-            // justify-content: space-evenly;
-            justify-content: flex-end;
-
 
 
             // -------------- new stuff ---------
 
+            justify-content: flex-end;
+            margin-bottom: 0;
+            height: 100%;
             margin-top: 0rem;
-            // padding-top: 3.3rem;
 
             li {
-                height: 100vh;
+                height: 100%;
                 border-left: 1px solid white;
 
                 a {
                     padding-top: 2rem;
-                    height: 100%;
+                    height: 100vh;
                     display: block;
-                    // padding-left: 1rem;
-                    // padding-right: 1rem;
                     position: relative;
-                    // right: 1rem;
                     text-decoration: none;
 
                     div {
