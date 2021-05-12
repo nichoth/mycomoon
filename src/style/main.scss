@@ -310,7 +310,7 @@ body {
             display: flex;
 
 
-            // -------------- new stuff ---------
+            // -------------- new stuff ----------------------
 
             justify-content: flex-end;
             margin-bottom: 0;
@@ -321,12 +321,28 @@ body {
                 height: 100%;
                 border-left: 1px solid white;
 
+
                 &.tab {
-                    transition: 2s all;
+                    transition: all 1s ease;
+                    .page-content {
+                        display: none;
+                    }
                 }
 
                 &.tab.active {
                     flex-grow: 1;
+                    .page-content {
+                        display: block;
+                    }
+
+                    a {
+                        padding-top: 0;
+                        & > h2 {
+                            transform: rotate(0deg);
+                            font-size: 2rem;
+                            padding: 0 2rem;
+                        }
+                    }
                 }
 
                 a {
@@ -336,8 +352,11 @@ body {
                     position: relative;
                     text-decoration: none;
 
-                    div {
+                    transition: all 1s ease;
+
+                    & > h2 {
                         transform: rotate(-90deg);
+                        font-size: 1rem;
                     }
 
                     &:hover {

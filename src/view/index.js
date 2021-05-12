@@ -1,17 +1,21 @@
 import { html, Component } from 'htm/preact'
-import { useEffect, useState } from 'preact/hooks';
+// import { useEffect, useState } from 'preact/hooks';
 
 function IndexView (props) {
+    // we're doing it this weird way because it doesn't work if you use a HOC
     var { path } = this.props
+
+    var about = path.includes('about')
     
     return html`
-        <!-- <h1>Myco Moon</h1> -->
         <ul class="main-nav">
             <li class="tab${path.includes('about') ? ' active' : ''}">
-                <a href="/about"><div>about</div></a>
+                <a href="/about"><h2>about</h2></a>
+                <div class="page-content">the about content</div>
             </li>
+
             <li class="tab${path.includes('products') ? ' active' : ''}">
-                <a href="/products"><div>products</div></a>
+                <a href="/products"><h2>products</h2></a>
             </li>
         </ul>
     `
