@@ -13,7 +13,7 @@ function IndexView (props) {
             <li class="tab${path === '/' ? ' active' : ''}">
                 <a href="/"><h2>products</h2></a>
                 <div class="page-content">
-                    <${Products} getContent=${getContent} />
+                    <${Products} />
                 </div>
             </li>
 

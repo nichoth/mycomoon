@@ -333,11 +333,14 @@ body {
                 height: 100%;
                 border-left: 1px solid white;
 
-
                 &.tab {
                     transition: flex-grow 1s ease;
+                    overflow: hidden;
+                    width: 4rem;
+                    flex-grow: 0;
                     .page-content {
-                        display: none;
+                        width: 0;
+                        overflow: hidden;
                     }
                 }
 
@@ -346,8 +349,10 @@ body {
                     overflow-y: scroll;
 
                     .page-content {
-                        display: block;
+                        // display: block;
                         padding: 2rem;
+                        width: initial;
+                        overflow-y: scroll;
                     }
 
                     a {
