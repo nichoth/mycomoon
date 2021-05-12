@@ -1,7 +1,6 @@
 var route = require('route-event')()
 var Router = require('./router')
 import { html } from 'htm/preact'
-// import { /*createRef, hydrate,*/ render } from 'preact';
 import { render } from 'preact';
 // import { useState, useLayoutEffect } from 'preact/hooks';
 // import shell from './view/shell';

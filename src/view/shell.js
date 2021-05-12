@@ -1,4 +1,5 @@
 import { html, Component } from 'htm/preact'
+import { createRef } from 'preact';
 
 class Shell extends Component {
     constructor (props) {
@@ -30,6 +31,7 @@ class Shell extends Component {
 
     render (props) {
         return html`<div class="nav-part">
+            <span class="who-are-you">Myco Moon</span>
             <span class="cart-container" ref=${this.ref}></span>
         </div>
 
