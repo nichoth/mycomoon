@@ -298,7 +298,8 @@ body {
     }
 
     #content {
-        background-color: #0000007a;
+        // background-color: #0000007a;
+        backdrop-filter: brightness(0.5);
 
         &.index {
             background-color: transparent;
@@ -323,7 +324,7 @@ body {
 
 
                 &.tab {
-                    transition: all 1s ease;
+                    transition: flex-grow 1s ease;
                     .page-content {
                         display: none;
                     }
@@ -333,14 +334,19 @@ body {
                     flex-grow: 1;
                     .page-content {
                         display: block;
+                        padding: 0 1rem;
                     }
 
                     a {
                         padding-top: 0;
+                        height: initial;
                         & > h2 {
+                            // transition: all 1s ease;
+                            transition: font-size 1s ease;
                             transform: rotate(0deg);
                             font-size: 2rem;
                             padding: 0 2rem;
+                            // display: inline;
                         }
                     }
                 }
@@ -352,7 +358,7 @@ body {
                     position: relative;
                     text-decoration: none;
 
-                    transition: all 1s ease;
+                    // transition: all 1s ease;
 
                     & > h2 {
                         transform: rotate(-90deg);
