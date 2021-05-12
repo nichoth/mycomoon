@@ -3,23 +3,18 @@ import { html } from 'htm/preact'
 
 function Products (props) {
     console.log('in products view', props)
-    var { getContent } = props
 
     const [content, setContent] = useState(null)
 
     useEffect(() => {
-        getContent()
-            .then(res => {
-                setContent(res)
-            })
-            .catch(err => console.log('errrr', err))
+        fetch('/.netlify/functions/get-catalog')
+            .then(response => response.json())
+            .then(res => setContent(res))
     }, []);
 
     console.log('products content', content)
 
     return html`<div>
-        <h1>products page</h1>
-
         ${content ?
             html`<ul class="products-list">
                 ${content

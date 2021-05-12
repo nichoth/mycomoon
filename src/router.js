@@ -51,6 +51,7 @@ function Router (/*order*/) {
                     .then(response => response.json())
             },
 
+            // @TODO -- should show products
             // view: createIndexView('products')
             view: IndexView
         }
