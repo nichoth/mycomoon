@@ -48,6 +48,10 @@ body {
         cursor: pointer;
     }
 
+    #content {
+        overflow-y: scroll;
+    }
+
     .nav-part {
         // margin-top: 1rem;
         // margin-bottom: 1rem;
@@ -177,13 +181,20 @@ body {
         list-style: none;
         align-items: stretch;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-        grid-template-rows: repeat(auto-fill, 50vmin);
+        grid-template-rows: repeat(2, 50vmin);
         gap: 2rem;
         grid-row-gap: 5rem;
         padding-bottom: 6rem;
 
+        li {
+            border: none!important;
+        }
+
         a {
             text-decoration: none;
+            height: initial;
+            display: inline!important;
+
             &:hover {
                 text-decoration: underline;
             }
@@ -341,6 +352,7 @@ body {
                     a {
                         padding-top: 0;
                         height: initial;
+
                         & > h2 {
                             transition: font-size 1s ease;
                             font-size: 2rem;
