@@ -315,6 +315,10 @@ body {
                 height: 100%;
                 border-left: 1px solid white;
 
+                &.tab.active {
+                    flex-grow: 1;
+                }
+
                 a {
                     padding-top: 2rem;
                     height: 100vh;
@@ -340,6 +344,7 @@ body {
     .shell {
         margin-left: 30vw;
         min-height: 100vh;
+        height: 140vh;
 
         &.checkout {
             padding: 0 2rem;
@@ -688,12 +693,6 @@ body {
                 }
             }
 
-        }
-
-        &.products {
-            margin-left: 0;
-            padding-bottom: 10rem;
-            // background-color: #0000007a;
         }
     }
 
