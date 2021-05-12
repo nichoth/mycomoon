@@ -343,6 +343,7 @@ body {
 
                 &.tab.active {
                     flex-grow: 1;
+                    overflow-y: scroll;
 
                     .page-content {
                         display: block;
