@@ -445,4 +445,13 @@ Run `netlify dev`, then open a browser to `http://localhost:8888/.netlify/functi
 
 It will send an email to me.
 
+---------------------------------------------------------
+
+## 5-13-2021
+
+Commerce.js gives you a host for a shopping cart, and slighly different/better API for products.
+
+
+
+
  
