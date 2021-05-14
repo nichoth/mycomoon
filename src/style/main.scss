@@ -123,10 +123,29 @@ body {
                 border: none;
                 background-color: transparent;
                 fill: $main-color;
+                color: #f0dca9;
 
                 &:hover {
                     fill: white;
                     filter: drop-shadow(2px 4px 6px white);
+                }
+
+                &.primary {
+                    padding: 0.4rem 1rem;
+                    border: 1px solid;
+                    margin-right: 1rem;
+                    &:hover {
+                        background-color: #f0dca954; 
+                        filter: drop-shadow(2px 4px 6px black);
+                    }
+                }
+
+                &.cancel {
+                    background-color: rgb(239, 239, 239);
+                    color: black;
+                    &:hover {
+                        filter: none;
+                    }
                 }
             }
         }

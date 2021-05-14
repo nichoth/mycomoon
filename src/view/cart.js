@@ -18,8 +18,19 @@ class CartPage extends Component {
         })
 
         function changeQuantity (i, ev) {
+            // ev.preventDefault()
             var n = parseInt(ev.target.value)
             cart.changeQuantity(i, n)
+        }
+
+        function remove (i, ev) {
+            ev.preventDefault()
+            cart.remove(i)
+        }
+
+        function cancelRemove (i, ev) {
+            ev.preventDefault()
+            cart.changeQuantity(i, 1)
         }
 
         cart.createPage(this.ref.current, mapper)
@@ -27,6 +38,22 @@ class CartPage extends Component {
         function mapper (html, prod, i) {
             console.log('mapper', prod)
             var { slug } = prod
+
+            if (prod.quantity === 0) {
+                return html`<div>
+                    <a href="${slug}" class="cart-image">
+                        <img src=${prod.imageData.url} />
+                    </a>
+                    <button onClick=${remove.bind(null, i)} class="primary">
+                        remove item?
+                    </button>
+                    <button class="cancel"
+                        onclick=${cancelRemove.bind(null, i)}
+                    >
+                        cancel
+                    </button>
+                </div>`
+            }
 
             return html`<div>
                 <a href="${slug}" class="cart-image">
