@@ -11,14 +11,20 @@ function IndexView (props) {
     return html`
         <ul class="main-nav">
             <li class="tab${path === '/' ? ' active' : ''}">
-                <a href="/"><h2>products</h2></a>
+                <a href="/"><h2>
+                    <span class="dot">${path === '/' ? '● ' : '⚬'}${'\u00A0'}</span>
+                    products
+                </h2></a>
                 <div class="page-content">
                     <${Products} />
                 </div>
             </li>
 
             <li class="tab${path.includes('about') ? ' active' : ''}">
-                <a href="/about"><h2>about</h2></a>
+                <a href="/about"><h2>
+                    <span class="dot">${path === '/about' ? '● ' : '⚬'}${'\u00A0'}</span>
+                    about
+                </h2></a>
                 <div class="page-content">the about content</div>
             </li>
         </ul>

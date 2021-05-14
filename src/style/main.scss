@@ -379,7 +379,8 @@ body {
                     }
 
                     a {
-                        padding-top: 0;
+                        // padding-top: 0;
+                        padding-top: 2rem;
                         height: initial;
 
                         & > h2 {
@@ -396,7 +397,7 @@ body {
                 }
 
                 a {
-                    padding-top: 2rem;
+                    padding-top: 3rem;
                     height: 100vh;
                     display: block;
                     position: relative;
