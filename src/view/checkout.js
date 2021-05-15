@@ -23,32 +23,9 @@ class Checkout extends Component {
         } 
     }
 
-    // componentDidMount () {
-    //     window.scrollTo(0, 0); 
-    //     var { cart } = this.props
-    //     cart.createPage(this.ref.current, mapper)
-
-    //     function mapper (html, prod, i) {
-    //         console.log('mapper', prod)
-    //         var { slug } = prod
-
-    //         return html`<div>
-    //             <a href="${slug}" class="cart-image">
-    //                 <img src=${prod.imageData.url} />
-    //             </a>
-    //             <span>${prod.name + ' -- ' + prod.variationName + ' -- '}</span>
-
-    //             <!-- <span>${prod.quantity}</span> -->
-    //             <span>
-    //                 ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
-    //             <//>
-
-    //             <!-- <span>
-    //                 ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
-    //             <//> -->
-    //         </div>`
-    //     }
-    // }
+    componentDidMount () {
+        window.scrollTo(0, 0); 
+    }
 
     render () {
         var { cart } = this.props
