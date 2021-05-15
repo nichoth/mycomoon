@@ -1,13 +1,12 @@
 import { html, Component } from 'htm/preact'
-import { useEffect } from 'preact/hooks';
 var observ = require('observ')
 var timestamp = require('monotonic-timestamp')
 var { toMoneyFormat, getTax, withTax } = require('../util')
+var Success = require('./success')
 
 class Checkout extends Component {
     constructor (props) {
         super(props)
-        // this.ref = createRef();
 
         this.state = {
             isResolving: false,
@@ -200,22 +199,6 @@ class Checkout extends Component {
 
 
 
-function OrderSummary ({ lineItems, order }) {
-    return html`<div class="order-summary">
-        ${lineItems.map(item => {
-            return html`<ul>
-                <li>
-                    <span>${item.name} -- ${item.variationName}</span>
-                    <span>${item.quantity}</span>
-                    <span>${toMoneyFormat(item.totalMoney.amount)}</span>
-                </li>
-
-                <li>total ${toMoneyFormat(order.totalMoney.amount)}</li>
-            </ul>`
-        })}
-    </div>`
-}
-
 
 function createPaymentForm (self, cart, shipping, email) {
     //TODO: paste code from step 2.1.1
@@ -362,23 +345,5 @@ function createPaymentForm (self, cart, shipping, email) {
 
     return paymentForm
 }
-
-
-function Success (props) {
-    useEffect(() => {
-        window.scrollTo(0, 0); 
-    }, [])
-
-    return html`<div class="success">
-        <h1>success</h1>
-
-        <p>Thanks for buying some things</p>
-        <p>We will send you an email with a receipt</p>
-
-        <${OrderSummary} order=${props.order}
-            lineItems=${props.order.lineItems} />
-    </div>`
-}
-
 
 module.exports = Checkout
