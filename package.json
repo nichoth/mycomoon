@@ -45,6 +45,7 @@
     "htm": "^3.0.4",
     "marked": "^2.0.3",
     "monotonic-timestamp": "^0.0.9",
+    "observ": "^0.2.0",
     "preact": "^10.5.13",
     "route-event": "^3.1.0",
     "ruta3": "^2.0.1",
