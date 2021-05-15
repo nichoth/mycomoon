@@ -1,6 +1,6 @@
 import { html, Component } from 'htm/preact'
 var observ = require('observ')
-var { toMoneyFormat, getTax, withTax } = require('../util')
+var { toMoneyFormat, getTax, withTax } = require('../../util')
 var Success = require('./success')
 var createPaymentForm = require('./create-payment-form')
 

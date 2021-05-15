@@ -1,4 +1,4 @@
-var { toMoneyFormat } = require('../util')
+var { toMoneyFormat } = require('../../util')
 import { html } from 'htm/preact'
 
 function OrderSummary ({ lineItems, order }) {
