@@ -1,5 +1,5 @@
 import { html, Component } from 'htm/preact'
-// import { useEffect, useState } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
 // import { createRef } from 'preact';
 var observ = require('observ')
 var timestamp = require('monotonic-timestamp')
@@ -366,6 +366,10 @@ function createPaymentForm (self, cart, shipping, email) {
 
 
 function Success (props) {
+    useEffect(() => {
+        window.scrollTo(0, 0); 
+    }, [])
+
     return html`<div class="success">
         <h1>success</h1>
 
