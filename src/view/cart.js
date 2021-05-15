@@ -64,7 +64,8 @@ class CartPage extends Component {
                     value=${prod.quantity}
                     onChange=${changeQuantity.bind(null, i)}
                 />
-                <span>${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+                <span>
+                    ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                 <//>
             </div>`
         }
