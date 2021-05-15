@@ -12,7 +12,7 @@ const handler = async (event, ctx, cb) => {
 
     var body = JSON.parse(event.body)
     var { nonce, idempotency_key, lineItems, shipping, email } = body
-    console.log('**body**', body)
+    console.log('**req body**', body)
 
     try {
         var orderRes = await createOrder({
@@ -30,7 +30,12 @@ const handler = async (event, ctx, cb) => {
     try {
         var paymentRes = await pay({ nonce, idempotency_key, ...orderRes })
     } catch (err) {
-        return { statusCode: 500, body: err.toString() }
+        console.log('**server side error**', err)
+        console.log('**the body**', JSON.parse(err.body, null, 2))
+        return {
+            statusCode: 500,
+            body: err.body
+        }
     }
 
     // console.log('**payment**', paymentRes)

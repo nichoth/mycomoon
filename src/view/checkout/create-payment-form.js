@@ -115,30 +115,15 @@ function createPaymentForm (self, cart, shipping, email) {
                         })
                     })
                     .catch(err => {
-                        // console.log('**err**', err)
-                        console.error('errr in hrr', err);
-                        // alert('Payment failed to complete!\nCheck browser developer console for more details');
-
-                        // TODO -- should show an error message
+                        var _err = JSON.parse(err)
+                        console.error('errr in hrr', _err);
 
                         self.setState({
                             isResolving: false,
                             order: null,
-                            error: err
+                            error: _err.errors[0]
                         })
                     })
-                    // .catch(err => {
-                    //     console.error('error -- process payment', err);
-
-                    //     // TODO -- should show an error message
-
-                    //     self.setState({
-                    //         isResolving: false,
-                    //         order: null,
-                    //         error: err
-                    //     })
-                    // });
-
             }
         }
     })

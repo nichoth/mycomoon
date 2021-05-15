@@ -78,9 +78,10 @@ class Checkout extends Component {
 
         if (self.state.error) {
             console.log('**error**', self.state.error)
-            return html`<div>
+            return html`<div class="payment-error">
                 <p>error</p>
-                <p class="error">${self.state.error}</p>
+                <p class="error">${self.state.error.category}</p>
+                <p class="error">${self.state.error.code}</p>
             </div>`
         }
 
