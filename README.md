@@ -451,7 +451,23 @@ It will send an email to me.
 
 Commerce.js gives you a host for a shopping cart, and slighly different/better API for products.
 
+-----------------------------------------------------------
+
+## 5-15-2021
+
+Doing the error views
+
+
+Test values | Desired error state
+------------------------------------------------
+```
+CVV: 911	Card CVV incorrect
+Postal code: 99999	Card postal code incorrect
+Expiration date: 01/40	Card expiration date incorrect
+Card number: 4000000000000002	Card declined number
+PAN: 4000000000000010	Card on file auth declined
+```
 
 
 
- 
+

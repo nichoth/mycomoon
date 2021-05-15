@@ -1,6 +1,5 @@
 import { html, Component } from 'htm/preact'
 import { useEffect } from 'preact/hooks';
-// import { createRef } from 'preact';
 var observ = require('observ')
 var timestamp = require('monotonic-timestamp')
 var { toMoneyFormat, getTax, withTax } = require('../util')
