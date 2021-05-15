@@ -41,7 +41,7 @@ class CartPage extends Component {
 
             if (prod.quantity === 0) {
                 return html`<div>
-                    <a href="${slug}" class="cart-image">
+                    <a href="${'/' + slug}" class="cart-image">
                         <img src=${prod.imageData.url} />
                     </a>
                     <button onClick=${remove.bind(null, i)} class="primary">

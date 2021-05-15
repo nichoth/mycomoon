@@ -1,6 +1,6 @@
 import { html, Component } from 'htm/preact'
 // import { useEffect, useState } from 'preact/hooks';
-import { createRef } from 'preact';
+// import { createRef } from 'preact';
 var observ = require('observ')
 var timestamp = require('monotonic-timestamp')
 var { toMoneyFormat, getTax, withTax } = require('../util')
@@ -8,7 +8,7 @@ var { toMoneyFormat, getTax, withTax } = require('../util')
 class Checkout extends Component {
     constructor (props) {
         super(props)
-        this.ref = createRef();
+        // this.ref = createRef();
 
         this.state = {
             isResolving: false,
@@ -23,32 +23,32 @@ class Checkout extends Component {
         } 
     }
 
-    componentDidMount () {
-        window.scrollTo(0, 0); 
-        var { cart } = this.props
-        cart.createPage(this.ref.current, mapper)
+    // componentDidMount () {
+    //     window.scrollTo(0, 0); 
+    //     var { cart } = this.props
+    //     cart.createPage(this.ref.current, mapper)
 
-        function mapper (html, prod, i) {
-            console.log('mapper', prod)
-            var { slug } = prod
+    //     function mapper (html, prod, i) {
+    //         console.log('mapper', prod)
+    //         var { slug } = prod
 
-            return html`<div>
-                <a href="${slug}" class="cart-image">
-                    <img src=${prod.imageData.url} />
-                </a>
-                <span>${prod.name + ' -- ' + prod.variationName + ' -- '}</span>
+    //         return html`<div>
+    //             <a href="${slug}" class="cart-image">
+    //                 <img src=${prod.imageData.url} />
+    //             </a>
+    //             <span>${prod.name + ' -- ' + prod.variationName + ' -- '}</span>
 
-                <!-- <span>${prod.quantity}</span> -->
-                <span>
-                    ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
-                <//>
+    //             <!-- <span>${prod.quantity}</span> -->
+    //             <span>
+    //                 ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+    //             <//>
 
-                <!-- <span>
-                    ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
-                <//> -->
-            </div>`
-        }
-    }
+    //             <!-- <span>
+    //                 ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+    //             <//> -->
+    //         </div>`
+    //     }
+    // }
 
     render () {
         var { cart } = this.props
@@ -117,7 +117,25 @@ class Checkout extends Component {
         return html`<div class="checkout-page">
             <h1>Checkout</h1>
 
-            <div ref=${this.ref} id="cart-summary"></div>
+            <ul id="cart-summary">
+                ${products.map((prod, i) => {
+                    console.log('in map', prod)
+                    var { slug } = prod
+
+                    return html`<li>
+                        <a href="${'/' + slug}" class="cart-image">
+                            <img src=${prod.imageData.url} />
+                        </a>
+                        <span>${prod.name + ' -- ' + prod.variationName}</span>
+
+                        <!-- <span>${prod.quantity}</span> -->
+                        <span>
+                            ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+                            ${' = ' + toMoneyFormat(total)}
+                        <//>
+                    </li>`
+                })}
+            </ul>
 
             <div class="cart-totals">
                 <div class="subtotal-money">
