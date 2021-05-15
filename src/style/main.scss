@@ -31,15 +31,11 @@
 
 $main-color: #f0dca9;
 
-a {
-    text-decoration: none;
-}
 
 body {
     margin: 0;
 
     padding: 0!important;
-    
     color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
@@ -47,6 +43,12 @@ body {
     font-family: 'Work Sans', sans-serif;
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
+
+    a {
+        color: $main-color;
+        filter: drop-shadow(2px 4px 6px black);
+        text-decoration: none;
+    }
 
     button {
         cursor: pointer;
@@ -158,17 +160,56 @@ body {
         margin-top: 4rem;
 
         .pay {
-            text-decoration: none;
-            border: 2px solid white;
-            padding: 0.5rem;
-            background-color: $main-color;
+            // text-decoration: none;
+            // border: 2px solid white;
+            // padding: 0.5rem;
+            // background-color: $main-color;
+            // color: black;
+            // transition: border-color 0.4s;
+
+            display: inline-block;
+            position: relative;
+            padding: .5rem 1.25rem;
+            background-color: black;
             color: black;
-            transition: border-color 0.4s;
+            font-family: sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: .02em;
+            filter: none;
+
             &:hover {
-                // text-decoration: underline;
-                border-color: tomato;
-                // border-color: black;
+                &::after {
+                    background-color: lighten($color: $main-color, $amount: 10%);
+                    transform: translate(-5px, -5px);
+                    filter: drop-shadow(2px 4px 6px black);
+                }
             }
+
+            &::after {
+                position: absolute;
+                content: 'buy them';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: $main-color;
+                color: black;
+                border: solid 3px black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-0.5rem, -0.5rem);
+                transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+                // transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+                // transition: border 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            // &:hover {
+            //     // text-decoration: underline;
+            //     border-color: tomato;
+            //     // border-color: black;
+            // }
         }
 
         span.pay {
@@ -321,16 +362,6 @@ body {
 
 
 
-
-    
-
-
-
-    a {
-        color: $main-color;
-        filter: drop-shadow(2px 4px 6px black);
-    }
-
     #content {
         // background-color: #0000007a;
         backdrop-filter: brightness(0.5);
@@ -428,6 +459,10 @@ body {
         margin-left: 30vw;
         min-height: 100vh;
         height: 140vh;
+
+        &.cart {
+            margin-bottom: 6rem;
+        }
 
         &.checkout {
             padding: 0 2rem;
