@@ -32,31 +32,20 @@ class Checkout extends Component {
             console.log('mapper', prod)
             var { slug } = prod
 
-            if (prod.quantity === 0) {
-                return html`<div>
-                    <a href="${slug}" class="cart-image">
-                        <img src=${prod.imageData.url} />
-                    </a>
-                    <button onClick=${remove.bind(null, i)} class="primary">
-                        remove item?
-                    </button>
-                    <button class="cancel"
-                        onclick=${cancelRemove.bind(null, i)}
-                    >
-                        cancel
-                    </button>
-                </div>`
-            }
-
             return html`<div>
                 <a href="${slug}" class="cart-image">
                     <img src=${prod.imageData.url} />
                 </a>
-                <span>${prod.name + ' -- ' + prod.variationName}</span>
-                <span>${prod.quantity}</span>
+                <span>${prod.name + ' -- ' + prod.variationName + ' -- '}</span>
+
+                <!-- <span>${prod.quantity}</span> -->
                 <span>
                     ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                 <//>
+
+                <!-- <span>
+                    ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+                <//> -->
             </div>`
         }
     }
