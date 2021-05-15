@@ -19,6 +19,13 @@ class Checkout extends Component {
         this.paymentForm = null
     }
 
+    componentDidUpdate () {
+        // kind of a hacky way to do this
+        if (this.state.error || this.state.order) {
+            window.scrollTo(0, 0); 
+        }
+    }
+
     componentDidMount () {
         var { cart } = this.props
         var self = this
@@ -70,7 +77,7 @@ class Checkout extends Component {
         }
 
         if (self.state.error) {
-            console.log('**error**')
+            console.log('**error**', self.state.error)
             return html`<div>
                 <p>error</p>
                 <p class="error">${self.state.error}</p>

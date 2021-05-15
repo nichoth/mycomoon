@@ -101,19 +101,6 @@ function createPaymentForm (self, cart, shipping, email) {
                         }
                         return response.json()
                     })
-                    .catch(err => {
-                        // console.log('**err**', err)
-                        console.error('errr in hrr', err);
-                        // alert('Payment failed to complete!\nCheck browser developer console for more details');
-
-                        // TODO -- should show an error message
-
-                        self.setState({
-                            isResolving: false,
-                            order: null,
-                            error: err
-                        })
-                    })
                     .then(res => {
                         console.log('process payment success', res);
 
@@ -128,7 +115,9 @@ function createPaymentForm (self, cart, shipping, email) {
                         })
                     })
                     .catch(err => {
-                        console.error('error -- process payment', err);
+                        // console.log('**err**', err)
+                        console.error('errr in hrr', err);
+                        // alert('Payment failed to complete!\nCheck browser developer console for more details');
 
                         // TODO -- should show an error message
 
@@ -137,7 +126,18 @@ function createPaymentForm (self, cart, shipping, email) {
                             order: null,
                             error: err
                         })
-                    });
+                    })
+                    // .catch(err => {
+                    //     console.error('error -- process payment', err);
+
+                    //     // TODO -- should show an error message
+
+                    //     self.setState({
+                    //         isResolving: false,
+                    //         order: null,
+                    //         error: err
+                    //     })
+                    // });
 
             }
         }
