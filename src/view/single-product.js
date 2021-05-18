@@ -43,8 +43,6 @@ function createSingleProductView ({ slug }) {
                 imageData: item.imageData
             }
 
-            console.log('__item', _item)
-
             // here, check & adjust the quantity if necessary
             var i = cart.state().products.findIndex(prod => {
                 return prod.variationId === variation.id
@@ -62,9 +60,6 @@ function createSingleProductView ({ slug }) {
             }
 
             cart.add(_item)
-            console.log('cart state', cart.state())
-
-            console.log('added to cart', item, _item)
         }
 
         // get the number of variations that are in the cart
