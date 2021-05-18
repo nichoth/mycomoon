@@ -18,8 +18,15 @@ class CartPage extends Component {
         })
 
         function changeQuantity (i, ev) {
-            // ev.preventDefault()
             var n = parseInt(ev.target.value)
+            if (!Number.isInteger(n)) {
+                return cart.changeQuantity(i, 1)
+            }
+            
+            if (n > ev.target.max) {
+                return cart.changeQuantity(i, parseInt(ev.target.max))
+            }
+
             cart.changeQuantity(i, n)
         }
 

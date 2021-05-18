@@ -27,7 +27,6 @@ function createSingleProductView ({ slug }) {
 
         function addToCart (variation, ev) {
             ev.preventDefault()
-            console.log('the cart', props.cart)
 
             console.log('variation', variation)
 
@@ -53,6 +52,9 @@ function createSingleProductView ({ slug }) {
 
             if (i > -1) {
                 var product = cart.state().products[i]
+
+                // in here, handle quantity within bounds
+
                 cart.changeQuantity(i, product.quantity + 1)
                 console.log('i > -1', cart.state())
                 return
@@ -78,6 +80,8 @@ function createSingleProductView ({ slug }) {
 
                 <ul class="item-variations">
                     ${item.itemData.variations.map(function (v) {
+                        var isInStock = v.inventory[0].quantity > 0
+
                         return html`<li>
                             <span class="variation-name">
                                 ${v.itemVariationData.name + ' '}
@@ -92,7 +96,10 @@ function createSingleProductView ({ slug }) {
                                     </span>` :
                                     null
                                 }
-                                <button onClick=${addToCart.bind(null, v)}>
+                                <button
+                                    disabled=${!isInStock}
+                                    onClick=${addToCart.bind(null, v)}
+                                >
                                     add to cart
                                 </button>
                             </span>
