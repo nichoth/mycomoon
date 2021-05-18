@@ -53,10 +53,11 @@ function createSingleProductView ({ slug }) {
             if (i > -1) {
                 var product = cart.state().products[i]
 
-                // in here, handle quantity within bounds
+                if ((product.quantity + 1) > product.quantityAvailable) {
+                    return
+                }
 
                 cart.changeQuantity(i, product.quantity + 1)
-                console.log('i > -1', cart.state())
                 return
             }
 
@@ -80,6 +81,7 @@ function createSingleProductView ({ slug }) {
 
                 <ul class="item-variations">
                     ${item.itemData.variations.map(function (v) {
+
                         var isInStock = v.inventory[0].quantity > 0
 
                         return html`<li>
