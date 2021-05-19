@@ -32,30 +32,46 @@ console.log('wooooooo')
 // --------------------------------------------------
 
 
-var cart = new Cart({
+// window for testing
+var cart = window.cart = new Cart({
     storage: true, // store the state in localStorage?
     key: 'myco-cart'  // default is 'cart'
 })
 
 var router = Router()
 
+
+// need to listen to cart events also, and change the ohno icon accordingly
+
+
 route(function onRoute (path) {
     console.log('route event', path)
 
 
-    // in here, check the stock of things in the cart
+    // in here, on every route change, check the stock of things in the cart
     fetch('/.netlify/functions/get-inventory', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cart.products())
+        body: JSON.stringify({
+            catalogObjectIds: cart.products().map(prod => prod.variationId)
+        })
     })
         .then(response => response.json())
         .then(res => {
-            console.log('***inventory', res)
-            // cart.ohno()
-            // loop through the res
-            // check if anythings is out of stock
-            // add the ohno to the cart icon if so
+            console.log('***inventory res', res)
+
+            cart.products().forEach((prod, i) => {
+                var wantedQuantity = prod.quantity
+                var availableQuantity = parseInt(res[prod.variationId].quantity)
+                if (wantedQuantity > availableQuantity) {
+                    cart.ohno()
+                }
+                if (prod.availableQuantity != availableQuantity) {
+                    // also update the items in cart with the availableQuantity
+                    // if it has changed
+                    cart.update(i, { availableQuantity: availableQuantity })
+                }
+            })
         })
 
 

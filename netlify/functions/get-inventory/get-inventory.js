@@ -15,11 +15,16 @@ const handler = async (event, ctx, cb) => {
             locationIds: [ 'LAZSTD2P84MEA' ]
         });
       
-        console.log(response.result);
+        console.log('**inv response.result**', response.result);
+
+        var res = response.result.counts.reduce((acc, item) => {
+            acc[item.catalogObjectId] = item
+            return acc
+        }, {})
 
         return {
             statusCode: 200,
-            body: JSON.stringify(response.result)
+            body: JSON.stringify(res)
         }
     } catch (error) {
         console.log('errrr', error);
