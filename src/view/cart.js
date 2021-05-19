@@ -12,6 +12,10 @@ class CartPage extends Component {
     componentDidMount ()  {
         var { cart } = this.props
 
+
+        // could check the inventory here
+
+
         var self = this
         cart.state(function onChange (newState) {
             self.setState(newState)

@@ -37,11 +37,27 @@ var cart = new Cart({
     key: 'myco-cart'  // default is 'cart'
 })
 
-
 var router = Router()
 
 route(function onRoute (path) {
     console.log('route event', path)
+
+
+    // in here, check the stock of things in the cart
+    fetch('/.netlify/functions/get-inventory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cart.products())
+    })
+        .then(response => response.json())
+        .then(res => {
+            console.log('***inventory', res)
+            // cart.ohno()
+            // loop through the res
+            // check if anythings is out of stock
+            // add the ohno to the cart icon if so
+        })
+
 
     try {
         var m = router.match(path)
@@ -65,6 +81,11 @@ route(function onRoute (path) {
     var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
         dirs[0] !== 'about')
     if (isProdPage) contentClass += ' product-page'
+
+
+    // `shell` gets rendered just once
+    // gets updated multiple times though
+
 
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass} path=${path}>
         <${view} cart=${cart} getContent=${getContent} path=${path} />

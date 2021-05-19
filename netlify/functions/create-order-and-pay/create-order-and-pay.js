@@ -12,7 +12,6 @@ const handler = async (event, ctx, cb) => {
 
     var body = JSON.parse(event.body)
     var { nonce, idempotency_key, lineItems, shipping, email } = body
-    console.log('**req body**', body)
 
     try {
         var orderRes = await createOrder({
@@ -41,7 +40,6 @@ const handler = async (event, ctx, cb) => {
     // console.log('**payment**', paymentRes)
 
     // https://github.com/square/square-nodejs-sdk/blob/master/doc/models/create-order-request.md
-
 
     return sendEmail({
         ...paymentRes,

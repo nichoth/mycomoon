@@ -35,11 +35,6 @@ class Shell extends Component {
             <span class="cart-container" ref=${this.ref}></span>
         </div>
 
-        <!-- ${props.contentClass === 'index' ?
-            html`<h1>myco moon</h1>` :
-            null
-        } -->
-
         <div class="shell ${props.contentClass}">
             ${props.children}
         </div>`

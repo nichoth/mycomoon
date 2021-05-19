@@ -27,6 +27,13 @@ class Checkout extends Component {
     }
 
     componentDidMount () {
+
+
+        // could check the inventory here
+        // disable or don't render the 'pay' button if theres not
+        // enough available
+
+
         var { cart } = this.props
         var self = this
         window.scrollTo(0, 0); 
@@ -48,7 +55,6 @@ class Checkout extends Component {
 
         // Create and initialize a payment form object
         var self = this
-        // this.paymentForm =  paymentForm
 
         function getCardNonce (ev) {
             ev.preventDefault()
