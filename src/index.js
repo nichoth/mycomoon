@@ -6,6 +6,7 @@ import { render } from 'preact';
 // import shell from './view/shell';
 var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
+import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var Shell = require('./view/shell')
 
 
@@ -38,11 +39,13 @@ var cart = window.cart = new Cart({
     key: 'myco-cart'  // default is 'cart'
 })
 
+cart.on(EVENTS.product.change, (index, updatedProduct) => {
+    if (updatedProduct.availableQuantity < updatedProduct.quantity) {
+        cart.ohno()
+    }
+})
+
 var router = Router()
-
-
-// need to listen to cart events also, and change the ohno icon accordingly
-
 
 route(function onRoute (path) {
     console.log('route event', path)
