@@ -42,11 +42,17 @@ class CartPage extends Component {
 
         cart.createPage(this.ref.current, mapper)
 
+        function displayAvailable (prod) {
+            return prod.quantityAvailable > 0 ?
+                prod.quantityAvailable :
+                0
+        }
+
         function mapper (html, prod, i) {
             console.log('mapper', prod)
             var { slug } = prod
 
-            // return the buttons for confirm remove or keep
+            // return the buttons for remove or keep
             if (prod.quantity === 0) {
                 return html`<div>
                     <a href="${'/' + slug}" class="cart-image">
@@ -68,14 +74,13 @@ class CartPage extends Component {
                     <img src=${prod.imageData.url} />
                 </a>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
-                <span>
-                    <input type="number" min="0" max="${prod.quantityAvailable}"
-                        value=${prod.quantity}
+                <span class="quantities${cart.ohno(i) ? ' ohno' : ''}">
+                    <input type="number" min="0" value=${prod.quantity}
+                        max="${displayAvailable(prod)}"
                         onChange=${changeQuantity.bind(null, i)}
                     />
-                    <span> (${prod.quantityAvailable < 0 ?
-                        0 :
-                        prod.quantityAvailable} available)
+                    <span class="available${cart.ohno(i) ? ' ohno' : ''}">
+                        ${' '}(${displayAvailable(prod)} available)
                     </span>
                 </span>
                 <span>

@@ -98,6 +98,10 @@ body {
         margin: 1rem auto;
         max-width: 40rem;
 
+        .quantities.ohno {
+            border-bottom: red 4px dashed;
+        }
+
         li {
             display: flex;
             border-bottom: 1px solid;
