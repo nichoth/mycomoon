@@ -62,19 +62,22 @@ class CartPage extends Component {
                 </div>`
             }
 
-            return html`<div>
+            return html`
                 <a href="${slug}" class="cart-image">
                     <img src=${prod.imageData.url} />
                 </a>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
-                <input type="number" min="0" max="${prod.quantityAvailable}"
-                    value=${prod.quantity}
-                    onChange=${changeQuantity.bind(null, i)}
-                />
+                <span>
+                    <input type="number" min="0" max="${prod.quantityAvailable}"
+                        value=${prod.quantity}
+                        onChange=${changeQuantity.bind(null, i)}
+                    />
+                    <span> (${prod.quantityAvailable} available)</span>
+                </span>
                 <span>
                     ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                 <//>
-            </div>`
+            `
         }
     }
 
