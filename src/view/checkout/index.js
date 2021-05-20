@@ -1,3 +1,4 @@
+import { sendMultiple } from '@sendgrid/mail'
 import { html, Component } from 'htm/preact'
 var observ = require('observ')
 var { toMoneyFormat, getTax, withTax } = require('../../util')
@@ -11,7 +12,8 @@ class Checkout extends Component {
         this.state = {
             isResolving: false,
             order: null,
-            error: null
+            error: null,
+            ohno: null
         }
 
         this.shipping = observ()
@@ -27,20 +29,21 @@ class Checkout extends Component {
     }
 
     componentDidMount () {
-
-
-        // could check the inventory here
-        // disable or don't render the 'pay' button if theres not
-        // enough available
-
-
         var { cart } = this.props
         var self = this
         window.scrollTo(0, 0); 
+
         var paymentForm = createPaymentForm(self, cart, this.shipping,
             this.email)
         this.paymentForm = paymentForm
         paymentForm.build();
+
+        cart.state.ohno(function onChange (val) {
+            console.log('change', val)
+            self.setState({
+                ohno: val
+            })
+        })
     }
 
     render () {
@@ -185,15 +188,20 @@ class Checkout extends Component {
                         <div class="third" id="sq-expiration-date"></div>
                         <div class="third" id="sq-cvv"></div>
                         <div class="third" id="sq-postal-code"></div>
-                        ${self.state.isResolving ?
+                        ${(self.state.isResolving) ?
                             html`<button id="sq-creditcard"
                                 class="button-credit-card spinning" type="submit"
                                 disabled=${true}
                             >
                             </button>` :
-                            html`<button id="sq-creditcard" class="button-credit-card">
-                                Pay ${toMoneyFormat(withTax(cart.products()))}
-                            </button>`
+                            self.state.ohno ?
+                                html`<button id="sq-creditcard"
+                                    class="button-credit-card" type="submit"
+                                    disabled=${true}
+                                ></button>` :
+                                html`<button id="sq-creditcard" class="button-credit-card">
+                                    Pay ${toMoneyFormat(withTax(cart.products()))}
+                                </button>`
                         }
                     </div>
                 </form>

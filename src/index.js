@@ -40,7 +40,7 @@ var cart = window.cart = new Cart({
 })
 
 cart.on(EVENTS.product.change, (index, updatedProduct) => {
-    if (updatedProduct.availableQuantity < updatedProduct.quantity) {
+    if (updatedProduct.quantityAvailable < updatedProduct.quantity) {
         cart.ohno()
     }
 })
@@ -65,14 +65,14 @@ route(function onRoute (path) {
 
             cart.products().forEach((prod, i) => {
                 var wantedQuantity = prod.quantity
-                var availableQuantity = parseInt(res[prod.variationId].quantity)
-                if (wantedQuantity > availableQuantity) {
+                var quantityAvailable = parseInt(res[prod.variationId].quantity)
+                if (wantedQuantity > quantityAvailable) {
                     cart.ohno()
                 }
-                if (prod.availableQuantity != availableQuantity) {
+                if (prod.quantityAvailable != quantityAvailable) {
                     // also update the items in cart with the availableQuantity
                     // if it has changed
-                    cart.update(i, { availableQuantity: availableQuantity })
+                    cart.update(i, { quantityAvailable: quantityAvailable })
                 }
             })
         })
@@ -100,10 +100,6 @@ route(function onRoute (path) {
     var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
         dirs[0] !== 'about')
     if (isProdPage) contentClass += ' product-page'
-
-
-    // `shell` gets rendered just once
-    // gets updated multiple times though
 
 
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass} path=${path}>

@@ -79,11 +79,16 @@ class CartPage extends Component {
     }
 
     render (props) {
-        var { products } = props.cart.state()
+        var { cart } = props
+        var { products } = cart.state()
 
         var total = products.reduce(function (total, prod) {
             return total + (prod.price * prod.quantity)
         }, 0)
+
+        var isWonky = cart.state().products.reduce((wonk, item) => {
+            return (wonk || (item.quantity > item.quantityAvailable))
+        }, false)
 
         return html`
             <h1>the shopping cart</h1>
@@ -99,7 +104,7 @@ class CartPage extends Component {
             </div>
 
             <div class="cart-controls">
-                ${products.length ?
+                ${(products.length && !isWonky) ?
                     (html`<a class="pay" href="/cart/checkout">
                         pay for them
                     </a>`) :

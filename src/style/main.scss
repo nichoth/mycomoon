@@ -8,6 +8,9 @@
 #cart-quantity {
     bottom: 23px;
     left: 16px;
+    &.ohno {
+        bottom: 26px;
+    }
 }
 // --------------- /fix that icon --------------------
 
