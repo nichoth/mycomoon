@@ -46,6 +46,7 @@ class CartPage extends Component {
             console.log('mapper', prod)
             var { slug } = prod
 
+            // return the buttons for confirm remove or keep
             if (prod.quantity === 0) {
                 return html`<div>
                     <a href="${'/' + slug}" class="cart-image">
@@ -72,7 +73,10 @@ class CartPage extends Component {
                         value=${prod.quantity}
                         onChange=${changeQuantity.bind(null, i)}
                     />
-                    <span> (${prod.quantityAvailable} available)</span>
+                    <span> (${prod.quantityAvailable < 0 ?
+                        0 :
+                        prod.quantityAvailable} available)
+                    </span>
                 </span>
                 <span>
                     ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
@@ -89,9 +93,7 @@ class CartPage extends Component {
             return total + (prod.price * prod.quantity)
         }, 0)
 
-        var isWonky = cart.state().products.reduce((wonk, item) => {
-            return (wonk || (item.quantity > item.quantityAvailable))
-        }, false)
+        var isWonky = cart.ohno()
 
         return html`
             <h1>the shopping cart</h1>
