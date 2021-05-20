@@ -12,8 +12,7 @@ class Checkout extends Component {
         this.state = {
             isResolving: false,
             order: null,
-            error: null,
-            ohno: null
+            error: null
         }
 
         this.shipping = observ()
@@ -37,13 +36,6 @@ class Checkout extends Component {
             this.email)
         this.paymentForm = paymentForm
         paymentForm.build();
-
-        cart.state.ohno(function onChange (val) {
-            console.log('change', val)
-            self.setState({
-                ohno: val
-            })
-        })
     }
 
     render () {
@@ -194,7 +186,7 @@ class Checkout extends Component {
                                 disabled=${true}
                             >
                             </button>` :
-                            self.state.ohno ?
+                            cart.ohno() ?
                                 html`<button id="sq-creditcard"
                                     class="button-credit-card" type="submit"
                                     disabled=${true}

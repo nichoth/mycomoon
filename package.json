@@ -39,7 +39,7 @@
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
-    "@nichoth/shopping-cart": "^0.0.37",
+    "@nichoth/shopping-cart": "^0.0.38",
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
     "htm": "^3.0.4",
