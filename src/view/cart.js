@@ -18,13 +18,22 @@ class CartPage extends Component {
         })
 
         function changeQuantity (i, ev) {
+            console.log('***value', ev.target.value)
             var n = parseInt(ev.target.value)
+            console.log('****n', n)
             if (!Number.isInteger(n)) {
+                console.log('not int', n)
                 return cart.changeQuantity(i, 1)
             }
             
-            if (n > ev.target.max) {
-                return cart.changeQuantity(i, parseInt(ev.target.max))
+            // var max = cart.products()[i].quantityAvailable
+            var max = parseInt(ev.target.max)
+            var min = parseInt(ev.target.min)
+            if (n < min) {
+                return cart.changeQuantity(i, min)
+            }
+            if (n > max) {
+                return cart.changeQuantity(i, max)
             }
 
             cart.changeQuantity(i, n)
@@ -75,10 +84,17 @@ class CartPage extends Component {
                 </a>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
                 <span class="quantities${cart.ohno(i) ? ' ohno' : ''}">
-                    <input type="number" min="0" value=${prod.quantity}
+                    <input type="text" inputmode="numeric" pattern="[0-9]*"
+                        max="${displayAvailable(prod)}"
+                        min="0"
+                        onchange=${changeQuantity.bind(null, i)}
+                        value=${prod.quantity}
+                        name="quantity"
+                    />
+                    <!-- <input type="number" min="0" value=${prod.quantity}
                         max="${displayAvailable(prod)}"
                         onChange=${changeQuantity.bind(null, i)}
-                    />
+                    /> -->
                     <span class="available${cart.ohno(i) ? ' ohno' : ''}">
                         ${' '}(${displayAvailable(prod)} available)
                     </span>
