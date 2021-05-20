@@ -40,16 +40,13 @@ var cart = window.cart = new Cart({
 })
 
 cart.on(EVENTS.product.change, (index, updatedProduct) => {
-    if (updatedProduct.quantityAvailable < updatedProduct.quantity) {
-        cart.ohno()
-    }
+    console.log('product change', updatedProduct)
 })
 
 var router = Router()
 
 route(function onRoute (path) {
     console.log('route event', path)
-
 
     // in here, on every route change, check the stock of things in the cart
     fetch('/.netlify/functions/get-inventory', {
@@ -64,11 +61,7 @@ route(function onRoute (path) {
             console.log('***inventory res', res)
 
             cart.products().forEach((prod, i) => {
-                var wantedQuantity = prod.quantity
                 var quantityAvailable = parseInt(res[prod.variationId].quantity)
-                if (wantedQuantity > quantityAvailable) {
-                    cart.ohno()
-                }
                 if (prod.quantityAvailable != quantityAvailable) {
                     // also update the items in cart with the availableQuantity
                     // if it has changed
