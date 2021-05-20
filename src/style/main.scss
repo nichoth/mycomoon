@@ -219,6 +219,10 @@ body {
             opacity: 0.6;
             &:hover {
                 border-color: white;
+                &::after {
+                    background-color: $main-color;
+                    filter: none;
+                }
             }
         }
     }

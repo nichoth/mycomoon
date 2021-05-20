@@ -109,10 +109,10 @@ class CartPage extends Component {
             <div class="cart-controls">
                 ${(products.length && !isWonky) ?
                     (html`<a class="pay" href="/cart/checkout">
-                        pay for them
+                        buy them
                     </a>`) :
                     (html`<span class="pay">
-                        pay for them
+                        buy them
                     </span>`)
                 }
             </div>
