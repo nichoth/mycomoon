@@ -106,7 +106,6 @@ class CartPage extends Component {
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
                 <span class="quantities${cart.ohno(i) ? ' ohno' : ''}">
 
-
                     <div class="input-group number">
                         <input type="number" inputmode="numeric"
                             pattern="[0-9]*"
@@ -125,9 +124,8 @@ class CartPage extends Component {
                                 <button onclick="${qtyDown}">-</button>
                             </div>
                         </div>
+
                     </div>
-
-
 
                     <!-- <input type="number" min="0" value=${prod.quantity}
                         max="${displayAvailable(prod)}"

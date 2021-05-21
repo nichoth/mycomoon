@@ -98,9 +98,15 @@ body {
         margin: 1rem auto;
         max-width: 40rem;
 
-        .quantities.ohno {
+        .quantities {
+            top: 10px;
+            position: relative;
+        }
+
+        .quantities.ohno, .available.ohno {
             border-bottom: red 4px dashed;
         }
+
 
         // -------- number input -----------------------
 
