@@ -78,27 +78,73 @@ class CartPage extends Component {
                 </div>`
             }
 
+            function qtyUp (ev) {
+                ev.preventDefault()
+                console.log('up')
+                var current = prod.quantity
+                var available = prod.quantityAvailable
+                if (current + 1 > available) {
+                    return
+                }
+                cart.changeQuantity(i, current + 1)
+            }
+
+            function qtyDown (ev) {
+                ev.preventDefault()
+                console.log('down')
+                var current = prod.quantity
+                if (current - 1 < 0) {
+                    return
+                }
+                cart.changeQuantity(i, current - 1)
+            }
+
             return html`
                 <a href="${slug}" class="cart-image">
                     <img src=${prod.imageData.url} />
                 </a>
                 <span>${prod.name + ' -- ' + prod.variationName}</span>
                 <span class="quantities${cart.ohno(i) ? ' ohno' : ''}">
-                    <input type="text" inputmode="numeric" pattern="[0-9]*"
-                        max="${displayAvailable(prod)}"
-                        min="0"
-                        onchange=${changeQuantity.bind(null, i)}
-                        value=${prod.quantity}
-                        name="quantity"
-                    />
+
+
+                    <div class="input-group number">
+                        <input type="number" inputmode="numeric"
+                            pattern="[0-9]*"
+                            max="${displayAvailable(prod)}"
+                            min="0"
+                            onchange=${changeQuantity.bind(null, i)}
+                            value=${prod.quantity}
+                            name="quantity"
+                        />
+                        <div class="quantity-nav">
+                            <div class="quantity-button quantity-up"
+                                onclick="${qtyUp}"
+                            >
+                                +
+                                <!-- <button class="up" onclick=${qtyUp}>+</button> -->
+                            </div>
+
+                            <div class="quantity-down quantity-button"
+                                onclick="${qtyDown}"
+                            >
+                                -
+                                <!-- <button class="down" onclick=${qtyDown}>-</button> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <!-- <input type="number" min="0" value=${prod.quantity}
                         max="${displayAvailable(prod)}"
                         onChange=${changeQuantity.bind(null, i)}
                     /> -->
-                    <span class="available${cart.ohno(i) ? ' ohno' : ''}">
-                        ${' '}(${displayAvailable(prod)} available)
-                    </span>
                 </span>
+
+                <span class="available${cart.ohno(i) ? ' ohno' : ''}">
+                    ${' '}(${displayAvailable(prod)} available)
+                </span>
+
                 <span>
                     ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
                 <//>
