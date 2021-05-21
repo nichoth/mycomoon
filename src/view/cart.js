@@ -117,18 +117,12 @@ class CartPage extends Component {
                             name="quantity"
                         />
                         <div class="quantity-nav">
-                            <div class="quantity-button quantity-up"
-                                onclick="${qtyUp}"
-                            >
-                                +
-                                <!-- <button class="up" onclick=${qtyUp}>+</button> -->
+                            <div class="quantity-button quantity-up">
+                                <button onclick="${qtyUp}">+</button>
                             </div>
 
-                            <div class="quantity-down quantity-button"
-                                onclick="${qtyDown}"
-                            >
-                                -
-                                <!-- <button class="down" onclick=${qtyDown}>-</button> -->
+                            <div class="quantity-down quantity-button">
+                                <button onclick="${qtyDown}">-</button>
                             </div>
                         </div>
                     </div>

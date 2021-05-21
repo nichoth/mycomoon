@@ -137,6 +137,12 @@ body {
                 float: left;
                 position: relative;
                 height: 42px!important;
+
+                button {
+                    top: initial;
+                    position: initial;
+                    color: #333;
+                }
                 
                 .quantity-button {
                     position: relative;
@@ -146,9 +152,9 @@ body {
                     text-align: center;
                     color: #333;
                     font-size: 13px;
-                    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+                    // font-family: "Trebuchet MS", Helvetica, sans-serif !important;
                     line-height: 1.7;
-                    -webkit-transform: translateX(-100%);
+                    // -webkit-transform: translateX(-100%);
                     transform: translateX(-100%);
                     -webkit-user-select: none;
                     -moz-user-select: none;
