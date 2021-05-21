@@ -18,11 +18,8 @@ class CartPage extends Component {
         })
 
         function changeQuantity (i, ev) {
-            console.log('***value', ev.target.value)
             var n = parseInt(ev.target.value)
-            console.log('****n', n)
             if (!Number.isInteger(n)) {
-                console.log('not int', n)
                 return cart.changeQuantity(i, 1)
             }
             
