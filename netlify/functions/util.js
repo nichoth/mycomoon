@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { Client, Environment } = require('square');
 
 const client = new Client({
@@ -7,7 +8,7 @@ const client = new Client({
 
     // this is from the 'sandbox test account'
     // this one works
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+    accessToken: process.env.SQ_ACCESS_TOKEN
 })
 
 async function getImages () {

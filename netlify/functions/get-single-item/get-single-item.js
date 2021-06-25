@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { Client, Environment } = require('square')
 var util = require('../util')
 
@@ -5,7 +6,7 @@ const client = new Client({
     environment: Environment.Sandbox,
     // this is from the 'sandbox test account'
     // this one works
-    accessToken: 'EAAAEDjayT7mAyyiqdNpLs_fD72uRTNq9FXwQ6nbDibhn-JHL62hwB-DuZQEs0I2'
+    accessToken: process.env.SQ_ACCESS_TOKEN
 })
 
 const handler = async (event) => {

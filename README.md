@@ -1,8 +1,29 @@
 # mycomoon
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ec517db2-97d2-48ac-803a-c21453d83cea/deploy-status)](https://app.netlify.com/sites/musing-kirch-9f2f0c/deploys)
+
 A website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ec517db2-97d2-48ac-803a-c21453d83cea/deploy-status)](https://app.netlify.com/sites/musing-kirch-9f2f0c/deploys)
+## test card number 
+
+card number -- 	4111 1111 1111 1111
+cvv -- 111
+
+## test cards for error views
+
+Test values | Desired error state
+------------------------------------------------
+```
+CVV: 911	Card CVV incorrect
+Postal code: 99999	Card postal code incorrect
+Expiration date: 01/40	Card expiration date incorrect
+Card number: 4000000000000002	Card declined number
+PAN: 4000000000000010	Card on file auth declined
+```
+
+-----------------------------------------------------------------------
+
+## notes
 
 * https://medium.com/samsung-internet-dev/pwa-series-service-workers-the-basics-about-offline-a6e8f1d92dfd
 * https://www.smashingmagazine.com/2016/02/making-a-service-worker/
