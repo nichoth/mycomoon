@@ -5,7 +5,7 @@ const client = new Client({
     environment: Environment.Sandbox,
     // this is from the 'sandbox test account'
     // this one works
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+    accessToken: 'EAAAEDjayT7mAyyiqdNpLs_fD72uRTNq9FXwQ6nbDibhn-JHL62hwB-DuZQEs0I2'
 })
 
 const handler = async (event) => {

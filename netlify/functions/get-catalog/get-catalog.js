@@ -4,7 +4,7 @@ const client = new Client({
     environment: Environment.Sandbox,
     // this is from the 'sandbox test account'
     // this one works
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+    accessToken: 'EAAAEDjayT7mAyyiqdNpLs_fD72uRTNq9FXwQ6nbDibhn-JHL62hwB-DuZQEs0I2'
 })
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
@@ -18,6 +18,7 @@ const handler = async (/* event */) => {
     var cats
     try {
         const { result } = await catalogApi.listCatalog(cursor, types);
+        console.log('**results**', result)
         cats = result.objects
     } catch (err) {
         console.log('errrrr', err)
@@ -28,13 +29,13 @@ const handler = async (/* event */) => {
     }
 
     var invBody = {
-        catalogObjectIds: cats.reduce((acc, catItem) => {
+        catalogObjectIds: (cats || []).reduce((acc, catItem) => {
             if (catItem.type !== 'ITEM') return acc
             return acc.concat(catItem.itemData.variations.map(variation => {
                 return variation.id
             }))
         }, [])
-    }
+    };
 
     var invRes
     try {
@@ -47,15 +48,20 @@ const handler = async (/* event */) => {
         }
     }
 
+
+    console.log('**aaaaa***', invRes.result);
+
     // inventory by catalog item ID
-    var inv = invRes.result.counts.reduce((acc, invItem) => {
-        acc[invItem.catalogObjectId] = invItem
-        return acc
-    }, {})
+    var arr = (invRes.result && invRes.result.counts) || [];
+    console.log('***rrrrrrrr***', arr);
+    var inv = arr.reduce((acc, invItem) => {
+        acc[invItem.catalogObjectId] = invItem;
+        return acc;
+    }, {});
 
     // mutate each catalog item variation by adding a field
     // `quantityAvailable`
-    cats.forEach(cat => {
+    (cats || []).forEach(cat => {
         if (cat.type !== 'ITEM') return
         cat.itemData.variations.forEach(variation => {
             var id = variation.id
@@ -64,7 +70,7 @@ const handler = async (/* event */) => {
     })
 
     // images by imageId
-    var images = cats
+    var images = (cats || [])
         .reduce((acc, item) => {
             if (item.type !== 'IMAGE') return acc
             acc[item.id] = item
@@ -72,10 +78,11 @@ const handler = async (/* event */) => {
         }, {})
 
     // mutate each catalog item by adding the image data
-    cats.forEach(cat => {
-        if (cat.type !== 'ITEM') return
-        cat.imageData = images[cat.imageId].imageData
-    })
+    var _cats = (cats || []);
+    _cats.forEach(cat => {
+        if (cat.type !== 'ITEM') return;
+        cat.imageData = images[cat.imageId].imageData;
+    });
 
 
     // -----------------------------------------
@@ -87,7 +94,7 @@ const handler = async (/* event */) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(cats, stringer, 2)
+        body: JSON.stringify((cats || {}), stringer, 2)
         // // more keys you can return:
         // headers: { "headerName": "headerValue", ... },
         // isBase64Encoded: true,

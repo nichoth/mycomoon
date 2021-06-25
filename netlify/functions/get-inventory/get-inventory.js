@@ -2,7 +2,7 @@ const { Client, Environment } = require('square')
 
 const client = new Client({
     environment: Environment.Sandbox,
-    accessToken: 'EAAAENYzIzAS3PZdZBlqqj72RLqwdGpNt-3f-1mR7F1ZKy21bRI1IXpFMPAPGN07'
+    accessToken: 'EAAAEDjayT7mAyyiqdNpLs_fD72uRTNq9FXwQ6nbDibhn-JHL62hwB-DuZQEs0I2'
 })
 
 const handler = async (event, ctx, cb) => {
@@ -12,12 +12,14 @@ const handler = async (event, ctx, cb) => {
         const response = await client.inventoryApi.batchRetrieveInventoryCounts({
             catalogObjectIds: body.catalogObjectIds,
             // our one location ID
-            locationIds: [ 'LAZSTD2P84MEA' ]
+
+            locationIds: [ 'LTTBZ5XKA3MGS' ]
         });
       
         console.log('**inv response.result**', response.result);
 
-        var res = response.result.counts.reduce((acc, item) => {
+        var list = (response.result && response.result.counts)
+        var res = (list || []).reduce((acc, item) => {
             acc[item.catalogObjectId] = item
             return acc
         }, {})

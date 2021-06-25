@@ -8,14 +8,23 @@ function Products (props) {
 
     useEffect(() => {
         fetch('/.netlify/functions/get-catalog')
-            .then(response => response.json())
+            .then(response => {
+                console.log('cat res', response)
+
+                if (!response.ok) {
+                    console.log('not ok')
+                    return response.text().then(t => console.log('t', t))
+                }
+
+                return response.json()
+            })
             .then(res => setContent(res))
     }, []);
 
     console.log('products content', content)
 
     return html`<div>
-        ${content ?
+        ${(content && Object.keys(content).length) ?
             html`<ul class="products-list">
                 ${content
                     .filter(item => item.type === 'ITEM')
