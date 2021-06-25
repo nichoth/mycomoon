@@ -18,7 +18,10 @@ function Products (props) {
 
                 return response.json()
             })
-            .then(res => setContent(res))
+            .then(res => {
+                console.log('cat res', res)
+                return setContent(res)
+            })
     }, []);
 
     console.log('products content', content)
