@@ -49,11 +49,11 @@ const handler = async (/* event */) => {
     }
 
 
-    console.log('**aaaaa***', invRes.result);
+    // console.log('**aaaaa***', invRes.result);
 
     // inventory by catalog item ID
     var arr = (invRes.result && invRes.result.counts) || [];
-    console.log('***rrrrrrrr***', arr);
+    // console.log('***rrrrrrrr***', arr);
     var inv = arr.reduce((acc, invItem) => {
         acc[invItem.catalogObjectId] = invItem;
         return acc;
