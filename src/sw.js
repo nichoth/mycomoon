@@ -10,7 +10,7 @@
 // Perform install steps
 let CACHE_NAME = 'my-cache'
 let urlsToCache = [
-    '/index.html',
+    // '/index.html',
     '/Casta-Regular.otf',
     'myco.webmanifest',
 
@@ -54,10 +54,8 @@ self.addEventListener('fetch', function (ev) {
     var cacheKey = 'static'
 
     if ((acceptHeader || '').indexOf('text/html') !== -1) {
-        console.log('**content**')
         cacheKey = 'content';
     } else if ((acceptHeader || '').indexOf('image') !== -1) {
-        console.log('image')
         cacheKey = 'image';
     }
 
@@ -65,19 +63,26 @@ self.addEventListener('fetch', function (ev) {
 
     // 1. Determine what kind of asset this is… (above).
     if (resourceType === 'content') {
+        console.log('**content**', request)
         // Use a network-first strategy.
         ev.respondWith(
             fetch(request)
-            .then(response => addToCache(cacheKey, request, response))
-            .catch(() => fetchFromCache(ev))
-            // .catch(() => offlineResponse(opts))
+                .then(response => {
+                    console.log('fetching', response)
+                    return addToCache(CACHE_NAME, request, response)
+                })
+                .catch((err) => {
+                    console.log('errrrr', err)
+                    return fetchFromCache(ev)
+                })
+                // .catch(() => offlineResponse(opts))
         );
     } else {
         // Use a cache-first strategy.
         ev.respondWith(
             fetchFromCache(ev)
             .catch(() => fetch(request))
-            .then(response => addToCache(cacheKey, request, response))
+            .then(response => addToCache(CACHE_NAME, request, response))
             // .catch(() => offlineResponse(resourceType, opts))
         )
     }
@@ -87,14 +92,14 @@ self.addEventListener('fetch', function (ev) {
 
 
 function addToCache (cacheKey, request, response) {
+    console.log('adding', cacheKey, response)
     if (response.ok) {
         var copy = response.clone()
         caches.open(cacheKey).then(cache => {
             cache.put(request, copy)
         })
-
-        return response
     }
+    return response
 }
 
 function fetchFromCache (ev) {
@@ -103,17 +108,18 @@ function fetchFromCache (ev) {
             // A synchronous error that will kick off the catch handler
             throw Error(`${ev.request.url} not found in cache`)
         }
+        console.log('got from cache', ev.request, response)
         return response
     })
 }
-
 
 
 // the browser will check if these resources are in the previous cache
 // list. if they don’t exist anymore it will remove them.
 self.addEventListener('activate', function (ev) {
     console.log('**activate', ev)
-    var cacheWhitelist = ['my-cache', 'static', 'content', 'image']
+    // var cacheWhitelist = ['my-cache', 'static', 'content', 'image']
+    var cacheWhitelist = [CACHE_NAME]
 
     // rm caches not in 'whitelist'
     ev.waitUntil(
