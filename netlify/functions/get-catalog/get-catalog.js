@@ -7,6 +7,17 @@ import Commerce from '@chec/commerce.js';
 
 const handler = async () => {
     const commerce = new Commerce(process.env.CHEC_PUBLIC);
+    var products = await commerce.products.list()
+    console.log('**products**', products)
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(products)
+    }
+    
+    // .then(product => {
+    //     console.log(product)
+    // });
 }
 
 module.exports = { handler }
