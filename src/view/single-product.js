@@ -42,7 +42,7 @@ function createSingleProductView ({ slug }) {
                 slug: slug,
                 name: item.name,
                 // variationName: variation.itemVariationData.name,
-                price: parseInt(variation.price.formatted),
+                price: variation.price,
                 quantity: 1,
                 quantityAvailable: parseInt(variation.inventory.available),
                 imageData: item.media
