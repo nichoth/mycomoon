@@ -1,11 +1,11 @@
 require('dotenv').config()
+const sgMail = require('@sendgrid/mail')
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const handler = (event, ctx, cb) => {
     try {
         const subject = event.queryStringParameters.name || 'World'
 
-        const sgMail = require('@sendgrid/mail')
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
         const msg = {

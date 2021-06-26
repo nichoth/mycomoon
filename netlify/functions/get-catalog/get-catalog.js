@@ -4,7 +4,6 @@ import Commerce from '@chec/commerce.js';
 
 
 
-
 const handler = async () => {
     const commerce = new Commerce(process.env.CHEC_PUBLIC);
     var products = await commerce.products.list()

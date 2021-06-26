@@ -1,45 +1,45 @@
-const { Client, Environment } = require('square')
+// const { Client, Environment } = require('square')
 
-const client = new Client({
-    environment: Environment.Sandbox,
-    accessToken: process.env.SQ_ACCESS_TOKEN
-})
+// const client = new Client({
+//     environment: Environment.Sandbox,
+//     accessToken: process.env.SQ_ACCESS_TOKEN
+// })
 
-const paymentsApi = client.paymentsApi;
+// const paymentsApi = client.paymentsApi;
 
-const pay = async ({ order, nonce, idempotency_key }) => {
+// const pay = async ({ order, nonce, idempotency_key }) => {
 
-    var { totalMoney } = order
+//     var { totalMoney } = order
 
-    const requestBody = {
-        sourceId: nonce,
-        orderId: order.id,
-        amountMoney: totalMoney,
+//     const requestBody = {
+//         sourceId: nonce,
+//         orderId: order.id,
+//         amountMoney: totalMoney,
 
-        // amountMoney: {
-        //     amount: 100, // $1.00 charge
-        //     currency: 'USD'
-        // },
+//         // amountMoney: {
+//         //     amount: 100, // $1.00 charge
+//         //     currency: 'USD'
+//         // },
 
-        locationId: "LAZSTD2P84MEA",
-        idempotencyKey: idempotency_key
-    };
+//         locationId: "LAZSTD2P84MEA",
+//         idempotencyKey: idempotency_key
+//     };
 
-    try {
-        var response = await paymentsApi.createPayment(requestBody);
-        return response.result
-    } catch (error) {
-        // let errorResult = null;
+//     try {
+//         var response = await paymentsApi.createPayment(requestBody);
+//         return response.result
+//     } catch (error) {
+//         // let errorResult = null;
 
-        // if (error instanceof ApiError) {
-        //     errorResult = error.errors;
-        // } else {
-        //     errorResult = error;
-        // }
+//         // if (error instanceof ApiError) {
+//         //     errorResult = error.errors;
+//         // } else {
+//         //     errorResult = error;
+//         // }
 
-        throw error
-    }
+//         throw error
+//     }
 
-}
+// }
 
-module.exports = pay
+// module.exports = pay
