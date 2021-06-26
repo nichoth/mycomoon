@@ -38,20 +38,19 @@ function createSingleProductView ({ slug }) {
 
             var _item = {
                 itemId: item.id,
-                variationId: variation.id,
+                // variationId: variation.id,
                 slug: slug,
-                name: item.itemData.name,
-                variationName: variation.itemVariationData.name,
-                price: parseInt(variation.itemVariationData.priceMoney
-                    .amount),
+                name: item.name,
+                // variationName: variation.itemVariationData.name,
+                price: parseInt(variation.price.formatted),
                 quantity: 1,
-                quantityAvailable: parseInt(variation.inventory[0].quantity),
-                imageData: item.imageData
+                quantityAvailable: parseInt(variation.inventory.available),
+                imageData: item.media
             }
 
             // here, check & adjust the quantity if necessary
             var i = cart.state().products.findIndex(prod => {
-                return prod.variationId === variation.id
+                return prod.itemId === variation.id
             })
 
             if (i > -1) {
@@ -70,9 +69,12 @@ function createSingleProductView ({ slug }) {
 
         // get the number of variations that are in the cart
         var prodsInCart = cartState.products.reduce((acc, prod) => {
-            acc[prod.id] = prod.quantity
+            console.log('prod', prod)
+            acc[prod.itemId] = prod.quantity
             return acc
         }, {})
+
+        console.log('prods in cart', prodsInCart)
 
         return html`<div class="single-product">
             <h1>${item.name}</h1>
