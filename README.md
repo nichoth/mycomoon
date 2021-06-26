@@ -4,6 +4,18 @@
 
 A website
 
+----------------------------------
+
+## chec
+
+.env is using the 'sandbox' keys
+
+
+--------------------------------------------------
+
+
+square stuff ----------------- vvvvv ----------------
+
 ## test card number 
 
 card number -- 	4111 1111 1111 1111

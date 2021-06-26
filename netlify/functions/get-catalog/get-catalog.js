@@ -10,6 +10,7 @@ const client = new Client({
 
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const handler = async (/* event */) => {
+    console.log('token', process.env.SQ_ACCESS_TOKEN)
     const catalogApi = client.catalogApi;
     const inventoryApi = client.inventoryApi;
     const cursor = ''
@@ -92,6 +93,8 @@ const handler = async (/* event */) => {
     var stringer = (key, value) => {
         return typeof value === "bigint" ? value.toString() + "n" : value
     }
+
+    console.log('**cats**', JSON.stringify(cats, stringer, 2))
 
     return {
         statusCode: 200,
