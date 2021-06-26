@@ -1,13 +1,21 @@
 require('dotenv').config()
 // const { Client, Environment } = require('square')
-import Commerce from '@chec/commerce.js';
+// import Commerce from '@chec/commerce.js';
+const Commerce = require('@chec/commerce.js')
 
 
 
 const handler = async () => {
     const commerce = new Commerce(process.env.CHEC_PUBLIC);
-    var products = await commerce.products.list()
-    console.log('**products**', products)
+    try {
+        var products = await commerce.products.list()
+    } catch(err) {
+        return {
+            statusCode: 500,
+            body: 'oh no'
+        }
+    }
+    // console.log('**products**', products)
 
     return {
         statusCode: 200,

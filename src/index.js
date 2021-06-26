@@ -49,33 +49,29 @@ route(function onRoute (path) {
     console.log('route event', path)
 
     // in here, on every route change, check the stock of things in the cart
-    fetch('/.netlify/functions/get-inventory', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            catalogObjectIds: cart.products().map(prod => prod.variationId)
-        })
-    })
-        .then(response => response.json())
-        .then(res => {
-            console.log('***inventory res', res)
+    // fetch('/.netlify/functions/get-inventory', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //         catalogObjectIds: cart.products().map(prod => prod.variationId)
+    //     })
+    // })
+    //     .then(response => response.json())
+    //     .then(res => {
+    //         console.log('***inventory res', res)
 
-            cart.products().forEach((prod, i) => {
-                var quantityAvailable = parseInt(res[prod.variationId].quantity)
-                if (prod.quantityAvailable != quantityAvailable) {
-                    // also update the items in cart with the availableQuantity
-                    // if it has changed
-                    cart.update(i, { quantityAvailable: quantityAvailable })
-                }
-            })
-        })
+    //         cart.products().forEach((prod, i) => {
+    //             var quantityAvailable = parseInt(res[prod.variationId].quantity)
+    //             if (prod.quantityAvailable != quantityAvailable) {
+    //                 // also update the items in cart with the availableQuantity
+    //                 // if it has changed
+    //                 cart.update(i, { quantityAvailable: quantityAvailable })
+    //             }
+    //         })
+    //     })
 
 
-    try {
-        var m = router.match(path)
-    } catch (err) {
-        console.log('caught', err)
-    }
+    var m = router.match(path)
 
     if (!m) {
         console.log('not m', path)
