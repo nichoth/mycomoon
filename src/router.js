@@ -63,7 +63,7 @@ function Router () {
         return {
             getContent: function () {
                 var url = new URL('/.netlify/functions/get-single-item', location)
-                url.searchParams.append('slug', slug)
+                url.searchParams.append('permalink', slug)
 
                 return fetch(url)
                     .then(res => {
