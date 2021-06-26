@@ -39,6 +39,7 @@
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
+    "@chec/commerce.js": "^2.7.1",
     "@nichoth/shopping-cart": "^0.0.39",
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
@@ -48,7 +49,6 @@
     "observ": "^0.2.0",
     "preact": "^10.5.13",
     "route-event": "^3.1.0",
-    "ruta3": "^2.0.1",
-    "square": "^10.0.0"
+    "ruta3": "^2.0.1"
   }
 }

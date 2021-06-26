@@ -8,14 +8,20 @@ function createSingleProductView ({ slug }) {
         const [item, setItem] = useState(null)
         var [cartState, setCartState] = useState(null)
 
-        console.log('state', cart.state())
+        console.log('cart state', cart.state())
+        console.log('item state', item)
 
+        // comppnent did mount
         useEffect(() => {
             getContent()
-                .then(res => setItem(res))
+                .then(res => {
+                    console.log('**res**', res)
+                    setItem(res)
+                })
                 .catch(err => console.log('errrr', err))
         }, []);
 
+        // component did mount
         useEffect(() => {
             setCartState(cart.state())
             return cart.state(function onChange (newCartState) {
@@ -32,20 +38,19 @@ function createSingleProductView ({ slug }) {
 
             var _item = {
                 itemId: item.id,
-                variationId: variation.id,
+                // variationId: variation.id,
                 slug: slug,
-                name: item.itemData.name,
-                variationName: variation.itemVariationData.name,
-                price: parseInt(variation.itemVariationData.priceMoney
-                    .amount),
+                name: item.name,
+                // variationName: variation.itemVariationData.name,
+                price: variation.price,
                 quantity: 1,
-                quantityAvailable: parseInt(variation.inventory[0].quantity),
-                imageData: item.imageData
+                quantityAvailable: parseInt(variation.inventory.available),
+                imageData: item.media
             }
 
             // here, check & adjust the quantity if necessary
             var i = cart.state().products.findIndex(prod => {
-                return prod.variationId === variation.id
+                return prod.itemId === variation.id
             })
 
             if (i > -1) {
@@ -63,25 +68,31 @@ function createSingleProductView ({ slug }) {
         }
 
         // get the number of variations that are in the cart
-        var prodsInCart = cartState.products.reduce((acc, variant) => {
-            acc[variant.variationId] = variant.quantity
+        var prodsInCart = cartState.products.reduce((acc, prod) => {
+            console.log('prod', prod)
+            acc[prod.itemId] = prod.quantity
             return acc
         }, {})
 
+        console.log('prods in cart', prodsInCart)
+
         return html`<div class="single-product">
-            <h1>${item.itemData.name}</h1>
+            <h1>${item.name}</h1>
             <div class="single-product-content">
-                <img src="${item.imageData.url}" alt="mushroom" />
-                <p>${item.itemData.description}</p>
+                <img src="${item.media.source}" alt="mushroom" />
+                <p dangerouslySetInnerHTML=${{
+                        __html: item.description
+                    }}
+                />
 
                 <ul class="item-variations">
-                    ${item.itemData.variations.map(function (v) {
+                    ${[item].map(function (v) {
 
-                        var isInStock = v.inventory[0].quantity > 0
+                        var isInStock = !v.is.sold_out
 
                         return html`<li>
                             <span class="variation-name">
-                                ${v.itemVariationData.name + ' '}
+                                ${v.name + ' '}
                             </span>
                             <span class="price-money">
                                 ${getReadableMoney(v)}
@@ -112,14 +123,15 @@ function createSingleProductView ({ slug }) {
 module.exports = createSingleProductView
 
 function getReadableMoney (variation) {
-    var price = variation.itemVariationData.priceMoney.amount
-    return toMoneyFormat(price)
+    return variation.formatted_with_symbol
+    // var price = variation.itemVariationData.priceMoney.amount
+    // return toMoneyFormat(price)
 }
 
-function toMoneyFormat (num) {
-    var format = (parseInt(num) / 100).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD"
-    })
-    return format
-}
+// function toMoneyFormat (num) {
+//     var format = (parseInt(num) / 100).toLocaleString("en-US", {
+//         style: "currency",
+//         currency: "USD"
+//     })
+//     return format
+// }

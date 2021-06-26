@@ -335,13 +335,17 @@ body {
         list-style: none;
         align-items: stretch;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-        grid-template-rows: repeat(2, 50vmin);
+        grid-auto-rows: 50vh;
+        // grid-template-rows: repeat(2, 50vmin);
         gap: 2rem;
         grid-row-gap: 5rem;
         padding-bottom: 6rem;
 
         li {
             border: none!important;
+            &:hover {
+                filter: drop-shadow(2px 4px 6px black);
+            }
         }
 
         a {

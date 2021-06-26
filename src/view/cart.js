@@ -62,7 +62,7 @@ class CartPage extends Component {
             if (prod.quantity === 0) {
                 return html`<div>
                     <a href="${'/' + slug}" class="cart-image">
-                        <img src=${prod.imageData.url} />
+                        <img src=${prod.imageData.source} />
                     </a>
                     <button onClick=${remove.bind(null, i)} class="primary">
                         remove item?
@@ -98,9 +98,9 @@ class CartPage extends Component {
 
             return html`
                 <a href="${slug}" class="cart-image">
-                    <img src=${prod.imageData.url} />
+                    <img src=${prod.imageData.source} />
                 </a>
-                <span>${prod.name + ' -- ' + prod.variationName}</span>
+                <span>${prod.name}</span>
                 <span class="quantities${cart.ohno(i) ? ' ohno' : ''}">
 
                     <div class="input-group number">
@@ -135,7 +135,7 @@ class CartPage extends Component {
                 </span>
 
                 <span>
-                    ${toMoneyFormat(prod.price) + 'ea'} × ${prod.quantity}
+                    ${prod.price.formatted_with_symbol + 'ea'} × ${prod.quantity}
                 <//>
             `
         }
@@ -146,7 +146,7 @@ class CartPage extends Component {
         var { products } = cart.state()
 
         var total = products.reduce(function (total, prod) {
-            return total + (prod.price * prod.quantity)
+            return total + (prod.price.raw * prod.quantity)
         }, 0)
 
         var isWonky = cart.ohno()

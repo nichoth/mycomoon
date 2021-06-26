@@ -2,9 +2,11 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
 function Products (props) {
-    console.log('in products view', props)
+    console.log('props in products view', props)
 
     const [content, setContent] = useState(null)
+
+    console.log('products content', content)
 
     useEffect(() => {
         fetch('/.netlify/functions/get-catalog')
@@ -20,17 +22,15 @@ function Products (props) {
             })
             .then(res => {
                 console.log('cat res', res)
-                return setContent(res)
+                return setContent(res.data)
             })
     }, []);
-
-    console.log('products content', content)
 
     return html`<div>
         ${(content && Object.keys(content).length) ?
             html`<ul class="products-list">
                 ${content
-                    .filter(item => item.type === 'ITEM')
+                    .filter(item => item.active)
                     .map(item => {
                         if (item.customAttributeValues) {
                             var key = Object.keys(item.customAttributeValues)[0]
@@ -38,10 +38,10 @@ function Products (props) {
                         }
 
                         return html`<li>
-                            <a href="/${slug}">
-                                <img src=${item.imageData.url}
+                            <a href="/${item.permalink}">
+                                <img src=${item.media.source}
                                     alt="mushroom" />
-                                <p>${item.itemData.name}</p>
+                                <p>${item.name}</p>
                             </a>
                         </li>`
                     })
