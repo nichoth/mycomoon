@@ -80,7 +80,7 @@ function createSingleProductView ({ slug }) {
             <h1>${item.name}</h1>
             <div class="single-product-content">
                 <img src="${item.media.source}" alt="mushroom" />
-                <p dangerouslySetInnerHTML=${{
+                <div dangerouslySetInnerHTML=${{
                         __html: item.description
                     }}
                 />
