@@ -868,6 +868,10 @@ body {
                     max-width: 30rem;
                     padding-bottom: 6rem;
 
+                    p {
+                        filter: drop-shadow(2px 4px 6px black);
+                    }
+
                     button {
                         border-radius: 7px;
                         font-size: 1.2rem;
