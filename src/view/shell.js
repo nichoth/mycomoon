@@ -4,7 +4,9 @@ import { createRef } from 'preact';
 class Shell extends Component {
     constructor (props) {
         super(props)
+        this.state = { isOpen: false }
         this.ref = createRef();
+        this.openMenu = this.openMenu.bind(this)
     }
 
     componentDidUpdate () {
@@ -14,6 +16,12 @@ class Shell extends Component {
         } else {
             el.className = ''
         }
+    }
+
+    openMenu (ev) {
+        ev.preventDefault()
+        console.log('opening')
+        this.setState({ isOpen: !this.state.isOpen })
     }
 
     componentDidMount() {
@@ -28,8 +36,10 @@ class Shell extends Component {
 
     render (props) {
         return html`<div class="outer-shell">
-            <div class="menu-part">
-                <span>---</span>
+            <div class="menu-part${this.state.isOpen ? ' open' : ''}">
+                <button onCLick=${this.openMenu}>
+                    <i class="fas ${this.state.isOpen ? 'fa-times' : 'fa-bars'}"></i>
+                </button>
             </div>
 
             <div>
