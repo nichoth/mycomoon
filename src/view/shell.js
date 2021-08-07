@@ -5,9 +5,7 @@ import { createRef } from 'preact';
 class Shell extends Component {
     constructor (props) {
         super(props)
-        // this.state = { isOpen: false }
         this.ref = createRef();
-        // this.openMenu = this.openMenu.bind(this)
     }
 
     componentDidUpdate () {
@@ -56,9 +54,15 @@ function Menu () {
     }
 
     return html`<div class="menu-part${isOpen ? ' open' : ''}">
-        <button onCLick=${openMenu}>
-            <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i>
-        </button>
+        <div>
+            <button onCLick=${openMenu}>
+                <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i>
+            </button>
+        </div>
+
+        <ul class="menu-content">
+
+        </ul>
     </div>`
 }
 
