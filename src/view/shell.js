@@ -61,7 +61,9 @@ function Menu () {
         </div>
 
         <ul class="menu-content">
-
+            <li>foo bar</li>
+            <li>baz gzz</li>
+            <li>woooo</li>
         </ul>
     </div>`
 }
