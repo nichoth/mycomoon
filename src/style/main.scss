@@ -1,4 +1,5 @@
 @use '../../node_modules/@nichoth/shopping-cart/src/style/main.scss';
+@use './shell.scss';
 
 @keyframes spinner {
     to {transform: rotate(360deg);}
@@ -26,9 +27,9 @@
         #content {
             margin-left: 0!important;
         }
-        .shell {
-            margin-left: 0!important;
-        }
+        // .shell {
+        //     margin-left: 0!important;
+        // }
     }
 }
 
@@ -550,9 +551,9 @@ body {
 
 
     .shell {
-        margin-left: 30vw;
-        min-height: 100vh;
-        height: 140vh;
+        // margin-left: 30vw;
+        // min-height: 100vh;
+        // height: 140vh;
 
         &.cart {
             margin-bottom: 6rem;

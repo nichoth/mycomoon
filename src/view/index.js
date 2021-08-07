@@ -3,13 +3,15 @@ var Products = require('./products')
 // import { useEffect, useState } from 'preact/hooks';
 
 function IndexView (props) {
-    // we're doing it this weird way because it doesn't work if you use a HOC
     var { getContent, path } = props
 
     console.log('props', props)
 
+    // we're doing it this weird way because it doesn't work if you use a HOC
     return html`
-        <ul class="main-nav">
+        <div>the index content</div>
+
+        <!-- <ul class="main-nav">
             <li class="tab${path === '/' ? ' active' : ''}">
                 <a href="/"><h2>
                     <span class="dot">${path === '/' ? '●' : '⚬'}${'\u00A0'}</span>
@@ -27,7 +29,7 @@ function IndexView (props) {
                 </h2></a>
                 <div class="page-content">the about content</div>
             </li>
-        </ul>
+        </ul> -->
     `
 }
 
