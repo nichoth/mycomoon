@@ -53,3 +53,82 @@
         }
     }
 }
+
+// .main-nav {
+//     padding: 0;
+//     list-style: none;
+//     display: flex;
+
+
+//     // -------------- new stuff ----------------------
+
+//     justify-content: flex-end;
+//     margin-bottom: 0;
+//     height: 100%;
+//     margin-top: 0rem;
+
+//     li {
+//         height: 100%;
+//         border-left: 1px solid white;
+
+//         &.tab {
+//             transition: flex-grow 1s ease;
+//             overflow: hidden;
+//             width: 4rem;
+//             flex-grow: 0;
+//             .page-content {
+//                 width: 0;
+//                 overflow: hidden;
+//             }
+//         }
+
+//         &.tab.active {
+//             flex-grow: 1;
+//             overflow-y: scroll;
+
+//             .page-content {
+//                 // display: block;
+//                 padding: 2rem;
+//                 width: initial;
+//                 overflow-y: scroll;
+//             }
+
+//             a {
+//                 padding-top: 1.2rem;
+//                 height: initial;
+
+//                 & > h2 {
+//                     transition: font-size 1s ease;
+//                     font-size: 1rem;
+//                     padding: 0 2rem;
+
+//                     top: 1rem;
+//                     display: inline-block;
+//                     position: relative;
+//                     left: -2rem;
+//                 }
+//             }
+//         }
+
+//         a {
+//             padding-top: 2rem;
+//             height: 100vh;
+//             display: block;
+//             position: relative;
+//             text-decoration: none;
+
+//             // transition: all 1s ease;
+
+//             & > h2 {
+//                 transform: rotate(-90deg);
+//                 font-size: 1rem;
+//                 display: inline-block;
+//             }
+
+//             &:hover {
+//                 text-decoration: underline;
+//             }
+//         }
+//     }
+
+// }
