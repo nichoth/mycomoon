@@ -1,12 +1,13 @@
 import { html, Component } from 'htm/preact'
+import { useState } from 'preact/hooks';
 import { createRef } from 'preact';
 
 class Shell extends Component {
     constructor (props) {
         super(props)
-        this.state = { isOpen: false }
+        // this.state = { isOpen: false }
         this.ref = createRef();
-        this.openMenu = this.openMenu.bind(this)
+        // this.openMenu = this.openMenu.bind(this)
     }
 
     componentDidUpdate () {
@@ -16,12 +17,6 @@ class Shell extends Component {
         } else {
             el.className = ''
         }
-    }
-
-    openMenu (ev) {
-        ev.preventDefault()
-        console.log('opening')
-        this.setState({ isOpen: !this.state.isOpen })
     }
 
     componentDidMount() {
@@ -36,11 +31,7 @@ class Shell extends Component {
 
     render (props) {
         return html`<div class="outer-shell">
-            <div class="menu-part${this.state.isOpen ? ' open' : ''}">
-                <button onCLick=${this.openMenu}>
-                    <i class="fas ${this.state.isOpen ? 'fa-times' : 'fa-bars'}"></i>
-                </button>
-            </div>
+            <${Menu} />
 
             <div>
                 <div class="nav-part">
@@ -54,6 +45,21 @@ class Shell extends Component {
             </div>
         </div>`
     }
+}
+
+function Menu () {
+    var [isOpen, setOpen] = useState(false)
+
+    function openMenu (ev) {
+        ev.preventDefault()
+        setOpen(!isOpen)
+    }
+
+    return html`<div class="menu-part${isOpen ? ' open' : ''}">
+        <button onCLick=${openMenu}>
+            <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i>
+        </button>
+    </div>`
 }
 
 module.exports = Shell
