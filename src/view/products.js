@@ -40,10 +40,10 @@ function Products (props) {
                 ${content
                     .filter(item => item.active)
                     .map(item => {
-                        if (item.customAttributeValues) {
-                            var key = Object.keys(item.customAttributeValues)[0]
-                            var slug = item.customAttributeValues[key].stringValue
-                        }
+                        // if (item.customAttributeValues) {
+                        //     var key = Object.keys(item.customAttributeValues)[0]
+                        //     var slug = item.customAttributeValues[key].stringValue
+                        // }
 
                         return html`<li>
                             <a href="/${item.permalink}">

@@ -1,11 +1,12 @@
 var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
-// var createSingleProductView = require('./view/single-product')
+var createSingleProductView = require('./view/single-product')
 var Products = require('./view/products')
 var AboutPage = require('./view/about')
 // var createIndexView = require('./view/index')
 var IndexView = require('./view/index')
+// const Commerce = require('@chec/commerce.js')
 
 function Router () {
 
@@ -55,26 +56,37 @@ function Router () {
         }
     })
 
-    // router.addRoute('/:slug', ({ params }) => {
-    //     var { slug } = params
+    router.addRoute('/:slug', ({ params }) => {
+        var { slug } = params
 
-    //     return {
-    //         getContent: function () {
-    //             var url = new URL('/.netlify/functions/get-single-item', location)
-    //             url.searchParams.append('permalink', slug)
+        return {
+            getContent: function () {
+                // var checKey = 'pk_test_183261c4e2a86741dc202b75c7956df699e0c2678d549'
+                // const commerce = new Commerce(checKey);
 
-    //             return fetch(url)
-    //                 .then(res => {
-    //                     return res.json()
-    //                 })
-    //                 .catch(err => {
-    //                     console.log('oh no', err)
-    //                 })
-    //         },
+                // return commerce.products.retrieve(slug, {
+                //     type: 'permalink'
+                // })
+                //     .then(res => {
+                //         console.log('res', res)
+                //         return res
+                //     })
 
-    //         view: createSingleProductView({ slug })
-    //     }
-    // })
+                var url = new URL('/.netlify/functions/get-single-item', location)
+                url.searchParams.append('permalink', slug)
+
+                return fetch(url)
+                    .then(res => {
+                        return res.json()
+                    })
+                    .catch(err => {
+                        console.log('oh no', err)
+                    })
+            },
+
+            view: createSingleProductView({ slug })
+        }
+    })
 
     return router
 }

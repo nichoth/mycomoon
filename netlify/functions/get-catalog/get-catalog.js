@@ -1,6 +1,5 @@
 require('dotenv').config()
 // const { Client, Environment } = require('square')
-// import Commerce from '@chec/commerce.js';
 const Commerce = require('@chec/commerce.js')
 
 

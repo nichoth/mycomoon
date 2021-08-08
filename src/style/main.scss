@@ -1,6 +1,6 @@
 @use '../../node_modules/@nichoth/shopping-cart/src/style/main.scss';
 @use './shell.scss';
-@use './cart.scss';
+// @use './cart.scss';
 @use './products.scss';
 
 // @use './variables.scss';
@@ -26,6 +26,16 @@ body {
     font-family: 'Work Sans', sans-serif;
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
+
+    // --------------- fix that icon --------------------
+    #cart-quantity {
+        bottom: 23px;
+        left: 16px;
+        &.ohno {
+            bottom: 26px;
+        }
+    }
+    // --------------- /fix that icon --------------------
 
     p, h1 {
         letter-spacing: 0.1rem;
