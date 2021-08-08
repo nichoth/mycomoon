@@ -9,7 +9,7 @@ function IndexView (props) {
 
     // we're doing it this weird way because it doesn't work if you use a HOC
     return html`
-        <div>the index content</div>
+        <p>the index content</p>
 
         <!-- <ul class="main-nav">
             <li class="tab${path === '/' ? ' active' : ''}">

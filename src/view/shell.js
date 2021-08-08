@@ -28,8 +28,12 @@ class Shell extends Component {
     }
 
     render (props) {
+        console.log('in shell', props)
+
+        var { path } = props
+
         return html`<div class="outer-shell">
-            <${Menu} />
+            <${Menu} activePath=${path} />
 
             <div>
                 <div class="nav-part">
@@ -45,7 +49,7 @@ class Shell extends Component {
     }
 }
 
-function Menu () {
+function Menu ({ activePath }) {
     var [isOpen, setOpen] = useState(false)
 
     function openMenu (ev) {
@@ -61,11 +65,18 @@ function Menu () {
         </div>
 
         <ul class="menu-content">
-            <li>foo bar</li>
-            <li>baz gzz</li>
-            <li>woooo</li>
+            <li class=${active('/about', activePath)}>
+                <a href="/about">about</a>
+            </li>
+            <li class=${active('/products', activePath)}>
+                <a href="/products">products</a>
+            </li>
         </ul>
     </div>`
+}
+
+function active (href, path) {
+    return href === path ? 'active' : ''
 }
 
 module.exports = Shell

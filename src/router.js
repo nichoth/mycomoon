@@ -1,7 +1,7 @@
 var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
-var createSingleProductView = require('./view/single-product')
+// var createSingleProductView = require('./view/single-product')
 var Products = require('./view/products')
 var AboutPage = require('./view/about')
 // var createIndexView = require('./view/index')
@@ -25,7 +25,7 @@ function Router () {
 
     router.addRoute('/about', () => {
         return {
-            view: IndexView
+            view: AboutPage
         }
     })
 
@@ -51,32 +51,30 @@ function Router () {
                     .then(response => response.json())
             },
 
-            // @TODO -- should show products
-            // view: createIndexView('products')
-            view: IndexView
+            view: Products
         }
     })
 
-    router.addRoute('/:slug', ({ params }) => {
-        var { slug } = params
+    // router.addRoute('/:slug', ({ params }) => {
+    //     var { slug } = params
 
-        return {
-            getContent: function () {
-                var url = new URL('/.netlify/functions/get-single-item', location)
-                url.searchParams.append('permalink', slug)
+    //     return {
+    //         getContent: function () {
+    //             var url = new URL('/.netlify/functions/get-single-item', location)
+    //             url.searchParams.append('permalink', slug)
 
-                return fetch(url)
-                    .then(res => {
-                        return res.json()
-                    })
-                    .catch(err => {
-                        console.log('oh no', err)
-                    })
-            },
+    //             return fetch(url)
+    //                 .then(res => {
+    //                     return res.json()
+    //                 })
+    //                 .catch(err => {
+    //                     console.log('oh no', err)
+    //                 })
+    //         },
 
-            view: createSingleProductView({ slug })
-        }
-    })
+    //         view: createSingleProductView({ slug })
+    //     }
+    // })
 
     return router
 }

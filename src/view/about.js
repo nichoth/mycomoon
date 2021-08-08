@@ -2,7 +2,7 @@ import { html } from 'htm/preact'
 
 function About (props) {
     return html`<div class="about">
-        <p>This is some writing about things</p>
+        <p>This is 'about' content</p>
     </div>`
 }
 

@@ -7,7 +7,7 @@
 @import './variables.scss';
 
 @keyframes spinner {
-    to {transform: rotate(360deg);}
+    to { transform: rotate(360deg); }
 }
 
 @font-face {
@@ -31,7 +31,7 @@ body {
         letter-spacing: 0.1rem;
         margin: 0 auto;
         margin-right: 0;
-        text-align: center;
+        // text-align: center;
         font-weight: 400;
     }
 
