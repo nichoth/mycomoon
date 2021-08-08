@@ -37,7 +37,9 @@ class Shell extends Component {
 
             <div>
                 <div class="nav-part">
-                    <span class="who-are-you"><a href="/">Myco Moon</a></span>
+                    <span class="who-are-you">
+                        <a href="/">🌙 Myco Moon</a>
+                    </span>
                     <span class="cart-container" ref=${this.ref}></span>
                 </div>
 

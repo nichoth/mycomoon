@@ -16,8 +16,11 @@
     border-right: 1px solid white;
     padding: 0 1rem;
     padding-top: 1rem;
-    transition: flex-grow 1s ease;
+    transition: all 1s ease;
     flex-grow: 0;
+    min-width: 0;
+    max-width: 2rem;
+    width: 2rem;
 
     .menu-content {
         display: none;
@@ -25,6 +28,9 @@
 
     &.open {
         flex-grow: 1;
+        min-width: 25%;
+        max-width: 25%;
+        width: 25%;
         .menu-content {
             visibility: visible;
             display: block;
