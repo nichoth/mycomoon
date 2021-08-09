@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+// .shell-content {
+//     &.product-page {
+//         border: 1px solid red;
+//     }
+// }
+
+.single-product {
+    display: flex;
+
+    h1 {
+        margin-top: 0;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .single-product-info {
+        width: 50%;
+    }
+
+    .single-product-content {
+        width: 50%;
+        > img {
+            width: 100%;
+        }
+    }
+}

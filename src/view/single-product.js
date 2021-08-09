@@ -8,9 +8,6 @@ function createSingleProductView ({ slug }) {
         const [item, setItem] = useState(null)
         var [cartState, setCartState] = useState(null)
 
-        console.log('cart state', cart.state())
-        console.log('item state', item)
-
         // comppnent did mount
         useEffect(() => {
             getContent()
@@ -77,7 +74,11 @@ function createSingleProductView ({ slug }) {
         console.log('prods in cart', prodsInCart)
 
         return html`<div class="single-product">
-            <h1>${item.name}</h1>
+
+            <div class="single-product-info">
+                <h1>${item.name}</h1>
+            </div>
+
             <div class="single-product-content">
                 <img src="${item.media.source}" alt="mushroom" />
                 <div dangerouslySetInnerHTML=${{
