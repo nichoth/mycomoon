@@ -75,8 +75,6 @@ function createSingleProductView ({ slug }) {
 
         // which menu item is open? it's based on the URL
 
-        console.log('aaaaaa', item, slug)
-
         return html`<div class="single-product">
 
             <div class="single-product-info">
@@ -88,34 +86,6 @@ function createSingleProductView ({ slug }) {
             <div class="single-product-content">
                 <img src="${item.media.source}" alt="mushroom" />
 
-                <ul class="item-variations">
-                    ${[item].map(function (v) {
-                        var isInStock = !v.is.sold_out
-
-                        return html`<li>
-                            <span class="variation-name">
-                                ${v.name + ' '}
-                            </span>
-                            <span class="price-money">
-                                ${getReadableMoney(v)}
-                            </span>
-                            <span class="variation-controls">
-                                ${prodsInCart[v.id] ?
-                                    html`<span class="prod-count">
-                                        ${prodsInCart[v.id]}
-                                    </span>` :
-                                    null
-                                }
-                                <button
-                                    disabled=${!isInStock}
-                                    onClick=${addToCart.bind(null, v)}
-                                >
-                                    add to cart
-                                </button>
-                            </span>
-                        </li>`
-                    })}
-                </ul>
 
             </div>
         </div>`

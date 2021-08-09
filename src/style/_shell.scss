@@ -10,10 +10,6 @@
     }
 }
 
-.shell-content {
-    min-height: 100vh;
-}
-
 .menu-part {
     border-right: 1px solid white;
     padding: 0 1rem;
@@ -81,7 +77,6 @@
     border-bottom: 1px solid;
     padding: 0.5rem;
     padding-right: 1rem;
-    // padding-top: 1.5rem;
 
     .who-are-you {
         font-feature-settings: "ss01";
@@ -100,10 +95,17 @@
     list-style: none;
     padding: 0;
 
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
     li {
         padding: 1rem;
         border-bottom: 1px solid;
-        padding-top: 0;
+
+        &.active {
+            flex-grow: 1;
+        }
     }
 
     ul {

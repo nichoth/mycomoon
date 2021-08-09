@@ -78,6 +78,7 @@ body {
     #content {
         overflow-y: scroll;
         backdrop-filter: brightness(0.5);
+        min-height: 100vh;
 
         &.index {
             background-color: transparent;
