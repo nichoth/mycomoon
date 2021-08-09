@@ -104,6 +104,12 @@
         padding: 1rem;
         border-bottom: 1px solid;
 
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
         &.active {
             flex-grow: 1;
         }
