@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
-// function Products (props) {
-//     return html`<div>
-//         <p>the 'products' content</p>
-//     </div>`
-// }
-
-// module.exports = Products
-
 function Products (props) {
     console.log('props in products view', props)
 

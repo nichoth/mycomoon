@@ -83,6 +83,10 @@ body {
         &.index {
             background-color: transparent;
         }
+
+        &.product-page {
+            backdrop-filter: brightness(0.2);
+        }
     }
 
 }

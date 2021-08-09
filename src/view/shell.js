@@ -10,18 +10,13 @@ class Shell extends Component {
 
     componentDidUpdate () {
         var el = document.getElementById('content')
-        if (this.props.contentClass === 'index') {
-            el.className += ' index'
-        } else {
-            el.className = ''
-        }
+        el.className = this.props.contentClass;
     }
 
     componentDidMount() {
-        if (this.props.contentClass === 'index') {
-            var el = document.getElementById('content')
-            el.className += " " + 'index'
-        }
+        var el = document.getElementById('content')
+        console.log('this.props.contentclass', this.props.contentClass)
+        el.className = this.props.contentClass;
 
         var cart = this.props.cart
         cart.createIcon(this.ref.current, { link: '/cart' })

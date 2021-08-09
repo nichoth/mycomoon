@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+body.page-products {
+    backdrop-filter: brightness(0.2);
+}
+
 .products-list {
     margin: 2rem 2rem;
     display: grid;

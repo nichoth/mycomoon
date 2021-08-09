@@ -2,8 +2,9 @@
 
 .outer-shell {
     display: flex;
+    min-height: 100vh;
 
-    > div {
+    & > div {
         &:last-child {
             flex-grow: 1;
         }
