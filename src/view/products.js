@@ -34,7 +34,7 @@ function Products (props) {
             })
     }, []);
 
-    return html`<div>
+    return html`
         ${(content && Object.keys(content).length) ?
             html`<ul class="products-list">
                 ${content
@@ -57,8 +57,7 @@ function Products (props) {
             </ul>` :
             null
         }
-
-    </div>`
+    `
 }
 
 module.exports = Products

@@ -1,11 +1,5 @@
 @import './variables.scss';
 
-// .shell-content {
-//     &.product-page {
-//         border: 1px solid red;
-//     }
-// }
-
 .single-product {
     display: flex;
 
@@ -17,6 +11,12 @@
 
     .single-product-info {
         width: 50%;
+
+        ul {
+            li {
+                margin-bottom: 0.5rem;
+            }
+        }
     }
 
     .single-product-content {

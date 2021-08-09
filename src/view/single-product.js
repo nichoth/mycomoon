@@ -8,6 +8,9 @@ function createSingleProductView ({ slug }) {
         const [item, setItem] = useState(null)
         var [cartState, setCartState] = useState(null)
 
+        console.log('props', props)
+        console.log('slug', slug)
+
         // comppnent did mount
         useEffect(() => {
             getContent()
@@ -30,8 +33,6 @@ function createSingleProductView ({ slug }) {
 
         function addToCart (variation, ev) {
             ev.preventDefault()
-
-            console.log('variation', variation)
 
             var _item = {
                 itemId: item.id,
@@ -71,24 +72,40 @@ function createSingleProductView ({ slug }) {
             return acc
         }, {})
 
-        console.log('prods in cart', prodsInCart)
+        // which menu item is open? it's based on the URL
 
         return html`<div class="single-product">
 
             <div class="single-product-info">
-                <h1>${item.name}</h1>
+
+                <ul class="product-list">
+                    <li class=${slug === 'turkey-tail-tincture' ? 'active' : ''}>
+                        Turkey Tail Tincture
+                    </li>
+                    <li class=${slug === 'chaga-tincture' ? 'active' : ''}>
+                        Chaga Tincture
+
+                        <div dangerouslySetInnerHTML=${{
+                                __html: item.description
+                            }}
+                        />
+                    </li>
+                    <li class=${slug === 'lions-mane-tincture' ? 'active' : ''}>
+                        Lion's Mane Tincture
+                    </li>
+                    <li class=${slug === 'reishi-tincture' ? 'active' : ''}>
+                        Reishi Tincture
+                    </li>
+                </ul>
+
+
             </div>
 
             <div class="single-product-content">
                 <img src="${item.media.source}" alt="mushroom" />
-                <div dangerouslySetInnerHTML=${{
-                        __html: item.description
-                    }}
-                />
 
                 <ul class="item-variations">
                     ${[item].map(function (v) {
-
                         var isInStock = !v.is.sold_out
 
                         return html`<li>
