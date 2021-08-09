@@ -2,7 +2,16 @@ import { html } from 'htm/preact'
 
 function About (props) {
     return html`<div class="about">
-        <p>This is 'about' content</p>
+        <h1>About</h1>
+        <p>
+            Myco Moon wantes to shaire their love for functional mushrooms
+            with the world. Their extracts are made from small batches of
+            homegrown Lion's Mane, Reishi, Turkey Tail, & Chaga mushrooms.
+        </p>
+        <p>
+            Funghi has the power to heal and balance the body and mind,
+            while simultaneously restoring environments and ecosystems.
+        </p>
     </div>`
 }
 

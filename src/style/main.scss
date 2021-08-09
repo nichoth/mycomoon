@@ -3,6 +3,7 @@
 // @use './cart.scss';
 @use './products.scss';
 @use './single-product.scss';
+@use './about';
 
 // @use './variables.scss';
 @import './variables.scss';
@@ -60,6 +61,7 @@ body {
 
     p {
         font-size: 1.2rem;
+        margin-bottom: 1rem;
     }
 
     button {
