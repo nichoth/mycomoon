@@ -10,6 +10,7 @@ function createSingleProductView ({ slug }) {
 
         console.log('props', props)
         console.log('slug', slug)
+        console.log('the item', item)
 
         // comppnent did mount
         useEffect(() => {
@@ -74,30 +75,13 @@ function createSingleProductView ({ slug }) {
 
         // which menu item is open? it's based on the URL
 
+        console.log('aaaaaa', item, slug)
+
         return html`<div class="single-product">
 
             <div class="single-product-info">
 
-                <ul class="product-list">
-                    <li class=${slug === 'turkey-tail-tincture' ? 'active' : ''}>
-                        Turkey Tail Tincture
-                    </li>
-                    <li class=${slug === 'chaga-tincture' ? 'active' : ''}>
-                        Chaga Tincture
-
-                        <div dangerouslySetInnerHTML=${{
-                                __html: item.description
-                            }}
-                        />
-                    </li>
-                    <li class=${slug === 'lions-mane-tincture' ? 'active' : ''}>
-                        Lion's Mane Tincture
-                    </li>
-                    <li class=${slug === 'reishi-tincture' ? 'active' : ''}>
-                        Reishi Tincture
-                    </li>
-                </ul>
-
+                <${ProductList} slug=${slug} item=${item} />
 
             </div>
 
@@ -136,6 +120,34 @@ function createSingleProductView ({ slug }) {
             </div>
         </div>`
     }
+}
+
+// needs permalink, description, name
+function ProductList (props) {
+    var { slug, item } = props
+
+    var items = [
+        { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
+        { link: 'chaga-tincture', name: 'Chaga Tincture' },
+        { link: 'lions-mane-tincture', name: "Lion's Mane Tincture" },
+        { link: 'reishi-tincture', name: "Reishi Tincture" }
+    ]
+
+    return html`<ul class="product-list">
+        ${items.map(_item => {
+            var isActive = _item.link === slug
+            return html`<li class=${isActive ? 'active' : ''}>
+                <a href=${'/' + _item.link}>${_item.name}</a>
+                ${isActive ?
+                    html`<div dangerouslySetInnerHTML=${{
+                            __html: item.description
+                        }}
+                    />` :
+                    null
+                }
+            </li>`
+        })}
+    </ul>`
 }
 
 module.exports = createSingleProductView

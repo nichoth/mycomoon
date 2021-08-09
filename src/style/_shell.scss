@@ -95,3 +95,21 @@
         }
     }
 }
+
+.product-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: 1rem;
+        border-bottom: 1px solid;
+        padding-top: 0;
+    }
+
+    ul {
+        li {
+            padding: 0;
+            border-bottom: none;
+        }
+    }
+}
