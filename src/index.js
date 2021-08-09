@@ -83,7 +83,9 @@ route(function onRoute (path) {
         return
     }
 
-    var { view, getContent } = m.action(m)
+    var { view, getContent, slug } = m.action(m)
+
+    console.log('view', view)
 
     var dirs = path.split('/').filter(Boolean)
 
@@ -98,7 +100,9 @@ route(function onRoute (path) {
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
         path=${path}
     >
-        <${view} cart=${cart} getContent=${getContent} path=${path} />
+        <${view} cart=${cart} getContent=${getContent} path=${path}
+            slug=${slug}
+        />
     <//>`
 
     render(el, document.getElementById('content'))

@@ -4,7 +4,7 @@ function About (props) {
     return html`<div class="about">
         <h1>About</h1>
         <p>
-            Myco Moon wantes to shaire their love for functional mushrooms
+            Myco Moon wants to share their love for functional mushrooms
             with the world. Their extracts are made from small batches of
             homegrown Lion's Mane, Reishi, Turkey Tail, & Chaga mushrooms.
         </p>

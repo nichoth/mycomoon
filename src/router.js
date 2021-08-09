@@ -1,7 +1,7 @@
 var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
-var createSingleProductView = require('./view/single-product')
+var SingleProductView = require('./view/single-product')
 var Products = require('./view/products')
 var AboutPage = require('./view/about')
 // var createIndexView = require('./view/index')
@@ -84,7 +84,9 @@ function Router () {
                     })
             },
 
-            view: createSingleProductView({ slug })
+            slug: slug,
+
+            view: SingleProductView
         }
     })
 
