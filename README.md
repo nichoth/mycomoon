@@ -10,6 +10,17 @@ A website
 
 .env is using the 'sandbox' keys
 
+## version two
+
+[Service-worker to prefetch remote images](https://gist.github.com/dsheiko/8a5878678371f950d37f3ee074fe8031)
+
+
+
+
+
+
+
+
 
 --------------------------------------------------
 
