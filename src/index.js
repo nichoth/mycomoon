@@ -85,8 +85,6 @@ route(function onRoute (path) {
 
     var { view, getContent, slug } = m.action(m)
 
-    console.log('view', view)
-
     var dirs = path.split('/').filter(Boolean)
 
     var contentClass = (path === '/' || path === '') ?
