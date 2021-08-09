@@ -9,9 +9,14 @@ import Cart from '@nichoth/shopping-cart'
 import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var Shell = require('./view/shell')
 
+var struct = require('observ-struct')
+var observ = require('observ')
+var Bus = require('@nichoth/events')
 
-console.log('wooooooo')
-
+var bus = Bus({ memo: true })
+var state = struct({
+    catalog: observ(null)
+})
 
 // -------------------------------------------------------
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register

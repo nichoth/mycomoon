@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@chec/commerce.js": "^2.7.1",
+    "@nichoth/events": "^1.1.2",
     "@nichoth/shopping-cart": "^0.0.39",
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
@@ -47,6 +48,7 @@
     "marked": "^2.0.3",
     "monotonic-timestamp": "^0.0.9",
     "observ": "^0.2.0",
+    "observ-struct": "^6.0.0",
     "preact": "^10.5.13",
     "route-event": "^3.1.0",
     "ruta3": "^2.0.1"

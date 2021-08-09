@@ -23,8 +23,6 @@ class Shell extends Component {
     }
 
     render (props) {
-        console.log('in shell', props)
-
         var { path } = props
 
         return html`<div class="outer-shell">

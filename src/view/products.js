@@ -2,11 +2,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
 function Products (props) {
-    console.log('props in products view', props)
-
     const [content, setContent] = useState(null)
-
-    console.log('products content', content)
 
     useEffect(() => {
         fetch('/.netlify/functions/get-catalog')
