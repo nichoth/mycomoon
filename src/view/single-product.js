@@ -79,29 +79,6 @@ function SingleProductView (props) {
 
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item} />
-
-            <ul class="item-cart-controls">
-                <span class="variation-name">
-                    ${item.name + ' '}
-                </span>
-                <span class="price-money">
-                    ${getReadableMoney(item)}
-                </span>
-                <span class="variation-controls">
-                    ${prodsInCart[item.id] ?
-                        html`<span class="prod-count">
-                            ${prodsInCart[item.id]}
-                        </span>` :
-                        null
-                    }
-                    <button
-                        disabled=${!item.is.sold_out}
-                        onClick=${addToCart.bind(null, item)}
-                    >
-                        add to cart
-                    </button>
-                </span>
-            </ul>
         </div>
 
         <div class="single-product-content">
