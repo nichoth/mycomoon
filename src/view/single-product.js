@@ -30,39 +30,39 @@ function SingleProductView (props) {
 
     if (!item) return null
 
-    // function addToCart (variation, ev) {
-    //     ev.preventDefault()
+    function addToCart (variation, ev) {
+        ev.preventDefault()
 
-    //     var _item = {
-    //         itemId: item.id,
-    //         // variationId: variation.id,
-    //         slug: slug,
-    //         name: item.name,
-    //         // variationName: variation.itemVariationData.name,
-    //         price: variation.price,
-    //         quantity: 1,
-    //         quantityAvailable: parseInt(variation.inventory.available),
-    //         imageData: item.media
-    //     }
+        var _item = {
+            itemId: item.id,
+            // variationId: variation.id,
+            slug: slug,
+            name: item.name,
+            // variationName: variation.itemVariationData.name,
+            price: variation.price,
+            quantity: 1,
+            quantityAvailable: parseInt(variation.inventory.available),
+            imageData: item.media
+        }
 
-    //     // here, check & adjust the quantity if necessary
-    //     var i = cart.state().products.findIndex(prod => {
-    //         return prod.itemId === variation.id
-    //     })
+        // here, check & adjust the quantity if necessary
+        var i = cart.state().products.findIndex(prod => {
+            return prod.itemId === variation.id
+        })
 
-    //     if (i > -1) {
-    //         var product = cart.state().products[i]
+        if (i > -1) {
+            var product = cart.state().products[i]
 
-    //         if ((product.quantity + 1) > product.quantityAvailable) {
-    //             return
-    //         }
+            if ((product.quantity + 1) > product.quantityAvailable) {
+                return
+            }
 
-    //         cart.changeQuantity(i, product.quantity + 1)
-    //         return
-    //     }
+            cart.changeQuantity(i, product.quantity + 1)
+            return
+        }
 
-    //     cart.add(_item)
-    // }
+        cart.add(_item)
+    }
 
     // get the number of variations that are in the cart
     // var prodsInCart = cartState.products.reduce((acc, prod) => {
@@ -76,13 +76,39 @@ function SingleProductView (props) {
     return html`<div class="single-product">
 
         <div class="single-product-info">
-
             <${ProductList} slug=${slug} item=${item} />
-
         </div>
 
         <div class="single-product-content">
             <img src="${item.media.source}" alt="mushroom" />
+
+
+            <ul class="item-cart-controls">
+
+                <span class="variation-name">
+                    ${item.name + ' '}
+                </span>
+                <span class="price-money">
+                    ${getReadableMoney(item)}
+                </span>
+                <span class="variation-controls">
+                    ${prodsInCart[v.id] ?
+                        html`<span class="prod-count">
+                            ${prodsInCart[item.id]}
+                        </span>` :
+                        null
+                    }
+                    <button
+                        disabled=${!item.is.sold_out}
+                        onClick=${addToCart.bind(null, item)}
+                    >
+                        add to cart
+                    </button>
+                </span>
+                    
+            </ul>
+
+
         </div>
     </div>`
 }
@@ -117,11 +143,11 @@ function ProductList (props) {
 
 module.exports = SingleProductView
 
-// function getReadableMoney (variation) {
-//     return variation.formatted_with_symbol
-//     // var price = variation.itemVariationData.priceMoney.amount
-//     // return toMoneyFormat(price)
-// }
+function getReadableMoney (variation) {
+    return variation.formatted_with_symbol
+    // var price = variation.itemVariationData.priceMoney.amount
+    // return toMoneyFormat(price)
+}
 
 // function toMoneyFormat (num) {
 //     var format = (parseInt(num) / 100).toLocaleString("en-US", {
