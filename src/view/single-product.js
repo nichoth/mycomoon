@@ -2,13 +2,14 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
 function SingleProductView (props) {
-    var { slug, getContent/*, cart*/ } = props
+    var { slug, getContent, cart } = props
     const [item, setItem] = useState(null)
     var [cartState, setCartState] = useState(null)
 
     console.log('props', props)
     console.log('slug', slug)
     console.log('the item', item)
+    console.log('the cart', cart)
 
     // comppnent did mount
     useEffect(() => {
@@ -108,7 +109,9 @@ function ProductList (props) {
                             __html: item.description
                         }}
                     />
-                    <${CartControls} item=${_item} />
+                    <${CartControls} item=${_item} product=${item}
+                        cart=${cart}
+                    />
                     ` :
                     null
                 }
@@ -118,7 +121,11 @@ function ProductList (props) {
 }
 
 function CartControls (props) {
-    var { item } = props
+    var { item, product, cart } = props
+    console.log('item in cart', item)
+    console.log('product in cart', product)
+    console.log('cart in cartcontrols', cart)
+    console.log('aaaa', cart.products())
     return html`<div class="cart-controls">
         cart controls ${item.name}
     </div>`
