@@ -4,7 +4,7 @@ import { html } from 'htm/preact'
 function SingleProductView (props) {
     var { slug, getContent/*, cart*/ } = props
     const [item, setItem] = useState(null)
-    // var [cartState, setCartState] = useState(null)
+    var [cartState, setCartState] = useState(null)
 
     console.log('props', props)
     console.log('slug', slug)
@@ -21,12 +21,12 @@ function SingleProductView (props) {
     }, []);
 
     // component did mount
-    // useEffect(() => {
-    //     setCartState(cart.state())
-    //     return cart.state(function onChange (newCartState) {
-    //         setCartState(newCartState)
-    //     })
-    // }, [])
+    useEffect(() => {
+        setCartState(cart.state())
+        return cart.state(function onChange (newCartState) {
+            setCartState(newCartState)
+        })
+    }, [])
 
     if (!item) return null
 
@@ -65,26 +65,22 @@ function SingleProductView (props) {
     }
 
     // get the number of variations that are in the cart
-    // var prodsInCart = cartState.products.reduce((acc, prod) => {
-    //     console.log('prod', prod)
-    //     acc[prod.itemId] = prod.quantity
-    //     return acc
-    // }, {})
+    var prodsInCart = cartState.products.reduce((acc, prod) => {
+        console.log('prod', prod)
+        acc[prod.itemId] = prod.quantity
+        return acc
+    }, {})
 
     // which menu item is open? it's based on the URL
+
+    // var isInStock = !v.is.sold_out
 
     return html`<div class="single-product">
 
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item} />
-        </div>
-
-        <div class="single-product-content">
-            <img src="${item.media.source}" alt="mushroom" />
-
 
             <ul class="item-cart-controls">
-
                 <span class="variation-name">
                     ${item.name + ' '}
                 </span>
@@ -92,7 +88,7 @@ function SingleProductView (props) {
                     ${getReadableMoney(item)}
                 </span>
                 <span class="variation-controls">
-                    ${prodsInCart[v.id] ?
+                    ${prodsInCart[item.id] ?
                         html`<span class="prod-count">
                             ${prodsInCart[item.id]}
                         </span>` :
@@ -105,10 +101,11 @@ function SingleProductView (props) {
                         add to cart
                     </button>
                 </span>
-                    
             </ul>
+        </div>
 
-
+        <div class="single-product-content">
+            <img src="${item.media.source}" alt="mushroom" />
         </div>
     </div>`
 }
@@ -133,12 +130,21 @@ function ProductList (props) {
                     html`<div dangerouslySetInnerHTML=${{
                             __html: item.description
                         }}
-                    />` :
+                    />
+                    <${CartControls} item=${_item} />
+                    ` :
                     null
                 }
             </li>`
         })}
     </ul>`
+}
+
+function CartControls (props) {
+    var { item } = props
+    return html`<div class="cart-controls">
+        cart controls ${item.name}
+    </div>`
 }
 
 module.exports = SingleProductView
