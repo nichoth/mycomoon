@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
+// TODO -- should use global state for the product list,
+// vs requesting each product when the route loads (which is what we're doing
+// currently)
+
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(null)
@@ -15,13 +19,13 @@ function SingleProductView (props) {
     useEffect(() => {
         getContent()
             .then(res => {
-                // console.log('**res**', res)
                 setItem(res)
             })
             .catch(err => console.log('errrr', err))
     }, []);
 
     // component did mount
+    // subscribe to any changes in the shopping cart
     useEffect(() => {
         setCartState(cart.state())
         return cart.state(function onChange (newCartState) {
@@ -31,24 +35,22 @@ function SingleProductView (props) {
 
     if (!item) return null
 
-    function addToCart (variation, ev) {
+    function addToCart (item, ev) {
         ev.preventDefault()
 
         var _item = {
             itemId: item.id,
-            // variationId: variation.id,
             slug: slug,
             name: item.name,
-            // variationName: variation.itemVariationData.name,
-            price: variation.price,
+            price: item.price,
             quantity: 1,
-            quantityAvailable: parseInt(variation.inventory.available),
+            quantityAvailable: parseInt(item.inventory.available),
             imageData: item.media
         }
 
         // here, check & adjust the quantity if necessary
         var i = cart.state().products.findIndex(prod => {
-            return prod.itemId === variation.id
+            return prod.itemId === item.id
         })
 
         if (i > -1) {
@@ -77,10 +79,9 @@ function SingleProductView (props) {
     // var isInStock = !v.is.sold_out
 
     return html`<div class="single-product">
-
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item}
-                prodsInCart=${prodsInCart}
+                prodsInCart=${prodsInCart} addToCart=${addToCart}
             />
         </div>
 
@@ -126,12 +127,15 @@ function ProductList (props) {
 
 function CartControls (props) {
     var { item, product, cart, prodsInCart, onAddToCart } = props
-    console.log('item in cart', item)
-    console.log('product in cart', product)
-    console.log('cart in cartcontrols', cart)
+
+    console.log('item in cart contorls', item)
+    console.log('product in cart contorls', product)
+    console.log('cart in cartcontrols contorls', cart)
     console.log('aaaa', cart.products())
+
     var count = (prodsInCart[product.id] || 0)
     var price = product.price.formatted_with_symbol
+
     return html`<div class="cart-controls">
         <span class="price">${price}</span>
         <span>${count} in cart</span> 
