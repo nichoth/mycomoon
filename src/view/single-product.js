@@ -65,7 +65,7 @@ function SingleProductView (props) {
         cart.add(_item)
     }
 
-    // get the number of variations that are in the cart
+    // get the quantity of each item that is in the cart
     var prodsInCart = cartState.products.reduce((acc, prod) => {
         console.log('prod', prod)
         acc[prod.itemId] = prod.quantity
@@ -79,7 +79,9 @@ function SingleProductView (props) {
     return html`<div class="single-product">
 
         <div class="single-product-info">
-            <${ProductList} slug=${slug} item=${item} />
+            <${ProductList} slug=${slug} item=${item}
+                prodsInCart=${prodsInCart}
+            />
         </div>
 
         <div class="single-product-content">
@@ -90,7 +92,7 @@ function SingleProductView (props) {
 
 // needs permalink, description, name
 function ProductList (props) {
-    var { slug, item } = props
+    var { slug, item, prodsInCart, addToCart } = props
 
     var items = [
         { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
@@ -110,7 +112,9 @@ function ProductList (props) {
                         }}
                     />
                     <${CartControls} item=${_item} product=${item}
-                        cart=${cart}
+                        cart=${cart} quantity=${prodsInCart[item.id]}
+                        prodsInCart=${prodsInCart}
+                        onAddToCart=${addToCart}
                     />
                     ` :
                     null
@@ -121,13 +125,17 @@ function ProductList (props) {
 }
 
 function CartControls (props) {
-    var { item, product, cart } = props
+    var { item, product, cart, prodsInCart, onAddToCart } = props
     console.log('item in cart', item)
     console.log('product in cart', product)
     console.log('cart in cartcontrols', cart)
     console.log('aaaa', cart.products())
+    var count = (prodsInCart[product.id] || 0)
+    var price = product.price.formatted_with_symbol
     return html`<div class="cart-controls">
-        cart controls ${item.name}
+        <span class="price">${price}</span>
+        <span>${count} in cart</span> 
+        <button onClick=${onAddToCart} class="cart-add">add to cart</button>
     </div>`
 }
 
