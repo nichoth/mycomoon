@@ -7,8 +7,9 @@ var AboutPage = require('./view/about')
 // var createIndexView = require('./view/index')
 var IndexView = require('./view/index')
 // const Commerce = require('@chec/commerce.js')
+var evs = require('./EVENTS')
 
-function Router () {
+function Router (state, bus) {
 
     router.addRoute('/', () => {
         return {
@@ -61,6 +62,7 @@ function Router () {
 
         return {
             getContent: function () {
+                // this is for fetching directly from commerce, not our server
                 // var checKey = 'pk_test_183261c4e2a86741dc202b75c7956df699e0c2678d549'
                 // const commerce = new Commerce(checKey);
 
@@ -72,12 +74,23 @@ function Router () {
                 //         return res
                 //     })
 
+                // console.log('*****here', state().catalog && state().catalog[slug])
+                if (state().catalog && state().catalog[slug]) {
+                    console.log('!!!!!!*****was in the state*******', state())
+                    return Promise.resolve(state().catalog[slug])
+                }
+
+                console.log('not in state')
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
 
                 return fetch(url)
                     .then(res => {
                         return res.json()
+                    })
+                    .then(json => {
+                        bus.emit(evs.product.got, json)
+                        return json
                     })
                     .catch(err => {
                         console.log('oh no', err)

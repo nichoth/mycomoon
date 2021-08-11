@@ -13,23 +13,24 @@ function SingleProductView (props) {
     const [item, setItem] = useState(null)
     var [cartState, setCartState] = useState(null)
 
-    console.log('props', props)
-    console.log('slug', slug)
-    console.log('the item', item)
-    console.log('the cart', cart)
+    // console.log('props', props)
+    // console.log('slug', slug)
+    // console.log('the item', item)
+    // console.log('the cart', cart)
 
     // comppnent did mount
     // request the item from the server
+
+    // todo:
+    // keep global state of products, and get it from there if possible
+    // compponent did update
     useEffect(() => {
-
-        // if !(products[slug]) return emit(evs.prod.get, slug)
-
         getContent()
             .then(res => {
                 setItem(res)
             })
             .catch(err => console.log('errrr', err))
-    }, []);
+    });
 
     // component did mount
     // subscribe to any changes in the shopping cart
@@ -133,10 +134,8 @@ function ProductList (props) {
 function CartControls (props) {
     var { item, product, cart, prodsInCart, onAddToCart } = props
 
-    console.log('item in cart contorls', item)
-    console.log('product in cart contorls', product)
-    console.log('cart in cartcontrols contorls', cart)
-    console.log('aaaa', cart.products())
+    // console.log('item in cart contorls', item)
+    // console.log('product in cart contorls', product)
 
     var count = (prodsInCart[product.id] || 0)
     var price = product.price.formatted_with_symbol

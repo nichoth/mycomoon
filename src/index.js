@@ -12,10 +12,28 @@ var Shell = require('./view/shell')
 var struct = require('observ-struct')
 var observ = require('observ')
 var Bus = require('@nichoth/events')
+var evs = require('./EVENTS')
+var xtend = require('xtend')
 
 var bus = Bus({ memo: true })
 var state = struct({
     catalog: observ(null)
+})
+
+function subscribe (bus, state) {
+    bus.on(evs.product.got, ev => {
+        console.log('******in event listener', ev)
+        var newItem = {}
+        newItem[ev.permalink] = ev
+        var newState = state.catalog() ?
+            xtend((state && state.catalog() || {}), newItem) :
+            newItem
+        state.catalog.set(newState)
+    })
+}
+
+state(_state => {
+    console.log('**debug new state', _state)
 })
 
 // -------------------------------------------------------
@@ -48,7 +66,9 @@ cart.on(EVENTS.product.change, (index, updatedProduct) => {
     console.log('product change', updatedProduct)
 })
 
-var router = Router()
+var router = Router(state, bus)
+
+subscribe(bus, state)
 
 route(function onRoute (path) {
     console.log('route event', path)
