@@ -1,9 +1,9 @@
 @use '../../node_modules/@nichoth/shopping-cart/src/style/main.scss';
 @use './shell.scss';
-// @use './cart.scss';
 @use './products.scss';
 @use './single-product.scss';
-@use './about';
+@use './about.scss';
+@use './cart.scss';
 
 // @use './variables.scss';
 @import './variables.scss';
@@ -29,15 +29,10 @@ body {
     background: url(/myco.png) no-repeat center center fixed; 
     background-size: cover;
 
-    // --------------- fix that icon --------------------
-    #cart-quantity {
-        bottom: 23px;
-        left: 16px;
-        &.ohno {
-            bottom: 26px;
-        }
+    .cart-container {
+        position: relative;
+        top: 8px;
     }
-    // --------------- /fix that icon --------------------
 
     p, h1 {
         letter-spacing: 0.1rem;

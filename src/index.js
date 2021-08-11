@@ -92,7 +92,7 @@ route(function onRoute (path) {
         _path.basename(path)
 
     var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
-        dirs[0] !== 'about')
+        dirs[0] !== 'about' && dirs[0] !== 'cart')
     if (isProdPage) contentClass += ' product-page'
 
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}

@@ -10,241 +10,335 @@
 }
 // --------------- /fix that icon --------------------
 
-// ---------------- cart page -----------------
-.cart-content {
-    padding: 0 4rem;
-}
+$pageWidth: 40rem;
 
-#cart-page, #cart-summary {
-    list-style: none;
-    padding-left: 0;
-    margin: 1rem auto;
-    max-width: 40rem;
 
-    .quantities {
-        top: 10px;
-        position: relative;
+.shell.cart {
+    margin-top: 2rem;
+
+    h2 {
+        font-size: 3rem;
+        margin: 0 auto;
+        max-width: $pageWidth;
     }
 
-    .quantities.ohno, .available.ohno {
-        border-bottom: red 4px dashed;
+    .cart-totals {
+        max-width: $pageWidth;
+        text-align: right;
+        margin: 0 auto;
+
+        .tax {
+            border-bottom: 1px solid;
+        }
     }
 
 
-    // -------- number input -----------------------
+    .cart-controls {
+        margin: 0 auto;
+        max-width: 40rem;
+        text-align: right;
+        margin-top: 4rem;
 
-    .input-group.number {
-        // float: left;
+        .pay {
+            // text-decoration: none;
+            // border: 2px solid white;
+            // padding: 0.5rem;
+            // background-color: $main-color;
+            // color: black;
+            // transition: border-color 0.4s;
 
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            appearance: none;
-            margin: 0;
-        }
-
-        input[type=number] {
-            appearance: textfield;
-            -moz-appearance: textfield;
-
-            font-size: 1.2rem;
-
-            width: 45px;
-            height: 42px;
-            line-height: 1.65;
-            float: left;
-            display: block;
-            padding: 0;
-            margin: 0;
-            padding-left: 20px;
-            border: 1px solid #eee;
-
-            &:focus {
-                outline: 0;
-            }
-        }
-
-        .quantity-nav {
-            float: left;
-            position: relative;
-            height: 42px!important;
-
-            button {
-                top: initial;
-                position: initial;
-                color: #333;
-            }
-            
-            .quantity-button {
-                position: relative;
-                cursor: pointer;
-                border-left: 1px solid #eee;
-                width: 20px;
-                text-align: center;
-                color: #333;
-                font-size: 13px;
-                // font-family: "Trebuchet MS", Helvetica, sans-serif !important;
-                line-height: 1.7;
-                // -webkit-transform: translateX(-100%);
-                transform: translateX(-100%);
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                -o-user-select: none;
-                user-select: none;
-
-                &.quantity-up {
-                    position: absolute;
-                    height: 50%;
-                    top: 0;
-                    border-bottom: 1px solid #eee;
-                }
-
-                &.quantity-down {
-                    position: absolute;
-                    bottom: -1px;
-                    height: 50%;
-                }
-            }
-
-        }
-
-    }
-
-    // -------- /number input -----------------------
-
-    li {
-        display: flex;
-        border-bottom: 1px solid;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem 0rem;
-
-        .cart-image {
-            width: 2rem;
-            height: 2rem;
-            margin-right: 1rem;
             display: inline-block;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-        }
-
-        button {
-            border: none;
-            background-color: transparent;
-            fill: $main-color;
-            color: #f0dca9;
-
-            top: 8px;
             position: relative;
+            padding: .5rem 1.25rem;
+            background-color: black;
+            color: black;
+            font-family: sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: .02em;
+            filter: none;
 
             &:hover {
-                fill: white;
-                filter: drop-shadow(2px 4px 6px white);
-            }
-
-            &.primary {
-                padding: 0.4rem 1rem;
-                border: 1px solid;
-                margin-right: 1rem;
-                &:hover {
-                    background-color: #f0dca954; 
+                &::after {
+                    background-color: lighten($color: $main-color, $amount: 10%);
+                    transform: translate(-5px, -5px);
                     filter: drop-shadow(2px 4px 6px black);
                 }
             }
 
-            &.cancel {
-                background-color: rgb(239, 239, 239);
+            &::after {
+                position: absolute;
+                content: 'buy them';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: $main-color;
                 color: black;
-                &:hover {
+                border: solid 3px black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-0.5rem, -0.5rem);
+                transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+        }
+
+        span.pay {
+            cursor: not-allowed;
+            opacity: 0.6;
+            &:hover {
+                border-color: white;
+                &::after {
+                    background-color: $main-color;
                     filter: none;
                 }
             }
         }
     }
+
 }
 
-.cart-controls {
-    margin: 0 auto;
-    max-width: 40rem;
-    text-align: right;
-    margin-top: 4rem;
 
-    .pay {
-        // text-decoration: none;
-        // border: 2px solid white;
-        // padding: 0.5rem;
-        // background-color: $main-color;
-        // color: black;
-        // transition: border-color 0.4s;
 
-        display: inline-block;
-        position: relative;
-        padding: .5rem 1.25rem;
-        background-color: black;
-        color: black;
-        font-family: sans-serif;
-        font-weight: 600;
-        text-decoration: none;
-        letter-spacing: .02em;
-        filter: none;
 
-        &:hover {
-            &::after {
-                background-color: lighten($color: $main-color, $amount: 10%);
-                transform: translate(-5px, -5px);
-                filter: drop-shadow(2px 4px 6px black);
-            }
-        }
 
-        &::after {
-            position: absolute;
-            content: 'buy them';
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-color: $main-color;
-            color: black;
-            border: solid 3px black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translate(-0.5rem, -0.5rem);
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-    }
 
-    span.pay {
-        cursor: not-allowed;
-        opacity: 0.6;
-        &:hover {
-            border-color: white;
-            &::after {
-                background-color: $main-color;
-                filter: none;
-            }
-        }
-    }
-}
+// ---------------- cart page -----------------
+// .cart-content {
+//     padding: 0 4rem;
+// }
 
-.cart-totals {
-    max-width: 40rem;
-    text-align: right;
-    margin: 0 auto;
+// #cart-page, #cart-summary {
+//     list-style: none;
+//     padding-left: 0;
+//     margin: 1rem auto;
+//     max-width: 40rem;
 
-    .tax {
-        border-bottom: 1px solid;
-    }
-}
+//     .quantities {
+//         top: 10px;
+//         position: relative;
+//     }
 
-.total-money {
-    text-align: right;
-}
-// ---------------- /cart page -----------------
+//     .quantities.ohno, .available.ohno {
+//         border-bottom: red 4px dashed;
+//     }
+
+
+//     // -------- number input -----------------------
+
+//     .input-group.number {
+//         // float: left;
+
+//         input[type=number]::-webkit-inner-spin-button,
+//         input[type=number]::-webkit-outer-spin-button {
+//             -webkit-appearance: none;
+//             appearance: none;
+//             margin: 0;
+//         }
+
+//         input[type=number] {
+//             appearance: textfield;
+//             -moz-appearance: textfield;
+
+//             font-size: 1.2rem;
+
+//             width: 45px;
+//             height: 42px;
+//             line-height: 1.65;
+//             float: left;
+//             display: block;
+//             padding: 0;
+//             margin: 0;
+//             padding-left: 20px;
+//             border: 1px solid #eee;
+
+//             &:focus {
+//                 outline: 0;
+//             }
+//         }
+
+//         .quantity-nav {
+//             float: left;
+//             position: relative;
+//             height: 42px!important;
+
+//             button {
+//                 top: initial;
+//                 position: initial;
+//                 color: #333;
+//             }
+            
+//             .quantity-button {
+//                 position: relative;
+//                 cursor: pointer;
+//                 border-left: 1px solid #eee;
+//                 width: 20px;
+//                 text-align: center;
+//                 color: #333;
+//                 font-size: 13px;
+//                 // font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+//                 line-height: 1.7;
+//                 // -webkit-transform: translateX(-100%);
+//                 transform: translateX(-100%);
+//                 -webkit-user-select: none;
+//                 -moz-user-select: none;
+//                 -ms-user-select: none;
+//                 -o-user-select: none;
+//                 user-select: none;
+
+//                 &.quantity-up {
+//                     position: absolute;
+//                     height: 50%;
+//                     top: 0;
+//                     border-bottom: 1px solid #eee;
+//                 }
+
+//                 &.quantity-down {
+//                     position: absolute;
+//                     bottom: -1px;
+//                     height: 50%;
+//                 }
+//             }
+
+//         }
+
+//     }
+
+//     // -------- /number input -----------------------
+
+//     li {
+//         display: flex;
+//         border-bottom: 1px solid;
+//         align-items: baseline;
+//         justify-content: space-between;
+//         margin-bottom: 0.5rem;
+//         padding: 0.5rem 0rem;
+
+//         .cart-image {
+//             width: 2rem;
+//             height: 2rem;
+//             margin-right: 1rem;
+//             display: inline-block;
+
+//             img {
+//                 width: 100%;
+//                 height: 100%;
+//                 object-fit: cover;
+//                 border-radius: 50%;
+//             }
+//         }
+
+//         button {
+//             border: none;
+//             background-color: transparent;
+//             fill: $main-color;
+//             color: #f0dca9;
+
+//             top: 8px;
+//             position: relative;
+
+//             &:hover {
+//                 fill: white;
+//                 filter: drop-shadow(2px 4px 6px white);
+//             }
+
+//             &.primary {
+//                 padding: 0.4rem 1rem;
+//                 border: 1px solid;
+//                 margin-right: 1rem;
+//                 &:hover {
+//                     background-color: #f0dca954; 
+//                     filter: drop-shadow(2px 4px 6px black);
+//                 }
+//             }
+
+//             &.cancel {
+//                 background-color: rgb(239, 239, 239);
+//                 color: black;
+//                 &:hover {
+//                     filter: none;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .cart-controls {
+//     margin: 0 auto;
+//     max-width: 40rem;
+//     text-align: right;
+//     margin-top: 4rem;
+
+//     .pay {
+//         // text-decoration: none;
+//         // border: 2px solid white;
+//         // padding: 0.5rem;
+//         // background-color: $main-color;
+//         // color: black;
+//         // transition: border-color 0.4s;
+
+//         display: inline-block;
+//         position: relative;
+//         padding: .5rem 1.25rem;
+//         background-color: black;
+//         color: black;
+//         font-family: sans-serif;
+//         font-weight: 600;
+//         text-decoration: none;
+//         letter-spacing: .02em;
+//         filter: none;
+
+//         &:hover {
+//             &::after {
+//                 background-color: lighten($color: $main-color, $amount: 10%);
+//                 transform: translate(-5px, -5px);
+//                 filter: drop-shadow(2px 4px 6px black);
+//             }
+//         }
+
+//         &::after {
+//             position: absolute;
+//             content: 'buy them';
+//             width: 100%;
+//             height: 100%;
+//             top: 0;
+//             left: 0;
+//             background-color: $main-color;
+//             color: black;
+//             border: solid 3px black;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             transform: translate(-0.5rem, -0.5rem);
+//             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+//         }
+//     }
+
+//     span.pay {
+//         cursor: not-allowed;
+//         opacity: 0.6;
+//         &:hover {
+//             border-color: white;
+//             &::after {
+//                 background-color: $main-color;
+//                 filter: none;
+//             }
+//         }
+//     }
+// }
+
+// .cart-totals {
+//     max-width: 40rem;
+//     text-align: right;
+//     margin: 0 auto;
+
+//     .tax {
+//         border-bottom: 1px solid;
+//     }
+// }
+
+// .total-money {
+//     text-align: right;
+// }
+// // ---------------- /cart page -----------------

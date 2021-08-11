@@ -152,7 +152,7 @@ class CartPage extends Component {
         var isWonky = cart.ohno()
 
         return html`
-            <h1>the shopping cart</h1>
+            <h2>the shopping cart</h2>
 
             <div class="cart-content" ref=${this.ref}></div>
 

@@ -4,6 +4,9 @@ import { html } from 'htm/preact'
 // TODO -- should use global state for the product list,
 // vs requesting each product when the route loads (which is what we're doing
 // currently)
+// could do this all in the route handler actually
+// if !(state().item[slug]) return fetch and set
+// setItem(state().item[slug])
 
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
@@ -16,7 +19,11 @@ function SingleProductView (props) {
     console.log('the cart', cart)
 
     // comppnent did mount
+    // request the item from the server
     useEffect(() => {
+
+        // if !(products[slug]) return emit(evs.prod.get, slug)
+
         getContent()
             .then(res => {
                 setItem(res)
