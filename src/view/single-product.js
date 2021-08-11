@@ -81,8 +81,6 @@ function SingleProductView (props) {
         return acc
     }, {})
 
-    // which menu item is open? it's based on the URL
-
     // var isInStock = !v.is.sold_out
 
     return html`<div class="single-product">
