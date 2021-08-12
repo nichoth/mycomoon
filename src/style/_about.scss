@@ -1,12 +1,21 @@
+@media screen and (max-width: 600px) {
+    #content.about {
+        .about {
+            margin: 1rem!important;
+        }
+    }
+}
+
 body {
     #content.about {
         .about {
+            h1 {
+                font-size: 3rem;
+                margin-top: 2rem;
+            }
+
             max-width: 40rem;
             margin: 0 auto;
-
-            h1 {
-                margin-top: 0;
-            }
         }
     }
 }
