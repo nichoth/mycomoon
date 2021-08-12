@@ -155,7 +155,10 @@ function ProductList (props) {
                     html`<div dangerouslySetInnerHTML=${{
                             __html: item.description
                         }}
-                    />
+                    ></div>
+
+                    <${DualExtracted} />
+
                     <div class="bonus-info">
                         <div class="bonus-info-tab">
                             <span>Organic</span>
@@ -178,6 +181,20 @@ function ProductList (props) {
             </li>`
         })}
     </ul>`
+}
+
+function DualExtracted () {
+    return html`<div class="dual-extracted">
+        <svg viewBox="0 0 100 120" fill="red">
+            <path id="curve" d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0" stroke="white" fill="transparent"/>
+            <path id="big-curve" d="M0,70a60,60 0 1,0 120,0a60,60 0 1,0 -140,0" stroke="transparent" fill="transparent"/>
+            <text transform="translate(-39, 30) rotate(-33)">
+                <textPath href="#big-curve" fill="white" stroke="transparent">
+                    Dual Extracted
+                </textPath>
+            </text>
+        </svg>
+    </div>`
 }
 
 function CartControls (props) {

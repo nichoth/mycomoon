@@ -81,6 +81,15 @@
 .single-product {
     display: flex;
 
+    svg {
+        height: 7rem;
+    }
+
+    .dual-extracted {
+        height: 10rem;
+        text-align: center;
+    }
+
     .product-list {
         margin: 0;
 
