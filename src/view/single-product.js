@@ -160,8 +160,7 @@ function ProductList (props) {
                         cart=${cart} quantity=${prodsInCart[item.id]}
                         prodsInCart=${prodsInCart}
                         onAddToCart=${addToCart}
-                    />
-                    ` :
+                    />` :
                     null
                 }
             </li>`

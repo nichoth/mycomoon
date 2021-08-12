@@ -105,7 +105,6 @@
         border-bottom: 1px solid;
 
         &.active {
-            border-bottom: none;
             flex-grow: 1;
             flex-direction: column;
             display: flex;
@@ -122,6 +121,7 @@
         }
 
         a {
+            display: block;
             &:hover {
                 text-decoration: underline;
             }
