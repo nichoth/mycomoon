@@ -87,6 +87,25 @@
         > li {
             margin: 0;
         }
+
+        .bonus-info {
+            margin: 0 auto;
+            min-width: 20rem;
+            border: 1px solid;
+
+            span {
+                text-transform: uppercase;
+            }
+
+            .bonus-info-tab {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem;
+                &:first-child {
+                    border-bottom: 1px solid;
+                }
+            }
+        }
     }
 
     h1 {

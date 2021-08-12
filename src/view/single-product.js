@@ -156,6 +156,18 @@ function ProductList (props) {
                             __html: item.description
                         }}
                     />
+                    <div class="bonus-info">
+                        <div class="bonus-info-tab">
+                            <span>Organic</span>
+                            <span>*</span>
+                            <span>non-GMO</span>
+                        </div>
+                        <div class="bonus-info-tab">
+                            <span>Vegan</span>
+                            <span>*</span>
+                            <span>made in USA</span>
+                        </div>
+                    </div>
                     <${CartControls} item=${_item} product=${item}
                         cart=${cart} quantity=${prodsInCart[item.id]}
                         prodsInCart=${prodsInCart}
