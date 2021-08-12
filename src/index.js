@@ -22,7 +22,7 @@ var state = struct({
 
 function subscribe (bus, state) {
     bus.on(evs.product.got, ev => {
-        console.log('******in event listener', ev)
+        // console.log('******in event listener', ev)
         var newItem = {}
         newItem[ev.permalink] = ev
         var newState = state.catalog() ?
@@ -32,9 +32,9 @@ function subscribe (bus, state) {
     })
 }
 
-state(_state => {
-    console.log('**debug new state', _state)
-})
+// state(_state => {
+//     console.log('**debug new state', _state)
+// })
 
 // -------------------------------------------------------
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
