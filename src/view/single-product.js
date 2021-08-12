@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 
+var ITEMS = [
+    { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
+    { link: 'chaga-tincture', name: 'Chaga Tincture' },
+    { link: 'lions-mane-tincture', name: "Lion's Mane Tincture" },
+    { link: 'reishi-tincture', name: "Reishi Tincture" }
+]
+
+
 // TODO -- should use global state for the product list,
 // vs requesting each product when the route loads (which is what we're doing
 // currently)
@@ -90,11 +98,23 @@ function SingleProductView (props) {
         setMenuOpen(false)
     }
 
+    function closeMenuAndNav (ev) {
+        setMenuOpen(false)
+    }
+
     if (menuIsOpen) return html`<div class="modal-nav-window">
         <div>
             <button onclick=${closeMenu} class="fas fa-times"></button>
         </div>
-        <div class="the-menu">open menu</div>
+        <ul class="the-modal-menu">
+            ${ITEMS.map(item => {
+                return html`<li>
+                    <a onclick=${closeMenuAndNav} href="/${item.link}">
+                        ${item.name}
+                    </a>
+                </li>`
+            })}
+        </ul>
     </div>`
 
     return html`<div class="single-product">
@@ -114,13 +134,7 @@ function SingleProductView (props) {
 // needs permalink, description, name
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, setMenuOpen } = props
-
-    var items = [
-        { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
-        { link: 'chaga-tincture', name: 'Chaga Tincture' },
-        { link: 'lions-mane-tincture', name: "Lion's Mane Tincture" },
-        { link: 'reishi-tincture', name: "Reishi Tincture" }
-    ]
+    var items = ITEMS
 
     function openMenu(ev) {
         ev.preventDefault()
