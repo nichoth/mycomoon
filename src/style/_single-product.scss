@@ -4,6 +4,18 @@
     .modal-nav-window {
         .the-modal-menu {
             margin-top: 1rem;
+
+            li {
+                // margin-bottom: 1rem;
+                list-style: none;
+                padding-bottom: 1rem;
+                margin-top: 1rem;
+                border-bottom: 1px solid;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
         }
     }
 
@@ -25,10 +37,15 @@
 
                     > div {
                         display: block;
+
+                        ul {
+                            display: block;
+                        }
                     }
 
                     .cart-controls {
                         display: flex;
+                        justify-content: space-between;
                     }
 
                     .chev {
@@ -53,7 +70,7 @@
 
         .single-product-content {
             width: 80%!important;
-            margin: 0 auto!important;
+            margin: 0 auto 2rem!important;
         }
     }
 }
