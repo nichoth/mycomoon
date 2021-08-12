@@ -96,7 +96,7 @@
     list-style: none;
     padding: 0;
 
-    display: flex;
+    display: flex!important;
     height: 100%;
     flex-direction: column;
 
@@ -112,6 +112,8 @@
 
         &.active {
             flex-grow: 1;
+            flex-direction: column;
+            display: flex;
 
             a {
                 margin-bottom: 1rem;

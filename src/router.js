@@ -74,8 +74,8 @@ function Router (state, bus) {
                 //         return res
                 //     })
 
-                // console.log('*****here', state().catalog && state().catalog[slug])
                 if (state().catalog && state().catalog[slug]) {
+                    console.log('***in state')
                     return Promise.resolve(state().catalog[slug])
                 }
 

@@ -1,14 +1,68 @@
 @import './variables.scss';
 
+@media screen and (max-width: 600px) {
+    .modal-nav-window {
+        .the-menu {
+            margin-top: 1rem;
+        }
+    }
+
+    .single-product {
+        flex-direction: column;
+
+        .single-product-info {
+            width: 100%!important;
+
+            li {
+                display: none;
+
+                &.active {
+                    display: block;
+
+                    a {
+                        display: inline-block;
+                    }
+
+                    > div {
+                        display: block;
+                    }
+
+                    .cart-controls {
+                        display: flex;
+                    }
+
+                    .chev {
+                        content: " ";
+                        width: 20px;
+                        height: 20px;
+                        background-size: contain;
+                        background-image: url(/img/chevron.svg);
+                        float: right;
+                    }
+
+                    * {
+                        display: initial;
+                    }
+
+                    li {
+                        display: list-item;
+                    }
+                }
+            }
+        }
+
+        .single-product-content {
+            width: 80%!important;
+            margin: 0 auto!important;
+        }
+    }
+}
+
 .single-product {
     display: flex;
 
     .product-list {
         margin: 0;
-
-        a {
-            display: block;
-        }
 
         > li {
             margin: 0;

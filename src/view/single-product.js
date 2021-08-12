@@ -12,6 +12,7 @@ function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(null)
     var [cartState, setCartState] = useState(null)
+    var [menuIsOpen, setMenuOpen] = useState(false)
 
     // console.log('props', props)
     // console.log('slug', slug)
@@ -84,10 +85,23 @@ function SingleProductView (props) {
 
     // var isInStock = !v.is.sold_out
 
+    function closeMenu (ev) {
+        ev.preventDefault()
+        setMenuOpen(false)
+    }
+
+    if (menuIsOpen) return html`<div class="modal-nav-window">
+        <div>
+            <button onclick=${closeMenu} class="fas fa-times"></button>
+        </div>
+        <div class="the-menu">open menu</div>
+    </div>`
+
     return html`<div class="single-product">
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item}
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
+                setMenuOpen=${setMenuOpen}
             />
         </div>
 
@@ -99,7 +113,7 @@ function SingleProductView (props) {
 
 // needs permalink, description, name
 function ProductList (props) {
-    var { slug, item, prodsInCart, addToCart } = props
+    var { slug, item, prodsInCart, addToCart, setMenuOpen } = props
 
     var items = [
         { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
@@ -108,11 +122,21 @@ function ProductList (props) {
         { link: 'reishi-tincture', name: "Reishi Tincture" }
     ]
 
+    function openMenu(ev) {
+        ev.preventDefault()
+        setMenuOpen(true)
+    }
+
     return html`<ul class="product-list">
         ${items.map(_item => {
             var isActive = _item.link === slug
+
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${'/' + _item.link}>${_item.name}</a>
+                ${isActive ?
+                    html`<button onclick="${openMenu}" class="chev"> </button>` :
+                    null
+                }
                 ${isActive ?
                     html`<div dangerouslySetInnerHTML=${{
                             __html: item.description

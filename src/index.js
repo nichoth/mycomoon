@@ -22,7 +22,6 @@ var state = struct({
 
 function subscribe (bus, state) {
     bus.on(evs.product.got, ev => {
-        // console.log('******in event listener', ev)
         var newItem = {}
         newItem[ev.permalink] = ev
         var newState = state.catalog() ?
