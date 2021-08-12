@@ -49,7 +49,7 @@
                 &.active {
                     a {
                         &::before {
-                            content: "● ";
+                            content: "●\00A0";
                         }
                     }
                 }

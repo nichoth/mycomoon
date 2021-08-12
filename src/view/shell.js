@@ -47,19 +47,23 @@ class Shell extends Component {
 function Menu ({ activePath }) {
     var [isOpen, setOpen] = useState(false)
 
-    function openMenu (ev) {
+    function toggleOpen (ev) {
         ev.preventDefault()
         setOpen(!isOpen)
     }
 
+    function navigate (ev) {
+        setOpen(false)
+    }
+
     return html`<div class="menu-part${isOpen ? ' open' : ''}">
         <div>
-            <button onCLick=${openMenu}>
+            <button onCLick=${toggleOpen}>
                 <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i>
             </button>
         </div>
 
-        <ul class="menu-content">
+        <ul class="menu-content" onclick="${navigate}">
             <li class=${active('/about', activePath)}>
                 <a href="/about">about</a>
             </li>
