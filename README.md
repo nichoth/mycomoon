@@ -14,6 +14,9 @@ A website
 
 [Service-worker to prefetch remote images](https://gist.github.com/dsheiko/8a5878678371f950d37f3ee074fe8031)
 
+----------------------------------------------------------------------
+
+This is now a single page app, with preact
 
 
 

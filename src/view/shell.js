@@ -59,7 +59,12 @@ function Menu ({ activePath }) {
     return html`<div class="menu-part${isOpen ? ' open' : ''}">
         <div>
             <button onCLick=${toggleOpen}>
-                <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i>
+                <div class="hamburger${isOpen ? ' open' : ''}">
+                    <span class="hamburger__top-bun"></span>
+                    <span class="hamburger__middle-bun"></span>
+                    <span class="hamburger__bottom-bun"></span>
+                </div>
+                <!-- <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i> -->
             </button>
         </div>
 
