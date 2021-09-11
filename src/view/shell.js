@@ -11,12 +11,15 @@ class Shell extends Component {
     componentDidUpdate () {
         var el = document.getElementById('content')
         el.className = this.props.contentClass;
+        document.body.className = this.props.contentClass
     }
 
     componentDidMount() {
         var el = document.getElementById('content')
         console.log('this.props.contentclass', this.props.contentClass)
         el.className = this.props.contentClass;
+
+        document.body.className = this.props.contentClass
 
         var cart = this.props.cart
         cart.createIcon(this.ref.current, { link: '/cart' })

@@ -29,6 +29,10 @@ body {
     background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
     background-size: cover;
 
+    &.about {
+        backdrop-filter: brightness(0.2);
+    }
+
     .cart-container {
         position: relative;
         top: 8px;

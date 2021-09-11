@@ -62,24 +62,12 @@ function Router (state, bus) {
 
         return {
             getContent: function () {
-                // this is for fetching directly from commerce, not our server
-                // var checKey = 'pk_test_183261c4e2a86741dc202b75c7956df699e0c2678d549'
-                // const commerce = new Commerce(checKey);
-
-                // return commerce.products.retrieve(slug, {
-                //     type: 'permalink'
-                // })
-                //     .then(res => {
-                //         console.log('res', res)
-                //         return res
-                //     })
-
                 if (state().catalog && state().catalog[slug]) {
-                    console.log('***in state')
+                    // console.log('***in state')
                     return Promise.resolve(state().catalog[slug])
                 }
 
-                console.log('not in state')
+                // console.log('not in state')
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
 
