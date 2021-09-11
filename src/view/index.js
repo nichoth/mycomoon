@@ -11,6 +11,10 @@ function IndexView (props) {
     return html`
         <p>the index content</p>
 
+        <div class="logo">
+            <img src="/img/logo.jpeg" />
+        </div>
+
         <!-- <ul class="main-nav">
             <li class="tab${path === '/' ? ' active' : ''}">
                 <a href="/"><h2>

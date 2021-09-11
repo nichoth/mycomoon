@@ -64,7 +64,6 @@ function Menu ({ activePath }) {
                     <span class="hamburger__middle-bun"></span>
                     <span class="hamburger__bottom-bun"></span>
                 </div>
-                <!-- <i class="fas ${isOpen ?  'fa-times' : 'fa-bars'}"></i> -->
             </button>
         </div>
 
