@@ -23,6 +23,7 @@
 .hamburger {
     cursor: pointer;
     position: absolute;
+    left: 1rem;
     width: 48px;
     height: 48px;
     transition: all 0.25s;
@@ -46,7 +47,7 @@
     content: '';
     display: block;
     position: absolute;
-    width: 25px;
+    width: 30px;
     height: 2px;
     background: #fff;
     transform: rotate(0);
@@ -58,11 +59,11 @@
 }
 
 .hamburger__top-bun {
-    transform: translateY(-7px);
+    transform: translateY(-8px);
 }
 
 .hamburger__bottom-bun {
-    transform: translateY(7px);
+    transform: translateY(8px);
 }
 
 
