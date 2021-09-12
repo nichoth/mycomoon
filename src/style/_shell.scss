@@ -154,13 +154,15 @@
 
         a {
             display: block;
+            &:hover {
+                img {
+                    filter: opacity(0.6);
+                }
+            }
         }
 
         img {
             max-width: 100%;
-            &:hover {
-                filter: drop-shadow(2px 4px 6px black);
-            }
         }
     }
 
