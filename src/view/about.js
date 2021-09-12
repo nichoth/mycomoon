@@ -1,7 +1,7 @@
 import { html } from 'htm/preact'
 
 function About (props) {
-    return html`<div class="about">
+    return html`<div>
         <h1>About</h1>
         <p>
             Myco Moon wants to share their love for functional mushrooms

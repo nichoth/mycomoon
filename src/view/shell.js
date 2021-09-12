@@ -26,6 +26,7 @@ class Shell extends Component {
     }
 
     render (props) {
+        console.log('props in shell', props)
         var { path } = props
 
         return html`<div class="outer-shell">
@@ -35,7 +36,7 @@ class Shell extends Component {
                 <div class="nav-part">
                     <span class="who-are-you">
                         <!-- <a href="/">🌙 Myco Moon</a> -->
-                        <a href="/'">
+                        <a href="/">
                             <img src="/img/logo-left.png" alt="myco moon logo" />
                         </a>
                     </span>
