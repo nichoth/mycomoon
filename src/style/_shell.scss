@@ -144,9 +144,23 @@
     padding-right: 1rem;
 
     .who-are-you {
-        font-feature-settings: "ss01";
-        font-family: Casta;
-        font-size: 2rem;
+        // this is for back when we had words here, not image
+        // font-feature-settings: "ss01";
+        // font-family: Casta;
+        // font-size: 2rem;
+        max-width: 11rem;
+        max-height: 4rem;
+
+        a {
+            display: block;
+        }
+
+        img {
+            max-width: 100%;
+            &:hover {
+                filter: drop-shadow(2px 4px 6px black);
+            }
+        }
     }
 
     #cart-icon {
