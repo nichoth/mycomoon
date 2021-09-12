@@ -34,15 +34,6 @@
                 &.active {
                     display: block;
 
-                    // ul {
-                    //     list-style-type: square;
-                    //     list-style-image: url(img/star.png);
-                    //     li {
-                    //         // fancy star bullet
-                    //         list-style-image: url(img/star.png);
-                    //     }
-                    // }
-
                     a {
                         display: inline-block;
                     }
@@ -111,7 +102,6 @@
     .product-list {
         list-style: none;
         padding: 0;
-
         display: flex!important;
         height: 100%;
         flex-direction: column;
@@ -169,6 +159,64 @@
                 p {
                     font-size: 1rem;
                 }
+            }
+        }
+
+        li {
+            padding: 1rem;
+            border-bottom: 1px solid;
+
+            &.active {
+                flex-grow: 1;
+                flex-direction: column;
+                display: flex;
+                border: 2px solid;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+
+                    li {
+                        &::before {
+                            content: '';
+                            display: inline-block;
+                            height: 17px;
+                            width: 17px;
+                            background-size: 17px;
+                            background-image: url("/img/star.png");
+                            background-repeat: no-repeat;
+                            margin-right: 1rem;
+                        }
+
+                        p {
+                            display: inline;
+                        }
+                    }
+                }
+
+                a {
+                    margin-bottom: 1rem;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+
+            a {
+                display: block;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        ul {
+            li {
+                padding: 0;
+                border-bottom: none;
             }
         }
 
