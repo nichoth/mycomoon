@@ -174,40 +174,64 @@
 }
 
 .product-list {
-    list-style: none;
-    padding: 0;
-
-    display: flex!important;
-    height: 100%;
-    flex-direction: column;
 
     li {
-        padding: 1rem;
-        border-bottom: 1px solid;
+        // padding: 1rem;
+        // border-bottom: 1px solid;
 
         &.active {
-            flex-grow: 1;
-            flex-direction: column;
-            display: flex;
-            border: 2px solid;
+        //     flex-grow: 1;
+        //     flex-direction: column;
+        //     display: flex;
+        //     border: 2px solid;
 
-            a {
-                margin-bottom: 1rem;
-                font-weight: bold;
-                text-decoration: underline;
+            ul {
+                // fancy star bullet
+                // list-style-image: url(img/star.png);
+                // list-style-type: none;
+                // padding: 0;
+
+                // li {
+                //     &::before {
+                //         content: '';
+                //         display: inline-block;
+                //         height: 17px;
+                //         width: 17px;
+                //         background-size: 17px;
+                //         background-image: url("/img/star.png");
+                //         background-repeat: no-repeat;
+                //         margin-right: 1rem;
+                //     }
+
+                //     p {
+                //         display: inline;
+                //     }
+                // }
+
+                // li {
+                //     &::marker {
+                //         width: 1rem;
+                //     }
+                // }
             }
 
-            p {
-                font-size: 1rem;
-            }
+            // a {
+            //     margin-bottom: 1rem;
+            //     font-weight: bold;
+            //     text-decoration: underline;
+            // }
+
+            // p {
+            //     font-size: 1rem;
+            // }
         }
 
-        a {
-            display: block;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+        // a {
+        //     display: block;
+        //     &:hover {
+        //         text-decoration: underline;
+        //     }
+        // }
     }
 
     ul {

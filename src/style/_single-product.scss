@@ -34,16 +34,21 @@
                 &.active {
                     display: block;
 
+                    // ul {
+                    //     list-style-type: square;
+                    //     list-style-image: url(img/star.png);
+                    //     li {
+                    //         // fancy star bullet
+                    //         list-style-image: url(img/star.png);
+                    //     }
+                    // }
+
                     a {
                         display: inline-block;
                     }
 
                     > div {
                         display: block;
-
-                        ul {
-                            display: block;
-                        }
                     }
 
                     .cart-controls {
@@ -104,10 +109,67 @@
     }
 
     .product-list {
+        list-style: none;
+        padding: 0;
+
+        display: flex!important;
+        height: 100%;
+        flex-direction: column;
         margin: 0;
 
-        > li {
+        li {
             margin: 0;
+            padding: 1rem;
+            border-bottom: 1px solid;
+
+            a {
+                display: block;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            &.active {
+                flex-grow: 1;
+                flex-direction: column;
+                display: flex;
+                border: 2px solid;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+
+                    li {
+                        &::before {
+                            content: '';
+                            display: inline-block;
+                            height: 17px;
+                            width: 17px;
+                            background-size: 17px;
+                            background-image: url("/img/star.png");
+                            background-repeat: no-repeat;
+                            margin-right: 1rem;
+                        }
+
+                        p {
+                            display: inline;
+                        }
+                    }
+
+
+
+                }
+
+                a {
+                    margin-bottom: 1rem;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+            }
         }
 
         .bonus-info {
@@ -165,7 +227,7 @@
         li.active {
             ul {
                 li {
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 1rem;
                 }
             }
         }
