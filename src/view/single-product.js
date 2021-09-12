@@ -153,12 +153,16 @@ function ProductList (props) {
                     <div class="bonus-info">
                         <div class="bonus-info-tab">
                             <span>Organic</span>
-                            <span>*</span>
+                            <span class="star-icon">
+                                <img src="/img/star.png" />
+                            </span>
                             <span>non-GMO</span>
                         </div>
                         <div class="bonus-info-tab">
                             <span>Vegan</span>
-                            <span>*</span>
+                            <span class="moon-icon">
+                                <img src="/img/moon.png" />
+                            </span>
                             <span>made in USA</span>
                         </div>
                     </div>
@@ -177,7 +181,7 @@ function ProductList (props) {
 function DualExtracted () {
 
     return html`<div class="dual-extracted">
-        <img src="/img/dual-extracted.png" />
+        <img src="/img/dual-extracted.png" alt="dual extracted" />
     </div>`
 
     // return html`<div class="dual-extracted">

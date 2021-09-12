@@ -96,6 +96,13 @@
         }
     }
 
+    .star-icon, .moon-icon {
+        width: 1rem;
+        img {
+            max-width: 100%;
+        }
+    }
+
     .product-list {
         margin: 0;
 
