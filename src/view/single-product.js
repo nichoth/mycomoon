@@ -136,21 +136,12 @@ function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, setMenuOpen } = props
     var items = ITEMS
 
-    function openMenu(ev) {
-        ev.preventDefault()
-        setMenuOpen(true)
-    }
-
     return html`<ul class="product-list">
         ${items.map(_item => {
             var isActive = _item.link === slug
 
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${'/' + _item.link}>${_item.name}</a>
-                ${isActive ?
-                    html`<button onclick="${openMenu}" class="chev"> </button>` :
-                    null
-                }
                 ${isActive ?
                     html`<div dangerouslySetInnerHTML=${{
                             __html: item.description
@@ -184,17 +175,22 @@ function ProductList (props) {
 }
 
 function DualExtracted () {
+
     return html`<div class="dual-extracted">
-        <svg viewBox="0 0 100 120" fill="red">
-            <path id="curve" d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0" stroke="white" fill="transparent"/>
-            <path id="big-curve" d="M0,70a60,60 0 1,0 120,0a60,60 0 1,0 -140,0" stroke="transparent" fill="transparent"/>
-            <text transform="translate(-39, 30) rotate(-33)">
-                <textPath href="#big-curve" fill="white" stroke="transparent">
-                    Dual Extracted
-                </textPath>
-            </text>
-        </svg>
+        <img src="/img/dual-extracted.png" />
     </div>`
+
+    // return html`<div class="dual-extracted">
+    //     <svg viewBox="0 0 100 120" fill="red">
+    //         <path id="curve" d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0" stroke="white" fill="transparent"/>
+    //         <path id="big-curve" d="M0,70a60,60 0 1,0 120,0a60,60 0 1,0 -140,0" stroke="transparent" fill="transparent"/>
+    //         <text transform="translate(-39, 30) rotate(-33)">
+    //             <textPath href="#big-curve" fill="white" stroke="transparent">
+    //                 Dual Extracted
+    //             </textPath>
+    //         </text>
+    //     </svg>
+    // </div>`
 }
 
 function CartControls (props) {

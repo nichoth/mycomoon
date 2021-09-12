@@ -86,8 +86,14 @@
     }
 
     .dual-extracted {
-        height: 10rem;
+        margin-bottom: 1rem;
+        height: 6rem;
         text-align: center;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
 
     .product-list {
