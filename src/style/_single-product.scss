@@ -179,6 +179,9 @@
                     list-style-type: none;
 
                     li {
+                        display: flex;
+                        margin-bottom: 1.5rem;
+
                         &::before {
                             content: '';
                             display: inline-block;
@@ -188,10 +191,6 @@
                             background-image: url("/img/star.png");
                             background-repeat: no-repeat;
                             margin-right: 1rem;
-                        }
-
-                        p {
-                            display: inline;
                         }
                     }
                 }

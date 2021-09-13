@@ -143,7 +143,8 @@ function ProductList (props) {
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${'/' + _item.link}>${_item.name}</a>
                 ${isActive ?
-                    html`<div dangerouslySetInnerHTML=${{
+                    html`<div class="item-description"
+                        dangerouslySetInnerHTML=${{
                             __html: item.description
                         }}
                     ></div>
