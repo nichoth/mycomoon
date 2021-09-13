@@ -83,6 +83,7 @@ body {
 
         &.index {
             background-color: transparent;
+            backdrop-filter: none;
         }
 
         &.product-page {
