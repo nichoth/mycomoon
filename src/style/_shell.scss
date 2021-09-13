@@ -154,11 +154,11 @@
 
         a {
             display: block;
-            &:hover {
-                img {
-                    filter: opacity(0.6);
-                }
-            }
+            // &:hover {
+            //     img {
+            //         filter: opacity(0.6);
+            //     }
+            // }
         }
 
         img {
