@@ -125,6 +125,8 @@ function SingleProductView (props) {
             />
         </div>
 
+        <hr class="special-divider" />
+
         <div class="single-product-content">
             <img src="${item.media.source}" alt="mushroom" />
         </div>

@@ -77,6 +77,16 @@
 .single-product {
     display: flex;
 
+    .special-divider {
+        height: 100vh;
+        border: none;
+        border-left: 1px solid;
+        position: absolute;
+        left: calc(50% + 2rem);
+        top: 0;
+        margin: 0;
+    }
+
     svg {
         height: 6rem;
     }
@@ -111,7 +121,7 @@
         // 4rem = height of top nav part
         // + 1 rem for padding
         max-height: calc(100vh - 5rem);
-        // max-height: 88vh;
+
 
         ul {
             padding-left: 1rem;
