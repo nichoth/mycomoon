@@ -23,7 +23,8 @@ sftp-config.json
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -96,4 +97,3 @@ public/sw.js
 
 # Local Netlify folder
 .netlify
-
