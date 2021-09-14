@@ -107,6 +107,12 @@
         flex-direction: column;
         margin: 0;
 
+        overflow: scroll;
+        // 4rem = height of top nav part
+        // + 1 rem for padding
+        max-height: calc(100vh - 5rem);
+        // max-height: 88vh;
+
         ul {
             padding-left: 1rem;
         }
