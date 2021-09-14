@@ -23,20 +23,27 @@
     src: url("/Casta-Regular.otf") format("opentype");
 }
 
-// @media screen and (max-width: 1025px) {
-// }
-
 body {
     margin: 0;
     color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
     font-family: 'Work Sans', sans-serif;
-    background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
     background-size: cover;
+
+    &.index {
+        background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
+
+        .cart-container {
+            display: none;
+        }
+    }
 
     &.about {
         backdrop-filter: brightness(0.2);
+        .cart-container {
+            display: none;
+        }
     }
 
     .cart-container {

@@ -12,9 +12,14 @@ class Shell extends Component {
         var el = document.getElementById('content')
         el.className = this.props.contentClass;
         document.body.className = this.props.contentClass
+        // cart.createIcon(this.ref.current, { link: '/cart' })
+        // if (this.props.contentClass.includes('product')) {
+        //     console.log('yayy')
+        //     cart.createIcon(this.ref.current, { link: '/cart' })
+        // }
     }
 
-    componentDidMount() {
+    componentDidMount () {
         var el = document.getElementById('content')
         console.log('this.props.contentclass', this.props.contentClass)
         el.className = this.props.contentClass;
@@ -23,7 +28,15 @@ class Shell extends Component {
 
         var cart = this.props.cart
         cart.createIcon(this.ref.current, { link: '/cart' })
+        // if (this.props.contentClass.includes('product')) {
+        //     console.log('bbbb')
+        //     cart.createIcon(this.ref.current, { link: '/cart' })
+        // }
     }
+
+
+    // if contentClass.includes('product')
+    
 
     render (props) {
         console.log('props in shell', props)
@@ -35,7 +48,6 @@ class Shell extends Component {
             <div>
                 <div class="nav-part">
                     <span class="who-are-you">
-                        <!-- <a href="/">🌙 Myco Moon</a> -->
                         <a href="/">
                             <img src="/img/logo-left.png" alt="myco moon logo" />
                         </a>
