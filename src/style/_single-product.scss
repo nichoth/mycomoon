@@ -76,6 +76,9 @@
 
 .single-product {
     display: flex;
+    font-family: 'YPort', sans-serif;
+    
+    font-size: 1.2rem;
 
     .special-divider {
         height: 100vh;
@@ -175,7 +178,7 @@
                 }
 
                 p {
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                 }
             }
         }
@@ -199,6 +202,7 @@
             .bonus-info-tab {
                 display: flex;
                 justify-content: space-between;
+                align-items: baseline;
                 padding: 1rem;
                 &:first-child {
                     border-bottom: 1px solid;

@@ -12,6 +12,12 @@
     to { transform: rotate(360deg); }
 }
 
+// this is for the main text in product pages
+@font-face {
+    font-family: YPort;
+    src: url("font/YportTrial-Book.otf") format("opentype");
+}
+
 @font-face {
     font-family: Casta;
     src: url("/Casta-Regular.otf") format("opentype");
