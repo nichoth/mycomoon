@@ -12,11 +12,6 @@ class Shell extends Component {
         var el = document.getElementById('content')
         el.className = this.props.contentClass;
         document.body.className = this.props.contentClass
-        // cart.createIcon(this.ref.current, { link: '/cart' })
-        // if (this.props.contentClass.includes('product')) {
-        //     console.log('yayy')
-        //     cart.createIcon(this.ref.current, { link: '/cart' })
-        // }
     }
 
     componentDidMount () {
@@ -28,15 +23,7 @@ class Shell extends Component {
 
         var cart = this.props.cart
         cart.createIcon(this.ref.current, { link: '/cart' })
-        // if (this.props.contentClass.includes('product')) {
-        //     console.log('bbbb')
-        //     cart.createIcon(this.ref.current, { link: '/cart' })
-        // }
     }
-
-
-    // if contentClass.includes('product')
-    
 
     render (props) {
         console.log('props in shell', props)

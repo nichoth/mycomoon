@@ -2,11 +2,9 @@ var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
-var Products = require('./view/products')
+// var Products = require('./view/products')
 var AboutPage = require('./view/about')
-// var createIndexView = require('./view/index')
 var IndexView = require('./view/index')
-// const Commerce = require('@chec/commerce.js')
 var evs = require('./EVENTS')
 
 function Router (state, bus) {
@@ -47,21 +45,28 @@ function Router (state, bus) {
     router.addRoute('/products', () => {
         console.log('**products route**')
 
+        console.log('prods route')
+
         return {
             getContent: function () {
                 return fetch('/.netlify/functions/get-catalog')
                     .then(response => response.json())
             },
 
-            view: Products
+            slug: '',
+
+            view: SingleProductView
         }
     })
 
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
+        console.log('in here', slug)
+
         return {
             getContent: function () {
+                console.log('getting content')
                 if (state().catalog && state().catalog[slug]) {
                     // console.log('***in state')
                     return Promise.resolve(state().catalog[slug])
@@ -71,12 +76,15 @@ function Router (state, bus) {
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
 
+                console.log('url', url)
+
                 return fetch(url)
                     .then(res => {
                         return res.json()
                     })
                     .then(json => {
                         bus.emit(evs.product.got, json)
+                        console.log('jjjjjj', json)
                         return json
                     })
                     .catch(err => {

@@ -8,49 +8,38 @@ var ITEMS = [
     { link: 'reishi-tincture', name: "Reishi Tincture" }
 ]
 
-
-// TODO -- should use global state for the product list,
-// vs requesting each product when the route loads (which is what we're doing
-// currently)
-// could do this all in the route handler actually
-// if !(state().item[slug]) return fetch and set
-// setItem(state().item[slug])
-
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
-    const [item, setItem] = useState(null)
+    const [item, setItem] = useState(slug === '' ? '' : null)
     var [cartState, setCartState] = useState(null)
-    var [menuIsOpen, setMenuOpen] = useState(false)
 
-    // console.log('props', props)
-    // console.log('slug', slug)
-    // console.log('the item', item)
-    // console.log('the cart', cart)
-
-    // comppnent did mount
-    // request the item from the server
+    console.log('props in sp', props)
 
     // todo:
     // keep global state of products, and get it from there if possible
-    // compponent did update
-    useEffect(() => {
-        getContent()
-            .then(res => {
-                setItem(res)
-            })
-            .catch(err => console.log('errrr', err))
-    });
+    if (slug) {  // compponent did mount
+        console.log('slugggg', slug)
+        useEffect(() => {
+            console.log('aaaaa')
+            getContent()
+                .then(res => {
+                    setItem(res)
+                })
+                .catch(err => console.log('errrr', err))
+        }, []);
+    }
 
-    // component did mount
     // subscribe to any changes in the shopping cart
-    useEffect(() => {
+    useEffect(() => {  // component did mount
         setCartState(cart.state())
         return cart.state(function onChange (newCartState) {
             setCartState(newCartState)
         })
     }, [])
 
-    if (!item) return null
+    if (item === null) {
+        return null
+    }
 
     function addToCart (item, ev) {
         ev.preventDefault()
@@ -85,65 +74,50 @@ function SingleProductView (props) {
     }
 
     // get the quantity of each item that is in the cart
-    var prodsInCart = cartState.products.reduce((acc, prod) => {
-        console.log('prod', prod)
-        acc[prod.itemId] = prod.quantity
-        return acc
-    }, {})
-
-    // var isInStock = !v.is.sold_out
-
-    function closeMenu (ev) {
-        ev.preventDefault()
-        setMenuOpen(false)
-    }
-
-    function closeMenuAndNav (ev) {
-        setMenuOpen(false)
-    }
-
-    if (menuIsOpen) return html`<div class="modal-nav-window">
-        <div>
-            <button onclick=${closeMenu} class="fas fa-times"></button>
-        </div>
-        <ul class="the-modal-menu">
-            ${ITEMS.map(item => {
-                return html`<li>
-                    <a onclick=${closeMenuAndNav} href="/${item.link}">
-                        ${item.name}
-                    </a>
-                </li>`
-            })}
-        </ul>
-    </div>`
+    var prodsInCart = cartState ? 
+        cartState.products.reduce((acc, prod) => {
+            console.log('prod', prod)
+            acc[prod.itemId] = prod.quantity
+            return acc
+        }, {}) :
+        null
 
     return html`<div class="single-product">
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item}
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
-                setMenuOpen=${setMenuOpen}
             />
         </div>
 
         <hr class="special-divider" />
 
         <div class="single-product-content">
-            <img src="${item.media.source}" alt="mushroom" />
+            ${item ?
+                html`<img src="${item.media.source}" alt="mushroom" />` :
+                null
+            }
         </div>
     </div>`
 }
 
 // needs permalink, description, name
 function ProductList (props) {
-    var { slug, item, prodsInCart, addToCart, setMenuOpen } = props
-    var items = ITEMS
+    var { slug, item, prodsInCart, addToCart } = props
 
+    // here you return a link regardless of whether it's active
     return html`<ul class="product-list">
-        ${items.map(_item => {
+        ${ITEMS.map(_item => {
             var isActive = _item.link === slug
 
+            console.log('**** is active?', isActive, _item, slug)
+
+            console.log('***item', item)
+            console.log('______item', _item)
+
             return html`<li class=${isActive ? 'active' : ''}>
+
                 <a href=${'/' + _item.link}>${_item.name}</a>
+
                 ${isActive ?
                     html`<div class="item-description"
                         dangerouslySetInnerHTML=${{
@@ -169,11 +143,16 @@ function ProductList (props) {
                             <span>made in USA</span>
                         </div>
                     </div>
-                    <${CartControls} item=${_item} product=${item}
-                        cart=${cart} quantity=${prodsInCart[item.id]}
-                        prodsInCart=${prodsInCart}
-                        onAddToCart=${addToCart}
-                    />` :
+
+                    ${item ?
+                        html`<${CartControls} item=${_item} product=${item}
+                            cart=${cart} quantity=${prodsInCart[item.id]}
+                            prodsInCart=${prodsInCart}
+                            onAddToCart=${addToCart}
+                        />` :
+                        null
+                    }` :
+
                     null
                 }
             </li>`
@@ -182,29 +161,14 @@ function ProductList (props) {
 }
 
 function DualExtracted () {
-
     return html`<div class="dual-extracted">
         <img src="/img/dual-extracted.png" alt="dual extracted" />
     </div>`
-
-    // return html`<div class="dual-extracted">
-    //     <svg viewBox="0 0 100 120" fill="red">
-    //         <path id="curve" d="M0,50a50,50 0 1,0 100,0a50,50 0 1,0 -100,0" stroke="white" fill="transparent"/>
-    //         <path id="big-curve" d="M0,70a60,60 0 1,0 120,0a60,60 0 1,0 -140,0" stroke="transparent" fill="transparent"/>
-    //         <text transform="translate(-39, 30) rotate(-33)">
-    //             <textPath href="#big-curve" fill="white" stroke="transparent">
-    //                 Dual Extracted
-    //             </textPath>
-    //         </text>
-    //     </svg>
-    // </div>`
 }
 
 function CartControls (props) {
-    var { item, product, cart, prodsInCart, onAddToCart } = props
-
-    // console.log('item in cart contorls', item)
-    // console.log('product in cart contorls', product)
+    var { product, prodsInCart, onAddToCart } = props
+    console.log('***product', product)
 
     var count = (prodsInCart[product.id] || 0)
     var price = product.price.formatted_with_symbol
@@ -217,17 +181,3 @@ function CartControls (props) {
 }
 
 module.exports = SingleProductView
-
-function getReadableMoney (variation) {
-    return variation.formatted_with_symbol
-    // var price = variation.itemVariationData.priceMoney.amount
-    // return toMoneyFormat(price)
-}
-
-// function toMoneyFormat (num) {
-//     var format = (parseInt(num) / 100).toLocaleString("en-US", {
-//         style: "currency",
-//         currency: "USD"
-//     })
-//     return format
-// }
