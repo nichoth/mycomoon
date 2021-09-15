@@ -45,8 +45,6 @@ function Router (state, bus) {
     router.addRoute('/products', () => {
         console.log('**products route**')
 
-        console.log('prods route')
-
         return {
             getContent: function () {
                 return fetch('/.netlify/functions/get-catalog')

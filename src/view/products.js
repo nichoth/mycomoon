@@ -7,14 +7,7 @@ function Products (props) {
 
     console.log('props in products', props)
 
-
     // we want to return a view like the /single-product route
-
-
-
-
-
-
 
     useEffect(() => {
         fetch('/.netlify/functions/get-catalog')

@@ -14,8 +14,6 @@ function SingleProductView (props) {
     const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
-    // console.log('all the states', item, slug)
-
     // todo:
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
@@ -100,7 +98,7 @@ function SingleProductView (props) {
         <hr class="special-divider" />
 
         <div class="single-product-content">
-            ${(item && item.media) ?
+            ${(item && item.media && slug) ?
                 html`<img src="${item.media.source}" alt="mushroom" />` :
                 (catalog ?
                     html`<ul class="products-list">
