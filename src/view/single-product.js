@@ -17,18 +17,15 @@ function SingleProductView (props) {
     // todo:
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
-        console.log('***effffsss***', slug)
         if (!slug) {
             getContent()
                 .then(res => {
-                    console.log('**got catalog', res)
                     setCatalog(res)
                 })
                 .catch(err => console.log('errrr', err))
         } else {
             getContent()
                 .then(res => {
-                    console.log('res in here', res)
                     setItem(res)
                 })
                 .catch(err => console.log('errrr', err))
@@ -82,7 +79,6 @@ function SingleProductView (props) {
     // get the quantity of each item that is in the cart
     var prodsInCart = cartState ? 
         cartState.products.reduce((acc, prod) => {
-            console.log('prod', prod)
             acc[prod.itemId] = prod.quantity
             return acc
         }, {}) :
@@ -105,8 +101,6 @@ function SingleProductView (props) {
                         ${catalog
                         .filter(item => item.active)
                         .map(item => {
-                            console.log('item bad', item)
-
                             return html`<li>
                                 <a href="/${item.permalink}">
                                     <img src=${item.media.source}
@@ -131,10 +125,6 @@ function ProductList (props) {
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
-
-            // console.log('**** is active?', isActive, _item, slug)
-            // console.log('***item', item)
-            // console.log('______item', _item)
 
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${'/' + _item.link}>${_item.name}</a>
@@ -188,9 +178,6 @@ function DualExtracted () {
 
 function CartControls (props) {
     var { product, prodsInCart, onAddToCart } = props
-
-    console.log('prpduct', product)
-    console.log('price', product.price)
 
     var count = (prodsInCart[product.id] || 0)
     var price = product.price.formatted_with_symbol
