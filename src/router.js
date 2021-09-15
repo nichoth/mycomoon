@@ -50,7 +50,6 @@ function Router (state, bus) {
                 return fetch('/.netlify/functions/get-catalog')
                     .then(response => response.json())
                     .then(res => {
-                        console.log('resp', res)
                         return res
                     })
             },
@@ -64,11 +63,8 @@ function Router (state, bus) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        console.log('in here', slug)
-
         return {
             getContent: function () {
-                console.log('getting content')
                 if (state().catalog && state().catalog[slug]) {
                     return Promise.resolve(state().catalog[slug])
                 }
