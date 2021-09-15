@@ -125,7 +125,6 @@
         // + 1 rem for padding
         max-height: calc(100vh - 5rem);
 
-
         ul {
             padding-left: 1rem;
         }
@@ -255,6 +254,8 @@
 
     .single-product-content {
         width: 50%;
+        max-height: calc(100vh - 5rem);
+
         > img {
             width: 100%;
             height: 100%;

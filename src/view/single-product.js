@@ -11,23 +11,31 @@ var ITEMS = [
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(slug === '' ? '' : null)
+    const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
-    console.log('props in sp', props)
+    // console.log('all the states', item, slug)
 
     // todo:
     // keep global state of products, and get it from there if possible
-    if (slug) {  // compponent did mount
-        console.log('slugggg', slug)
-        useEffect(() => {
-            console.log('aaaaa')
+    useEffect(() => {  // compponent did mount
+        console.log('***effffsss***', slug)
+        if (!slug) {
             getContent()
                 .then(res => {
+                    console.log('**got catalog', res)
+                    setCatalog(res)
+                })
+                .catch(err => console.log('errrr', err))
+        } else {
+            getContent()
+                .then(res => {
+                    console.log('res in here', res)
                     setItem(res)
                 })
                 .catch(err => console.log('errrr', err))
-        }, []);
-    }
+        }
+    }, [slug]);
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -92,9 +100,26 @@ function SingleProductView (props) {
         <hr class="special-divider" />
 
         <div class="single-product-content">
-            ${item ?
+            ${(item && item.media) ?
                 html`<img src="${item.media.source}" alt="mushroom" />` :
-                null
+                (catalog ?
+                    html`<ul class="products-list">
+                        ${catalog
+                        .filter(item => item.active)
+                        .map(item => {
+                            console.log('item bad', item)
+
+                            return html`<li>
+                                <a href="/${item.permalink}">
+                                    <img src=${item.media.source}
+                                        alt="mushroom" />
+                                    <p>${item.name}</p>
+                                </a>
+                            </li>`
+                        })}
+                    </ul>` :
+                    null
+                )
             }
         </div>
     </div>`
@@ -109,13 +134,11 @@ function ProductList (props) {
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
 
-            console.log('**** is active?', isActive, _item, slug)
-
-            console.log('***item', item)
-            console.log('______item', _item)
+            // console.log('**** is active?', isActive, _item, slug)
+            // console.log('***item', item)
+            // console.log('______item', _item)
 
             return html`<li class=${isActive ? 'active' : ''}>
-
                 <a href=${'/' + _item.link}>${_item.name}</a>
 
                 ${isActive ?
@@ -152,7 +175,6 @@ function ProductList (props) {
                         />` :
                         null
                     }` :
-
                     null
                 }
             </li>`
@@ -168,7 +190,9 @@ function DualExtracted () {
 
 function CartControls (props) {
     var { product, prodsInCart, onAddToCart } = props
-    console.log('***product', product)
+
+    console.log('prpduct', product)
+    console.log('price', product.price)
 
     var count = (prodsInCart[product.id] || 0)
     var price = product.price.formatted_with_symbol

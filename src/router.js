@@ -51,6 +51,10 @@ function Router (state, bus) {
             getContent: function () {
                 return fetch('/.netlify/functions/get-catalog')
                     .then(response => response.json())
+                    .then(res => {
+                        console.log('resp', res)
+                        return res
+                    })
             },
 
             slug: '',
@@ -68,15 +72,11 @@ function Router (state, bus) {
             getContent: function () {
                 console.log('getting content')
                 if (state().catalog && state().catalog[slug]) {
-                    // console.log('***in state')
                     return Promise.resolve(state().catalog[slug])
                 }
 
-                // console.log('not in state')
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
-
-                console.log('url', url)
 
                 return fetch(url)
                     .then(res => {
@@ -84,7 +84,6 @@ function Router (state, bus) {
                     })
                     .then(json => {
                         bus.emit(evs.product.got, json)
-                        console.log('jjjjjj', json)
                         return json
                     })
                     .catch(err => {
