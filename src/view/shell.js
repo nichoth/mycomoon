@@ -1,11 +1,16 @@
 import { html, Component } from 'htm/preact'
 import { useState } from 'preact/hooks';
 import { createRef } from 'preact';
+import { options } from 'marked';
 
 class Shell extends Component {
     constructor (props) {
         super(props)
+        this.state = { isMenuOpen: false }
         this.ref = createRef();
+        this.setState = this.setState.bind(this)
+        this.openMenu = this.openMenu.bind(this)
+        this.closeMenu = this.closeMenu.bind(this)
     }
 
     componentDidUpdate () {
@@ -25,12 +30,24 @@ class Shell extends Component {
         cart.createIcon(this.ref.current, { link: '/cart' })
     }
 
+    openMenu () {
+        this.setState({ isMenuOpen: true })
+    }
+
+    closeMenu () {
+        this.setState({ isMenuOpen: false })
+    }
+
     render (props) {
         console.log('props in shell', props)
         var { path } = props
 
-        return html`<div class="outer-shell">
-            <${Menu} activePath=${path} />
+        return html`<div class="outer-shell${this.state.isMenuOpen ?
+            ' menu-open' : ''}"
+        >
+            <${Menu} onOpen=${this.openMenu} onClose=${this.closeMenu}
+                activePath=${path} isOpen=${this.state.isMenuOpen}
+            />
 
             <div>
                 <div class="nav-part">
@@ -50,12 +67,10 @@ class Shell extends Component {
     }
 }
 
-function Menu ({ activePath }) {
-    var [isOpen, setOpen] = useState(false)
-
+function Menu ({ activePath, isOpen, onOpen, onClose }) {
     function toggleOpen (ev) {
         ev.preventDefault()
-        setOpen(!isOpen)
+        isOpen ? onClose() : onOpen()
     }
 
     function navigate (ev) {

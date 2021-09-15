@@ -74,13 +74,19 @@
     }
 }
 
+.menu-open {
+    .special-divider {
+        left: 62.5%!important;
+    }
+}
+
 .single-product {
     display: flex;
     font-family: 'YPort', sans-serif;
-    
     font-size: 1.2rem;
 
     .special-divider {
+        transition: all 0.25s;
         height: 100vh;
         border: none;
         border-left: 1px solid;
@@ -249,7 +255,6 @@
                 }
             }
         }
-
     }
 
     .single-product-content {
