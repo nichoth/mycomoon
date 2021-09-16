@@ -8,14 +8,27 @@
 
 body {
     #content.about {
+        font-family: YPort, sans-serif;
+
         .about {
             h1 {
                 font-size: 3rem;
                 margin-top: 2rem;
             }
 
-            max-width: 40rem;
-            margin: 0 auto;
+            > div {
+                display: flex;
+
+                .about-pic, .about-info {
+                    width: 50%;
+                }
+
+                .about-info {
+                    & > * {
+                        margin: 1rem;
+                    }
+                }
+            }
         }
     }
 }

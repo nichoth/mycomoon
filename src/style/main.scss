@@ -31,6 +31,17 @@ body {
     font-family: 'Work Sans', sans-serif;
     background-size: cover;
 
+    .special-divider {
+        transition: all 1s;
+        height: 100vh;
+        border: none;
+        border-left: 1px solid;
+        position: absolute;
+        left: calc(50% + 2rem);
+        top: 0;
+        margin: 0;
+    }
+
     &.index {
         background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
 
@@ -51,11 +62,13 @@ body {
         top: 8px;
     }
 
-    p, h1 {
+    h1 {
         letter-spacing: 0.1rem;
+    }
+
+    p, h1 {
         margin: 0 auto;
         margin-right: 0;
-        // text-align: center;
         font-weight: 400;
     }
 
@@ -72,7 +85,6 @@ body {
     }
 
     p {
-        font-size: 1.2rem;
         margin-bottom: 1rem;
     }
 

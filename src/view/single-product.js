@@ -130,13 +130,15 @@ function ProductList (props) {
                 <a href=${'/' + _item.link}>${_item.name}</a>
 
                 ${isActive ?
-                    html`<div class="item-description"
-                        dangerouslySetInnerHTML=${{
-                            __html: item.description
-                        }}
-                    ></div>
+                    html`<div class="item-description">
+                        <div class="desc"
+                            dangerouslySetInnerHTML=${{
+                                __html: item.description
+                            }}
+                        ></div>
+                        <${DualExtracted} />
+                    </div>
 
-                    <${DualExtracted} />
 
                     <div class="bonus-info">
                         <div class="bonus-info-tab">
