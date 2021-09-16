@@ -42,6 +42,13 @@ body {
         margin: 0;
     }
 
+    .shell-content {
+        &.index {
+            display: flex;
+            height: calc(100vh - 4rem);
+        }
+    }
+
     &.index {
         background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
 
@@ -117,9 +124,11 @@ body {
     }
 
     .logo {
-        height: 60vh;
+        height: 50vh;
         width: 60vw;
         margin: 2rem auto;
+        align-self: center;
+        margin-bottom: 6rem;
 
         img {
             max-width: 100%;
