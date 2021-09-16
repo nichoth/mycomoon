@@ -51,6 +51,8 @@ body {
 
     &.index {
         background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
+        background-size: cover;
+        background-color: black;
 
         .cart-container, .who-are-you {
             display: none;
