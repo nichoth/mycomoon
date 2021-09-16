@@ -1,7 +1,8 @@
 import { html, Component } from 'htm/preact'
-import { useState } from 'preact/hooks';
+// import { useState } from 'preact/hooks';
 import { createRef } from 'preact';
-import { options } from 'marked';
+// import { options } from 'marked';
+var { ITEMS } = require('../CONSTANTS')
 
 class Shell extends Component {
     constructor (props) {
@@ -100,7 +101,11 @@ function Menu ({ activePath, isOpen, onOpen, onClose }) {
 }
 
 function active (href, path) {
-    return href === path ? 'active' : ''
+    return ((href === path || (href === '/products' && ITEMS.find(item => {
+        return path.includes(item.link)
+    }))) ?
+        'active' :
+        '')
 }
 
 module.exports = Shell

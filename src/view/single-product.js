@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
-
-var ITEMS = [
-    { link: 'turkey-tail-tincture', name: 'Turkey Tail Tincture' },
-    { link: 'chaga-tincture', name: 'Chaga Tincture' },
-    { link: 'lions-mane-tincture', name: "Lion's Mane Tincture" },
-    { link: 'reishi-tincture', name: "Reishi Tincture" }
-]
+var { ITEMS } = require('../CONSTANTS')
 
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(slug === '' ? '' : null)
-    const [catalog, setCatalog] = useState(null)
+    // const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
+
+    console.log('props', props)
 
     // todo:
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
         if (!slug) {
-            getContent()
-                .then(res => {
-                    setCatalog(res)
-                })
-                .catch(err => console.log('errrr', err))
+            // set the route to the first in the ITEMS list
+
+            // do nothing
+
+            // getContent()
+            //     .then(res => {
+            //         setCatalog(res)
+            //     })
+            //     .catch(err => console.log('errrr', err))
         } else {
             getContent()
                 .then(res => {

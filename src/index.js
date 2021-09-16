@@ -15,6 +15,8 @@ var Bus = require('@nichoth/events')
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 
+var { ITEMS } = require('./CONSTANTS')
+
 var bus = Bus({ memo: true })
 var state = struct({
     catalog: observ(null)
@@ -74,12 +76,19 @@ route(function onRoute (path) {
 
     var m = router.match(path)
 
+    if (path === '/products') {
+        route.setRoute('/' + ITEMS[0].link)
+        return
+    }
+
     if (!m) {
         console.log('not m', path)
         return
     }
 
     var { view, getContent, slug } = m.action(m)
+
+    console.log('getting stuff', slug)
 
     var dirs = path.split('/').filter(Boolean)
 
