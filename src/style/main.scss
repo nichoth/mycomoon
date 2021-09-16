@@ -34,7 +34,7 @@ body {
     &.index {
         background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
 
-        .cart-container {
+        .cart-container, .who-are-you {
             display: none;
         }
     }

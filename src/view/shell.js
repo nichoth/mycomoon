@@ -74,7 +74,7 @@ function Menu ({ activePath, isOpen, onOpen, onClose }) {
     }
 
     function navigate (ev) {
-        setOpen(false)
+        onClose()
     }
 
     return html`<div class="menu-part${isOpen ? ' open' : ''}">
