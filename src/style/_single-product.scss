@@ -9,7 +9,7 @@
                 list-style: none;
                 padding-bottom: 1rem;
                 margin-top: 1rem;
-                border-bottom: 1px solid;
+                border-bottom: $stroke-width solid;
 
                 &:last-child {
                     border-bottom: none;
@@ -132,14 +132,11 @@
         li {
             margin: 0;
             padding: 1rem;
-            border-bottom: 1px solid;
+            border-bottom: $stroke-width solid;
 
             a {
                 display: block;
                 font-size: 1.5rem;
-                &:hover {
-                    text-decoration: underline;
-                }
             }
 
             &.active {
@@ -190,7 +187,7 @@
         .bonus-info {
             margin: 0 auto;
             min-width: 20rem;
-            border: 1px solid;
+            border: $stroke-width solid;
 
             span {
                 text-transform: uppercase;
@@ -202,7 +199,7 @@
                 align-items: baseline;
                 padding: 1rem;
                 &:first-child {
-                    border-bottom: 1px solid;
+                    border-bottom: $stroke-width solid;
                 }
             }
         }
@@ -230,8 +227,8 @@
     .cart-controls {
         margin-top: 2rem;
         padding: 1rem;
-        border-top: 1px solid;
-        border-bottom: 1px solid;
+        border-top: $stroke-width solid;
+        border-bottom: $stroke-width solid;
         display: flex;
         justify-content: space-evenly;
         align-items: baseline;

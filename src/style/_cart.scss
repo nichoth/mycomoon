@@ -28,7 +28,7 @@ $pageWidth: 40rem;
         margin: 0 auto;
 
         .tax {
-            border-bottom: 1px solid;
+            border-bottom: $stroke-width solid;
         }
     }
 

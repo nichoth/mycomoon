@@ -35,7 +35,7 @@ body {
         transition: all 1s;
         height: 100vh;
         border: none;
-        border-left: 1px solid;
+        border-left: $stroke-width solid;
         position: absolute;
         left: calc(50% + 2rem);
         top: 0;

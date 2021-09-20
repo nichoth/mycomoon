@@ -45,7 +45,7 @@
     display: block;
     position: absolute;
     width: 30px;
-    height: 1px;
+    height: $stroke-width;
     background: $main-color;
     transform: rotate(0);
     transition: all 0.25s;
@@ -72,7 +72,7 @@
 
 
 .menu-part {
-    border-right: 1px solid $main-color;
+    border-right: $stroke-width solid $main-color;
     padding: 0 1rem;
     padding-top: 1rem;
     transition: all 1s ease;
@@ -104,7 +104,7 @@
             padding: 0;
 
             li {
-                border-top: 1px solid $main-color;
+                border-top: $stroke-width solid $main-color;
                 border-bottom: none;
 
                 &.active {
@@ -116,7 +116,7 @@
                 }
 
                 &:last-child {
-                    border-bottom: 1px solid $main-color;
+                    border-bottom: $stroke-width solid $main-color;
                 }
 
                 a {
@@ -136,7 +136,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid;
+    border-bottom: $stroke-width solid;
     padding: 0.5rem;
     padding-right: 1rem;
     min-height: 4rem;
