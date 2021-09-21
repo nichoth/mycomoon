@@ -106,6 +106,7 @@
             margin: 1rem;
             height: 6rem;
             text-align: center;
+            width: 10rem;
 
             img {
                 max-width: 100%;
@@ -153,6 +154,7 @@
                 flex-grow: 1;
                 flex-direction: column;
                 display: flex;
+                font-size: 30px;
 
                 ul {
                     list-style-type: none;
@@ -163,15 +165,15 @@
 
                         &::before {
                             position: relative;
-                            bottom: 3px;
+                            bottom: -8px;
                             content: '';
                             display: inline-block;
                             height: 17px;
-                            width: 17px;
+                            width: 30px;
                             background-size: 17px;
                             background-image: url("/img/star.png");
                             background-repeat: no-repeat;
-                            margin-right: 1rem;
+                            margin-right: 0.5rem;
                         }
 
                         p {
