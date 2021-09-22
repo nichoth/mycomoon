@@ -5,7 +5,7 @@ var { ITEMS } = require('../CONSTANTS')
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(slug === '' ? '' : null)
-    // const [catalog, setCatalog] = useState(null)
+    const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
     console.log('props', props)
@@ -18,11 +18,11 @@ function SingleProductView (props) {
 
             // do nothing
 
-            // getContent()
-            //     .then(res => {
-            //         setCatalog(res)
-            //     })
-            //     .catch(err => console.log('errrr', err))
+            getContent()
+                .then(res => {
+                    setCatalog(res)
+                })
+                .catch(err => console.log('errrr', err))
         } else {
             getContent()
                 .then(res => {
@@ -96,23 +96,23 @@ function SingleProductView (props) {
         <div class="single-product-content">
             ${(item && item.media && slug) ?
                 html`<img src="${item.media.source}" alt="mushroom" />` :
-                null
-                // (catalog ?
-                //     html`<ul class="products-list">
-                //         ${catalog
-                //         .filter(item => item.active)
-                //         .map(item => {
-                //             return html`<li>
-                //                 <a href="/${item.permalink}">
-                //                     <img src=${item.media.source}
-                //                         alt="mushroom" />
-                //                     <p>${item.name}</p>
-                //                 </a>
-                //             </li>`
-                //         })}
-                //     </ul>` :
-                //     null
-                // )
+                // null
+                (catalog ?
+                    html`<ul class="products-list">
+                        ${catalog
+                        .filter(item => item.active)
+                        .map(item => {
+                            return html`<li>
+                                <a href="/${item.permalink}">
+                                    <img src=${item.media.source}
+                                        alt="mushroom" />
+                                    <p>${item.name}</p>
+                                </a>
+                            </li>`
+                        })}
+                    </ul>` :
+                    null
+                )
             }
         </div>
     </div>`
@@ -121,8 +121,6 @@ function SingleProductView (props) {
 // needs permalink, description, name
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
-
-    console.log('in here', props)
 
     // here you return a link regardless of whether it's active
     return html`<ul class="product-list">

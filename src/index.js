@@ -76,10 +76,10 @@ route(function onRoute (path) {
 
     var m = router.match(path)
 
-    if (path === '/products') {
-        route.setRoute('/' + ITEMS[0].link)
-        return
-    }
+    // if (path === '/products') {
+    //     route.setRoute('/' + ITEMS[0].link)
+    //     return
+    // }
 
     if (!m) {
         console.log('not m', path)
