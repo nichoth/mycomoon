@@ -178,7 +178,7 @@ function ProductList (props) {
 
 function DualExtracted () {
     return html`<div class="dual-extracted">
-        <img src="/img/dual-extracted.png" alt="dual extracted" />
+        <img src="/img/dual-extracted_1.svg" alt="dual extracted" />
     </div>`
 }
 
