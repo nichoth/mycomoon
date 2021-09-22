@@ -12,7 +12,8 @@ body {
 
         .about {
             h1 {
-                font-size: 3rem;
+                font-family: YPort;
+                font-size: 2rem;
                 margin-top: 2rem;
             }
 
@@ -26,6 +27,10 @@ body {
                 .about-info {
                     & > * {
                         margin: 1rem;
+                    }
+
+                    & > p {
+                        margin: 1rem 2rem;
                     }
                 }
             }

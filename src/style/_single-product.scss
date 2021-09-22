@@ -213,6 +213,16 @@
                 &:first-child {
                     border-bottom: $stroke-width solid;
                 }
+
+                .moon-icon {
+                    position: relative;
+                    left: 8px;
+                }
+
+                .star-icon {
+                    position: relative;
+                    right: 4px;
+                }
             }
         }
     }

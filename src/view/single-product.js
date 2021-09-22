@@ -122,6 +122,8 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
 
+    console.log('in here', props)
+
     // here you return a link regardless of whether it's active
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
