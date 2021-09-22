@@ -63,6 +63,8 @@ function Router (state, bus) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
+        console.log('current url', window.location.href)
+
         return {
             getContent: function () {
                 if (state().catalog && state().catalog[slug]) {

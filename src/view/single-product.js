@@ -8,8 +8,6 @@ function SingleProductView (props) {
     const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
-    console.log('props', props)
-
     // todo:
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
@@ -128,7 +126,12 @@ function ProductList (props) {
             var isActive = _item.link === slug
 
             return html`<li class=${isActive ? 'active' : ''}>
-                <a href=${'/' + _item.link}>${_item.name}</a>
+                <a href=${isActive ?
+                    '/products' :
+                    '/' + _item.link}
+                >
+                    ${_item.name}
+                </a>
 
                 ${isActive ?
                     html`<div class="item-description">

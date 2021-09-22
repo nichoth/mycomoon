@@ -22,7 +22,7 @@ class Shell extends Component {
 
     componentDidMount () {
         var el = document.getElementById('content')
-        console.log('this.props.contentclass', this.props.contentClass)
+        // console.log('this.props.contentclass', this.props.contentClass)
         el.className = this.props.contentClass;
 
         document.body.className = this.props.contentClass
@@ -40,7 +40,6 @@ class Shell extends Component {
     }
 
     render (props) {
-        console.log('props in shell', props)
         var { path } = props
 
         return html`<div class="outer-shell${this.state.isMenuOpen ?
