@@ -80,17 +80,10 @@
     }
 }
 
-@font-face {
-  font-family: 'Ampersand';
-  src: local('Gill Sans');
-  unicode-range: U+0020 - 0029;  // dollar sign
-}
-
 .single-product {
     display: flex;
-    // font-family: 'YPort', sans-serif;
 
-    font-family:  'Ampersand', 'Yport', sans-serif;
+    font-family: 'Ampersand', 'Yport', sans-serif;
 
 
     svg {
