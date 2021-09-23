@@ -164,8 +164,14 @@
     }
 
     #cart-icon {
+        #cart-quantity {
+            bottom: 22px;
+            left: 32px;
+            font-weight: 100;
+        }
         svg {
             fill: $main-color;
+            width: 3rem;
         }
     }
 }

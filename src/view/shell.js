@@ -4,6 +4,11 @@ import { createRef } from 'preact';
 // import { options } from 'marked';
 var { ITEMS } = require('../CONSTANTS')
 
+function Icon () {
+    // return html`<img src="/img/shoppingcart_icon.svg" />`
+    return html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.07 91"><defs><style>.cls-1{fill:none;stroke:#e8e1d7;stroke-miterlimit:10;stroke-width:2px;}</style></defs><title>shoppingcart_icib</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M0,1H10.75a5.17,5.17,0,0,1,5,4L17.1,11a5.17,5.17,0,0,0,5,4H93.91A5.16,5.16,0,0,1,99,21L93.72,52.69A5.16,5.16,0,0,1,88.63,57H33a5.17,5.17,0,0,1-5-3.85L22,15l9,57.2a5.17,5.17,0,0,0,5,3.8H87"/><circle class="cls-1" cx="42" cy="85" r="5"/><circle class="cls-1" cx="79" cy="85" r="5"/></g></g></svg>`
+}
+
 class Shell extends Component {
     constructor (props) {
         super(props)
@@ -28,7 +33,8 @@ class Shell extends Component {
         document.body.className = this.props.contentClass
 
         var cart = this.props.cart
-        cart.createIcon(this.ref.current, { link: '/cart' })
+        console.log('cart', cart)
+        cart.createIcon(this.ref.current, Icon, { link: '/cart' })
     }
 
     openMenu () {
