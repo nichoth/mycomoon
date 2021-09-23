@@ -90,7 +90,7 @@ function Menu ({ activePath, isOpen, onOpen, onClose }) {
 
         <ul class="menu-content" onclick="${navigate}">
             <li class=${active('/products', activePath)}>
-                <a href="/products">products</a>
+                <a href="/turkey-tail-tincture">products</a>
             </li>
             <li class=${active('/about', activePath)}>
                 <a href="/about">about</a>
