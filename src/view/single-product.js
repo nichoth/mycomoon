@@ -94,23 +94,24 @@ function SingleProductView (props) {
         <div class="single-product-content">
             ${(item && item.media && slug) ?
                 html`<img src="${item.media.source}" alt="mushroom" />` :
-                // null
-                (catalog ?
-                    html`<ul class="products-list">
-                        ${catalog
-                        .filter(item => item.active)
-                        .map(item => {
-                            return html`<li>
-                                <a href="/${item.permalink}">
-                                    <img src=${item.media.source}
-                                        alt="mushroom" />
-                                    <p>${item.name}</p>
-                                </a>
-                            </li>`
-                        })}
-                    </ul>` :
-                    null
-                )
+                null
+
+                // (catalog ?
+                //     html`<ul class="products-list">
+                //         ${catalog
+                //         .filter(item => item.active)
+                //         .map(item => {
+                //             return html`<li>
+                //                 <a href="/${item.permalink}">
+                //                     <img src=${item.media.source}
+                //                         alt="mushroom" />
+                //                     <p>${item.name}</p>
+                //                 </a>
+                //             </li>`
+                //         })}
+                //     </ul>` :
+                //     null
+                // )
             }
         </div>
     </div>`
