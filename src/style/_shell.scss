@@ -29,7 +29,7 @@
     width: 48px;
     height: 48px;
     transition: all 0.25s;
-    filter: drop-shadow(2px 4px 6px black);
+    // filter: drop-shadow(2px 4px 6px black);
 
     &.open {
         .hamburger__top-bun {
@@ -40,6 +40,12 @@
         }
         .hamburger__bottom-bun {
             transform: rotate(-45deg) translate(-8px, 0px);
+        }
+
+        .hamburger__top-bun,
+        .hamburger__middle-bun,
+        .hamburger__bottom-bun {
+            background: black;
         }
     }
 }
@@ -98,7 +104,8 @@
         // max-width: 25%;
         width: 100%;
         // backdrop-filter: brightness(0.4);
-        background: #2a98a5f5;
+        // background: #2a98a5f5;
+        background: #E8E1D7;
 
         & > div:first-child {
             padding: 1rem;
@@ -114,6 +121,10 @@
                 // border-top: $stroke-width solid $main-color;
                 // border-bottom: none;
                 text-align: center;
+                a {
+                    color: black;
+                    filter: none;
+                }
 
                 &.active {
                     a {
