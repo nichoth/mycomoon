@@ -88,10 +88,11 @@
     &.open {
         padding: 0;
         flex-grow: 1;
-        min-width: 25%;
-        max-width: 25%;
-        width: 25%;
-        backdrop-filter: brightness(0.4);
+        min-width: 100%;
+        // max-width: 25%;
+        width: 100%;
+        // backdrop-filter: brightness(0.4);
+        background: #2a98a5f5;
 
         & > div:first-child {
             padding: 1rem;
@@ -104,8 +105,9 @@
             padding: 0;
 
             li {
-                border-top: $stroke-width solid $main-color;
-                border-bottom: none;
+                // border-top: $stroke-width solid $main-color;
+                // border-bottom: none;
+                text-align: center;
 
                 &.active {
                     a {
@@ -115,9 +117,9 @@
                     }
                 }
 
-                &:last-child {
-                    border-bottom: $stroke-width solid $main-color;
-                }
+                // &:last-child {
+                //     border-bottom: $stroke-width solid $main-color;
+                // }
 
                 a {
                     display: block;
