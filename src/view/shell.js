@@ -55,7 +55,7 @@ class Shell extends Component {
                 activePath=${path} isOpen=${this.state.isMenuOpen}
             />
 
-            <div>
+            <div class="page-content">
                 <div class="nav-part">
                     <span class="who-are-you">
                         <a href="/">
