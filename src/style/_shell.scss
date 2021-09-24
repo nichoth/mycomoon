@@ -19,6 +19,7 @@
     .page-content {
         border-left: $stroke-width solid;
         margin-left: 4rem;
+        min-height: calc(100vh + 5rem);
     }
 }
 

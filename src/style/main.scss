@@ -42,7 +42,7 @@ body {
 
     .special-divider {
         transition: all 1s;
-        height: 100vh;
+        height: calc(100vh + 5rem);
         border: none;
         border-left: $stroke-width solid;
         position: absolute;
