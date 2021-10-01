@@ -73,9 +73,11 @@ body {
             // height: calc(100vh - 4rem);
             height: 100%;
 
-            p {
+            .left-part {
                 padding: 2rem;
                 width: 50vw;
+                height: calc(100vh - 5rem);
+                overflow-y: scroll;
             }
         }
     }
