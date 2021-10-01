@@ -31,6 +31,20 @@
   unicode-range: U+0020 - 0029;  // dollar sign, ampersand
 }
 
+@media screen and (max-width: 600px) {
+    body {
+        .shell-content {
+            &.index {
+                flex-direction: column!important;
+            }
+
+            p {
+                width: initial!important;
+            }
+        }
+
+    }
+}
 
 body {
     margin: 0;
@@ -54,12 +68,14 @@ body {
     .shell-content {
         &.index {
             display: flex;
-            flex-direction: column;
+            flex-direction: row-reverse;
+            // flex-direction: column;
             // height: calc(100vh - 4rem);
             height: 100%;
 
             p {
                 padding: 2rem;
+                width: 50vw;
             }
         }
     }
@@ -146,8 +162,8 @@ body {
         height: 50vh;
         width: 60vw;
         margin: 2rem auto;
-        align-self: center;
         margin-bottom: 2rem;
+        margin-top: 15vh;
 
         img {
             max-width: 100%;
