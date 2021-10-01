@@ -23,7 +23,7 @@
     }
 
     .single-product {
-        flex-direction: column;
+        flex-direction: column-reverse;
 
         .single-product-info {
             width: 100%!important;
@@ -71,7 +71,9 @@
 
         .single-product-content {
             width: 80%!important;
-            margin: 0 auto 2rem!important;
+            // margin: 0 auto 2rem!important;
+            margin: 0 auto;
+            margin-top: 1rem;
         }
     }
 }

@@ -12,10 +12,6 @@ function SingleProductView (props) {
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
         if (!slug) {
-            // set the route to the first in the ITEMS list
-
-            // do nothing
-
             getContent()
                 .then(res => {
                     setCatalog(res)
@@ -82,6 +78,7 @@ function SingleProductView (props) {
         }, {}) :
         null
 
+    // here we use the `item` from state
     return html`<div class="single-product">
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item}
