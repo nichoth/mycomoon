@@ -18,6 +18,10 @@
         }
     }
 
+    .special-divider {
+        display: none;
+    }
+
     .single-product {
         flex-direction: column;
 
@@ -25,8 +29,6 @@
             width: 100%!important;
 
             li {
-                display: none;
-
                 a {
                     display: block;
                 }
@@ -96,10 +98,11 @@
         margin-bottom: 1rem;
 
         .dual-extracted {
-            margin: 1rem;
-            height: 6rem;
+            display: block!important;
+            margin: 1rem auto 0;
+            height: 4rem;
             text-align: center;
-            width: 10rem;
+            width: 4rem;
 
             img {
                 max-width: 100%;
@@ -191,7 +194,7 @@
 
         .bonus-info {
             margin: 0 auto;
-            min-width: 20rem;
+            min-width: 16rem;
             border: $stroke-width solid;
 
             span {
