@@ -5,9 +5,8 @@ import { html } from 'htm/preact'
 function IndexView (props) {
     // var { getContent, path } = props
 
-    console.log('props', props)
+    console.log('props in index', props)
 
-    // we're doing it this weird way because it doesn't work if you use a HOC
     return html`
         <div class="logo">
             <img src="/img/logo.png" />

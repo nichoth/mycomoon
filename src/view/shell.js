@@ -27,13 +27,11 @@ class Shell extends Component {
 
     componentDidMount () {
         var el = document.getElementById('content')
-        // console.log('this.props.contentclass', this.props.contentClass)
         el.className = this.props.contentClass;
 
         document.body.className = this.props.contentClass
 
         var cart = this.props.cart
-        console.log('cart', cart)
         cart.createIcon(this.ref.current, Icon, { link: '/cart' })
     }
 
@@ -47,6 +45,8 @@ class Shell extends Component {
 
     render (props) {
         var { path } = props
+
+        console.log('props in shell', props)
 
         return html`<div class="outer-shell${this.state.isMenuOpen ?
             ' menu-open' : ''}"
