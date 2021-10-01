@@ -54,7 +54,13 @@ body {
     .shell-content {
         &.index {
             display: flex;
-            height: calc(100vh - 4rem);
+            flex-direction: column;
+            // height: calc(100vh - 4rem);
+            height: 100%;
+
+            p {
+                padding: 2rem;
+            }
         }
     }
 
@@ -62,6 +68,8 @@ body {
         background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
         background-size: cover;
         background-color: black;
+
+        backdrop-filter: brightness(0.5);
 
         .cart-container, .who-are-you {
             display: none;
