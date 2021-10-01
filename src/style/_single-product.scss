@@ -25,6 +25,10 @@
     .single-product {
         flex-direction: column-reverse;
 
+        .inline-image {
+            display: initial;
+        }
+
         .single-product-info {
             width: 100%!important;
 
@@ -70,10 +74,11 @@
         }
 
         .single-product-content {
-            width: 80%!important;
-            // margin: 0 auto 2rem!important;
-            margin: 0 auto;
-            margin-top: 1rem;
+            // width: 80%!important;
+            // // margin: 0 auto 2rem!important;
+            // margin: 0 auto;
+            // margin-top: 1rem;
+            display: none;
         }
     }
 }
@@ -257,6 +262,10 @@
     .single-product-info {
         width: 50%;
         transition: all 1s;
+
+        .inline-image {
+            display: none;
+        }
 
         li.active {
             ul {

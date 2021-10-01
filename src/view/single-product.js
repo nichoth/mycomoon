@@ -132,7 +132,11 @@ function ProductList (props) {
                 </a>
 
                 ${isActive ?
-                    html`<div class="item-description">
+                    html`
+                    <img src="${item.media.source}" alt="mushroom"
+                        class="inline-image" />
+                    
+                    <div class="item-description">
                         <div class="desc"
                             dangerouslySetInnerHTML=${{
                                 __html: item.description
