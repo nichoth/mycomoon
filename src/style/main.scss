@@ -67,6 +67,19 @@ body {
     }
 
     .shell-content {
+        .left-part {
+            padding: 2rem;
+            width: 50vw;
+            height: calc(100vh - 7rem);
+            overflow-y: scroll;
+
+            .home-text {
+                height: 100vh;
+                filter: drop-shadow(2px 9px 13px black);
+                // height: calc(100vh - 7rem);
+            }
+        }
+
         &.index {
             display: flex;
             // flex-direction: row-reverse;
@@ -74,18 +87,6 @@ body {
             // height: calc(100vh - 4rem);
             height: 100%;
 
-            .left-part {
-                padding: 2rem;
-                width: 50vw;
-                height: calc(100vh - 7rem);
-                overflow-y: scroll;
-
-                .home-text {
-                    height: 100vh;
-                    filter: drop-shadow(2px 9px 13px black);
-                    // height: calc(100vh - 7rem);
-                }
-            }
         }
     }
 

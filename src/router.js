@@ -8,16 +8,18 @@ var IndexView = require('./view/index')
 var evs = require('./EVENTS')
 import { html } from 'htm/preact'
 
+function HomeView () {
+    return html`<p class="home-text" id="home">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+        do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>`
+}
+
 function Router (state, bus) {
 
     router.addRoute('/', () => {
         return {
-            view: function () {
-                return html`<p class="home-text" id="home">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>`
-            }
+            view: HomeView
         }
     })
 
@@ -87,8 +89,8 @@ function Router (state, bus) {
 
             slug: slug,
 
-            view: IndexView
-            // view: SingleProductView
+            // view: IndexView
+            view: SingleProductView
         }
     })
 
