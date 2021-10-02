@@ -94,9 +94,9 @@ function SingleProductView (props) {
             />
         </div>
 
-        <hr class="special-divider" />
+        <!-- <hr class="special-divider" /> -->
 
-        <div class="single-product-content">
+        <!-- <div class="single-product-content">
             ${(item && item.media && slug) ?
                 html`<img src="${item.media.source}" alt="mushroom" />` :
                 null
@@ -118,7 +118,7 @@ function SingleProductView (props) {
                 //     null
                 // )
             }
-        </div>
+        </div> -->
     </div>`
 }
 
@@ -126,7 +126,6 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
 
-    // here you return a link regardless of whether it's active
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
@@ -152,7 +151,6 @@ function ProductList (props) {
                         ></div>
                         <${DualExtracted} />
                     </div>
-
 
                     <div class="bonus-info">
                         <div class="bonus-info-tab">

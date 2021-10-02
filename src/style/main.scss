@@ -67,9 +67,13 @@ body {
     }
 
     .shell-content {
+        display: flex;
+
         .left-part {
             padding: 2rem;
-            width: 50vw;
+            // width: calc(50vw - 6rem);
+            width: calc(50vw + 6rem);
+            // width: 50vw;
             height: calc(100vh - 7rem);
             overflow-y: scroll;
 
@@ -165,6 +169,10 @@ body {
 
         &.product-page {
             backdrop-filter: brightness(0.2);
+            .left-part {
+                padding: 0;
+                width: calc(50vw + 6rem);
+            }
         }
     }
 

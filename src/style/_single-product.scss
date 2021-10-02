@@ -91,9 +91,8 @@
 
 .single-product {
     display: flex;
-
     font-family: 'Ampersand', 'Yport', sans-serif;
-
+    width: 100%;
 
     svg {
         height: 6rem;
@@ -157,7 +156,7 @@
                 flex-grow: 1;
                 flex-direction: column;
                 display: flex;
-                // font-size: 30px;
+                padding: 0;
 
                 ul {
                     list-style-type: none;
@@ -260,7 +259,7 @@
     }
 
     .single-product-info {
-        width: 50%;
+        width: 100%;
         transition: all 1s;
 
         .inline-image {
