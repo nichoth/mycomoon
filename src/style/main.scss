@@ -35,11 +35,12 @@
     body {
         .shell-content {
             &.index {
-                flex-direction: column!important;
+                flex-direction: column-reverse!important;
             }
 
             p {
                 width: initial!important;
+                height: calc(100vh - 7rem);
             }
         }
 
@@ -68,7 +69,7 @@ body {
     .shell-content {
         &.index {
             display: flex;
-            flex-direction: row-reverse;
+            // flex-direction: row-reverse;
             // flex-direction: column;
             // height: calc(100vh - 4rem);
             height: 100%;
@@ -76,8 +77,14 @@ body {
             .left-part {
                 padding: 2rem;
                 width: 50vw;
-                height: calc(100vh - 5rem);
+                height: calc(100vh - 7rem);
                 overflow-y: scroll;
+
+                .home-text {
+                    height: 100vh;
+                    filter: drop-shadow(2px 9px 13px black);
+                    // height: calc(100vh - 7rem);
+                }
             }
         }
     }
@@ -148,7 +155,7 @@ body {
     #content {
         overflow-y: scroll;
         backdrop-filter: brightness(0.5);
-        min-height: 100vh;
+        // min-height: 100vh;
 
         &.index {
             background-color: transparent;

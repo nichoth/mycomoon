@@ -6,20 +6,18 @@ var SingleProductView = require('./view/single-product')
 var AboutPage = require('./view/about')
 var IndexView = require('./view/index')
 var evs = require('./EVENTS')
+import { html } from 'htm/preact'
 
 function Router (state, bus) {
 
     router.addRoute('/', () => {
         return {
-            getContent: function getHome () {
-                return new Promise((resolve, _reject) => {
-                    setTimeout(() => {
-                        resolve('homeeeee')
-                    }, 1000)
-                })
-            },
-
-            view: IndexView
+            view: function () {
+                return html`<p class="home-text" id="home">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>`
+            }
         }
     })
 
@@ -63,7 +61,7 @@ function Router (state, bus) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        console.log('current url', window.location.href)
+        console.log('current url in :slug route', window.location.href)
 
         return {
             getContent: function () {
@@ -89,7 +87,8 @@ function Router (state, bus) {
 
             slug: slug,
 
-            view: SingleProductView
+            view: IndexView
+            // view: SingleProductView
         }
     })
 

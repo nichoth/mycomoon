@@ -5,25 +5,33 @@ var { ITEMS } = require('../CONSTANTS')
 function SingleProductView (props) {
     var { slug, getContent, cart } = props
     const [item, setItem] = useState(slug === '' ? '' : null)
-    const [catalog, setCatalog] = useState(null)
+    // const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
     // todo:
     // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
-        if (!slug) {
-            getContent()
-                .then(res => {
-                    setCatalog(res)
-                })
-                .catch(err => console.log('errrr', err))
-        } else {
+        if (slug) {
             getContent()
                 .then(res => {
                     setItem(res)
                 })
                 .catch(err => console.log('errrr', err))
         }
+
+        // if (!slug) {
+        //     getContent()
+        //         .then(res => {
+        //             setCatalog(res)
+        //         })
+        //         .catch(err => console.log('errrr', err))
+        // } else {
+        //     getContent()
+        //         .then(res => {
+        //             setItem(res)
+        //         })
+        //         .catch(err => console.log('errrr', err))
+        // }
     }, [slug]);
 
     // subscribe to any changes in the shopping cart

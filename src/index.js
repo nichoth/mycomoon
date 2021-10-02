@@ -8,6 +8,7 @@ var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
 import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var Shell = require('./view/shell')
+var IndexView = require('./view/index')
 
 var struct = require('observ-struct')
 var observ = require('observ')
@@ -98,12 +99,19 @@ route(function onRoute (path) {
         dirs[0] !== 'about' && dirs[0] !== 'cart')
     if (isProdPage) contentClass += ' product-page'
 
+    // here we take the view returned from router, and use it as a child of
+    // `shell`
+    // need to always render the `index` view, and pass it a child that
+    //   is the content corresponding to url
+
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-        path=${path}
+        path=${path} slug=${slug}
     >
-        <${view} cart=${cart} getContent=${getContent} path=${path}
-            slug=${slug}
-        />
+        <${IndexView} cart=${cart} slug=${slug}>
+            <${view} cart=${cart} getContent=${getContent} path=${path}
+                slug=${slug}
+            />
+        <//>
     <//>`
 
     render(el, document.getElementById('content'))
