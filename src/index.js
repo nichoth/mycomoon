@@ -16,7 +16,7 @@ var Bus = require('@nichoth/events')
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 
-var { ITEMS } = require('./CONSTANTS')
+// var { ITEMS } = require('./CONSTANTS')
 
 var bus = Bus({ memo: true })
 var state = struct({
@@ -72,6 +72,11 @@ var router = Router(state, bus)
 
 subscribe(bus, state)
 
+
+// for dev
+window.setRoute = route.setRoute
+
+
 route(function onRoute (path) {
     console.log('route event', path)
 
@@ -107,7 +112,7 @@ route(function onRoute (path) {
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
         path=${path} slug=${slug}
     >
-        <${IndexView} cart=${cart} slug=${slug}>
+        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
             <${view} cart=${cart} getContent=${getContent} path=${path}
                 slug=${slug}
             />

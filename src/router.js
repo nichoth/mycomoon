@@ -4,22 +4,24 @@ var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
 // var Products = require('./view/products')
 var AboutPage = require('./view/about')
-var IndexView = require('./view/index')
+// var IndexView = require('./view/index')
 var evs = require('./EVENTS')
 import { html } from 'htm/preact'
 
-function HomeView () {
-    return html`<p class="home-text" id="home">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-        do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </p>`
-}
+// function HomeView () {
+//     return html`
+//         <p class="home-text" id="home">
+//             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+//             do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//         </p>
+//     `
+// }
 
 function Router (state, bus) {
 
     router.addRoute('/', () => {
         return {
-            view: HomeView
+            view: () => html`<p>ok</p>`
         }
     })
 

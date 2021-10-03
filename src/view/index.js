@@ -9,8 +9,11 @@ function IndexView (props) {
 
     console.log('props in index', props)
 
+
     return html`
         <div class="left-part">
+            <${HomeView} />
+
             ${props.children}
         </div>
 
@@ -19,6 +22,15 @@ function IndexView (props) {
         <div class="logo">
             <img src="/img/logo.png" />
         </div>
+    `
+}
+
+function HomeView () {
+    return html`
+        <p class="home-text" id="home">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
     `
 }
 
