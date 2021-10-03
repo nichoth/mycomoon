@@ -6,7 +6,7 @@ var SingleProductView = require('./view/single-product')
 var AboutPage = require('./view/about')
 // var IndexView = require('./view/index')
 var evs = require('./EVENTS')
-import { html } from 'htm/preact'
+// import { html } from 'htm/preact'
 
 // function HomeView () {
 //     return html`

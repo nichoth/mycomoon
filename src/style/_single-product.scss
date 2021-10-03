@@ -149,14 +149,9 @@
             padding: 1rem;
             border-bottom: $stroke-width solid;
 
-            &:first-child {
-                border-top: $stroke-width solid;
-            }
-
             a {
                 display: block;
                 font-size: 1.5rem;
-                // font-size: 40px;
             }
 
             &.active {
