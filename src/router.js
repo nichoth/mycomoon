@@ -21,7 +21,8 @@ function Router (state, bus) {
 
     router.addRoute('/', () => {
         return {
-            view: () => html`<p>ok</p>`
+            // view: () => html`<p>ok</p>`
+            view: SingleProductView
         }
     })
 

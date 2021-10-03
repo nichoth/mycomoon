@@ -17,9 +17,10 @@
     }
 
     .page-content {
+        height: 100vh;
         border-left: $stroke-width solid;
         margin-left: 4rem;
-        min-height: calc(100vh + 5rem);
+        // min-height: calc(100vh + 5rem);
     }
 }
 
@@ -85,10 +86,6 @@
     transform: translateY(24px);
 }
 
-
-
-
-
 .menu-part {
     // border-right: $stroke-width solid $main-color;
     padding: 0 1rem;
@@ -101,7 +98,8 @@
 
     z-index: 2;
     position: fixed;
-    height: 100vh;
+    // height: 100vh;
+    height: calc(100vh - 1rem);
 
     .menu-content {
         display: none;
