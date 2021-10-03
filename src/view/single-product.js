@@ -42,7 +42,7 @@ function SingleProductView (props) {
         })
     }, [])
 
-    if (item === null) {
+    if (!item && slug) {
         return null
     }
 
@@ -126,6 +126,16 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
 
+    // console.log('aaaaaa', item, slug)
+    if (slug && !item) {
+        // need to fetch the item
+        useEffect(() => {
+            
+        }, [])
+
+        return null
+    }
+
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
@@ -177,6 +187,7 @@ function ProductList (props) {
                         />` :
                         null
                     }` :
+
                     null
                 }
             </li>`
