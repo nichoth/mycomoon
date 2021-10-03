@@ -129,13 +129,13 @@
     .product-list {
         list-style: none;
         padding: 0;
-        padding-top: 4rem;
+        // padding-top: 4rem;
         display: flex!important;
         height: 100%;
         flex-direction: column;
         margin: 0;
 
-        overflow: scroll;
+        // overflow: scroll;
         // 4rem = height of top nav part
         // + 1 rem for padding
         max-height: calc(100vh - 5rem);
@@ -149,6 +149,16 @@
             padding: 1rem;
             border-bottom: $stroke-width solid;
 
+            background-color: #000000ad;
+
+            &:first-child {
+                border-top: $stroke-width solid;
+            }
+
+            li {
+                border-top: none!important;
+            }
+
             a {
                 display: block;
                 font-size: 1.5rem;
@@ -159,6 +169,7 @@
                 flex-direction: column;
                 display: flex;
                 padding: 0;
+                padding-top: 1rem;
 
                 ul {
                     list-style-type: none;
