@@ -8,8 +8,6 @@ function SingleProductView (props) {
     // const [catalog, setCatalog] = useState(null)
     var [cartState, setCartState] = useState(null)
 
-    // todo:
-    // keep global state of products, and get it from there if possible
     useEffect(() => {  // compponent did mount
         if (slug) {
             getContent()
@@ -126,6 +124,14 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
 
+    useEffect(() => {
+        var el = document.querySelector('.product-list li.active a')
+
+        if (el) {
+            el.scrollIntoView()
+        }
+    }, [slug])
+
     // console.log('aaaaaa', item, slug)
     if (slug && !item) {
         // need to fetch the item
@@ -136,14 +142,21 @@ function ProductList (props) {
         return null
     }
 
+    function handleClck (ev) {
+        console.log('ccccc', ev.target)
+        ev.target.scrollIntoView()
+    }
+
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
+            console.log('active?', isActive, _item)
 
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${isActive ?
                     '/products' :
                     '/' + _item.link}
+                    onclick=${handleClck}
                 >
                     ${_item.name}
                 </a>

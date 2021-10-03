@@ -55,6 +55,12 @@ body {
     font-family: 'Work Sans', sans-serif;
     background-size: cover;
 
+    background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
+    background-size: cover;
+    background-color: black;
+    backdrop-filter: brightness(0.5);
+
+
     .special-divider {
         transition: all 1s;
         // height: calc(100vh + 5rem);
@@ -74,7 +80,7 @@ body {
         .left-part {
             width: calc(50vw + 6rem);
             // width: 50vw;
-            height: calc(100vh - 7rem);
+            height: calc(100vh - 5rem);
             overflow-y: scroll;
 
             .home-text {
@@ -94,12 +100,6 @@ body {
     }
 
     &.index {
-        background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
-        background-size: cover;
-        background-color: black;
-
-        backdrop-filter: brightness(0.5);
-
         .cart-container, .who-are-you {
             display: none;
         }
