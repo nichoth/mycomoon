@@ -108,7 +108,7 @@ route(function onRoute (path) {
     if (getContent) {
         getContent()
             .then(res => {
-                console.log('aaaa', res)
+                console.log('in res', res)
                 var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
                     path=${path} slug=${slug}
                 >

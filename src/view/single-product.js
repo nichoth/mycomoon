@@ -17,7 +17,7 @@ function SingleProductView (props) {
     }, [])
 
     if (!item && slug) {
-        console.log('aaaa', item)
+        console.log('errrrrr', item)
         return null
     }
 

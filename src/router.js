@@ -66,13 +66,13 @@ function Router (state, bus) {
         console.log('**products route**')
 
         return {
-            getContent: function () {
-                return fetch('/.netlify/functions/get-catalog')
-                    .then(response => response.json())
-                    .then(res => {
-                        return res
-                    })
-            },
+            // getContent: function () {
+            //     return fetch('/.netlify/functions/get-catalog')
+            //         .then(response => response.json())
+            //         .then(res => {
+            //             return res
+            //         })
+            // },
 
             slug: '',
 
