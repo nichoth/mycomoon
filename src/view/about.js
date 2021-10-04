@@ -1,6 +1,6 @@
 import { html } from 'htm/preact'
 
-function About (props) {
+function About () {
     return html`<div class="about-info">
         <h1>About</h1>
         <p>
@@ -16,17 +16,3 @@ function About (props) {
 }
 
 module.exports = About
-
-// function getReadableMoney (variation) {
-//     var price = variation.itemVariationData.priceMoney.amount
-//     return toMoneyFormat(price)
-// }
-
-// function toMoneyFormat (num) {
-//     var format = (parseInt(num) / 100).toLocaleString("en-US", {
-//         style: "currency",
-//         currency: "USD"
-//     })
-//     return format
-// }
-
