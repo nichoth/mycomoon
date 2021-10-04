@@ -18,13 +18,12 @@ body {
             }
 
             > div {
-                display: flex;
-
-                .about-pic, .about-info {
-                    width: 50%;
-                }
 
                 .about-info {
+                    scroll-snap-align: start;
+                    min-height: calc(100vh - var(--nudge-height));
+                    padding-top: 1rem;
+
                     & > * {
                         margin: 1rem;
                     }

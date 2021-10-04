@@ -3,6 +3,7 @@ import { html } from 'htm/preact'
 // import { useEffect, useState } from 'preact/hooks';
 // var SingleProduct = require('./single-product')
 var SingleItem = require('./single-product')
+var About = require('./about')
 
 
 function IndexView (props) {
@@ -12,9 +13,17 @@ function IndexView (props) {
 
     return html`
         <div class="left-part">
-            <${HomeView} />
 
-            <${SingleItem} ...${props} />
+            ${props.path === '/about' ?
+                (html`
+                    <${About} ...${props} />
+                    <${SingleItem} ...${props} />
+                `) :
+                html`
+                    <${HomeView} ...${props} />
+                    <${SingleItem} ...${props} />
+                `
+            }
         </div>
 
         <hr class="special-divider" />
@@ -25,10 +34,10 @@ function IndexView (props) {
                 <img src="/img/logo.png" />
             </div>`
         }
-
     `
 }
 
+            // <${SingleItem} ...${props} />
             // ${props.children[0] || props.children}
 
 function HomeView () {

@@ -113,7 +113,7 @@ route(function onRoute (path) {
                     path=${path} slug=${slug}
                 >
                     <${IndexView} cart=${cart} slug=${slug} item=${res}
-                        setRoute=${route.setRoute}
+                        setRoute=${route.setRoute} path=${path}
                     >
                         <${view} cart=${cart} item=${res} path=${path}
                             slug=${slug}
@@ -131,8 +131,10 @@ route(function onRoute (path) {
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
         path=${path} slug=${slug}
     >
-        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
-            <${view} cart=${cart} path=${path} slug=${slug} />
+        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}
+            path=${path}
+        >
+            <${view} cart=${cart} path=${path} slug=${slug} path=${path} />
         <//>
     <//>`
 
