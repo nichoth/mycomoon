@@ -76,6 +76,9 @@ body {
     .shell-content {
         display: flex;
         height: calc(100vh - 6rem);
+        > img {
+            min-width: 50%;
+        }
 
         .left-part {
             width: calc(50vw + 6rem);

@@ -3,34 +3,10 @@ import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
 
 function SingleProductView (props) {
-    var { slug, getContent, cart } = props
-    const [item, setItem] = useState(slug === '' ? '' : null)
-    // const [catalog, setCatalog] = useState(null)
-    var [cartState, setCartState] = useState(null)
+    var { slug, item, cart } = props
+    var [cartState, setCartState] = useState(cart.state())
 
-    useEffect(() => {  // compponent did mount
-        if (slug) {
-            getContent()
-                .then(res => {
-                    setItem(res)
-                })
-                .catch(err => console.log('errrr', err))
-        }
-
-        // if (!slug) {
-        //     getContent()
-        //         .then(res => {
-        //             setCatalog(res)
-        //         })
-        //         .catch(err => console.log('errrr', err))
-        // } else {
-        //     getContent()
-        //         .then(res => {
-        //             setItem(res)
-        //         })
-        //         .catch(err => console.log('errrr', err))
-        // }
-    }, [slug]);
+    console.log('props in here', props)
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -75,6 +51,8 @@ function SingleProductView (props) {
 
         cart.add(_item)
     }
+
+    console.log('cart state', cartState)
 
     // get the quantity of each item that is in the cart
     var prodsInCart = cartState ? 
@@ -124,6 +102,8 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
 
+    console.log('item', item)
+
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
@@ -132,18 +112,7 @@ function ProductList (props) {
         }
     }, [slug])
 
-    // console.log('aaaaaa', item, slug)
-    if (slug && !item) {
-        // need to fetch the item
-        useEffect(() => {
-            
-        }, [])
-
-        return null
-    }
-
     function handleClck (ev) {
-        console.log('ccccc', ev.target)
         ev.target.scrollIntoView()
     }
 
@@ -161,7 +130,7 @@ function ProductList (props) {
                     ${_item.name}
                 </a>
 
-                ${isActive ?
+                ${(isActive && item) ?
                     html`
                     <img src="${item.media.source}" alt="mushroom"
                         class="inline-image" />

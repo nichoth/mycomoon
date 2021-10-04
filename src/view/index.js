@@ -1,29 +1,37 @@
 import { html } from 'htm/preact'
 // var Products = require('./products')
-// import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 // var SingleProduct = require('./single-product')
+var SingleItem = require('./single-product')
 
 
 function IndexView (props) {
-    // var { getContent, path } = props
+    var { item } = props
 
     console.log('props in index', props)
 
+    // console.log('props.children', props.children)
 
     return html`
         <div class="left-part">
             <${HomeView} />
 
-            ${props.children}
+            ${item ? html`<${SingleItem} ...${props} />` : null}
         </div>
 
         <hr class="special-divider" />
 
-        <div class="logo">
-            <img src="/img/logo.png" />
-        </div>
+        ${item ?
+            html`<img src=${item.media.source} />` :
+            html` <div class="logo">
+                <img src="/img/logo.png" />
+            </div>`
+        }
+
     `
 }
+
+            // ${props.children[0] || props.children}
 
 function HomeView () {
     return html`

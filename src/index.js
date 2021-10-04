@@ -3,7 +3,6 @@ var Router = require('./router')
 import { html } from 'htm/preact'
 import { render } from 'preact';
 // import { useState, useLayoutEffect } from 'preact/hooks';
-// import shell from './view/shell';
 var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
 import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
@@ -68,6 +67,8 @@ cart.on(EVENTS.product.change, (index, updatedProduct) => {
     console.log('product change', updatedProduct)
 })
 
+console.log('cart state', cart.state())
+
 var router = Router(state, bus)
 
 subscribe(bus, state)
@@ -81,11 +82,6 @@ route(function onRoute (path) {
     console.log('route event', path)
 
     var m = router.match(path)
-
-    // if (path === '/products') {
-    //     route.setRoute('/' + ITEMS[0].link)
-    //     return
-    // }
 
     if (!m) {
         console.log('not m', path)
@@ -109,13 +105,31 @@ route(function onRoute (path) {
     // need to always render the `index` view, and pass it a child that
     //   is the content corresponding to url
 
+    getContent()
+        .then(res => {
+            var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
+                path=${path} slug=${slug}
+            >
+                <${IndexView} cart=${cart} slug=${slug} item=${res}
+                    setRoute=${route.setRoute}
+                >
+                    <${view} cart=${cart} item=${res} path=${path}
+                        slug=${slug}
+                    />
+                <//>
+            <//>`
+
+            render(el, document.getElementById('content'))
+        })
+        .catch(err => {
+            console.log('aaaa', err)
+        })
+
     var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
         path=${path} slug=${slug}
     >
         <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
-            <${view} cart=${cart} getContent=${getContent} path=${path}
-                slug=${slug}
-            />
+            <${view} cart=${cart} path=${path} slug=${slug} />
         <//>
     <//>`
 
