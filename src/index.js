@@ -105,33 +105,36 @@ route(function onRoute (path) {
     // need to always render the `index` view, and pass it a child that
     //   is the content corresponding to url
 
-    getContent()
-        .then(res => {
-            var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-                path=${path} slug=${slug}
-            >
-                <${IndexView} cart=${cart} slug=${slug} item=${res}
-                    setRoute=${route.setRoute}
+    if (getContent) {
+        getContent()
+            .then(res => {
+                var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
+                    path=${path} slug=${slug}
                 >
-                    <${view} cart=${cart} item=${res} path=${path}
-                        slug=${slug}
-                    />
-                <//>
-            <//>`
+                    <${IndexView} cart=${cart} slug=${slug} item=${res}
+                        setRoute=${route.setRoute}
+                    >
+                        <${view} cart=${cart} item=${res} path=${path}
+                            slug=${slug}
+                        />
+                    <//>
+                <//>`
 
-            render(el, document.getElementById('content'))
-        })
-        .catch(err => {
-            console.log('aaaa', err)
-        })
+                render(el, document.getElementById('content'))
+            })
+            .catch(err => {
+                console.log('aaaa', err)
+            })
+    } else {
+        var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
+            path=${path} slug=${slug}
+        >
+            <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
+                <${view} cart=${cart} path=${path} slug=${slug} />
+            <//>
+        <//>`
 
-    var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-        path=${path} slug=${slug}
-    >
-        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
-            <${view} cart=${cart} path=${path} slug=${slug} />
-        <//>
-    <//>`
+        render(el, document.getElementById('content'))
+    }
 
-    render(el, document.getElementById('content'))
 })
