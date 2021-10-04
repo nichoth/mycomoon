@@ -52,7 +52,8 @@ body {
     color: $main-color;
     font-variant-ligatures: common-ligatures;
     background-color: black;
-    font-family: 'Work Sans', sans-serif;
+    // font-family: 'Work Sans', sans-serif;
+    font-family: 'Ampersand', 'Yport', sans-serif;
     background-size: cover;
 
     background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
@@ -89,7 +90,9 @@ body {
             .home-text {
                 height: 100vh;
                 filter: drop-shadow(2px 9px 13px black);
-                margin: 2rem;
+                padding: 2rem;
+                background-color: #00000059;
+                margin: 0;
             }
         }
 

@@ -93,7 +93,6 @@
     display: flex;
     font-family: 'Ampersand', 'Yport', sans-serif;
     width: 100%;
-    // height: calc(100vh - 8rem);
     height: calc(100vh - var(--nudge-height));
 
     svg {
