@@ -76,13 +76,14 @@ body {
 
     .shell-content {
         display: flex;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - var(--nudge-height));
         > img {
-            min-width: 50%;
+            object-fit: cover;
+            max-width: calc(50vw - 2rem);
         }
 
         .left-part {
-            width: calc(50vw + 6rem);
+            width: 50vw;
             // width: 50vw;
             height: calc(100vh - 5rem);
             overflow-y: scroll;
@@ -182,7 +183,8 @@ body {
             backdrop-filter: brightness(0.2);
             .left-part {
                 padding: 0;
-                width: calc(50vw + 6rem);
+                width: calc(50vw - 2rem);
+                // width: 50vw;
                 background-color: #000000ad;
             }
         }
@@ -190,7 +192,7 @@ body {
 
     .logo {
         height: 50vh;
-        width: 60vw;
+        width: 50vw;
         margin: 2rem auto;
         margin-bottom: 2rem;
         margin-top: 15vh;
