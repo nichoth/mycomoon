@@ -17,6 +17,7 @@ function SingleProductView (props) {
     }, [])
 
     if (!item && slug) {
+        console.log('aaaa', item)
         return null
     }
 
@@ -52,7 +53,7 @@ function SingleProductView (props) {
         cart.add(_item)
     }
 
-    console.log('cart state', cartState)
+    // console.log('cart state', cartState)
 
     // get the quantity of each item that is in the cart
     var prodsInCart = cartState ? 

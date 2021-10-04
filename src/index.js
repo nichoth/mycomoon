@@ -108,6 +108,7 @@ route(function onRoute (path) {
     if (getContent) {
         getContent()
             .then(res => {
+                console.log('aaaa', res)
                 var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
                     path=${path} slug=${slug}
                 >
@@ -125,16 +126,16 @@ route(function onRoute (path) {
             .catch(err => {
                 console.log('aaaa', err)
             })
-    } else {
-        var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-            path=${path} slug=${slug}
-        >
-            <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
-                <${view} cart=${cart} path=${path} slug=${slug} />
-            <//>
-        <//>`
+    } 
 
-        render(el, document.getElementById('content'))
-    }
+    var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
+        path=${path} slug=${slug}
+    >
+        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}>
+            <${view} cart=${cart} path=${path} slug=${slug} />
+        <//>
+    <//>`
+
+    render(el, document.getElementById('content'))
 
 })
