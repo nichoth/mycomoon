@@ -34,6 +34,12 @@
 @media screen and (max-width: 600px) {
     body {
         .shell-content {
+            flex-direction: column;
+
+            .special-divider {
+                display: none!important;
+            }
+
             &.index {
                 flex-direction: column!important;
             }
@@ -41,14 +47,18 @@
             .left-part {
                 min-height: calc(100vh - var(--nudge-height));
                 width: 100%!important;
+                scroll-snap-type: none!important;
             }
 
-            p {
+            > p {
                 width: initial!important;
                 height: calc(100vh - 7rem);
             }
-        }
 
+            > img {
+                display: none!important;
+            }
+        }
     }
 }
 
@@ -90,7 +100,7 @@ body {
 
         .left-part {
             width: 50vw;
-            height: calc(100vh - 5rem);
+            height: calc(100vh - var(--nudge-height));
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
 

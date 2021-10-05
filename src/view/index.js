@@ -1,7 +1,5 @@
 import { html } from 'htm/preact'
-// var Products = require('./products')
 // import { useEffect, useState } from 'preact/hooks';
-// var SingleProduct = require('./single-product')
 var SingleItem = require('./single-product')
 var About = require('./about')
 
@@ -30,7 +28,7 @@ function IndexView (props) {
 
         ${item ?
             html`<img src=${item.media.source} />` :
-            html` <div class="logo">
+            html`<div class="logo">
                 <img src="/img/logo.png" />
             </div>`
         }
