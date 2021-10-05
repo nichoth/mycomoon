@@ -1,6 +1,12 @@
 import { html } from 'htm/preact'
+import { useEffect } from 'preact/hooks';
 
 function About () {
+    useEffect(() => {
+        var el = document.querySelector('.about-info')
+        el.scrollIntoView()
+    }, [])
+
     return html`<div class="about-info">
         <h1>About</h1>
         <p>
