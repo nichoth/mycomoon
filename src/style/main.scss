@@ -35,7 +35,12 @@
     body {
         .shell-content {
             &.index {
-                flex-direction: column-reverse!important;
+                flex-direction: column!important;
+            }
+
+            .left-part {
+                min-height: calc(100vh - var(--nudge-height));
+                width: 100%!important;
             }
 
             p {
