@@ -108,6 +108,7 @@
     height: calc(100vh - var(--nudge-height));
 
     h2 {
+        padding-top: 1rem;
         margin-left: 1rem;
     }
 
@@ -123,9 +124,9 @@
         .dual-extracted {
             display: block!important;
             margin: 1rem auto 0;
-            height: 4rem;
+            height: 6rem;
             text-align: center;
-            width: 4rem;
+            width: 6rem;
             margin-right: 1rem;
 
             img {
@@ -184,6 +185,7 @@
                 padding: 0;
                 padding-top: 1rem;
                 background-color: initial;
+                border-bottom: none;
 
                 ul {
                     list-style-type: none;
@@ -215,6 +217,9 @@
                 a {
                     display: block;
                     margin-bottom: 1rem;
+                    border-bottom: 2px solid;
+                    padding-left: 1rem;
+                    padding-bottom: 1rem;
                 }
             }
         }

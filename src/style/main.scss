@@ -78,7 +78,7 @@ body {
     font-family: 'Ampersand', 'Yport', sans-serif;
     background-size: cover;
 
-    background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
+    // background: url(/img/myco-bg.jpeg) no-repeat center center fixed; 
     background-size: cover;
     backdrop-filter: brightness(0.5);
 
@@ -104,11 +104,16 @@ body {
             width: calc(50vw - 2rem);
         }
 
+        &.index {
+            .left-part {
+                scroll-snap-type: y mandatory;
+            }
+        }
+
         .left-part {
             width: 50vw;
             height: calc(100vh - var(--nudge-height));
             overflow-y: scroll;
-            scroll-snap-type: y mandatory;
 
             .home-view {
                 height: 100vh;
