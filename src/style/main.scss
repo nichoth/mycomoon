@@ -49,7 +49,12 @@
             .left-part {
                 min-height: calc(100vh - var(--nudge-height));
                 width: 100%!important;
-                // scroll-snap-type: none!important;
+            }
+
+            &.product-page {
+                .left-part {
+                    scroll-snap-type: none!important;
+                }
             }
 
             > p {
