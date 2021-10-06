@@ -1,5 +1,28 @@
 @import './variables.scss';
 
+@media screen and (max-width: 600px) {
+    .page-content {
+        margin-left: 0!important;
+        border-left: none!important;
+    }
+
+    .nav-part {
+        .who-are-you {
+            margin-left: 4rem;
+        }
+    }
+
+    .shell-content.index {
+        .special-divider {
+            display: none;
+        }
+
+        div.logo {
+            display: none;
+        }
+    }
+}
+
 .outer-shell {
     // display: flex;
     // min-height: 100vh;
@@ -23,10 +46,6 @@
         // min-height: calc(100vh + 5rem);
     }
 }
-
-
-
-
 
 .hamburger {
     cursor: pointer;
@@ -109,11 +128,9 @@
         padding: 0;
         flex-grow: 1;
         min-width: 100%;
-        // max-width: 25%;
         width: 100%;
-        // backdrop-filter: brightness(0.4);
-        // background: #2a98a5f5;
         background: #E8E1D7;
+        height: 102%;
 
         & > div:first-child {
             padding: 1rem;

@@ -40,10 +40,13 @@ function IndexView (props) {
 
 function HomeView () {
     return html`
-        <p class="home-text" id="home">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <div class="home-view">
+            <img src="/img/logo.png" />
+            <p class="home-text" id="home">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
     `
 }
 
