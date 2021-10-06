@@ -25,12 +25,6 @@
     .single-product {
         flex-direction: column-reverse;
 
-        .dual-extracted {
-            margin: 0!important;
-            margin-left: 1rem!important;
-            margin-right: 1rem!important;
-        }
-
         .inline-image {
             display: initial;
         }
@@ -54,6 +48,16 @@
 
                     > div {
                         display: block;
+                    }
+
+                    .item-description {
+                        display: flex;
+                        padding-left: 1rem;
+
+                        .dual-extracted {
+                            height: 5rem;
+                            width: 8rem;
+                        }
                     }
 
                     .cart-controls {
