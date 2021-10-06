@@ -102,10 +102,14 @@
 }
 
 .single-product {
-    display: flex;
+    // display: flex;
     font-family: 'Ampersand', 'Yport', sans-serif;
     width: 100%;
     height: calc(100vh - var(--nudge-height));
+
+    h2 {
+        margin-left: 1rem;
+    }
 
     svg {
         height: 6rem;

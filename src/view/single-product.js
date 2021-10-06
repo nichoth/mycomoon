@@ -65,6 +65,7 @@ function SingleProductView (props) {
 
     // here we use the `item` from state
     return html`<div class="single-product">
+        <h2>Products</h2>
         <div class="single-product-info">
             <${ProductList} slug=${slug} item=${item}
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
