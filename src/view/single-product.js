@@ -17,7 +17,7 @@ function SingleProductView (props) {
     }, [])
 
     if (!item && slug) {
-        console.log('errrrrr', item)
+        console.log('errrrrr not item and slug', item)
         return null
     }
 
@@ -121,7 +121,6 @@ function ProductList (props) {
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
-            console.log('active?', isActive, _item)
 
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${isActive ?
