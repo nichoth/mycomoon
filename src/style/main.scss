@@ -97,7 +97,6 @@ body {
     background-size: cover;
     backdrop-filter: brightness(0.5);
 
-
     .special-divider {
         transition: all 1s;
         // height: calc(100vh + 5rem);
@@ -137,6 +136,10 @@ body {
                 background-color: #00000059;
                 margin: 0;
                 scroll-snap-align: start;
+
+                .home-text {
+                    margin-top: 25vh;
+                }
 
                 img {
                     display: none;
