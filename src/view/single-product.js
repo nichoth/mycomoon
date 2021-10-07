@@ -7,8 +7,6 @@ function SingleProductView (props) {
     var item = props.content
     var [cartState, setCartState] = useState(cart.state())
 
-    console.log('ooooo', props)
-
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
         setCartState(cart.state())
@@ -19,9 +17,9 @@ function SingleProductView (props) {
 
     console.log('item slug', item, slug)
 
-    if (!item) {
-        return null
-    }
+    // if (!item) {
+    //     return null
+    // }
 
     if (!item && slug) {
         console.log('errrrrr not item and slug', item)
