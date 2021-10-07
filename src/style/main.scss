@@ -49,6 +49,12 @@
             .left-part {
                 min-height: calc(100vh - var(--nudge-height));
                 width: 100%!important;
+
+                .home-view {
+                    img {
+                        display: block!important;
+                    }
+                }
             }
 
             &.product-page {
@@ -133,9 +139,10 @@ body {
                 scroll-snap-align: start;
 
                 img {
+                    display: none;
                     max-width: 50vw;
                     max-height: 50vh;
-                    display: block;
+                    // display: block;
                     margin: 0 auto;
                     margin-bottom: 2rem;
                 }
