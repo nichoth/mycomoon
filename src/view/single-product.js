@@ -22,13 +22,6 @@ function SingleProductView (props) {
         })
     }, [])
 
-    // console.log('item, slug', item, slug)
-
-    // if (!item && slug) {
-    //     console.log('errrrrr not item and slug', item)
-    //     return null
-    // }
-
     function addToCart (item, ev) {
         ev.preventDefault()
 
@@ -87,21 +80,27 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, route } = props
 
+    console.log('slug', slug, 'perma', item && item.permalink)
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
         if (el && item) {
+            console.log('scrolling', el, item)
             el.scrollIntoView()
         }
 
         if (route === '/products') {
-            document.getElementById('products').scrollIntoView()
+            console.log('prods')
+            document.getElementById('products').scrollIntoView(true)
         }
     }, [slug, (item && item.permalink)])
 
     function handleClck (ev) {
         ev.target.scrollIntoView()
     }
+
+    // for test
+    item = props.item || { foo: 'bar' }
 
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
@@ -118,8 +117,10 @@ function ProductList (props) {
 
                 ${(isActive && item) ?
                     html`
-                    <img src="${item.media.source}" alt="mushroom"
-                        class="inline-image" />
+                    <img src="${item.media && item.media.source}"
+                        alt="mushroom"
+                        class="inline-image"
+                    />
                     
                     <div class="item-description">
                         <div class="desc"
@@ -173,7 +174,7 @@ function CartControls (props) {
     var { product, prodsInCart, onAddToCart } = props
 
     var count = (prodsInCart[product.id] || 0)
-    var price = product.price.formatted_with_symbol
+    var price = (product.price && product.price.formatted_with_symbol)
 
     return html`<div class="cart-controls">
         <span class="price">${price}</span>
