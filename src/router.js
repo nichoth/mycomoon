@@ -4,6 +4,9 @@ var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
 var AboutPage = require('./view/about')
 
+// if we have the item, return it
+// if not, request it then return it
+
 function Router (state) {
 
     router.addRoute('/', () => {
@@ -49,7 +52,7 @@ function Router (state) {
     })
 
     router.addRoute('/products', () => {
-        console.log('**products route**')
+        // console.log('**products route**')
 
         return {
             getContent: function () {

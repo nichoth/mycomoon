@@ -9,26 +9,26 @@ var IndexView = require('./view/index')
 
 var struct = require('observ-struct')
 var observ = require('observ')
-var Bus = require('@nichoth/events')
-var evs = require('./EVENTS')
-var xtend = require('xtend')
+// var Bus = require('@nichoth/events')
+// var evs = require('./EVENTS')
+// var xtend = require('xtend')
 
-var bus = Bus({ memo: true })
+// var bus = Bus({ memo: true })
 var state = struct({
     route: observ(''),
     content: observ(null)
 })
 
-function subscribe (bus, state) {
-    bus.on(evs.product.got, ev => {
-        var newItem = {}
-        newItem[ev.permalink] = ev
-        var newState = state.catalog() ?
-            xtend((state && state.catalog() || {}), newItem) :
-            newItem
-        state.catalog.set(newState)
-    })
-}
+// function subscribe (bus, state) {
+//     // bus.on(evs.product.got, ev => {
+//     //     var newItem = {}
+//     //     newItem[ev.permalink] = ev
+//     //     var newState = state.catalog() ?
+//     //         xtend((state && state.catalog() || {}), newItem) :
+//     //         newItem
+//     //     state.catalog.set(newState)
+//     // })
+// }
 
 // state(_state => {
 //     console.log('**debug new state', _state)
@@ -64,36 +64,14 @@ cart.on(EVENTS.product.change, (index, updatedProduct) => {
     console.log('product change', updatedProduct)
 })
 
-console.log('cart state', cart.state())
-
 var router = Router(state)
 
-subscribe(bus, state)
-
-
-// for dev
-window.setRoute = route.setRoute
-
+// subscribe(bus, state)
 
 route(function onRoute (path) {
     var m = router.match(path)
 
-    // if (!m) {
-    //     console.log('not m', path)
-    //     return
-    // }
-
     var { getContent } = m.action(m)
-
-    // var dirs = path.split('/').filter(Boolean)
-
-    // var contentClass = (path === '/' || path === '') ?
-    //     'index' :
-    //     _path.basename(path)
-
-    // var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
-    //     dirs[0] !== 'about' && dirs[0] !== 'cart')
-    // if (isProdPage) contentClass += ' product-page'
 
     state.route.set(path)
 

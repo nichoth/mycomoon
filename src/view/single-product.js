@@ -3,12 +3,13 @@ import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
 
 function SingleProductView (props) {
-    var { slug, cart } = props
+    var { slug, cart, route } = props
+    // console.log('props again', props)
     var item = props.content
     var slug = item && item.permalink
     var [cartState, setCartState] = useState(cart.state())
 
-    console.log('porpppp', props)
+    // console.log('porpppp', props)
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -18,7 +19,7 @@ function SingleProductView (props) {
         })
     }, [])
 
-    console.log('item, slug', item, slug)
+    // console.log('item, slug', item, slug)
 
     if (!item && slug) {
         console.log('errrrrr not item and slug', item)
@@ -67,18 +68,23 @@ function SingleProductView (props) {
 
     // here we use the `item` from state
     return html`<div class="single-product">
-        <h2>Products</h2>
+        <h2 id="products">Products</h2>
         <div class="single-product-info">
-            <${ProductList} slug=${slug} item=${item}
+            <${ProductList} slug=${slug} item=${item} route=${route}
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
             />
         </div>
     </div>`
 }
 
-// needs permalink, description, name
+// this view is used for the list of products,
+// single products
+
+
 function ProductList (props) {
-    var { slug, item, prodsInCart, addToCart } = props
+    var { slug, item, prodsInCart, addToCart, route } = props
+
+    console.log('props in here', props)
 
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
@@ -86,7 +92,21 @@ function ProductList (props) {
         if (el) {
             el.scrollIntoView()
         }
+
+        if (route === '/products') {
+            document.getElementById('products').scrollIntoView()
+        }
+
     }, [slug])
+
+    // useEffect(() => {
+    //     console.log('**slug**', slug)
+    //     if (slug) return
+    //     console.log('not slug')
+    //     var el = document.getElementById('products')
+    //     console.log('el', el)
+    //     el.scrollIntoView()
+    // }, [slug])
 
     function handleClck (ev) {
         ev.target.scrollIntoView()
