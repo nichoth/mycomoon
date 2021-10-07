@@ -72,10 +72,6 @@ function Router (state) {
 
         return {
             getContent: function () {
-                if (state().catalog && state().catalog[slug]) {
-                    return Promise.resolve(state().catalog[slug])
-                }
-
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
 

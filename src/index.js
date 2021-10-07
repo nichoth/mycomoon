@@ -15,6 +15,7 @@ var observ = require('observ')
 
 // var bus = Bus({ memo: true })
 var state = struct({
+    slug: observ(null),
     route: observ(''),
     content: observ(null)
 })
@@ -71,9 +72,10 @@ var router = Router(state)
 route(function onRoute (path) {
     var m = router.match(path)
 
-    var { getContent } = m.action(m)
+    var { getContent, slug } = m.action(m)
 
     state.route.set(path)
+    state.slug.set(slug)
 
     if (getContent) {
         getContent()

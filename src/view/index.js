@@ -6,7 +6,7 @@ var SingleItem = require('./single-product')
 function IndexView (props) {
     var item = props.content
 
-    console.log('**props in index', props)
+    // console.log('**props in index', props)
 
     return html`
         <div class="left-part">
@@ -26,7 +26,7 @@ function IndexView (props) {
 }
 
 function HomeView (props) {
-    console.log('**props', props)
+    console.log('props in home view', props)
     // component did update
     useEffect(() => {
         document.getElementById('home').scrollIntoView()

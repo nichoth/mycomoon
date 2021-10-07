@@ -2,11 +2,14 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
 
+// we are setting the 'active' class after the request resolves,
+// needs to happend before then
+
 function SingleProductView (props) {
     var { slug, cart, route } = props
     // console.log('props again', props)
     var item = props.content
-    var slug = item && item.permalink
+    // var slug = item && item.permalink
     var [cartState, setCartState] = useState(cart.state())
 
     // console.log('porpppp', props)
@@ -21,10 +24,10 @@ function SingleProductView (props) {
 
     // console.log('item, slug', item, slug)
 
-    if (!item && slug) {
-        console.log('errrrrr not item and slug', item)
-        return null
-    }
+    // if (!item && slug) {
+    //     console.log('errrrrr not item and slug', item)
+    //     return null
+    // }
 
     function addToCart (item, ev) {
         ev.preventDefault()
@@ -89,24 +92,14 @@ function ProductList (props) {
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
-        if (el) {
+        if (el && item) {
             el.scrollIntoView()
         }
 
         if (route === '/products') {
             document.getElementById('products').scrollIntoView()
         }
-
-    }, [slug])
-
-    // useEffect(() => {
-    //     console.log('**slug**', slug)
-    //     if (slug) return
-    //     console.log('not slug')
-    //     var el = document.getElementById('products')
-    //     console.log('el', el)
-    //     el.scrollIntoView()
-    // }, [slug])
+    }, [slug, (item && item.permalink)])
 
     function handleClck (ev) {
         ev.target.scrollIntoView()
