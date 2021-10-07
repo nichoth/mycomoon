@@ -3,7 +3,6 @@ var Router = require('./router')
 import { html } from 'htm/preact'
 import { render } from 'preact';
 // import { useState, useLayoutEffect } from 'preact/hooks';
-var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
 import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var Shell = require('./view/shell')
@@ -19,7 +18,9 @@ var xtend = require('xtend')
 
 var bus = Bus({ memo: true })
 var state = struct({
-    catalog: observ(null)
+    catalog: observ(null),
+    route: observ('/'),
+    content: observ(null)
 })
 
 function subscribe (bus, state) {
@@ -69,7 +70,7 @@ cart.on(EVENTS.product.change, (index, updatedProduct) => {
 
 console.log('cart state', cart.state())
 
-var router = Router(state, bus)
+var router = Router(state)
 
 subscribe(bus, state)
 
@@ -79,65 +80,49 @@ window.setRoute = route.setRoute
 
 
 route(function onRoute (path) {
-    console.log('route event', path)
-
     var m = router.match(path)
 
-    if (!m) {
-        console.log('not m', path)
-        return
-    }
+    // if (!m) {
+    //     console.log('not m', path)
+    //     return
+    // }
 
-    var { view, getContent, slug } = m.action(m)
+    var { getContent } = m.action(m)
 
-    var dirs = path.split('/').filter(Boolean)
+    // var dirs = path.split('/').filter(Boolean)
 
-    var contentClass = (path === '/' || path === '') ?
-        'index' :
-        _path.basename(path)
+    // var contentClass = (path === '/' || path === '') ?
+    //     'index' :
+    //     _path.basename(path)
 
-    var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
-        dirs[0] !== 'about' && dirs[0] !== 'cart')
-    if (isProdPage) contentClass += ' product-page'
+    // var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
+    //     dirs[0] !== 'about' && dirs[0] !== 'cart')
+    // if (isProdPage) contentClass += ' product-page'
 
     // here we take the view returned from router, and use it as a child of
     // `shell`
     // need to always render the `index` view, and pass it a child that
     //   is the content corresponding to url
 
+    state.route.set(path)
+
     if (getContent) {
         getContent()
             .then(res => {
-                console.log('in res', res)
-                var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-                    path=${path} slug=${slug}
-                >
-                    <${IndexView} cart=${cart} slug=${slug} item=${res}
-                        setRoute=${route.setRoute} path=${path}
-                    >
-                        <${view} cart=${cart} item=${res} path=${path}
-                            slug=${slug}
-                        />
-                    <//>
-                <//>`
-
-                render(el, document.getElementById('content'))
+                state.content.set(res)
             })
             .catch(err => {
                 console.log('aaaa', err)
             })
     } 
-
-    var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-        path=${path} slug=${slug}
-    >
-        <${IndexView} cart=${cart} slug=${slug} setRoute=${route.setRoute}
-            path=${path}
-        >
-            <${view} cart=${cart} path=${path} slug=${slug} path=${path} />
-        <//>
-    <//>`
-
-    render(el, document.getElementById('content'))
-
 })
+
+// contentClass=${contentClass}*/
+// path=${path} 
+// slug=${slug} 
+
+var el = html`<${Shell} cart=${cart} state=${state} >
+    <${IndexView} cart=${cart} setRoute=${route.setRoute} ...${state()} />
+<//>`
+
+render(el, document.getElementById('content'))

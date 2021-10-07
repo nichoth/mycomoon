@@ -3,6 +3,10 @@ import { html, Component } from 'htm/preact'
 import { createRef } from 'preact';
 // import { options } from 'marked';
 var { ITEMS } = require('../CONSTANTS')
+var xtend = require('xtend')
+var Router = require('../router')
+var _path = require('path')
+var IndexView = require('./index')
 
 function Icon () {
     // return html`<img src="/img/shoppingcart_icon.svg" />`
@@ -12,17 +16,32 @@ function Icon () {
 class Shell extends Component {
     constructor (props) {
         super(props)
-        this.state = { isMenuOpen: false }
+        this.state = xtend({ isMenuOpen: false }, props.state())
+        // this.state = { isMenuOpen: false, ...props.state() }
         this.ref = createRef();
         this.setState = this.setState.bind(this)
         this.openMenu = this.openMenu.bind(this)
         this.closeMenu = this.closeMenu.bind(this)
+        this.router = Router(props.state)
+        props.state(newState => {
+            this.setState(xtend(this.state, newState))
+        })
     }
 
     componentDidUpdate () {
+        var path = this.state.route
+        var contentClass = (path === '/' || path === '') ?
+            'index' :
+            _path.basename(path)
+
+        var dirs = path.split('/').filter(Boolean)
+        var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
+            dirs[0] !== 'about' && dirs[0] !== 'cart')
+        if (isProdPage) contentClass += ' product-page'
+
         var el = document.getElementById('content')
-        el.className = this.props.contentClass;
-        document.body.className = this.props.contentClass
+        el.className = contentClass
+        document.body.className = contentClass
     }
 
     componentDidMount () {
@@ -44,15 +63,20 @@ class Shell extends Component {
     }
 
     render (props) {
-        var { path } = props
+        var path = this.state.route
 
-        console.log('props in shell', props)
+        var m = this.router.match(path)
+
+        var view
+        if (!m) view = null
+        else view = m.action(m).view
 
         return html`<div class="outer-shell${this.state.isMenuOpen ?
             ' menu-open' : ''}"
         >
             <${Menu} onOpen=${this.openMenu} onClose=${this.closeMenu}
                 activePath=${path} isOpen=${this.state.isMenuOpen}
+                ...${this.state}
             />
 
             <div class="page-content">
@@ -65,8 +89,10 @@ class Shell extends Component {
                     <span class="cart-container" ref=${this.ref}></span>
                 </div>
 
-                <div class="shell shell-content ${props.contentClass}">
-                    ${props.children}
+                <div class="shell shell-content">
+                    <${IndexView} ...${props} ...${this.state}>
+                        <${view} ...${this.state} ...${this.props} />
+                    <//>
                 </div>
             </div>
         </div>`

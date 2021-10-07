@@ -6,8 +6,6 @@ function SingleProductView (props) {
     var { slug, item, cart } = props
     var [cartState, setCartState] = useState(cart.state())
 
-    console.log('props in here', props)
-
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
         setCartState(cart.state())
@@ -52,8 +50,6 @@ function SingleProductView (props) {
 
         cart.add(_item)
     }
-
-    // console.log('cart state', cartState)
 
     // get the quantity of each item that is in the cart
     var prodsInCart = cartState ? 
@@ -103,8 +99,6 @@ function SingleProductView (props) {
 // needs permalink, description, name
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart } = props
-
-    console.log('item', item)
 
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')

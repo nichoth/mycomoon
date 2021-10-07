@@ -97,6 +97,14 @@ body {
     background-size: cover;
     backdrop-filter: brightness(0.5);
 
+    #content {
+        &.index {
+            .left-part {
+                scroll-snap-type: y mandatory;
+            }
+        }
+    }
+
     .special-divider {
         transition: all 1s;
         // height: calc(100vh + 5rem);
@@ -116,12 +124,6 @@ body {
             object-fit: cover;
             max-width: calc(50vw - 2rem);
             width: calc(50vw - 2rem);
-        }
-
-        &.index {
-            .left-part {
-                scroll-snap-type: y mandatory;
-            }
         }
 
         .left-part {

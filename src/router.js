@@ -2,22 +2,9 @@ var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
-// var Products = require('./view/products')
 var AboutPage = require('./view/about')
-// var IndexView = require('./view/index')
-var evs = require('./EVENTS')
-// import { html } from 'htm/preact'
 
-// function HomeView () {
-//     return html`
-//         <p class="home-text" id="home">
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-//             do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-//         </p>
-//     `
-// }
-
-function Router (state, bus) {
+function Router (state) {
 
     router.addRoute('/', () => {
         return {
@@ -82,7 +69,7 @@ function Router (state, bus) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        console.log('current url in :slug route', window.location.href)
+        // console.log('current url in :slug route', window.location.href)
 
         return {
             getContent: function () {
@@ -98,7 +85,7 @@ function Router (state, bus) {
                         return res.json()
                     })
                     .then(json => {
-                        bus.emit(evs.product.got, json)
+                        // bus.emit(evs.product.got, json)
                         return json
                     })
                     .catch(err => {
