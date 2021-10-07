@@ -1,5 +1,5 @@
 import { html } from 'htm/preact'
-// import { useEffect, useState } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
 var SingleItem = require('./single-product')
 // var About = require('./about')
 
@@ -25,7 +25,13 @@ function IndexView (props) {
     `
 }
 
-function HomeView () {
+function HomeView (props) {
+    console.log('**props', props)
+    // component did update
+    useEffect(() => {
+        document.getElementById('home').scrollIntoView()
+    })
+
     return html`
         <div class="home-view">
             <img src="/img/logo.png" />

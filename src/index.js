@@ -15,7 +15,7 @@ var xtend = require('xtend')
 
 var bus = Bus({ memo: true })
 var state = struct({
-    route: observ('/'),
+    route: observ(''),
     content: observ(null)
 })
 
