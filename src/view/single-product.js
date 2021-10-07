@@ -99,7 +99,7 @@ function ProductList (props) {
         ev.target.scrollIntoView()
     }
 
-    // for test
+    // so the page layout doesn't get as bad when you're loading a product
     item = props.item || { foo: 'bar' }
 
     return html`<ul class="product-list">
