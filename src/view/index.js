@@ -34,17 +34,22 @@ function IndexView (props) {
     `
 }
 
-            // <${SingleItem} ...${props} />
-            // ${props.children[0] || props.children}
-
 function HomeView () {
     return html`
         <div class="home-view">
             <img src="/img/logo.png" />
-            <p class="home-text" id="home">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+
+            <div class="home-text" id="home">
+                <p>
+                    Myco Moon wants to share their love for functional mushrooms
+                    with the world. Their extracts are made from small batches of
+                    homegrown Lion's Mane, Reishi, Turkey Tail, & Chaga mushrooms.
+                </p>
+                <p>
+                    Funghi has the power to heal and balance the body and mind,
+                    while simultaneously restoring environments and ecosystems.
+                </p>
+            </div>
         </div>
     `
 }
