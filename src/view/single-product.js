@@ -20,10 +20,6 @@ function SingleProductView (props) {
 
     console.log('item, slug', item, slug)
 
-    // if (!item) {
-    //     return null
-    // }
-
     if (!item && slug) {
         console.log('errrrrr not item and slug', item)
         return null

@@ -1,26 +1,17 @@
 import { html } from 'htm/preact'
 // import { useEffect, useState } from 'preact/hooks';
 var SingleItem = require('./single-product')
-var About = require('./about')
+// var About = require('./about')
 
 function IndexView (props) {
-    var { item, route } = props
+    var item = props.content
 
-    console.log('props in index', props)
+    console.log('**props in index', props)
 
     return html`
         <div class="left-part">
-
-            ${route === '/about' ?
-                (html`
-                    <${About} ...${props} />
-                    <${SingleItem} ...${props} />
-                `) :
-                html`
-                    <${HomeView} ...${props} />
-                    <${SingleItem} ...${props} />
-                `
-            }
+            <${HomeView} ...${props} />
+            <${SingleItem} ...${props} />
         </div>
 
         <hr class="special-divider" />
