@@ -13,11 +13,8 @@ var Bus = require('@nichoth/events')
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 
-// var { ITEMS } = require('./CONSTANTS')
-
 var bus = Bus({ memo: true })
 var state = struct({
-    catalog: observ(null),
     route: observ('/'),
     content: observ(null)
 })
