@@ -52,13 +52,9 @@ function Router (state) {
         console.log('**products route**')
 
         return {
-            // getContent: function () {
-            //     return fetch('/.netlify/functions/get-catalog')
-            //         .then(response => response.json())
-            //         .then(res => {
-            //             return res
-            //         })
-            // },
+            getContent: function () {
+                return Promise.resolve(null)
+            },
 
             slug: '',
 

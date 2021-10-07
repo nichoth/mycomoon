@@ -5,7 +5,10 @@ var { ITEMS } = require('../CONSTANTS')
 function SingleProductView (props) {
     var { slug, cart } = props
     var item = props.content
+    var slug = item && item.permalink
     var [cartState, setCartState] = useState(cart.state())
+
+    console.log('porpppp', props)
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
