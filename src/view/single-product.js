@@ -3,8 +3,11 @@ import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
 
 function SingleProductView (props) {
-    var { slug, item, cart } = props
+    var { slug, cart } = props
+    var item = props.content
     var [cartState, setCartState] = useState(cart.state())
+
+    console.log('ooooo', props)
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -13,6 +16,12 @@ function SingleProductView (props) {
             setCartState(newCartState)
         })
     }, [])
+
+    console.log('item slug', item, slug)
+
+    if (!item) {
+        return null
+    }
 
     if (!item && slug) {
         console.log('errrrrr not item and slug', item)
@@ -67,32 +76,6 @@ function SingleProductView (props) {
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
             />
         </div>
-
-        <!-- <hr class="special-divider" /> -->
-
-        <!-- <div class="single-product-content">
-            ${(item && item.media && slug) ?
-                html`<img src="${item.media.source}" alt="mushroom" />` :
-                null
-
-                // (catalog ?
-                //     html`<ul class="products-list">
-                //         ${catalog
-                //         .filter(item => item.active)
-                //         .map(item => {
-                //             return html`<li>
-                //                 <a href="/${item.permalink}">
-                //                     <img src=${item.media.source}
-                //                         alt="mushroom" />
-                //                     <p>${item.name}</p>
-                //                 </a>
-                //             </li>`
-                //         })}
-                //     </ul>` :
-                //     null
-                // )
-            }
-        </div> -->
     </div>`
 }
 

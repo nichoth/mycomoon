@@ -2,7 +2,6 @@ var route = require('route-event')()
 var Router = require('./router')
 import { html } from 'htm/preact'
 import { render } from 'preact';
-// import { useState, useLayoutEffect } from 'preact/hooks';
 import Cart from '@nichoth/shopping-cart'
 import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var Shell = require('./view/shell')
@@ -99,11 +98,6 @@ route(function onRoute (path) {
     //     dirs[0] !== 'about' && dirs[0] !== 'cart')
     // if (isProdPage) contentClass += ' product-page'
 
-    // here we take the view returned from router, and use it as a child of
-    // `shell`
-    // need to always render the `index` view, and pass it a child that
-    //   is the content corresponding to url
-
     state.route.set(path)
 
     if (getContent) {
@@ -116,10 +110,6 @@ route(function onRoute (path) {
             })
     } 
 })
-
-// contentClass=${contentClass}*/
-// path=${path} 
-// slug=${slug} 
 
 var el = html`<${Shell} cart=${cart} state=${state} >
     <${IndexView} cart=${cart} setRoute=${route.setRoute} ...${state()} />

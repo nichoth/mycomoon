@@ -3,16 +3,15 @@ import { html } from 'htm/preact'
 var SingleItem = require('./single-product')
 var About = require('./about')
 
-
 function IndexView (props) {
-    var { item } = props
+    var { item, route } = props
 
     console.log('props in index', props)
 
     return html`
         <div class="left-part">
 
-            ${props.path === '/about' ?
+            ${route === '/about' ?
                 (html`
                     <${About} ...${props} />
                     <${SingleItem} ...${props} />
