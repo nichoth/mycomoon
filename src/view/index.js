@@ -25,8 +25,7 @@ function IndexView (props) {
     `
 }
 
-function HomeView (props) {
-    console.log('props in home view', props)
+function HomeView (/*props*/) {
     // component did update
     useEffect(() => {
         document.getElementById('home').scrollIntoView()

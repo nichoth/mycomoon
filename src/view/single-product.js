@@ -87,8 +87,6 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, route } = props
 
-    console.log('props in here', props)
-
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
