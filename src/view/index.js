@@ -25,9 +25,10 @@ function IndexView (props) {
     `
 }
 
-function HomeView (/*props*/) {
+function HomeView (props) {
     // component did update
     useEffect(() => {
+        if (props.route !== '/') return
         document.getElementById('home').scrollIntoView(true)
     })
 
