@@ -169,7 +169,6 @@
             margin: 0;
             padding: 1rem;
             border-bottom: $stroke-width solid;
-
             background-color: #000000ad;
 
             &:first-child {
@@ -196,6 +195,7 @@
                 padding-top: 1rem;
                 background-color: initial;
                 border-bottom: 2px solid;
+                min-height: calc(100vh - var(--nudge-height));
 
                 ul {
                     list-style-type: none;
