@@ -5,8 +5,9 @@ var SingleItem = require('./single-product')
 
 function IndexView (props) {
     var item = props.content
+    var path = props.route
 
-    // console.log('**props in index', props)
+    console.log('path', path)
 
     return html`
         <div class="left-part">
@@ -16,7 +17,7 @@ function IndexView (props) {
 
         <hr class="special-divider" />
 
-        ${item ?
+        ${(item  && path !== '/') ?
             html`<img src=${item.media.source} />` :
             html`<div class="logo">
                 <img src="/img/logo.png" />
