@@ -120,6 +120,17 @@ body {
             display: flex;
             justify-content: space-evenly;
             align-items: baseline;
+
+            button {
+                border: 1px solid;
+                padding: 0.5rem 0.8rem;
+                border-radius: 6px;
+                transition: all 0.2s;
+                &:hover {
+                    background-color: beige;
+                    color: black;
+                }
+            }
         }
 
         li.active {
@@ -225,13 +236,21 @@ body {
                 }
 
                 .moon-icon {
+                    width: 1.3rem;
                     position: relative;
                     left: 2%;
+                    img {
+                        max-width: 100%;
+                    }
                 }
 
                 .star-icon {
+                    width: 1.3rem;
                     position: relative;
                     right: 3.5%;
+                    img {
+                        max-width: 100%;
+                    }
                 }
             }
         }
