@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
+var Route = require('route-event')
+var Router = require('../router')
+var router = Router()
+var _path = require('path')
 
 // we are setting the 'active' class after the request resolves,
 // needs to happend before then
 
+var routeEvent = Route()
+
 function SingleProductView (props) {
-    var { slug, cart, route } = props
-    // console.log('props again', props)
+    // var { slug, cart, route } = props
+    var { cart } = props
     var item = props.content
     // var slug = item && item.permalink
     var [cartState, setCartState] = useState(cart.state())
-
-    // console.log('porpppp', props)
+    var [route, setRoute] = useState({ route: '', slug: '' })
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -21,6 +26,42 @@ function SingleProductView (props) {
             setCartState(newCartState)
         })
     }, [])
+
+
+    useEffect(() => {
+        console.log('blaaaa')
+        var path = route.route
+        var contentClass = (path === '/' || path === '') ?
+            'index' :
+            _path.basename(path)
+
+        var dirs = path.split('/').filter(Boolean)
+        var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
+            dirs[0] !== 'about' && dirs[0] !== 'cart')
+        if (isProdPage) contentClass += ' product-page'
+
+        var el = document.getElementById('content')
+        el.className = contentClass
+        document.body.className = contentClass
+    }, [route])
+
+    routeEvent(function onRoute (path) {
+        console.log('**on route', path)
+        var m = router.match(path)
+        var { getContent, slug } = m.action(m)
+
+        setRoute({ route: path, slug })
+
+        if (getContent) {
+            getContent()
+                .then(res => {
+                    state.content.set(res)
+                })
+                .catch(err => {
+                    console.log('aaaa', err)
+                })
+        } 
+    })
 
     function addToCart (item, ev) {
         ev.preventDefault()
@@ -66,8 +107,9 @@ function SingleProductView (props) {
     return html`<div class="single-product">
         <h2 id="products">Products</h2>
         <div class="single-product-info">
-            <${ProductList} slug=${slug} item=${item} route=${route}
-                prodsInCart=${prodsInCart} addToCart=${addToCart}
+            <${ProductList} slug=${route.slug} item=${item}
+                route=${route.path} addToCart=${addToCart}
+                prodsInCart=${prodsInCart}
             />
         </div>
     </div>`
@@ -80,7 +122,6 @@ function SingleProductView (props) {
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, route } = props
 
-    console.log('slug', slug, 'perma', item && item.permalink)
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
@@ -101,6 +142,14 @@ function ProductList (props) {
 
     // so the page layout doesn't get as bad when you're loading a product
     item = props.item || { foo: 'bar' }
+
+
+
+    // in here, set state based on the route event
+    // on route = (path) => { setState({ path }) }
+
+
+
 
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {

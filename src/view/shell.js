@@ -4,7 +4,7 @@ import { createRef } from 'preact';
 // import { options } from 'marked';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
-var Router = require('../router')
+// var Router = require('../router')
 var _path = require('path')
 var IndexView = require('./index')
 
@@ -22,26 +22,26 @@ class Shell extends Component {
         this.setState = this.setState.bind(this)
         this.openMenu = this.openMenu.bind(this)
         this.closeMenu = this.closeMenu.bind(this)
-        this.router = Router(props.state)
+        // this.router = Router(props.state)
         props.state(newState => {
             this.setState(xtend(this.state, newState))
         })
     }
 
     componentDidUpdate () {
-        var path = this.state.route
-        var contentClass = (path === '/' || path === '') ?
-            'index' :
-            _path.basename(path)
+        // var path = this.state.route
+        // var contentClass = (path === '/' || path === '') ?
+        //     'index' :
+        //     _path.basename(path)
 
         var dirs = path.split('/').filter(Boolean)
         var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
             dirs[0] !== 'about' && dirs[0] !== 'cart')
         if (isProdPage) contentClass += ' product-page'
 
-        var el = document.getElementById('content')
-        el.className = contentClass
-        document.body.className = contentClass
+        // var el = document.getElementById('content')
+        // el.className = contentClass
+        // document.body.className = contentClass
     }
 
     componentDidMount () {
@@ -65,11 +65,10 @@ class Shell extends Component {
     render (props) {
         var path = this.state.route
 
-        var m = this.router.match(path)
+        // var m = this.router.match(path)
 
-        var view
-        if (!m) view = null
-        else view = m.action(m).view
+        // if (!m) view = null
+        // else view = m.action(m).view
 
         return html`<div class="outer-shell${this.state.isMenuOpen ?
             ' menu-open' : ''}"
@@ -90,9 +89,7 @@ class Shell extends Component {
                 </div>
 
                 <div class="shell shell-content">
-                    <${IndexView} ...${props} ...${this.state}>
-                        <${view} ...${this.state} ...${this.props} />
-                    <//>
+                    <${IndexView} ...${props} ...${this.state}><//>
                 </div>
             </div>
         </div>`

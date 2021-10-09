@@ -1,4 +1,4 @@
-var router = require('ruta3')()
+var Ruta = require('ruta3')
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
@@ -7,7 +7,8 @@ var AboutPage = require('./view/about')
 // if we have the item, return it
 // if not, request it then return it
 
-function Router (state) {
+function Router () {
+    var router = Ruta()
 
     router.addRoute('/', () => {
         return {

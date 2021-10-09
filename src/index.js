@@ -1,5 +1,5 @@
-var route = require('route-event')()
-var Router = require('./router')
+// var route = require('route-event')()
+// var Router = require('./router')
 import { html } from 'htm/preact'
 import { render } from 'preact';
 import Cart from '@nichoth/shopping-cart'
@@ -65,31 +65,39 @@ cart.on(EVENTS.product.change, (index, updatedProduct) => {
     console.log('product change', updatedProduct)
 })
 
-var router = Router(state)
+// var router = Router(state)
 
 // subscribe(bus, state)
 
-route(function onRoute (path) {
-    var m = router.match(path)
 
-    var { getContent, slug } = m.action(m)
+// should move the onRoute callback into the index view
+// or the single-product view
 
-    state.route.set(path)
-    state.slug.set(slug)
+// route(function onRoute (path) {
+//     var m = router.match(path)
 
-    if (getContent) {
-        getContent()
-            .then(res => {
-                state.content.set(res)
-            })
-            .catch(err => {
-                console.log('aaaa', err)
-            })
-    } 
-})
+//     var { getContent, slug } = m.action(m)
 
-var el = html`<${Shell} cart=${cart} state=${state} >
-    <${IndexView} cart=${cart} setRoute=${route.setRoute} ...${state()} />
+//     state.route.set(path)
+//     state.slug.set(slug)
+
+//     if (getContent) {
+//         getContent()
+//             .then(res => {
+//                 state.content.set(res)
+//             })
+//             .catch(err => {
+//                 console.log('aaaa', err)
+//             })
+//     } 
+// })
+
+// var el = html`<${Shell} cart=${cart} state=${state}>
+//     <${IndexView} cart=${cart} setRoute=${route.setRoute} ...${state()} />
+// <//>`
+
+var el = html`<${Shell} cart=${cart} state=${state}>
+    <${IndexView} cart=${cart} ...${state()} />
 <//>`
 
 render(el, document.getElementById('content'))
