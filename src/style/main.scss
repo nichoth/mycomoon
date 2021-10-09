@@ -79,10 +79,6 @@
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
-/* Optional: show position indicator in red */
-// ::-webkit-scrollbar-thumb {
-//     background: #FF0000;
-// }
 
 body {
     margin: 0;
@@ -310,11 +306,13 @@ body {
         }
 
         .pane-2 {
+            width: 100vw;
             display: flex;
             border-bottom: 3px solid;
             height: 100vh;
             .left-part {
                 overflow-y: scroll;
+                width: calc(50vw - 2rem);
             }
         }
 

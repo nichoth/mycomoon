@@ -131,7 +131,23 @@ function Two (props) {
     var { item, cart } = props
 
     // TODO -- return the product list with open to first one
-    if (!item) return null
+    if (!item) return html`<div class="pane-2">
+        <div class="left-part">
+            <${ProductList} ...${props} prodsInCart=${prodsInCart} />
+        </div>
+
+        <div class="right-part">
+            <div class="product-image">
+                ${item && item.media && item.media.source ? 
+                    html`<img src="${item.media.source}"
+                        alt="mushroom"
+                        class="inline-image"
+                    />` :
+                    null
+                }
+            </div>
+        </div>
+    </div>`
 
     var [cartState, setCartState] = useState(cart.state())
 
