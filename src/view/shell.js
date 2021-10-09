@@ -1,5 +1,5 @@
 import { html, Component } from 'htm/preact'
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { createRef } from 'preact';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
@@ -99,8 +99,8 @@ class Shell extends Component {
                 </div>
 
                 <div class="shell shell-content">
-                    <${One} ...${props} item=${item} />
-                    <${Two} ...${props} item=${item} />
+                    <${One} ...${props} item=${item} slug=${slug} />
+                    <${Two} ...${props} item=${item} slug=${slug} />
                 </div>
             </div>
         </div>`
@@ -128,22 +128,33 @@ function One (props) {
 }
 
 function Two (props) {
-    var { item } = props
+    var { item, cart } = props
 
-    console.log('ppppppp', props)
-
+    // TODO -- return the product list with open to first one
     if (!item) return null
+
+    var [cartState, setCartState] = useState(cart.state())
+
+    var prodsInCart = cartState ? 
+        cartState.products.reduce((acc, prod) => {
+            acc[prod.itemId] = prod.quantity
+            return acc
+        }, {}) :
+        null
+
+    // console.log('porpppp', props)
+
+    // subscribe to any changes in the shopping cart
+    useEffect(() => {  // component did mount
+        setCartState(cart.state())
+        return cart.state(function onChange (newCartState) {
+            setCartState(newCartState)
+        })
+    }, [])
 
     return html`<div class="pane-2">
         <div class="left-part">
-            <div class="item-description">
-                <div class="desc"
-                    dangerouslySetInnerHTML=${{
-                        __html: item.description
-                    }}
-                ></div>
-                <${DualExtracted} />
-            </div>
+            <${ProductList} ...${props} prodsInCart=${prodsInCart} />
         </div>
 
         <div class="right-part">
@@ -155,6 +166,29 @@ function Two (props) {
             </div>
         </div>
     </div>`
+    
+
+    // return html`<div class="pane-2">
+    //     <div class="left-part">
+    //         <div class="item-description">
+    //             <div class="desc"
+    //                 dangerouslySetInnerHTML=${{
+    //                     __html: item.description
+    //                 }}
+    //             ></div>
+    //             <${DualExtracted} />
+    //         </div>
+    //     </div>
+
+    //     <div class="right-part">
+    //         <div class="product-image">
+    //             <img src="${item && item.media && item.media.source}"
+    //                 alt="mushroom"
+    //                 class="inline-image"
+    //             />
+    //         </div>
+    //     </div>
+    // </div>`
 }
 
 function HomeView (props) {
@@ -228,5 +262,110 @@ function DualExtracted () {
         <img src="/img/dual-extracted_1.svg" alt="dual extracted" />
     </div>`
 }
+
+
+function ProductList (props) {
+    var { slug, item, prodsInCart, addToCart, route } = props
+    console.log('ps in here', props)
+
+    console.log('slug', slug)
+    console.log('perma', item && item.permalink)
+    useEffect(() => {
+        var el = document.querySelector('.product-list li.active a')
+
+        if (el && item) {
+            console.log('scrolling', el, item)
+            el.scrollIntoView()
+        }
+
+        if (route === '/products') {
+            console.log('prods')
+            document.getElementById('products').scrollIntoView(true)
+        }
+    }, [slug, (item && item.permalink)])
+
+    function handleClck (ev) {
+        ev.target.scrollIntoView()
+    }
+
+    // so the page layout doesn't get as bad when you're loading a product
+    item = props.item || { foo: 'bar' }
+
+    return html`<ul class="product-list">
+        ${ITEMS.map(_item => {
+            var isActive = _item.link === slug
+
+            return html`<li class=${isActive ? 'active' : ''}>
+                <a href=${isActive ?
+                    '/products' :
+                    '/' + _item.link}
+                    onclick=${handleClck}
+                >
+                    ${_item.name}
+                </a>
+
+                ${(isActive && item) ?
+                    html`
+                    <img src="${item.media && item.media.source}"
+                        alt="mushroom"
+                        class="inline-image"
+                    />
+                    
+                    <div class="item-description">
+                        <div class="desc"
+                            dangerouslySetInnerHTML=${{
+                                __html: item.description
+                            }}
+                        ></div>
+                        <${DualExtracted} />
+                    </div>
+
+                    <div class="bonus-info">
+                        <div class="bonus-info-tab">
+                            <span>Organic</span>
+                            <span class="star-icon">
+                                <img src="/img/star.png" />
+                            </span>
+                            <span>non-GMO</span>
+                        </div>
+                        <div class="bonus-info-tab">
+                            <span>Vegan</span>
+                            <span class="moon-icon">
+                                <img src="/img/moon.png" />
+                            </span>
+                            <span>made in USA</span>
+                        </div>
+                    </div>
+
+                    ${item ?
+                        html`<${CartControls} item=${_item} product=${item}
+                            cart=${cart} quantity=${prodsInCart[item.id]}
+                            prodsInCart=${prodsInCart}
+                            onAddToCart=${addToCart}
+                        />` :
+                        null
+                    }` :
+
+                    null
+                }
+            </li>`
+        })}
+    </ul>`
+}
+
+function CartControls (props) {
+    var { product, prodsInCart, onAddToCart } = props
+
+    var count = (prodsInCart[product.id] || 0)
+    var price = (product.price && product.price.formatted_with_symbol)
+
+    return html`<div class="cart-controls">
+        <span class="price">${price}</span>
+        <span>${count} in cart</span> 
+        <button onClick=${onAddToCart} class="cart-add">add to cart</button>
+    </div>`
+}
+
+
 
 module.exports = Shell

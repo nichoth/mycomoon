@@ -73,6 +73,7 @@ function SingleProductView (props) {
     </div>`
 }
 
+
 // this view is used for the list of products,
 // single products
 
