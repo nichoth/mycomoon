@@ -43,7 +43,7 @@ function IndexView (props) {
 
         <hr class="special-divider" />
 
-        ${(route.route === '/') ?
+        ${(route.route === '/' || route.route === '/products') ?
             html`<div class="logo">
                 <img src="/img/logo.png" />
             </div>` :
