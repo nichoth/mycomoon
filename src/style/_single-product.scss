@@ -132,11 +132,11 @@
 
         .dual-extracted {
             display: block!important;
-            margin: 1rem auto 0;
             height: 6rem;
             text-align: center;
             width: 6rem;
-            margin-right: 1rem;
+            margin-right: 3rem;
+            margin-top: 0;
 
             img {
                 max-width: 100%;
@@ -229,6 +229,7 @@
                     margin-bottom: 1rem;
                     padding-left: 1rem;
                     padding-bottom: 1rem;
+                    padding-top: 1rem;
                 }
             }
         }
