@@ -1,23 +1,17 @@
 import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
-var Route = require('route-event')
-var Router = require('../router')
-var router = Router()
 var _path = require('path')
 
 // we are setting the 'active' class after the request resolves,
 // needs to happend before then
 
-var routeEvent = Route()
-
 function SingleProductView (props) {
     // var { slug, cart, route } = props
-    var { cart } = props
-    var item = props.content
+    var { cart, content, route } = props
     // var slug = item && item.permalink
     var [cartState, setCartState] = useState(cart.state())
-    var [route, setRoute] = useState({ route: '', slug: '' })
+    var item = content
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -27,13 +21,16 @@ function SingleProductView (props) {
         })
     }, [])
 
-
     useEffect(() => {
-        console.log('blaaaa')
+        console.log('blaaaa', route)
         var path = route.route
         var contentClass = (path === '/' || path === '') ?
             'index' :
             _path.basename(path)
+
+        if (path === '/') {
+            document.getElementById('home').scrollIntoView()
+        }
 
         var dirs = path.split('/').filter(Boolean)
         var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
@@ -44,24 +41,6 @@ function SingleProductView (props) {
         el.className = contentClass
         document.body.className = contentClass
     }, [route])
-
-    routeEvent(function onRoute (path) {
-        console.log('**on route', path)
-        var m = router.match(path)
-        var { getContent, slug } = m.action(m)
-
-        setRoute({ route: path, slug })
-
-        if (getContent) {
-            getContent()
-                .then(res => {
-                    state.content.set(res)
-                })
-                .catch(err => {
-                    console.log('aaaa', err)
-                })
-        } 
-    })
 
     function addToCart (item, ev) {
         ev.preventDefault()
@@ -108,7 +87,7 @@ function SingleProductView (props) {
         <h2 id="products">Products</h2>
         <div class="single-product-info">
             <${ProductList} slug=${route.slug} item=${item}
-                route=${route.path} addToCart=${addToCart}
+                route=${route.route} addToCart=${addToCart}
                 prodsInCart=${prodsInCart}
             />
         </div>
@@ -120,13 +99,13 @@ function SingleProductView (props) {
 
 
 function ProductList (props) {
-    var { slug, item, prodsInCart, addToCart, route } = props
+    var { slug, prodsInCart, addToCart, route, item } = props
 
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
         if (el && item) {
-            console.log('scrolling', el, item)
+            // console.log('scrolling', el, item)
             el.scrollIntoView()
         }
 
@@ -142,14 +121,6 @@ function ProductList (props) {
 
     // so the page layout doesn't get as bad when you're loading a product
     item = props.item || { foo: 'bar' }
-
-
-
-    // in here, set state based on the route event
-    // on route = (path) => { setState({ path }) }
-
-
-
 
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {

@@ -1,24 +1,53 @@
 import { html } from 'htm/preact'
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 var SingleItem = require('./single-product')
+var Route = require('route-event')
 // var About = require('./about')
+var Router = require('../router')
+var router = Router()
+
+var routeEvent = Route()
 
 function IndexView (props) {
-    var item = props.content
+    console.log('ppppp', props)
+
+    var [route, setRoute] = useState({ route: '', slug: '' })
+    var [content, setContent] = useState(null)
+    var item = content
+
+    routeEvent(function onRoute (path) {
+        console.log('**on route', path)
+        var m = router.match(path)
+        var { getContent, slug } = m.action(m)
+
+        // in here we set the state
+        setRoute({ route: path, slug })
+
+        if (getContent) {
+            getContent()
+                .then(res => {
+                    setContent(res)
+                })
+                .catch(err => {
+                    console.log('aaaa', err)
+                })
+        } 
+    })
+
 
     return html`
         <div class="left-part">
             <${HomeView} ...${props} />
-            <${SingleItem} ...${props} />
+            <${SingleItem} ...${props} content=${content} route=${route} />
         </div>
 
         <hr class="special-divider" />
 
-        ${(item && path !== '/') ?
-            html`<img src=${item.media.source} />` :
+        ${(route.route === '/') ?
             html`<div class="logo">
                 <img src="/img/logo.png" />
-            </div>`
+            </div>` :
+            html`<img src=${item && item.media.source} />`
         }
     `
 }

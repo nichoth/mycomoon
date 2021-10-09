@@ -5,7 +5,7 @@ import { createRef } from 'preact';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
 // var Router = require('../router')
-var _path = require('path')
+// var _path = require('path')
 var IndexView = require('./index')
 
 function Icon () {
@@ -26,22 +26,6 @@ class Shell extends Component {
         props.state(newState => {
             this.setState(xtend(this.state, newState))
         })
-    }
-
-    componentDidUpdate () {
-        // var path = this.state.route
-        // var contentClass = (path === '/' || path === '') ?
-        //     'index' :
-        //     _path.basename(path)
-
-        var dirs = path.split('/').filter(Boolean)
-        var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
-            dirs[0] !== 'about' && dirs[0] !== 'cart')
-        if (isProdPage) contentClass += ' product-page'
-
-        // var el = document.getElementById('content')
-        // el.className = contentClass
-        // document.body.className = contentClass
     }
 
     componentDidMount () {
