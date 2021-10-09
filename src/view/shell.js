@@ -130,6 +130,8 @@ function One (props) {
 function Two (props) {
     var { item, cart } = props
 
+    console.log('aaaaa', props)
+
     // TODO -- return the product list with open to first one
     if (!item) return html`<div class="pane-2">
         <div class="left-part">
@@ -174,12 +176,15 @@ function Two (props) {
         </div>
 
         <div class="right-part">
-            <div class="product-image">
-                <img src="${item && item.media && item.media.source}"
-                    alt="mushroom"
-                    class="inline-image"
-                />
-            </div>
+            ${props.slug ?
+                html`<div class="product-image">
+                    <img src="${item && item.media && item.media.source}"
+                        alt="mushroom"
+                        class="inline-image"
+                    />
+                </div>` :
+                null
+            }
         </div>
     </div>`
     
