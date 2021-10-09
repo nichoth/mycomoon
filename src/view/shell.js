@@ -1,7 +1,5 @@
 import { html, Component } from 'htm/preact'
-// import { useState } from 'preact/hooks';
 import { createRef } from 'preact';
-// import { options } from 'marked';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
 var Router = require('../router')
@@ -17,7 +15,6 @@ class Shell extends Component {
     constructor (props) {
         super(props)
         this.state = xtend({ isMenuOpen: false }, props.state())
-        // this.state = { isMenuOpen: false, ...props.state() }
         this.ref = createRef();
         this.setState = this.setState.bind(this)
         this.openMenu = this.openMenu.bind(this)
