@@ -1,10 +1,11 @@
 import { html, Component } from 'htm/preact'
+import { useEffect } from 'preact/hooks';
 import { createRef } from 'preact';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
 var Router = require('../router')
 var _path = require('path')
-var IndexView = require('./index')
+// var IndexView = require('./index')
 
 function Icon () {
     // return html`<img src="/img/shoppingcart_icon.svg" />`
@@ -64,12 +65,23 @@ class Shell extends Component {
 
         var m = this.router.match(path)
 
-        var view
-        if (!m) view = null
-        else view = m.action(m).view
+        if (!m) var view = null
+        else {
+            var { view, slug } = m.action(m)
+        }
+
+        console.log('in shell', props)
+        console.log('in shell state', this.state)
+
+        var item = this.state.content
+
+        if (slug && !item) {
+            return null
+        }
 
         return html`<div class="outer-shell${this.state.isMenuOpen ?
-            ' menu-open' : ''}"
+            ' menu-open' :
+            ''}"
         >
             <${Menu} onOpen=${this.openMenu} onClose=${this.closeMenu}
                 activePath=${path} isOpen=${this.state.isMenuOpen}
@@ -87,14 +99,89 @@ class Shell extends Component {
                 </div>
 
                 <div class="shell shell-content">
-                    <${IndexView} ...${props} ...${this.state}>
-                        <${view} ...${this.state} ...${this.props} />
-                    <//>
+                    <${One} ...${props} item=${item} />
+                    <${Two} ...${props} item=${item} />
                 </div>
             </div>
         </div>`
     }
 }
+
+                    // <${IndexView} ...${props} ...${this.state}>
+                    //     <${view} ...${this.state} ...${this.props} />
+                    // <//>
+
+function One (props) {
+    return html`<div class="pane-1">
+        <div class="left-part">
+            <${HomeView} ...${props} />
+        </div>
+
+        <hr class="special-divider" />
+
+        <div class="right-part">
+            <div class="logo">
+                <img src="/img/logo.png" alt="mycomoon logo" />
+            </div>
+        </div>
+    </div>`
+}
+
+function Two (props) {
+    var { item } = props
+
+    console.log('ppppppp', props)
+
+    if (!item) return null
+
+    return html`<div class="pane-2">
+        <div class="left-part">
+            <div class="item-description">
+                <div class="desc"
+                    dangerouslySetInnerHTML=${{
+                        __html: item.description
+                    }}
+                ></div>
+                <${DualExtracted} />
+            </div>
+        </div>
+
+        <div class="right-part">
+            <div class="product-image">
+                <img src="${item && item.media && item.media.source}"
+                    alt="mushroom"
+                    class="inline-image"
+                />
+            </div>
+        </div>
+    </div>`
+}
+
+function HomeView (props) {
+    useEffect(() => {  // component did update
+        if (props.route !== '/') return
+        document.getElementById('home').scrollIntoView(true)
+    })
+
+    return html`
+        <div class="home-view">
+            <img src="/img/logo.png" />
+
+            <div class="home-text" id="home">
+                <p>
+                    Myco Moon wants to share their love for functional mushrooms
+                    with the world. Their extracts are made from small batches of
+                    homegrown Lion's Mane, Reishi, Turkey Tail, & Chaga mushrooms.
+                </p>
+                <p>
+                    Funghi has the power to heal and balance the body and mind,
+                    while simultaneously restoring environments and ecosystems.
+                </p>
+            </div>
+        </div>
+    `
+}
+
 
 function Menu ({ activePath, isOpen, onOpen, onClose }) {
     function toggleOpen (ev) {
@@ -134,6 +221,12 @@ function active (href, path) {
     }))) ?
         'active' :
         '')
+}
+
+function DualExtracted () {
+    return html`<div class="dual-extracted">
+        <img src="/img/dual-extracted_1.svg" alt="dual extracted" />
+    </div>`
 }
 
 module.exports = Shell

@@ -17,12 +17,26 @@ function IndexView (props) {
 
         <hr class="special-divider" />
 
-        ${(item  && path !== '/') ?
-            html`<img src=${item.media.source} />` :
-            html`<div class="logo">
-                <img src="/img/logo.png" />
-            </div>`
-        }
+        <div class="right-part">
+            ${(item && path === '/') ?
+                html`
+                    <div class="logo">
+                        <img src="/img/logo.png" />
+                    </div>
+                ` :
+                html`
+                    <div class="logo">
+                        <img src="/img/logo.png" alt="mycomoon logo" />
+                    </div>
+                    ${(item && item.media) ?
+                        html`<div class="product-img">
+                            <img src=${item.media.source} />
+                        </div>` :
+                        null
+                    }
+                `
+            }
+        </div>
     `
 }
 
