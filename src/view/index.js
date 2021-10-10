@@ -1,11 +1,22 @@
 import { html } from 'htm/preact'
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 var SingleItem = require('./single-product')
 // var About = require('./about')
 
 function IndexView (props) {
     var item = props.content
     var path = props.route
+    var { state } = props
+    var [slug, setSlug] = useState(null)
+    var [cat, setCat] = useState(null)
+
+    state.catalog(function onChange (newCat) {
+        setCat(newCat)
+    })
+
+    state.slug(function onChange(newSlug) {
+        setSlug(newSlug)
+    })
 
     console.log('path', path)
 

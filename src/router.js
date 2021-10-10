@@ -7,28 +7,11 @@ var AboutPage = require('./view/about')
 // if we have the item, return it
 // if not, request it then return it
 
-function Router (state) {
+function Router () {
 
     router.addRoute('/', () => {
         return {
             view: SingleProductView
-
-        //     getContent: function () {
-        //     //     var url = new URL('/.netlify/functions/get-single-item', location)
-        //     //     url.searchParams.append('permalink', slug)
-
-        //     //     return fetch(url)
-        //     //         .then(res => {
-        //     //             return res.json()
-        //     //         })
-        //     //         .then(json => {
-        //     //             bus.emit(evs.product.got, json)
-        //     //             return json
-        //     //         })
-        //     //         .catch(err => {
-        //     //             console.log('oh no', err)
-        //     //         })
-        //     // },
         }
     })
 

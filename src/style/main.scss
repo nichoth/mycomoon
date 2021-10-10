@@ -93,6 +93,10 @@ body {
     background-size: cover;
     backdrop-filter: brightness(0.5);
 
+    .home-view {
+        margin: 1rem;
+    }
+
     #content {
         &.index {
             .left-part {
@@ -281,8 +285,8 @@ body {
             display: flex;
 
             .left-part {
+                max-width: calc(50vw - 2rem);
                 padding: 1rem;
-                max-width: calc(50vw - 4rem);
             }
         }
         .pane-2 {
@@ -326,7 +330,7 @@ body {
         }
 
         .pane-2 {
-            width: 100vw;
+            width: calc(100vw - 2rem);
             display: flex;
             border-bottom: 3px solid;
             height: 100vh;
@@ -444,8 +448,7 @@ body {
         &.product-page {
             backdrop-filter: brightness(0.2);
             .left-part {
-                width: calc(50vw - 4rem);
-                padding: 1rem;
+                width: calc(50vw - 2rem);
                 background-color: #000000ad;
             }
         }

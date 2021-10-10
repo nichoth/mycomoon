@@ -5,24 +5,26 @@ var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
 var Router = require('../router')
 var _path = require('path')
-// var IndexView = require('./index')
-
-function Icon () {
-    // return html`<img src="/img/shoppingcart_icon.svg" />`
-    return html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.07 91"><defs><style>.cls-1{fill:none;stroke:#e8e1d7;stroke-miterlimit:10;stroke-width:2px;}</style></defs><title>shoppingcart_icib</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M0,1H10.75a5.17,5.17,0,0,1,5,4L17.1,11a5.17,5.17,0,0,0,5,4H93.91A5.16,5.16,0,0,1,99,21L93.72,52.69A5.16,5.16,0,0,1,88.63,57H33a5.17,5.17,0,0,1-5-3.85L22,15l9,57.2a5.17,5.17,0,0,0,5,3.8H87"/><circle class="cls-1" cx="42" cy="85" r="5"/><circle class="cls-1" cx="79" cy="85" r="5"/></g></g></svg>`
+var _ = {
+    keyBy: require('lodash.keyby')
 }
 
 class Shell extends Component {
+    ref = createRef();
+
     constructor (props) {
         super(props)
+        // this.ref = createRef()
         this.state = xtend({ isMenuOpen: false }, props.state())
-        this.ref = createRef();
         this.setState = this.setState.bind(this)
         this.openMenu = this.openMenu.bind(this)
         this.closeMenu = this.closeMenu.bind(this)
         this.router = Router(props.state)
+
         props.state(newState => {
-            this.setState(xtend(this.state, newState))
+            this.setState(xtend(this.state, xtend(newState, {
+                catalog: _.keyBy(newState.catalog, 'permalink')
+            })))
         })
     }
 
@@ -49,6 +51,7 @@ class Shell extends Component {
         document.body.className = this.props.contentClass
 
         var cart = this.props.cart
+        console.log('this.ref', this.ref)
         cart.createIcon(this.ref.current, Icon, { link: '/cart' })
     }
 
@@ -62,18 +65,19 @@ class Shell extends Component {
 
     render (props) {
         var path = this.state.route
+        var match = this.router.match(path)
 
-        var m = this.router.match(path)
-
-        if (!m) var view = null
-        else {
-            var { view, slug } = m.action(m)
+        if (!match) {
+            var slug = null
+        } else {
+            var { slug } = match.action(match)
         }
 
         console.log('in shell', props)
         console.log('in shell state', this.state)
 
-        var item = this.state.content
+        var cat = this.state.catalog
+        var item = cat && cat[this.state.slug]
 
         if (slug && !item) {
             return null
@@ -100,7 +104,9 @@ class Shell extends Component {
 
                 <div class="shell shell-content">
                     <${One} ...${props} item=${item} slug=${slug} />
-                    <${Two} ...${props} item=${item} slug=${slug} />
+                    <${Two} ...${props} ...${this.state} item=${item}
+                        slug=${slug}
+                    />
                 </div>
             </div>
         </div>`
@@ -187,29 +193,6 @@ function Two (props) {
             }
         </div>
     </div>`
-    
-
-    // return html`<div class="pane-2">
-    //     <div class="left-part">
-    //         <div class="item-description">
-    //             <div class="desc"
-    //                 dangerouslySetInnerHTML=${{
-    //                     __html: item.description
-    //                 }}
-    //             ></div>
-    //             <${DualExtracted} />
-    //         </div>
-    //     </div>
-
-    //     <div class="right-part">
-    //         <div class="product-image">
-    //             <img src="${item && item.media && item.media.source}"
-    //                 alt="mushroom"
-    //                 class="inline-image"
-    //             />
-    //         </div>
-    //     </div>
-    // </div>`
 }
 
 function HomeView (props) {
@@ -385,6 +368,10 @@ function CartControls (props) {
         <span>${count} in cart</span> 
         <button onClick=${onAddToCart} class="cart-add">add to cart</button>
     </div>`
+}
+
+function Icon () {
+    return html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.07 91"><defs><style>.cls-1{fill:none;stroke:#e8e1d7;stroke-miterlimit:10;stroke-width:2px;}</style></defs><title>shoppingcart_icib</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M0,1H10.75a5.17,5.17,0,0,1,5,4L17.1,11a5.17,5.17,0,0,0,5,4H93.91A5.16,5.16,0,0,1,99,21L93.72,52.69A5.16,5.16,0,0,1,88.63,57H33a5.17,5.17,0,0,1-5-3.85L22,15l9,57.2a5.17,5.17,0,0,0,5,3.8H87"/><circle class="cls-1" cx="42" cy="85" r="5"/><circle class="cls-1" cx="79" cy="85" r="5"/></g></g></svg>`
 }
 
 
