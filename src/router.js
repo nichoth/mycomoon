@@ -3,6 +3,7 @@ var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
 var AboutPage = require('./view/about')
+var IndexView = require('./view')
 
 // if we have the item, return it
 // if not, request it then return it
@@ -11,7 +12,8 @@ function Router (state) {
 
     router.addRoute('/', () => {
         return {
-            view: SingleProductView
+            view: IndexView,
+            slug: ''
 
         //     getContent: function () {
         //     //     var url = new URL('/.netlify/functions/get-single-item', location)
@@ -68,29 +70,8 @@ function Router (state) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        // console.log('current url in :slug route', window.location.href)
-
         return {
-            getContent: function () {
-                var url = new URL('/.netlify/functions/get-single-item', location)
-                url.searchParams.append('permalink', slug)
-
-                return fetch(url)
-                    .then(res => {
-                        return res.json()
-                    })
-                    .then(json => {
-                        // bus.emit(evs.product.got, json)
-                        return json
-                    })
-                    .catch(err => {
-                        console.log('oh no', err)
-                    })
-            },
-
             slug: slug,
-
-            // view: IndexView
             view: SingleProductView
         }
     })

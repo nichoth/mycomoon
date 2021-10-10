@@ -2,38 +2,24 @@ var route = require('route-event')()
 import { html } from 'htm/preact'
 import { render } from 'preact';
 import Cart from '@nichoth/shopping-cart'
-import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
 var struct = require('observ-struct')
 var observ = require('observ')
 var Shell = require('./view/shell')
-var IndexView = require('./view/index')
+// var IndexView = require('./view/index')
 var Router = require('./router')
 
 var state = struct({
     slug: observ(null),
-    route: observ(''),
-    content: observ(null)
+    path: observ(null),
+    catalog: observ(null)
 })
 
-// -------------------------------------------------------
-// https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
-
-// if ('serviceWorker' in navigator) {
-//     console.log('we are in')
-//     navigator.serviceWorker.register('/sw.js')
-//         .then((reg) => {
-//             // registration worked
-//             console.log('Registration succeeded. Scope is ' + reg.scope)
-//         }).catch((error) => {
-//             // registration failed
-//             console.log('Registration failed with ' + error)
-//         })
-// } else {
-//       console.log('Service workers are not supported.')
-// }
-
-// --------------------------------------------------
-
+// request the product right away
+var url = new URL('/.netlify/functions/get-catalog', location)
+fetch(url)
+    .then(res => res.json())
+    .then(res => state.catalog.set(res))
+    .catch(err => console.log('oh no', err))
 
 // window for testing
 var cart = window.cart = new Cart({
@@ -44,26 +30,17 @@ var cart = window.cart = new Cart({
 var router = Router(state)
 
 route(function onRoute (path) {
-    var m = router.match(path)
+    var match = router.match(path)
 
-    var { getContent, slug } = m.action(m)
+    var { slug, view } = match.action(match)
 
-    state.route.set(path)
+    state.path.set(path)
     state.slug.set(slug)
 
-    if (getContent) {
-        getContent()
-            .then(res => {
-                state.content.set(res)
-            })
-            .catch(err => {
-                console.log('aaaa', err)
-            })
-    } 
+    var el = html`<${Shell} cart=${cart} state=${state}>
+        <${view} cart=${cart} state=${state} />
+    <//>`
+
+    render(el, document.getElementById('content'))
 })
 
-var el = html`<${Shell} cart=${cart} state=${state}>
-    <${IndexView} cart=${cart} setRoute=${route.setRoute} ...${state()} />
-<//>`
-
-render(el, document.getElementById('content'))

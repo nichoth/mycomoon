@@ -45,6 +45,7 @@
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
     "htm": "^3.0.4",
+    "lodash.keyby": "^4.6.0",
     "marked": "^2.0.3",
     "monotonic-timestamp": "^0.0.9",
     "observ": "^0.2.0",
