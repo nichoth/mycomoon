@@ -5,7 +5,7 @@ import Cart from '@nichoth/shopping-cart'
 var struct = require('observ-struct')
 var observ = require('observ')
 var Shell = require('./view/shell')
-var IndexView = require('./view/index')
+// var IndexView = require('./view/index')
 var Router = require('./router')
 
 // window for testing
@@ -43,8 +43,8 @@ route(function onRoute (path) {
     state.slug.set(slug)
 })
 
-var el = html`<${Shell} cart=${cart} state=${state}>
-    <${IndexView} cart=${cart} setRoute=${route.setRoute} state=${state} />
-<//>`
+var el = html`<${Shell} cart=${cart} state=${state} />`
+
+    // <${IndexView} cart=${cart} setRoute=${route.setRoute} state=${state} />
 
 render(el, document.getElementById('content'))

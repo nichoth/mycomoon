@@ -1,5 +1,5 @@
 import { html, Component } from 'htm/preact'
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
 import { createRef } from 'preact';
 var { ITEMS } = require('../CONSTANTS')
 var xtend = require('xtend')
