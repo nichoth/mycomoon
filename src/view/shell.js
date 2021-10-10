@@ -136,8 +136,6 @@ function One (props) {
 function Two (props) {
     var { item, cart } = props
 
-    console.log('aaaaa', props)
-
     // TODO -- return the product list with open to first one
     if (!item) return html`<div class="pane-2">
         <div class="left-part">
