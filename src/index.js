@@ -8,11 +8,18 @@ var Shell = require('./view/shell')
 var IndexView = require('./view/index')
 var Router = require('./router')
 
+// window for testing
+var cart = window.cart = new Cart({
+    storage: true, // store the state in localStorage?
+    key: 'myco-cart'  // default is 'cart'
+})
+
 var state = struct({
     slug: observ(null),
     route: observ(''),
     content: observ(null),
-    catalog: observ(null)
+    catalog: observ(null),
+    cartState: cart.state
 })
 
 // fetch the entire catalog right away
@@ -24,12 +31,6 @@ fetch(url)
     })
     .catch(err => console.log('oh no', err))
 
-
-// window for testing
-var cart = window.cart = new Cart({
-    storage: true, // store the state in localStorage?
-    key: 'myco-cart'  // default is 'cart'
-})
 
 var router = Router()
 

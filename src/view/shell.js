@@ -42,17 +42,16 @@ class Shell extends Component {
         var el = document.getElementById('content')
         el.className = contentClass
         document.body.className = contentClass
+
+        var cart = this.props.cart
+        if (!this.ref.current) return
+        cart.createIcon(this.ref.current, Icon, { link: '/cart' })
     }
 
     componentDidMount () {
         var el = document.getElementById('content')
         el.className = this.props.contentClass;
-
         document.body.className = this.props.contentClass
-
-        var cart = this.props.cart
-        console.log('this.ref', this.ref)
-        cart.createIcon(this.ref.current, Icon, { link: '/cart' })
     }
 
     openMenu () {
@@ -72,9 +71,6 @@ class Shell extends Component {
         } else {
             var { slug } = match.action(match)
         }
-
-        console.log('in shell', props)
-        console.log('in shell state', this.state)
 
         var cat = this.state.catalog
         var item = cat && cat[this.state.slug]
@@ -134,7 +130,14 @@ function One (props) {
 }
 
 function Two (props) {
-    var { item, cart } = props
+    var { item, cartState } = props
+
+    var prodsInCart = cart ? 
+        cartState.products.reduce((acc, prod) => {
+            acc[prod.itemId] = prod.quantity
+            return acc
+        }, {}) :
+        null
 
     // TODO -- return the product list with open to first one
     if (!item) return html`<div class="pane-2">
@@ -155,24 +158,13 @@ function Two (props) {
         </div>
     </div>`
 
-    var [cartState, setCartState] = useState(cart.state())
-
-    var prodsInCart = cartState ? 
-        cartState.products.reduce((acc, prod) => {
-            acc[prod.itemId] = prod.quantity
-            return acc
-        }, {}) :
-        null
-
-    // console.log('porpppp', props)
-
     // subscribe to any changes in the shopping cart
-    useEffect(() => {  // component did mount
-        setCartState(cart.state())
-        return cart.state(function onChange (newCartState) {
-            setCartState(newCartState)
-        })
-    }, [])
+    // useEffect(() => {  // component did mount
+    //     setCartState(cart.state())
+    //     return cart.state(function onChange (newCartState) {
+    //         setCartState(newCartState)
+    //     })
+    // }, [])
 
     return html`<div class="pane-2">
         <div class="left-part">
@@ -268,20 +260,15 @@ function DualExtracted () {
 
 function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, route } = props
-    console.log('ps in here', props)
 
-    console.log('slug', slug)
-    console.log('perma', item && item.permalink)
     useEffect(() => {
         var el = document.querySelector('.product-list li.active a')
 
         if (el && item) {
-            console.log('scrolling', el, item)
             el.scrollIntoView()
         }
 
         if (route === '/products') {
-            console.log('prods')
             document.getElementById('products').scrollIntoView(true)
         }
     }, [slug, (item && item.permalink)])
