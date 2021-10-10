@@ -109,7 +109,8 @@ body {
         list-style: none;
         padding: 0;
         display: flex!important;
-        height: calc(100vh - var(--nudge-height));
+        // height: calc(100vh - var(--nudge-height));
+        height: 100vh;
         flex-direction: column;
         margin: 0;
         background-color: #000000ad;
@@ -145,11 +146,13 @@ body {
             }
         }
 
-        li {
+        > li {
             margin: 0;
             padding: 1rem;
             border-bottom: $stroke-width solid;
             background-color: #000000ad;
+            transition: height 1s;
+            height: 2rem;
 
             &:first-child {
                 // border-top: $stroke-width solid;
@@ -175,14 +178,14 @@ body {
                 padding-top: 1rem;
                 background-color: initial;
                 border-bottom: 2px solid;
-                min-height: calc(100vh - var(--nudge-height));
+                height: calc(100vh - var(--nudge-height));
 
                 ul {
                     list-style-type: none;
 
                     li {
                         display: flex;
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 1rem;
                         background-color: initial;
 
                         &::before {
