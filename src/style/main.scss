@@ -185,6 +185,10 @@ body {
                 border-bottom: 2px solid;
                 height: calc(100vh - var(--nudge-height));
 
+                ~ li:last-child {
+                    border-bottom: none;
+                }
+
                 ul {
                     list-style-type: none;
 
