@@ -99,7 +99,6 @@ body {
 
     .home-view {
         margin: 2rem;
-        margin-top: 20vh;
     }
 
     #content {
@@ -297,6 +296,8 @@ body {
 
             .left-part {
                 max-width: calc(50vw - 2rem);
+                display: flex;
+                align-items: center;
                 // padding: 1rem;
             }
         }
