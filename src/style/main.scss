@@ -277,7 +277,8 @@ body {
         // height: calc(100vh + 5rem);
         // height: 200vh;
         // height: calc(200vh + var(--nudge-height));
-        height: calc(202vh + var(--nudge-height));
+        height: 201vh;
+        // height: calc(202vh + var(--nudge-height));
         border: none;
         border-left: $stroke-width solid;
         position: absolute;
