@@ -202,7 +202,7 @@ function HomeView (props) {
                     homegrown Lion's Mane, Reishi, Turkey Tail, & Chaga mushrooms.
                 </p>
                 <p>
-                    Funghi has the power to heal and balance the body and mind,
+                    Fungi has the power to heal and balance the body and mind,
                     while simultaneously restoring environments and ecosystems.
                 </p>
             </div>
