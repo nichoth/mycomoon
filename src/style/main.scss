@@ -287,7 +287,6 @@ body {
         // display: flex;
 
         .pane-1 {
-            margin-top: 4rem;
             height: calc(100vh - var(--nudge-height));
             border-bottom: 2px solid;
             display: flex;
@@ -304,6 +303,10 @@ body {
                 max-width: calc(50vw - 2rem);
                 width: calc(50vw - 2rem);
             }
+
+            .right-part {
+                background: black;
+            }
         }
 
         // height: calc(100vh - var(--nudge-height));
@@ -317,6 +320,8 @@ body {
             width: calc(50vw - 2rem);
             // height: calc(100vh - var(--nudge-height));
             height: 100%;
+            background: url(/img/myco-bg.jpeg) no-repeat center center fixed;
+            background-size: cover;
 
             .product-image {
                 width: 100%;
