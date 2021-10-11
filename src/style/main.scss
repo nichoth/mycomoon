@@ -93,8 +93,13 @@ body {
     background-size: cover;
     backdrop-filter: brightness(0.5);
 
+    .home-text {
+        font-size: 1.2rem;
+    }
+
     .home-view {
         margin: 1rem;
+        margin-top: 20vh;
     }
 
     #content {
