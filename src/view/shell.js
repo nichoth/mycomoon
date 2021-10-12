@@ -109,9 +109,6 @@ class Shell extends Component {
     }
 }
 
-                    // <${IndexView} ...${props} ...${this.state}>
-                    //     <${view} ...${this.state} ...${this.props} />
-                    // <//>
 
 function One (props) {
     return html`<div class="pane-1">
@@ -157,14 +154,6 @@ function Two (props) {
             </div>
         </div>
     </div>`
-
-    // subscribe to any changes in the shopping cart
-    // useEffect(() => {  // component did mount
-    //     setCartState(cart.state())
-    //     return cart.state(function onChange (newCartState) {
-    //         setCartState(newCartState)
-    //     })
-    // }, [])
 
     return html`<div class="pane-2">
         <div class="left-part">
@@ -269,11 +258,14 @@ function ProductList (props) {
         }
 
         if (route === '/products') {
-            document.getElementById('products').scrollIntoView(true)
+            var _el = document.getElementById('products')
+            if (_el) {
+                el.scrollIntoView(true)
+            }
         }
     }, [slug, (item && item.permalink)])
 
-    function handleClck (ev) {
+    function handleClick (ev) {
         ev.target.scrollIntoView()
     }
 
@@ -288,14 +280,13 @@ function ProductList (props) {
                 <a href=${isActive ?
                     '/products' :
                     '/' + _item.link}
-                    onclick=${handleClck}
+                    onclick=${handleClick}
                 >
                     ${_item.name}
                 </a>
 
                 ${(isActive && item) ?
-                    html`
-                    <img src="${item.media && item.media.source}"
+                    html`<img src="${item.media && item.media.source}"
                         alt="mushroom"
                         class="inline-image"
                     />
