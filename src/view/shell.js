@@ -137,23 +137,35 @@ function Two (props) {
         null
 
     // TODO -- return the product list with open to first one
-    if (!item) return html`<div class="pane-2">
-        <div class="left-part">
-            <${ProductList} ...${props} prodsInCart=${prodsInCart} />
-        </div>
+    if (!item && props.route !== '/products') {
+        console.log('props', props)
+        if (!props.catalog) return null
 
-        <div class="right-part">
-            <div class="product-image">
-                ${item && item.media && item.media.source ? 
-                    html`<img src="${item.media.source}"
-                        alt="mushroom"
-                        class="inline-image"
-                    />` :
-                    null
-                }
+        var _item = props.catalog['turkey-tail-tincture']
+
+        console.log('aaaaa', props.catalog)
+        console.log('bbbbb', _item)
+
+        return html`<div class="pane-2">
+            <div class="left-part">
+                <${ProductList} ...${props} item=${_item}
+                    prodsInCart=${prodsInCart} slug=${"turkey-tail-tincture"}
+                />
             </div>
-        </div>
-    </div>`
+
+            <div class="right-part">
+                <div class="product-image">
+                    ${(item || _item) && (item || _item).media.source ? 
+                        html`<img src="${(item || _item).media.source}"
+                            alt="mushroom"
+                            class="inline-image"
+                        />` :
+                        null
+                    }
+                </div>
+            </div>
+        </div>`
+    }
 
     return html`<div class="pane-2">
         <div class="left-part">
@@ -251,6 +263,8 @@ function ProductList (props) {
     var { slug, item, prodsInCart, addToCart, route } = props
 
     useEffect(() => {
+        if (route === '/') return
+
         var el = document.querySelector('.product-list li.active a')
 
         if (el && item) {
