@@ -158,6 +158,17 @@ body {
             transition: height 1s;
             height: 2rem;
 
+            overflow: hidden;
+
+            > * {
+                visibility: hidden;
+            }
+
+            > a {
+                visibility: visible;
+                padding-top: 1rem;
+            }
+
             &:first-child {
                 // border-top: $stroke-width solid;
                 border-top: none;
@@ -168,12 +179,13 @@ body {
             }
 
             a {
-                display: block;
+                // display: block;
                 font-size: 1.5rem;
                 margin-left: 1rem;
             }
 
             &.active {
+                overflow: scroll;
                 border-top: none;
                 flex-grow: 1;
                 flex-direction: column;
@@ -183,6 +195,14 @@ body {
                 background-color: initial;
                 border-bottom: 2px solid;
                 height: calc(100vh - var(--nudge-height));
+
+                a {
+                    padding-top: 0;
+                }
+
+                > * {
+                    visibility: visible;
+                }
 
                 ~ li:last-child {
                     border-bottom: none;

@@ -284,12 +284,20 @@ function ProductList (props) {
     }
 
     // so the page layout doesn't get as bad when you're loading a product
-    item = props.item || { foo: 'bar' }
+    item = props.catalog[slug]
+    item = item || props.item || { foo: 'bar' }
+
+    console.log('props', props)
 
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
 
+            // this first part is the label + button part
+            // the next part -- the content of the <li> -- you need to
+            // always render that. It's always there, the <li> just shrinks or
+            // grows depending on the active state
+            
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${isActive ?
                     '/products' :
@@ -299,8 +307,7 @@ function ProductList (props) {
                     ${_item.name}
                 </a>
 
-                ${(isActive && item) ?
-                    html`<img src="${item.media && item.media.source}"
+                    <img src="${item && item.media && item.media.source}"
                         alt="mushroom"
                         class="inline-image"
                     />
@@ -338,10 +345,7 @@ function ProductList (props) {
                             onAddToCart=${addToCart}
                         />` :
                         null
-                    }` :
-
-                    null
-                }
+                    }
             </li>`
         })}
     </ul>`
