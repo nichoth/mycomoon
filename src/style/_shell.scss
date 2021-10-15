@@ -39,7 +39,8 @@
     }
 
     .page-content {
-        height: 201vh;
+        // height: 201vh;
+        height: calc(200vh + 4rem);
         border-left: $stroke-width solid;
         margin-left: 4rem;
     }

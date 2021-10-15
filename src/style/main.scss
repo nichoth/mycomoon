@@ -286,7 +286,8 @@ body {
 
     .special-divider {
         transition: all 1s;
-        height: 201vh;
+        // height: 201vh;
+        height: calc(201vh + 4rem);
         border: none;
         border-left: $stroke-width solid;
         position: absolute;
@@ -310,6 +311,14 @@ body {
                 align-items: center;
             }
         }
+
+        .pane-divider {
+            padding: 1rem;
+            background-color: #E8E1D7;
+            color: black;
+            margin: 0;
+        }
+
         .pane-2 {
             height: calc(100vh - var(--nudge-height));
             scroll-snap-align: start;

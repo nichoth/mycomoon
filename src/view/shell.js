@@ -100,6 +100,7 @@ class Shell extends Component {
 
                 <div class="shell shell-content">
                     <${One} ...${props} item=${item} slug=${slug} />
+                    <h2 class="pane-divider">Products</h2>
                     <${Two} ...${props} ...${this.state} item=${item}
                         slug=${slug}
                     />
