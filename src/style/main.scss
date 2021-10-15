@@ -101,14 +101,6 @@ body {
         margin: 3rem;
     }
 
-    // #content {
-    //     &.index {
-    //         .left-part {
-    //             scroll-snap-type: y mandatory;
-    //         }
-    //     }
-    // }
-
     .product-list {
         list-style: none;
         padding: 0;
@@ -333,7 +325,6 @@ body {
             }
         }
 
-        // height: calc(100vh - var(--nudge-height));
         > img {
             object-fit: cover;
             max-width: calc(50vw - 2rem);
@@ -342,7 +333,6 @@ body {
 
         .right-part {
             width: calc(50vw - 2rem);
-            // height: calc(100vh - var(--nudge-height));
             height: 100%;
             background: url(/img/myco-bg.jpeg) no-repeat center center fixed;
             background-position-y: 1rem;
@@ -368,7 +358,6 @@ body {
         }
 
         .pane-2 {
-            // width: calc(100vw - 2rem);
             display: flex;
             border-bottom: 3px solid;
             height: 100vh;
@@ -378,44 +367,8 @@ body {
             }
         }
 
-        // .left-part {
-        //     width: 50vw;
-        //     height: calc(100vh - var(--nudge-height));
-        //     // overflow-y: scroll;
-
-        //     .home-view {
-        //         height: 100vh;
-        //         filter: drop-shadow(2px 9px 13px black);
-        //         padding: 2rem;
-        //         background-color: #00000059;
-        //         margin: 0;
-        //         scroll-snap-align: start;
-
-        //         .home-text {
-        //             margin-top: 25vh;
-        //         }
-
-        //         img {
-        //             display: none;
-        //             max-width: 50vw;
-        //             max-height: 50vh;
-        //             // display: block;
-        //             margin: 0 auto;
-        //             margin-bottom: 2rem;
-        //         }
-        //     }
-
-        //     .single-product {
-        //         scroll-snap-align: start;
-        //     }
-        // }
-
         &.index {
             display: flex;
-            // flex-direction: row-reverse;
-            // flex-direction: column;
-            // height: calc(100vh - 4rem);
-            // height: 100%;
         }
     }
 
