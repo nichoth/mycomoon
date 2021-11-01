@@ -279,9 +279,9 @@ function ProductList (props) {
         }
     }, [slug, (item && item.permalink)])
 
-    function handleClick (ev) {
-        ev.target.scrollIntoView()
-    }
+    // function handleClick (ev) {
+    //     ev.target.scrollIntoView()
+    // }
 
     // so the page layout doesn't get as bad when you're loading a product
     item = props.catalog[slug]
@@ -298,11 +298,11 @@ function ProductList (props) {
             // always render that. It's always there, the <li> just shrinks or
             // grows depending on the active state
             
+                    // onclick=${handleClick}
             return html`<li class=${isActive ? 'active' : ''}>
                 <a href=${isActive ?
                     '/products' :
                     '/' + _item.link}
-                    onclick=${handleClick}
                 >
                     ${_item.name}
                 </a>

@@ -40,7 +40,7 @@
 
     .page-content {
         // ? why do we need the 3px?
-        height: calc(200vh + 4rem + 3px);
+        height: calc(200vh + 6px);
         border-left: $stroke-width solid;
         margin-left: 4rem;
     }
