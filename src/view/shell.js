@@ -10,34 +10,54 @@ var _ = {
 }
 
 
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
-// import Typography from '@mui/material/Typography';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemHeading,
-    AccordionItemButton,
-    AccordionItemPanel,
-} from 'react-accessible-accordion';
+// import {
+//     Accordion,
+//     AccordionItem,
+//     AccordionItemHeading,
+//     AccordionItemButton,
+//     AccordionItemPanel,
+// } from 'react-accessible-accordion';
 
-// <${AccordionSummary}
-//     expandIcon={<${ExpandMoreIcon} />}
-//     aria-controls="panel1a-content"
-//     id="panel1a-header"
-// >
-//     <${Typography}>Accordion 1</${Typography}>
-// </${AccordionSummary}>
-// <${AccordionDetails}>
-//     <${Typography}>
-//         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-//         malesuada lacus ex, sit amet blandit leo lobortis eget.
-//     </${Typography}>
-// </${AccordionDetails}>
+// <${Accordion} allowZeroExpanded onChange=${expander}>
 
+//     <${AccordionItem} uuid=${'aaa'}>
+//         <${AccordionItemHeading}>
+//             <${AccordionItemButton}>
+//                 What harsh truths do you prefer to ignore?
+//             </${AccordionItemButton}>
+//         </${AccordionItemHeading}>
+//         <${AccordionItemPanel}>
+//             <p>
+//                 Exercitation in fugiat est ut ad ea cupidatat ut in
+//                 cupidatat occaecat ut occaecat consequat est minim minim
+//                 esse tempor laborum consequat esse adipisicing eu
+//                 reprehenderit enim.
+//             </p>
+//         </${AccordionItemPanel}>
+//     </${AccordionItem}>
+
+//     <${AccordionItem} uuid=${'bbb'}>
+//         <${AccordionItemHeading}>
+//             <${AccordionItemButton}>
+//                 Is free will real or just an illusion?
+//             </${AccordionItemButton}>
+//         </${AccordionItemHeading}>
+//         <${AccordionItemPanel}>
+//             <p>
+//                 In ad velit in ex nostrud dolore cupidatat consectetur
+//                 ea in ut nostrud velit in irure cillum tempor laboris
+//                 sed adipisicing eu esse duis nulla non.
+//             </p>
+//         </${AccordionItemPanel}>
+//     </${AccordionItem}>
+
+// </${Accordion}>
 
 
 
@@ -112,10 +132,6 @@ class Shell extends Component {
             return null
         }
 
-        function expander (ev) {
-            console.log('expanding', ev)
-        }
-
         return html`<div class="outer-shell${this.state.isMenuOpen ?
             ' menu-open' :
             ''}"
@@ -123,43 +139,24 @@ class Shell extends Component {
 
 
 
-        <${Accordion} allowZeroExpanded onChange=${expander}>
-
-            <${AccordionItem} uuid=${'aaa'}>
-                <${AccordionItemHeading}>
-                    <${AccordionItemButton}>
-                        What harsh truths do you prefer to ignore?
-                    </${AccordionItemButton}>
-                </${AccordionItemHeading}>
-                <${AccordionItemPanel}>
-                    <p>
-                        Exercitation in fugiat est ut ad ea cupidatat ut in
-                        cupidatat occaecat ut occaecat consequat est minim minim
-                        esse tempor laborum consequat esse adipisicing eu
-                        reprehenderit enim.
-                    </p>
-                </${AccordionItemPanel}>
-            </${AccordionItem}>
-
-            <${AccordionItem} uuid=${'bbb'}>
-                <${AccordionItemHeading}>
-                    <${AccordionItemButton}>
-                        Is free will real or just an illusion?
-                    </${AccordionItemButton}>
-                </${AccordionItemHeading}>
-                <${AccordionItemPanel}>
-                    <p>
-                        In ad velit in ex nostrud dolore cupidatat consectetur
-                        ea in ut nostrud velit in irure cillum tempor laboris
-                        sed adipisicing eu esse duis nulla non.
-                    </p>
-                </${AccordionItemPanel}>
-            </${AccordionItem}>
-
-        </${Accordion}>
 
 
 
+            <${Accordion}>
+                <${AccordionSummary}
+                    expandIcon={<${ExpandMoreIcon} />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <${Typography}>Accordion 1</${Typography}>
+                </${AccordionSummary}>
+                <${AccordionDetails}>
+                    <${Typography}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                        malesuada lacus ex, sit amet blandit leo lobortis eget.
+                    </${Typography}>
+                </${AccordionDetails}>
+            </${Accordion}>
 
 
 
