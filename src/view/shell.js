@@ -8,13 +8,29 @@ var _path = require('path')
 var _ = {
     keyBy: require('lodash.keyby')
 }
+import Button from 'preact-mui/lib/button';
 
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import Accordion from '@mui/material/Accordion';
+// import AccordionSummary from '@mui/material/AccordionSummary';
+// import AccordionDetails from '@mui/material/AccordionDetails';
+// import Typography from '@mui/material/Typography';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+            // <${Accordion}>
+            //     <${AccordionSummary}
+            //         expandIcon={<${ExpandMoreIcon} />}
+            //         aria-controls="panel1a-content"
+            //         id="panel1a-header"
+            //     >
+            //         <${Typography}>Accordion 1</${Typography}>
+            //     </${AccordionSummary}>
+            //     <${AccordionDetails}>
+            //         <${Typography}>
+            //             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            //             malesuada lacus ex, sit amet blandit leo lobortis eget.
+            //         </${Typography}>
+            //     </${AccordionDetails}>
+            // </${Accordion}>
 
 // import {
 //     Accordion,
@@ -142,23 +158,8 @@ class Shell extends Component {
 
 
 
-            <${Accordion}>
-                <${AccordionSummary}
-                    expandIcon={<${ExpandMoreIcon} />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <${Typography}>Accordion 1</${Typography}>
-                </${AccordionSummary}>
-                <${AccordionDetails}>
-                    <${Typography}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </${Typography}>
-                </${AccordionDetails}>
-            </${Accordion}>
 
-
+            <${Button} color="primary">button</${Button}>
 
 
 
