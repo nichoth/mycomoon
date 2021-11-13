@@ -95,7 +95,7 @@ class Shell extends Component {
 
 
             <${Accordion}>
-                <$
+                <${AccordionSummary}
                     expandIcon={<${ExpandMoreIcon} />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
