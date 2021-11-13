@@ -9,6 +9,15 @@ var _ = {
     keyBy: require('lodash.keyby')
 }
 
+
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+
 class Shell extends Component {
     ref = createRef();
 
@@ -83,6 +92,26 @@ class Shell extends Component {
             ' menu-open' :
             ''}"
         >
+
+
+            <${Accordion}>
+                <$
+                    expandIcon={<${ExpandMoreIcon} />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <${Typography}>Accordion 1</${Typography}>
+                </${AccordionSummary}>
+                <${AccordionDetails}>
+                    <${Typography}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                        malesuada lacus ex, sit amet blandit leo lobortis eget.
+                    </${Typography}>
+                </${AccordionDetails}>
+            </${Accordion}>
+
+
+
             <${Menu} onOpen=${this.openMenu} onClose=${this.closeMenu}
                 activePath=${path} isOpen=${this.state.isMenuOpen}
                 ...${this.state}
