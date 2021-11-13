@@ -143,9 +143,6 @@ function Two (props) {
 
         var _item = props.catalog['turkey-tail-tincture']
 
-        console.log('aaaaa', props.catalog)
-        console.log('bbbbb', _item)
-
         return html`<div class="pane-2">
             <div class="left-part">
                 <${ProductList} ...${props} item=${_item}
