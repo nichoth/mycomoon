@@ -14,7 +14,6 @@ class Shell extends Component {
 
     constructor (props) {
         super(props)
-        // this.ref = createRef()
         this.state = xtend({ isMenuOpen: false }, props.state())
         this.setState = this.setState.bind(this)
         this.openMenu = this.openMenu.bind(this)
@@ -138,13 +137,9 @@ function Two (props) {
 
     // TODO -- return the product list with open to first one
     if (!item && props.route !== '/products') {
-        console.log('props', props)
         if (!props.catalog) return null
 
         var _item = props.catalog['turkey-tail-tincture']
-
-        console.log('aaaaa', props.catalog)
-        console.log('bbbbb', _item)
 
         return html`<div class="pane-2">
             <div class="left-part">
@@ -287,11 +282,11 @@ function ProductList (props) {
     item = props.catalog[slug]
     item = item || props.item || { foo: 'bar' }
 
-    console.log('props', props)
-
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
+
+            console.log('_item', _item)
 
             // this first part is the label + button part
             // the next part -- the content of the <li> -- you need to
@@ -299,7 +294,7 @@ function ProductList (props) {
             // grows depending on the active state
             
                     // onclick=${handleClick}
-            return html`<li class=${isActive ? 'active' : ''}>
+            return html`<li key=${_item.link} class=${isActive ? 'active' : ''}>
                 <a href=${isActive ?
                     '/products' :
                     '/' + _item.link}
@@ -315,7 +310,7 @@ function ProductList (props) {
                     <div class="item-description">
                         <div class="desc"
                             dangerouslySetInnerHTML=${{
-                                __html: item.description
+                                __html: props.catalog[_item.link].description
                             }}
                         ></div>
                         <${DualExtracted} />

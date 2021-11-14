@@ -45,6 +45,4 @@ route(function onRoute (path) {
 
 var el = html`<${Shell} cart=${cart} state=${state} />`
 
-    // <${IndexView} cart=${cart} setRoute=${route.setRoute} state=${state} />
-
 render(el, document.getElementById('content'))

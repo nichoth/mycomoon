@@ -134,26 +134,25 @@ body {
             }
         }
 
-        li.active {
-            ul {
-                li {
-                    margin-bottom: 1rem;
-                }
-            }
-        }
-
         > li {
             margin: 0;
             padding: 1rem;
             border-bottom: $stroke-width solid;
             background-color: #000000ad;
-            transition: height 1s;
+            transition: height 1s ease-out;
             height: 2rem;
-
             overflow: hidden;
 
-            > * {
-                visibility: hidden;
+            .item-description {
+                margin-top: 1rem;
+            }
+
+            // > * {
+            //     visibility: hidden;
+            // }
+
+            > img {
+                display: none;
             }
 
             > a {
@@ -171,9 +170,9 @@ body {
             }
 
             a {
-                // display: block;
+                display: block;
                 font-size: 1.5rem;
-                margin-left: 1rem;
+                // margin-left: 1rem;
             }
 
             &.active {
@@ -186,6 +185,12 @@ body {
                 background-color: initial;
                 border-bottom: 2px solid;
                 height: calc(100vh - var(--nudge-height));
+
+                ul {
+                    li {
+                        margin-bottom: 1rem;
+                    }
+                }
 
                 a {
                     padding-top: 0;
@@ -228,9 +233,9 @@ body {
 
                 a {
                     display: block;
-                    margin-bottom: 1rem;
+                    // margin-bottom: 1rem;
                     padding-left: 1rem;
-                    padding-bottom: 1rem;
+                    // padding-bottom: 1rem;
                     padding-top: 1rem;
                 }
             }

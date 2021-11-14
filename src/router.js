@@ -51,8 +51,6 @@ function Router () {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        // console.log('current url in :slug route', window.location.href)
-
         return {
             getContent: function () {
                 var url = new URL('/.netlify/functions/get-single-item', location)
