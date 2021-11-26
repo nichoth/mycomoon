@@ -292,6 +292,10 @@ function ProductList (props) {
             // the next part -- the content of the <li> -- you need to
             // always render that. It's always there, the <li> just shrinks or
             // grows depending on the active state
+
+            console.log('props.catalog', props.catalog)
+
+            if (!props.catalog || !props.catalog[_item.link]) return null
             
                     // onclick=${handleClick}
             return html`<li key=${_item.link} class=${isActive ? 'active' : ''}>
