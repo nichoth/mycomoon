@@ -2,24 +2,16 @@ var router = require('ruta3')()
 var Checkout = require('./view/checkout')
 var CartPage = require('./view/cart')
 var SingleProductView = require('./view/single-product')
-// var Products = require('./view/products')
 var AboutPage = require('./view/about')
-var IndexView = require('./view/index')
-var evs = require('./EVENTS')
 
-function Router (state, bus) {
+// if we have the item, return it
+// if not, request it then return it
+
+function Router () {
 
     router.addRoute('/', () => {
         return {
-            getContent: function getHome () {
-                return new Promise((resolve, _reject) => {
-                    setTimeout(() => {
-                        resolve('homeeeee')
-                    }, 1000)
-                })
-            },
-
-            view: IndexView
+            view: SingleProductView
         }
     })
 
@@ -43,15 +35,11 @@ function Router (state, bus) {
     })
 
     router.addRoute('/products', () => {
-        console.log('**products route**')
+        // console.log('**products route**')
 
         return {
             getContent: function () {
-                return fetch('/.netlify/functions/get-catalog')
-                    .then(response => response.json())
-                    .then(res => {
-                        return res
-                    })
+                return Promise.resolve(null)
             },
 
             slug: '',
@@ -63,14 +51,8 @@ function Router (state, bus) {
     router.addRoute('/:slug', ({ params }) => {
         var { slug } = params
 
-        console.log('current url', window.location.href)
-
         return {
             getContent: function () {
-                if (state().catalog && state().catalog[slug]) {
-                    return Promise.resolve(state().catalog[slug])
-                }
-
                 var url = new URL('/.netlify/functions/get-single-item', location)
                 url.searchParams.append('permalink', slug)
 
@@ -79,7 +61,7 @@ function Router (state, bus) {
                         return res.json()
                     })
                     .then(json => {
-                        bus.emit(evs.product.got, json)
+                        // bus.emit(evs.product.got, json)
                         return json
                     })
                     .catch(err => {
@@ -89,6 +71,7 @@ function Router (state, bus) {
 
             slug: slug,
 
+            // view: IndexView
             view: SingleProductView
         }
     })

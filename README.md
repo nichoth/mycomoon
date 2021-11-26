@@ -522,3 +522,14 @@ PAN: 4000000000000010	Card on file auth declined
 * https://css-tricks.com/snippets/css/turn-off-number-input-spinners/
 * https://css-tricks.com/numeric-inputs-a-comparison-of-browser-defaults/
 
+ 
+## accordions
+
+* https://www.w3schools.com/howto/howto_js_accordion.asp
+* https://dhtmlx.com/docs/products/dhtmlxAccordion/
+* https://stackoverflow.com/questions/21504623/how-to-add-a-button-in-accordion-header-in-bootstrap-3-0-bootstrap-ui
+* https://jqueryui.com/accordion/
+* https://www.stechies.com/create-accordion-using-javascript-jquery/
+ 
+ 
+ 

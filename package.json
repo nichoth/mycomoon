@@ -7,8 +7,8 @@
     "start": "npm run build && concurrently --kill-others \"npm run watch-sass\" \"npm run watch-js\" \"npx netlify dev\"",
     "//start": "npm run build && concurrently --kill-others \"npx ecstatic public\" \"npm run watch-sass\"",
     "build": "npm run copy && npm run build-js && npm run build-sass",
-    "build-js": "browserify -t uglifyify --debug -p esmify src/index.js > public/bundle.js",
-    "watch-js": "watchify -t uglifyify --debug -p esmify src/index.js -o public/bundle.js",
+    "build-js": "browserify --debug -t [ babelify --presets [ @babel/preset-env ] ] -p esmify src/index.js > public/bundle.js",
+    "watch-js": "watchify --debug -t [ babelify --presets [ @babel/preset-env ] ] -p esmify src/index.js -o public/bundle.js",
     "//build-sw": "browserify -t uglifyify --debug src/sw.js > public/sw.js",
     "copy": "mkdir -p public && mkdir -p public/img && cp src/img/* public/img && cp src/_redirects public && mkdir -p public/admin && cp src/admin/* public/admin && cp src/index.html src/mysqpaymentform.css src/*.otf src/*.png src/icons/* public && mkdir -p public/font && cp assets/YportTrial-Book.otf public/font",
     "build-sass": "sass src/style/main.scss public/style.css",
@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/nichoth/mycomoon#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "concurrently": "^6.0.0",
     "ecstatic": "^4.1.4",
@@ -45,12 +48,14 @@
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
     "htm": "^3.0.4",
+    "lodash.keyby": "^4.6.0",
     "marked": "^2.0.3",
     "monotonic-timestamp": "^0.0.9",
     "observ": "^0.2.0",
     "observ-struct": "^6.0.0",
     "preact": "^10.5.13",
     "route-event": "^3.1.0",
-    "ruta3": "^2.0.1"
+    "ruta3": "^2.0.1",
+    "xtend": "^4.0.2"
   }
 }

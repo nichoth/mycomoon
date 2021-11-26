@@ -12,8 +12,6 @@
     <!-- <link rel="stylesheet" href="/mysqpaymentform.css"> -->
 
     <!-- <link rel="manifest" href="/myco.webmanifest"> -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
 
     <!-- ------------------------------ -->
 
@@ -22,27 +20,11 @@
 
     <!-- link to the local custom styles for SqPaymentForm -->
     <!-- <link rel="stylesheet" type="text/css" href="/mysqpaymentform.css"> -->
-
-    <!-- ------------------------------ -->
-
-    <script src="https://kit.fontawesome.com/9e9dd86d64.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div id="content"></div>
     <script src="/bundle.js"></script>
-
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
 </body>
 </html>
 

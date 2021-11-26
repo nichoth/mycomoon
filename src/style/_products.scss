@@ -1,7 +1,16 @@
 @import './variables.scss';
 
-body.page-products {
-    backdrop-filter: brightness(0.2);
+.products {
+    .left-part {
+        padding: 0;
+    }
+
+    // .logo {
+    //     display: none;
+    // }
+    //  .special-divider {
+    //      display: none;
+    //  }
 }
 
 .products-list {

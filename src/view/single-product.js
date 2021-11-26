@@ -2,33 +2,17 @@ import { useState, useEffect } from 'preact/hooks';
 import { html } from 'htm/preact'
 var { ITEMS } = require('../CONSTANTS')
 
+// we are setting the 'active' class after the request resolves,
+// needs to happend before then
+
 function SingleProductView (props) {
-    var { slug, getContent, cart } = props
-    const [item, setItem] = useState(slug === '' ? '' : null)
-    const [catalog, setCatalog] = useState(null)
-    var [cartState, setCartState] = useState(null)
+    var { slug, cart, route } = props
+    // console.log('props again', props)
+    var item = props.content
+    // var slug = item && item.permalink
+    var [cartState, setCartState] = useState(cart.state())
 
-    // todo:
-    // keep global state of products, and get it from there if possible
-    useEffect(() => {  // compponent did mount
-        if (!slug) {
-            // set the route to the first in the ITEMS list
-
-            // do nothing
-
-            getContent()
-                .then(res => {
-                    setCatalog(res)
-                })
-                .catch(err => console.log('errrr', err))
-        } else {
-            getContent()
-                .then(res => {
-                    setItem(res)
-                })
-                .catch(err => console.log('errrr', err))
-        }
-    }, [slug]);
+    // console.log('porpppp', props)
 
     // subscribe to any changes in the shopping cart
     useEffect(() => {  // component did mount
@@ -37,10 +21,6 @@ function SingleProductView (props) {
             setCartState(newCartState)
         })
     }, [])
-
-    if (item === null) {
-        return null
-    }
 
     function addToCart (item, ev) {
         ev.preventDefault()
@@ -82,46 +62,47 @@ function SingleProductView (props) {
         }, {}) :
         null
 
+    // here we use the `item` from state
     return html`<div class="single-product">
+        <h2 id="products">Products</h2>
         <div class="single-product-info">
-            <${ProductList} slug=${slug} item=${item}
+            <${ProductList} slug=${slug} item=${item} route=${route}
                 prodsInCart=${prodsInCart} addToCart=${addToCart}
             />
-        </div>
-
-        <hr class="special-divider" />
-
-        <div class="single-product-content">
-            ${(item && item.media && slug) ?
-                html`<img src="${item.media.source}" alt="mushroom" />` :
-                null
-
-                // (catalog ?
-                //     html`<ul class="products-list">
-                //         ${catalog
-                //         .filter(item => item.active)
-                //         .map(item => {
-                //             return html`<li>
-                //                 <a href="/${item.permalink}">
-                //                     <img src=${item.media.source}
-                //                         alt="mushroom" />
-                //                     <p>${item.name}</p>
-                //                 </a>
-                //             </li>`
-                //         })}
-                //     </ul>` :
-                //     null
-                // )
-            }
         </div>
     </div>`
 }
 
-// needs permalink, description, name
-function ProductList (props) {
-    var { slug, item, prodsInCart, addToCart } = props
 
-    // here you return a link regardless of whether it's active
+// this view is used for the list of products,
+// single products
+
+
+function ProductList (props) {
+    var { slug, item, prodsInCart, addToCart, route } = props
+
+    console.log('slug', slug, 'perma', item && item.permalink)
+    useEffect(() => {
+        var el = document.querySelector('.product-list li.active a')
+
+        if (el && item) {
+            console.log('scrolling', el, item)
+            el.scrollIntoView()
+        }
+
+        if (route === '/products') {
+            console.log('prods')
+            document.getElementById('products').scrollIntoView(true)
+        }
+    }, [slug, (item && item.permalink)])
+
+    function handleClck (ev) {
+        ev.target.scrollIntoView()
+    }
+
+    // so the page layout doesn't get as bad when you're loading a product
+    item = props.item || { foo: 'bar' }
+
     return html`<ul class="product-list">
         ${ITEMS.map(_item => {
             var isActive = _item.link === slug
@@ -130,12 +111,19 @@ function ProductList (props) {
                 <a href=${isActive ?
                     '/products' :
                     '/' + _item.link}
+                    onclick=${handleClck}
                 >
                     ${_item.name}
                 </a>
 
-                ${isActive ?
-                    html`<div class="item-description">
+                ${(isActive && item) ?
+                    html`
+                    <img src="${item.media && item.media.source}"
+                        alt="mushroom"
+                        class="inline-image"
+                    />
+                    
+                    <div class="item-description">
                         <div class="desc"
                             dangerouslySetInnerHTML=${{
                                 __html: item.description
@@ -143,7 +131,6 @@ function ProductList (props) {
                         ></div>
                         <${DualExtracted} />
                     </div>
-
 
                     <div class="bonus-info">
                         <div class="bonus-info-tab">
@@ -170,6 +157,7 @@ function ProductList (props) {
                         />` :
                         null
                     }` :
+
                     null
                 }
             </li>`
@@ -187,7 +175,7 @@ function CartControls (props) {
     var { product, prodsInCart, onAddToCart } = props
 
     var count = (prodsInCart[product.id] || 0)
-    var price = product.price.formatted_with_symbol
+    var price = (product.price && product.price.formatted_with_symbol)
 
     return html`<div class="cart-controls">
         <span class="price">${price}</span>

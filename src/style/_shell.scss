@@ -1,8 +1,30 @@
 @import './variables.scss';
 
+@media screen and (max-width: 600px) {
+    .page-content {
+        margin-left: 0!important;
+        border-left: none!important;
+    }
+
+    .nav-part {
+        .who-are-you {
+            margin-left: 4rem;
+        }
+    }
+
+    .shell-content.index {
+        .special-divider {
+            display: none;
+        }
+
+        div.logo {
+            display: none;
+        }
+    }
+}
+
 .outer-shell {
-    // display: flex;
-    min-height: 100vh;
+    border-top: 2px solid;
 
     & > div {
         &:last-child {
@@ -17,15 +39,12 @@
     }
 
     .page-content {
+        // ? why do we need the 3px?
+        height: calc(200vh + 6px);
         border-left: $stroke-width solid;
         margin-left: 4rem;
-        min-height: calc(100vh + 5rem);
     }
 }
-
-
-
-
 
 .hamburger {
     cursor: pointer;
@@ -85,10 +104,6 @@
     transform: translateY(24px);
 }
 
-
-
-
-
 .menu-part {
     // border-right: $stroke-width solid $main-color;
     padding: 0 1rem;
@@ -101,7 +116,8 @@
 
     z-index: 2;
     position: fixed;
-    height: 100vh;
+    // height: 100vh;
+    height: calc(100vh - 1rem);
 
     .menu-content {
         display: none;
@@ -111,11 +127,9 @@
         padding: 0;
         flex-grow: 1;
         min-width: 100%;
-        // max-width: 25%;
         width: 100%;
-        // backdrop-filter: brightness(0.4);
-        // background: #2a98a5f5;
         background: #E8E1D7;
+        height: 102%;
 
         & > div:first-child {
             padding: 1rem;
@@ -143,10 +157,6 @@
                         }
                     }
                 }
-
-                // &:last-child {
-                //     border-bottom: $stroke-width solid $main-color;
-                // }
 
                 a {
                     display: block;
@@ -197,6 +207,7 @@
             bottom: 17px;
             left: 29px;
             font-weight: 100;
+            font-size: 0.9rem;
         }
         svg {
             fill: $main-color;

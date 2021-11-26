@@ -1,61 +1,12 @@
 var route = require('route-event')()
-var Router = require('./router')
 import { html } from 'htm/preact'
 import { render } from 'preact';
-// import { useState, useLayoutEffect } from 'preact/hooks';
-// import shell from './view/shell';
-var _path = require('path')
 import Cart from '@nichoth/shopping-cart'
-import EVENTS from '@nichoth/shopping-cart/src/EVENTS'
-var Shell = require('./view/shell')
-
 var struct = require('observ-struct')
 var observ = require('observ')
-var Bus = require('@nichoth/events')
-var evs = require('./EVENTS')
-var xtend = require('xtend')
-
-var { ITEMS } = require('./CONSTANTS')
-
-var bus = Bus({ memo: true })
-var state = struct({
-    catalog: observ(null)
-})
-
-function subscribe (bus, state) {
-    bus.on(evs.product.got, ev => {
-        var newItem = {}
-        newItem[ev.permalink] = ev
-        var newState = state.catalog() ?
-            xtend((state && state.catalog() || {}), newItem) :
-            newItem
-        state.catalog.set(newState)
-    })
-}
-
-// state(_state => {
-//     console.log('**debug new state', _state)
-// })
-
-// -------------------------------------------------------
-// https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register
-
-// if ('serviceWorker' in navigator) {
-//     console.log('we are in')
-//     navigator.serviceWorker.register('/sw.js')
-//         .then((reg) => {
-//             // registration worked
-//             console.log('Registration succeeded. Scope is ' + reg.scope)
-//         }).catch((error) => {
-//             // registration failed
-//             console.log('Registration failed with ' + error)
-//         })
-// } else {
-//       console.log('Service workers are not supported.')
-// }
-
-// --------------------------------------------------
-
+var Shell = require('./view/shell')
+// var IndexView = require('./view/index')
+var Router = require('./router')
 
 // window for testing
 var cart = window.cart = new Cart({
@@ -63,48 +14,35 @@ var cart = window.cart = new Cart({
     key: 'myco-cart'  // default is 'cart'
 })
 
-cart.on(EVENTS.product.change, (index, updatedProduct) => {
-    console.log('product change', updatedProduct)
+var state = struct({
+    slug: observ(null),
+    route: observ(''),
+    content: observ(null),
+    catalog: observ(null),
+    cartState: cart.state
 })
 
-var router = Router(state, bus)
+// fetch the entire catalog right away
+var url = new URL('/.netlify/functions/get-catalog', location)
+fetch(url)
+    .then(res => res.json())
+    .then(res => {
+        state.catalog.set(res)
+    })
+    .catch(err => console.log('oh no', err))
 
-subscribe(bus, state)
+
+var router = Router()
 
 route(function onRoute (path) {
-    console.log('route event', path)
-
     var m = router.match(path)
 
-    // if (path === '/products') {
-    //     route.setRoute('/' + ITEMS[0].link)
-    //     return
-    // }
+    var { slug } = m.action(m)
 
-    if (!m) {
-        console.log('not m', path)
-        return
-    }
-
-    var { view, getContent, slug } = m.action(m)
-
-    var dirs = path.split('/').filter(Boolean)
-
-    var contentClass = (path === '/' || path === '') ?
-        'index' :
-        _path.basename(path)
-
-    var isProdPage = (dirs.length === 1 && dirs[0] !== 'products' &&
-        dirs[0] !== 'about' && dirs[0] !== 'cart')
-    if (isProdPage) contentClass += ' product-page'
-
-    var el = html`<${Shell} cart=${cart} contentClass=${contentClass}
-        path=${path}
-    >
-        <${view} cart=${cart} getContent=${getContent} path=${path}
-            slug=${slug}
-        />
-    <//>`
-
-    render(el, document.getElementById('content'))
+    state.route.set(path)
+    state.slug.set(slug)
 })
+
+var el = html`<${Shell} cart=${cart} state=${state} />`
+
+render(el, document.getElementById('content'))
