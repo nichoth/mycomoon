@@ -34,7 +34,7 @@
     "hyperstream": "^1.2.2",
     "mkdirp": "^1.0.4",
     "netlify": "^6.1.20",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.7.0",
     "sass": "^1.32.8",
     "uglifyify": "^5.0.2"
   },
@@ -44,7 +44,7 @@
     "@sendgrid/mail": "^7.4.4",
     "dotenv": "^8.6.0",
     "htm": "^3.0.4",
-    "marked": "^2.0.3",
+    "marked": "^4.0.10",
     "monotonic-timestamp": "^0.0.9",
     "observ": "^0.2.0",
     "preact": "^10.5.13",
